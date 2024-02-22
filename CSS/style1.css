@@ -1,13 +1,15 @@
 body {
+    margin: 0;
+    padding: 0;
     color: #fff;
     font-family: Arial, sans-serif;
     line-height: 1.6; 
 }
 .face{
-    width: 50vw; /* Adjust the width and height as needed */
-    height: 50vw;
+    width: 400px; /* Adjust the width and height as needed */
+    height: 400px; 
     overflow: hidden;
-    border-radius: 50vw; /*Creates a circular shape */
+    border-radius: 50%; /*Creates a circular shape */
     margin: 0 auto;
   }
 .face img {
@@ -16,39 +18,40 @@ body {
     display: block; /* Removes extra space below the image */
 }
 .left{
-    align-content: center;
-    justify-content: center;
-    width: 95%;
+    text-align: center;
+    width: 100%;
+    margin-top: 20px;
 }
+
 .background-container {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     background-image: url("../images/background5.jpg");
     background-size: cover;
     filter: blur(3px); /* Adjust the blur value as needed */
     z-index: -1; /* Place the background behind other content*/ 
-  }
-.title{
-    width: 100vw;
-    text-align: center;
 }
-.grid-container {
-    display: grid;
-    grid-template-columns: auto auto auto auto;
-    height: 100vh; /* 100% of the viewport height */
-    width: 100vw; /* 100% of the viewport width */
-    align-items: center; /* Center items vertically */
-    justify-content: center; /* Center items horizontally */
-  }
-.grid-container > div {
-    text-align: center;
-    padding: 20vw 0;
-    font-size: 4vw;
+.phone {
+    width: 80%; /* Adjust the size of the phone */
+    max-width: 767px; /* Maximum width of the phone */
+    margin: 0 auto; /* Center the phone horizontally */
+    position: absolute;
+    top: 50%; /* Position the phone at the vertical center */
+    left: 50%; /* Position the phone at the horizontal center */
+    transform: translate(-50%, -50%); /* Center the phone perfectly */
+    background-image: url("../images/background5.jpg"); /* Image of the phone frame */
+    background-size: cover;
+    background-position: center;
+    padding: 20px; /* Add padding inside the phone */
+    border: 1px solid #fff;
+    border-radius: 3vw;
+    box-shadow: 0 0 20px rgba(252, 251, 251, 0.3); /* Add a shadow to the phone */
 }
-a{
+
+a {
     text-decoration: none;
     background-color: transparent;
     color: #ffffff;
@@ -56,23 +59,25 @@ a{
 }
 .NavBut {
     background-color: transparent;
-    border: 1vw solid #fff;
+    border: 1px solid #fff;
     border-radius: 3vw;
     cursor: pointer;
     overflow: hidden;
     outline: none;
     text-decoration: none;
-    width: 94vw;
-    margin-bottom: 4vw;
+    width: 100%;
+    margin-bottom: 4%;
     transition: border-color 0.3s ease; /* Add a smooth transition effect for border color */
 }
-
+.but{
+   text-align: center;
+}
 .fa {
   overflow: hidden;
   outline: none;
   color: #ffffff;
   text-decoration: none;
-  width: 45vw;
+  width: 40%;
 }
 
 .text{
