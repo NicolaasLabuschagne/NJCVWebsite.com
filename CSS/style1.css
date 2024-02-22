@@ -1,0 +1,84 @@
+body {
+    color: #fff;
+    font-family: Arial, sans-serif;
+    line-height: 1.6; 
+}
+.face{
+    width: 50vw; /* Adjust the width and height as needed */
+    height: 50vw;
+    overflow: hidden;
+    border-radius: 50vw; /*Creates a circular shape */
+    margin: 0 auto;
+  }
+.face img {
+    width: 100%;
+    height: auto;
+    display: block; /* Removes extra space below the image */
+}
+.left{
+    align-content: center;
+    justify-content: center;
+    width: 95%;
+}
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("../Images/background5.jpg");
+    background-size: cover;
+    filter: blur(3px); /* Adjust the blur value as needed */
+    z-index: -1; /* Place the background behind other content*/ 
+  }
+.title{
+    width: 100vw;
+    text-align: center;
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    height: 100vh; /* 100% of the viewport height */
+    width: 100vw; /* 100% of the viewport width */
+    align-items: center; /* Center items vertically */
+    justify-content: center; /* Center items horizontally */
+  }
+.grid-container > div {
+    text-align: center;
+    padding: 20vw 0;
+    font-size: 4vw;
+}
+a{
+    text-decoration: none;
+    background-color: transparent;
+    color: #ffffff;
+    border: none;
+}
+.NavBut {
+    background-color: transparent;
+    border: 1vw solid #fff;
+    border-radius: 3vw;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    text-decoration: none;
+    width: 94vw;
+    margin-bottom: 4vw;
+    transition: border-color 0.3s ease; /* Add a smooth transition effect for border color */
+}
+
+.fa {
+  overflow: hidden;
+  outline: none;
+  color: #ffffff;
+  text-decoration: none;
+  width: 45vw;
+}
+
+.text{
+    width: 94vw;
+}
+.grey{
+    background-color: rgb(48, 46, 46);
+    opacity: 0.8;
+}
