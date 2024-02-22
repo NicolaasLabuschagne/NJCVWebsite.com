@@ -26,7 +26,7 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-image: url("../Images/background5.jpg");
+    background-image: url("../images/background5.jpg");
     background-size: cover;
     filter: blur(3px); /* Adjust the blur value as needed */
     z-index: -1; /* Place the background behind other content*/ 
