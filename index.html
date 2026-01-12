@@ -1,44 +1,64 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nicolaas Labuschagne</title>
-  <link rel="stylesheet" href="CSS/style1.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nicolaas Labuschagne</title>
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-    <div class="background-container"></div>
-      <div class="phone">
-        <div class = "content">
-          <div class="left">
-            <div class="face">
-              <img src="images/myPic3.jpg">
-            </div>
-            <a href="https://www.linkedin.com/in/nicolaas-labuschagne-919739286" class="fa fa-linkedin"></a>
-            <a href="https://github.com/NicolaasLabuschagne" class="fa fa-github"></a>
-          
-            <h1 class="title">Hello! I am <br>Nicolaas Labuschagne</h1>
-            <div class="NavBut">
-              <a href="./pages/aboutMe.html">
-                <div class="but" type="button">
-                  ABOUT ME
-                </div>
-              </a>
-            </div>
-            <div class="NavBut">
-              <a href="./pages/contactMe.html">
-                <div class="but" type="button">
-                  GET IN CONTACT
-                </div>
-              </a>   
-            </div>
-          </div>
-
+    <nav class="navbar">
+        <div class="container">
+            <a href="#home" class="logo">MyPortfolio</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
         </div>
-      </div>
-
+    </nav>
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="face">
+                    <img src="images/myPic3.jpg" alt="Nicolaas Labuschagne">
+                </div>
+                <h1 class="hero-title">Nicolaas Labuschagne</h1>
+                <p class="hero-subtitle">Full Stack Web & Software Developer</p>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/nicolaas-labuschagne-919739286" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/NicolaasLabuschagne" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <p>I'm a passionate Full Stack Web and Software Developer with expertise in creating cutting-edge web and software solutions.
+                My background covers both front-end and back-end development, allowing me to turn your ideas into reality.
+                What I can promise is unwavering dedication to finding solutions for your challenges.
+                I'm open to learning from more experienced developers, and I eagerly look forward to doing so.
+                My true passion revolves around code, and I'm committed to becoming as proficient as possible in as many languages as possible.
+                I'm genuinely excited to dive into this profession, and I'd be grateful for the opportunity to demonstrate my skills.</p>
+            </div>
+            <a href="CV/Nicolaas-Labuschagne-CV.pdf" class="btn" download="Nicolaas-Labuschagne-CV.pdf">Download My CV</a>
+        </div>
+    </section>
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Me</h2>
+            <div class="contact-content">
+                <p>Feel free to reach out to me via email or connect with me on LinkedIn.</p>
+                <div class="contact-links">
+                    <a href="mailto:Zhaques2001@gmail.com" class="contact-link"><i class="fas fa-envelope"></i> Zhaques2001@gmail.com</a>
+                    <a href="https://www.linkedin.com/in/nicolaas-labuschagne-919739286" class="contact-link" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="JS/script.js"></script>
 </body>
 </html>
