@@ -48,12 +48,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Animate sections on scroll
-    const sections = document.querySelectorAll('.about, .projects, .contact');
+    const animatedSections = document.querySelectorAll('.about, .projects, .contact');
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = 1;
-                entry.target.style.transform = 'translateY(0)';
+                entry.target.classList.add('visible');
                 observer.unobserve(entry.target);
             }
         });
@@ -61,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
         threshold: 0.1
     });
 
-    sections.forEach(section => {
+    animatedSections.forEach(section => {
         observer.observe(section);
     });
 
