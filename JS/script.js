@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const heroText = document.querySelector('.hero-text');
     const aboutSection = document.querySelector('.about');
-    
+
     // Animate hero text on page load
     heroText.style.opacity = 0;
     heroText.style.transform = 'translateY(50px)';
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
         heroText.style.opacity = 1;
         heroText.style.transform = 'translateY(0)';
     }, 500);
-    
+
     // Add hover effect on the about section
     aboutSection.addEventListener('mouseover', function() {
         aboutSection.style.transform = 'rotate(5deg)';
