@@ -97,8 +97,13 @@ body {
 
 /* Sections */
 .about, .projects, .contact {
+    padding: 4rem 0;
     opacity: 0;
     transition: opacity 1s, transform 1s;
+}
+
+.about.visible, .projects.visible, .contact.visible {
+    opacity: 1;
 }
 
 .about.visible .card, .contact.visible .card {
