@@ -47,17 +47,34 @@ document.addEventListener('DOMContentLoaded', function() {
         drawMaze();
     }
 
-    // Animate sections on scroll
+    // Animate sections on scroll with direction detection
+    let lastScrollY = window.scrollY;
+    let scrollDirection = 'down';
+
     const animatedSections = document.querySelectorAll('.about, .projects, .contact');
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
+                // Remove old animation classes
+                entry.target.classList.remove('slide-in-right', 'slide-in-left', 'fade-in-up');
+
+                if (entry.target.classList.contains('about') || entry.target.classList.contains('contact')) {
+                    if (scrollDirection === 'down') {
+                        entry.target.classList.add('slide-in-right');
+                    } else {
+                        entry.target.classList.add('slide-in-left');
+                    }
+                } else {
+                    entry.target.classList.add('fade-in-up');
+                }
                 entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
+            } else {
+                // Reset animation when out of view
+                entry.target.classList.remove('visible', 'slide-in-right', 'slide-in-left', 'fade-in-up');
             }
         });
     }, {
-        threshold: 0.1
+        threshold: 0.2
     });
 
     animatedSections.forEach(section => {
@@ -71,11 +88,21 @@ document.addEventListener('DOMContentLoaded', function() {
     backToTopButton.classList.add('back-to-top');
     document.body.appendChild(backToTopButton);
 
+    // Consolidated scroll listener
     window.addEventListener('scroll', () => {
+        // Back to top button visibility
         if (window.scrollY > 300) {
             backToTopButton.style.display = 'block';
         } else {
             backToTopButton.style.display = 'none';
         }
+
+        // Update scroll direction
+        if (window.scrollY > lastScrollY) {
+            scrollDirection = 'down';
+        } else {
+            scrollDirection = 'up';
+        }
+        lastScrollY = window.scrollY;
     });
 });
