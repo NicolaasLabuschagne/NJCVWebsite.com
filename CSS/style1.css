@@ -1,13 +1,110 @@
+/* ===========================
+   Default Theme Variables
+   =========================== */
 :root {
     --primary-color: #17D900; /* Creative Green */
+    --primary-color-rgb: 23, 217, 0;
+
     --accent-color: #E000E0;  /* Creative Magenta */
+    --accent-color-rgb: 224, 0, 224;
+
     --bg-color: #000000;
+    --bg-color-rgb: 0, 0, 0;
+
     --secondary-bg: #111111;
+    --secondary-bg-rgb: 17, 17, 17;
+
     --text-color: #ffffff;
+    --text-color-rgb: 255, 255, 255;
+
     --text-dim: #888888;
+    --text-dim-rgb: 136, 136, 136;
+
     --font-main: 'Montserrat', sans-serif;
 }
 
+/* ===========================
+   Theme Overrides
+   =========================== */
+
+[data-theme="molten"] {
+    --primary-color: #FF6A00;
+    --primary-color-rgb: 255, 106, 0;
+
+    --accent-color: #FFB347;
+    --accent-color-rgb: 255, 179, 71;
+
+    --bg-color-rgb: 28, 18, 10;
+    --bg-color: rgb(var(--bg-color-rgb));
+
+    --secondary-bg-rgb: 58, 31, 15;
+    --secondary-bg: rgb(var(--secondary-bg-rgb));
+
+    --text-color: #FDF2E8;
+    --text-color-rgb: 253, 242, 232;
+
+    --text-dim: rgba(253,242,232,0.75);
+}
+
+[data-theme="acid"] {
+    --primary-color: #17D900;
+    --primary-color-rgb: 23, 217, 0;
+
+    --accent-color: #E000E0;
+    --accent-color-rgb: 224, 0, 224;
+
+    --bg-color-rgb: 18, 6, 22;
+    --bg-color: rgb(var(--bg-color-rgb));
+
+    --secondary-bg-rgb: 36, 0, 31;
+    --secondary-bg: rgb(var(--secondary-bg-rgb));
+
+    --text-color: #FFF0FF;
+    --text-color-rgb: 255, 240, 255;
+
+    --text-dim: rgba(255,240,255,0.72);
+}
+
+[data-theme="red"] {
+    --primary-color: #FF0033;
+    --primary-color-rgb: 255, 0, 51;
+
+    --accent-color: #FF6600;
+    --accent-color-rgb: 255, 102, 0;
+
+    --bg-color-rgb: 12, 0, 0;
+    --bg-color: rgb(var(--bg-color-rgb));
+
+    --secondary-bg-rgb: 51, 0, 0;
+    --secondary-bg: rgb(var(--secondary-bg-rgb));
+
+    --text-color: #FFEAEA;
+    --text-color-rgb: 255, 234, 234;
+
+    --text-dim: rgba(255,234,234,0.75);
+}
+
+[data-theme="glitch"] {
+    --primary-color: #FF00FF;
+    --primary-color-rgb: 255, 0, 255;
+
+    --accent-color: #00FFFF;
+    --accent-color-rgb: 0, 255, 255;
+
+    --bg-color-rgb: 10, 0, 20;
+    --bg-color: rgb(var(--bg-color-rgb));
+
+    --secondary-bg-rgb: 26, 0, 26;
+    --secondary-bg: rgb(var(--secondary-bg-rgb));
+
+    --text-color: #FDFDFD;
+    --text-color-rgb: 253, 253, 253;
+
+    --text-dim: rgba(253,253,253,0.72);
+}
+/* ===========================
+   Global Reset & Base
+   =========================== */
 * {
     margin: 0;
     padding: 0;
@@ -19,7 +116,7 @@ html {
 }
 
 body {
-    background-color: transparent;
+    background-color: rgb(var(--bg-color-rgb));
     color: var(--text-color);
     font-family: var(--font-main);
     line-height: 1.6;
@@ -39,7 +136,9 @@ canvas {
     padding: 0 20px;
 }
 
-/* Header & Nav */
+/* ===========================
+   Header & Navigation
+   =========================== */
 .header {
     position: fixed;
     top: 0;
@@ -122,7 +221,9 @@ canvas {
     width: 100%;
 }
 
-/* Sections */
+/* ===========================
+   Sections
+   =========================== */
 .section {
     padding: 100px 0;
     min-height: 80vh;
@@ -143,7 +244,9 @@ canvas {
     border-bottom: 4px solid var(--accent-color);
 }
 
-/* Hero */
+/* ===========================
+   Hero
+   =========================== */
 .hero {
     height: 100vh;
     padding-top: 80px;
@@ -158,19 +261,19 @@ canvas {
 
 .hero-bg-text {
     position: absolute;
-    font-size: 20vw;
+    font-size: 12vw;
     font-weight: 900;
-    color: rgba(255, 255, 255, 0.015);
+    color: rgba(255, 255, 255, 0.01);
     z-index: 0;
     white-space: nowrap;
     pointer-events: none;
     text-transform: uppercase;
-    animation: moveText 20s linear infinite;
+    animation: moveText 40s ease-in-out infinite;
 }
 
 @keyframes moveText {
-    0% { transform: translateX(50%); }
-    100% { transform: translateX(-50%); }
+    0% { transform: translateX(40%); }
+    100% { transform: translateX(-40%); }
 }
 
 .hero-content {
@@ -205,7 +308,9 @@ canvas {
     margin-bottom: 40px;
 }
 
-/* Buttons */
+/* ===========================
+   Buttons
+   =========================== */
 .btn {
     display: inline-block;
     padding: 15px 40px;
@@ -240,9 +345,11 @@ canvas {
     color: #000;
 }
 
-/* About */
+/* ===========================
+   About
+   =========================== */
 .about {
-    background-color: var(--secondary-bg);
+    background-color: rgba(var(--secondary-bg-rgb), 0.8);
 }
 
 .about-text {
@@ -259,7 +366,9 @@ canvas {
     margin-top: 40px;
 }
 
-/* Experience & Work */
+/* ===========================
+   Experience & Work
+   =========================== */
 .experience-grid, .work-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -294,7 +403,7 @@ canvas {
     border-color: var(--accent-color);
     background-color: #050505;
     transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 10px 30px rgba(224, 0, 224, 0.2);
+    box-shadow: 0 10px 30px rgba(var(--accent-color-rgb), 0.2);
 }
 
 .card h3 {
@@ -308,7 +417,9 @@ canvas {
     color: var(--accent-color);
 }
 
-/* Contact */
+/* ===========================
+   Contact
+   =========================== */
 .contact-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -336,6 +447,11 @@ canvas {
 .contact-form textarea:focus {
     outline: none;
     border-color: var(--primary-color);
+}
+
+.contact {
+    background-color: rgba(var(--secondary-bg-rgb), 0.8);
+    text-align: center;
 }
 
 .contact-link {
@@ -368,10 +484,15 @@ canvas {
     transform: translateY(-5px) rotate(15deg);
 }
 
-/* Footer */
+/* ===========================
+   Footer
+   =========================== */
 .footer {
-    padding: 50px 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s;
+    padding: 25px 0;
 }
 
 .footer-content {
@@ -385,7 +506,9 @@ canvas {
     font-size: 0.8rem;
 }
 
-/* Animations */
+/* ===========================
+   Animations
+   =========================== */
 .animate-reveal {
     opacity: 0;
     transform: translateY(30px);
@@ -397,7 +520,9 @@ canvas {
     transform: translateY(0);
 }
 
-/* Responsive */
+/* ===========================
+   Responsive
+   =========================== */
 @media (max-width: 992px) {
     .hero-title {
         font-size: 4rem;
