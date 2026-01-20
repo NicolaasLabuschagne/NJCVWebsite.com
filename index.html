@@ -2,43 +2,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nicolaas Labuschagne</title>
-  <link rel="stylesheet" href="CSS/style1.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nicolaas Labuschagne | Full Stack Developer</title>
+    <link rel="stylesheet" href="CSS/style1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="background-container"></div>
-      <div class="phone">
-        <div class = "content">
-          <div class="left">
-            <div class="face">
-              <img src="images/myPic3.jpg">
-            </div>
-            <a href="https://www.linkedin.com/in/nicolaas-labuschagne-919739286" class="fa fa-linkedin"></a>
-            <a href="https://github.com/NicolaasLabuschagne" class="fa fa-github"></a>
-          
-            <h1 class="title">Hello! I am <br>Nicolaas Labuschagne</h1>
-            <div class="NavBut">
-              <a href="./pages/aboutMe.html">
-                <div class="but" type="button">
-                  ABOUT ME
-                </div>
-              </a>
-            </div>
-            <div class="NavBut">
-              <a href="./pages/contactMe.html">
-                <div class="but" type="button">
-                  GET IN CONTACT
-                </div>
-              </a>   
-            </div>
-          </div>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">NL</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
+    <main>
+        <section id="home" class="hero section">
+            <div class="hero-content">
+                <h1 class="hero-title animate-reveal">NICOLAAS <br><span>LABUSCHAGNE</span></h1>
+                <p class="hero-subtitle animate-reveal">FULL STACK WEB & SOFTWARE DEVELOPER</p>
+                <div class="hero-cta animate-reveal">
+                    <a href="#contact" class="btn btn-primary">GET IN CONTACT</a>
+                </div>
+            </div>
+            <div class="hero-image animate-reveal">
+                <img src="images/myPic3.jpg" alt="Nicolaas Labuschagne">
+            </div>
+        </section>
+
+        <section id="about" class="about section">
+            <div class="container">
+                <h2 class="section-title animate-reveal">MESSAGE FROM <span>NICOLAAS</span></h2>
+                <div class="about-grid">
+                    <div class="about-text animate-reveal">
+                        <p>I'm a passionate Full Stack Web and Software Developer with expertise in creating cutting-edge web and software solutions.</p>
+                        <p>My background covers both front-end and back-end development, allowing me to turn your ideas into reality. What I can promise is unwavering dedication to finding solutions for your challenges.</p>
+                        <p>I'm open to learning from more experienced developers, and I eagerly look forward to doing so. My true passion revolves around code, and I'm committed to becoming as proficient as possible in as many languages as possible.</p>
+                        <div class="about-cta">
+                            <a href="CV/Nicolaas-Labuschagne-CV.pdf" download class="btn btn-secondary">DOWNLOAD MY CV</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="experience section">
+            <div class="container">
+                <h2 class="section-title animate-reveal">ON <span>TRACK</span></h2>
+                <div class="experience-grid">
+                    <div class="card animate-reveal">
+                        <h3>Full Stack Development</h3>
+                        <p>Expertise in both front-end and back-end technologies.</p>
+                    </div>
+                    <div class="card animate-reveal">
+                        <h3>Problem Solving</h3>
+                        <p>Unwavering dedication to finding solutions for complex challenges.</p>
+                    </div>
+                    <div class="card animate-reveal">
+                        <h3>Continuous Learning</h3>
+                        <p>Committed to mastering new languages and frameworks.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact section">
+            <div class="container">
+                <h2 class="section-title animate-reveal">GET IN <span>TOUCH</span></h2>
+                <div class="contact-content">
+                    <div class="contact-info animate-reveal">
+                        <p>Ready to redefine limits and fight for wins in the digital space?</p>
+                        <a href="mailto:Zhaques2001@gmail.com" class="contact-link">Zhaques2001@gmail.com</a>
+                    </div>
+                    <div class="social-links animate-reveal">
+                        <a href="https://www.linkedin.com/in/nicolaas-labuschagne-919739286" class="fa fa-linkedin"></a>
+                        <a href="https://github.com/NicolaasLabuschagne" class="fa fa-github"></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">NL</div>
+                <p>&copy; 2024 Nicolaas Labuschagne. All rights reserved.</p>
+            </div>
         </div>
-      </div>
+    </footer>
 
+    <script src="JS/script.js"></script>
 </body>
 </html>
