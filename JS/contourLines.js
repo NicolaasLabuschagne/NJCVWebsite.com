@@ -6,8 +6,8 @@ let zoff = 0;
 let xShift = 0;
 let yShift = 0;
 
-const C1 = [70, 200, 255];   // teal
-const C2 = [180, 100, 255];  // purple
+const C1 = [23, 217, 0];   // Creative Green
+const C2 = [224, 0, 224];  // Creative Magenta
 
 function setup() {
   createCanvas(windowWidth, windowHeight);

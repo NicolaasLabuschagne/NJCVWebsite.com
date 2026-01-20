@@ -19,11 +19,18 @@ html {
 }
 
 body {
-    background-color: var(--bg-color);
+    background-color: transparent;
     color: var(--text-color);
     font-family: var(--font-main);
     line-height: 1.6;
     overflow-x: hidden;
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
 }
 
 .container {
@@ -42,6 +49,15 @@ body {
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     transition: all 0.3s;
+}
+
+.header.sticky {
+    background-color: rgba(0, 0, 0, 0.95);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+
+.header.sticky .nav {
+    padding: 10px 5%;
 }
 
 .nav {
@@ -144,7 +160,7 @@ body {
     position: absolute;
     font-size: 20vw;
     font-weight: 900;
-    color: rgba(255, 255, 255, 0.03);
+    color: rgba(255, 255, 255, 0.015);
     z-index: 0;
     white-space: nowrap;
     pointer-events: none;
