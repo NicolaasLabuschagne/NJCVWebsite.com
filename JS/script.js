@@ -8,11 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
-                // Optional: stop observing after it's revealed
-                // observer.unobserve(entry.target);
             } else {
-                // Remove class if we want animations to re-trigger on scroll up
-                // (Matches Lando Norris site feel where things often re-animate)
+                // Remove class to re-trigger animations on scroll
                 entry.target.classList.remove('active');
             }
         });
