@@ -65,6 +65,7 @@ const themes = {
   acid: "#E000E0",
   red: "#FF0033",
   glitch: "#FF00FF",
+  forestember: "#394515",
 };
 function getThemeColors() {
   const styles = getComputedStyle(document.documentElement);

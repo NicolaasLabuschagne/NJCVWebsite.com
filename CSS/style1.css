@@ -83,7 +83,24 @@
 
     --text-dim: rgba(255,234,234,0.75);
 }
+[data-theme="forestember"] {
+    --primary-color: #515739;
+    --primary-color-rgb: 81, 87, 57;
 
+    --accent-color: #FD6F2F;
+    --accent-color-rgb: 253, 111, 47;
+
+    --bg-color-rgb: 10, 15, 10;
+    --bg-color: rgb(var(--bg-color-rgb));
+
+    --secondary-bg-rgb: 25, 30, 20;
+    --secondary-bg: rgb(var(--secondary-bg-rgb));
+
+    --text-color: #FDFDFD;
+    --text-color-rgb: 253, 253, 253;
+
+    --text-dim: rgba(253, 253, 253, 0.72);
+}
 [data-theme="glitch"] {
     --primary-color: #FF00FF;
     --primary-color-rgb: 255, 0, 255;
