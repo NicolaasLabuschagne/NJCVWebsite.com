@@ -2,25 +2,29 @@
    Default Theme Variables
    =========================== */
 :root {
-    --primary-color: #17D900; /* Creative Green */
-    --primary-color-rgb: 23, 217, 0;
+    --primary-color: #64748b; /* Muted Blue Grey - Clarity & Trust */
+    --primary-color-rgb: 100, 116, 139;
 
-    --accent-color: #E000E0;  /* Creative Magenta */
-    --accent-color-rgb: 224, 0, 224;
+    --accent-color: #f59e0b;  /* Amber - Creativity & Energy */
+    --accent-color-rgb: 245, 158, 11;
 
-    --bg-color: #000000;
-    --bg-color-rgb: 0, 0, 0;
+    --accent-secondary: #f43f5e; /* Rose/Coral - Approachability */
+    --accent-secondary-rgb: 244, 63, 94;
 
-    --secondary-bg: #111111;
-    --secondary-bg-rgb: 17, 17, 17;
+    --bg-color: #0f172a;      /* Deep Slate */
+    --bg-color-rgb: 15, 23, 42;
 
-    --text-color: #ffffff;
-    --text-color-rgb: 255, 255, 255;
+    --secondary-bg: #1e293b;  /* Slate 800 */
+    --secondary-bg-rgb: 30, 41, 59;
 
-    --text-dim: #888888;
-    --text-dim-rgb: 136, 136, 136;
+    --text-color: #f8fafc;    /* Slate 50 */
+    --text-color-rgb: 248, 250, 252;
+
+    --text-dim: #94a3b8;      /* Slate 400 */
+    --text-dim-rgb: 148, 163, 184;
 
     --font-main: 'Montserrat', sans-serif;
+    --font-accent: 'JetBrains Mono', monospace;
 }
 
 /* ===========================
@@ -120,8 +124,63 @@
     --text-dim: rgba(253,253,253,0.72);
 }
 /* ===========================
+   Messy Professional Utilities
+   =========================== */
+.organic-shape {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+}
+
+.asymmetric-card {
+    border-radius: 2px 15px 5px 20px !important;
+}
+
+.slight-offset {
+    transform: rotate(-0.5deg);
+}
+
+.slight-offset-alt {
+    transform: rotate(0.8deg);
+}
+
+.hand-drawn-underline {
+    position: relative;
+    display: inline-block;
+}
+
+.hand-drawn-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background-color: var(--accent-secondary);
+    opacity: 0.3;
+    z-index: -1;
+    border-radius: 100% 20% 100% 20%;
+    transform: rotate(-1deg);
+}
+
+.font-accent {
+    font-family: var(--font-accent);
+    letter-spacing: -0.5px;
+}
+
+/* ===========================
    Global Reset & Base
    =========================== */
+.noise-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10000;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -413,6 +472,7 @@ canvas {
     background-color: var(--secondary-bg);
     padding: 40px;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px 12px 2px 8px; /* Subtle messiness */
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
