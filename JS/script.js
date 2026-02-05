@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Intersection Observer for reveal animations
     const observerOptions = {
-        threshold: 0.1
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -71,12 +72,14 @@ function getThemeColors() {
   const styles = getComputedStyle(document.documentElement);
   const c1 = styles.getPropertyValue('--primary-color-rgb').trim();
   const c2 = styles.getPropertyValue('--accent-color-rgb').trim();
+  const bg = styles.getPropertyValue('--bg-color-rgb').trim();
 
   // convert "23, 217, 0" → [23,217,0]
   const parse = str => str.split(',').map(v => parseInt(v, 10));
   return {
-    C1: c1 ? parse(c1) : [23,217,0],
-    C2: c2 ? parse(c2) : [224,0,224]
+    C1: c1 ? parse(c1) : [100, 116, 139],
+    C2: c2 ? parse(c2) : [245, 158, 11],
+    BG: bg ? parse(bg) : [15, 23, 42]
   };
 }
 
@@ -174,7 +177,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 (function(){
   
-  const CHAR_POOL = ['1','0'];
+  const CHAR_POOL = ['0', '1', '+', '-', '•', '/'];
 
   function randomChar(){
     return CHAR_POOL[Math.floor(Math.random() * CHAR_POOL.length)];
@@ -306,11 +309,12 @@ function setup() {
 }
 
 function draw() {
-    const { C1: newC1, C2: newC2 } = getThemeColors();
+    const { C1: newC1, C2: newC2, BG: newBG } = getThemeColors();
     C1 = newC1;
     C2 = newC2;
+    BG = newBG;
 
-    background(0)
+    background(BG[0], BG[1], BG[2]);
 
   // build drifting noise field
   let xoff = 0;
