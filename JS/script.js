@@ -11,11 +11,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('.animate-reveal').forEach(el => observer.observe(el));
 
-    // 2. Sticky header
+    // 2. Sticky header & Scroll Progress
     const header = document.querySelector('.header');
+    const scrollProgress = document.querySelector('.scroll-progress');
+
     window.addEventListener('scroll', () => {
+        // Sticky Header
         if (window.scrollY > 50) header.classList.add('sticky');
         else header.classList.remove('sticky');
+
+        // Scroll Progress
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        if (scrollProgress) scrollProgress.style.width = scrolled + "%";
     });
 
     // 3. Smooth scroll
@@ -37,6 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 5. Initialize Binary Rain
     startRain();
+
+    // 6. Initialize p5.js Sketch in Instance Mode
+    new p5(sketch);
 });
 
 /* ==========================================================================
@@ -52,16 +64,14 @@ function initThemeSystem() {
     const keys = Object.keys(THEMES);
     const saved = localStorage.getItem('theme');
 
-    // Pick random initial theme that isn't the saved one (for variety)
     let initialTheme = keys[Math.floor(Math.random() * keys.length)];
     if (saved && keys.includes(saved)) {
-        // Just use saved or pick a different one? Let's stick with saved if exists, else random
         initialTheme = saved;
     }
 
     setTheme(initialTheme);
 
-    // Keyboard shortcuts (Arrow Left/Right)
+    // Keyboard shortcuts
     window.addEventListener('keydown', (e) => {
         if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
         if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName) || document.activeElement.isContentEditable) return;
@@ -91,7 +101,7 @@ function renderPaletteButtons(activeTheme) {
     const switcher = document.querySelector('.palette-switcher');
     if (!switcher) return;
 
-    switcher.innerHTML = ''; // Clear
+    switcher.innerHTML = '';
 
     const q = document.createElement('div');
     q.className = 'palette-question';
@@ -103,7 +113,7 @@ function renderPaletteButtons(activeTheme) {
     switcher.appendChild(buttonsContainer);
 
     Object.keys(THEMES).forEach(name => {
-        if (name === activeTheme) return; // Don't show current
+        if (name === activeTheme) return;
         const btn = document.createElement('button');
         btn.className = 'palette-btn';
         btn.style.background = THEMES[name];
@@ -147,64 +157,66 @@ function startRain() {
 }
 
 /* ==========================================================================
-   p5.js Reactive Background
+   p5.js Reactive Background (Instance Mode)
    ========================================================================== */
-let symbols = ['+', '-', '•', '/'];
-let grid = [];
-let spacing = 60;
+const sketch = (p) => {
+    let symbolsArr = ['+', '-', '•', '/'];
+    let points = [];
+    let spacing = 60;
 
-function setup() {
-    const canvas = createCanvas(windowWidth, windowHeight);
-    canvas.position(0, 0);
-    canvas.style('z-index', '-1');
-    textAlign(CENTER, CENTER);
-    initGrid();
-}
+    p.setup = () => {
+        const canvas = p.createCanvas(p.windowWidth, p.windowHeight);
+        canvas.position(0, 0);
+        canvas.style('z-index', '-1');
+        p.textAlign(p.CENTER, p.CENTER);
+        initGrid();
+    };
 
-function initGrid() {
-    grid = [];
-    for (let x = 0; x < width; x += spacing) {
-        for (let y = 0; y < height; y += spacing) {
-            grid.push({
-                x: x + spacing / 2,
-                y: y + spacing / 2,
-                s: random(symbols),
-                angle: random(TWO_PI)
-            });
+    const initGrid = () => {
+        points = [];
+        for (let x = 0; x < p.width; x += spacing) {
+            for (let y = 0; y < p.height; y += spacing) {
+                points.push({
+                    x: x + spacing / 2,
+                    y: y + spacing / 2,
+                    s: p.random(symbolsArr),
+                    angle: p.random(p.TWO_PI)
+                });
+            }
         }
-    }
-}
+    };
 
-function draw() {
-    const { C1, C2 } = getThemeColors();
-    clear();
+    p.draw = () => {
+        const { C1, C2 } = getThemeColors();
+        p.clear();
 
-    grid.forEach(p => {
-        let d = dist(mouseX, mouseY, p.x, p.y);
-        let maxDist = 200;
-        let influence = map(min(d, maxDist), 0, maxDist, 20, 0);
-        let angle = atan2(p.y - mouseY, p.x - mouseX);
+        points.forEach(pt => {
+            let d = p.dist(p.mouseX, p.mouseY, pt.x, pt.y);
+            let maxDist = 200;
+            let influence = p.map(p.min(d, maxDist), 0, maxDist, 20, 0);
+            let angle = p.atan2(pt.y - p.mouseY, pt.x - p.mouseX);
 
-        push();
-        translate(p.x + cos(angle) * influence, p.y + sin(angle) * influence);
-        rotate(p.angle + (d < maxDist ? map(d, 0, maxDist, PI/4, 0) : 0));
+            p.push();
+            p.translate(pt.x + p.cos(angle) * influence, pt.y + p.sin(angle) * influence);
+            p.rotate(pt.angle + (d < maxDist ? p.map(d, 0, maxDist, p.PI/4, 0) : 0));
 
-        if (d < 150) {
-            fill(C2[0], C2[1], C2[2], 180);
-            textSize(20);
-        } else {
-            fill(C1[0], C1[1], C1[2], 60);
-            textSize(14);
-        }
+            if (d < 150) {
+                p.fill(C2[0], C2[1], C2[2], 180);
+                p.textSize(20);
+            } else {
+                p.fill(C1[0], C1[1], C1[2], 60);
+                p.textSize(14);
+            }
 
-        text(p.s, 0, 0);
-        pop();
+            p.text(pt.s, 0, 0);
+            p.pop();
 
-        p.angle += 0.005;
-    });
-}
+            pt.angle += 0.005;
+        });
+    };
 
-function windowResized() {
-    resizeCanvas(windowWidth, windowHeight);
-    initGrid();
-}
+    p.windowResized = () => {
+        p.resizeCanvas(p.windowWidth, p.windowHeight);
+        initGrid();
+    };
+};
