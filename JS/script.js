@@ -47,13 +47,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. Initialize Themes & Palette Switcher
     initThemeSystem();
 
-    // 5. Initialize Binary Rain Effects
-    document.querySelectorAll('.cloud-effect').forEach(el => new CloudEffect(el));
+    // 5. Initialize Reactive Background (Class-based p5.js)
+    new ReactiveBackground();
 
-    // 6. Initialize p5.js Sketch in Instance Mode
-    new p5(sketch);
-
-    // 7. Interactive Touches (Magnetic & Tilt)
+    // 6. Interactive Touches (Magnetic & Tilt)
     initInteractiveTouches();
 });
 
@@ -138,100 +135,74 @@ function getThemeColors() {
 }
 
 /* ==========================================================================
-   Binary Rain (CloudEffect)
+   Reactive Background (p5.js Class)
    ========================================================================== */
-class CloudEffect {
-    constructor(container) {
-        this.container = container;
-        this.interval = null;
-        this.init();
+class ReactiveBackground {
+    constructor() {
+        this.symbolsArr = ['+', '-', '•', '/'];
+        this.points = [];
+        this.spacing = 60;
+        this.instance = new p5(this.sketch.bind(this));
     }
 
-    init() {
-        const rate = window.innerWidth < 700 ? 200 : 100;
-        this.interval = setInterval(() => {
-            const drop = document.createElement('div');
-            drop.className = 'drop';
-            drop.innerText = Math.random() > 0.5 ? '1' : '0';
+    sketch(p) {
+        p.setup = () => {
+            const canvas = p.createCanvas(p.windowWidth, p.windowHeight);
+            canvas.position(0, 0);
+            canvas.style('z-index', '-1');
+            p.textAlign(p.CENTER, p.CENTER);
+            this.initGrid(p);
+        };
 
-            const size = Math.random();
-            if (size < 0.3) drop.classList.add('small');
-            else if (size > 0.8) drop.classList.add('large');
+        p.draw = () => {
+            const { C1, C2 } = getThemeColors();
+            p.clear();
 
-            drop.style.left = Math.random() * 100 + '%';
-            drop.style.animationDuration = (1.5 + Math.random() * 2.5) + 's';
-            drop.style.setProperty('--horizontal-movement', (Math.random() * 60 - 30) + 'px');
+            this.points.forEach(pt => {
+                let d = p.dist(p.mouseX, p.mouseY, pt.x, pt.y);
+                let maxDist = 200;
+                let influence = p.map(p.min(d, maxDist), 0, maxDist, 20, 0);
+                let angle = p.atan2(pt.y - p.mouseY, pt.x - p.mouseX);
 
-            this.container.appendChild(drop);
-            drop.onanimationend = () => drop.remove();
-        }, rate);
+                p.push();
+                p.translate(pt.x + p.cos(angle) * influence, pt.y + p.sin(angle) * influence);
+                p.rotate(pt.angle + (d < maxDist ? p.map(d, 0, maxDist, p.PI/4, 0) : 0));
+
+                if (d < 150) {
+                    p.fill(C2[0], C2[1], C2[2], 180);
+                    p.textSize(20);
+                } else {
+                    p.fill(C1[0], C1[1], C1[2], 60);
+                    p.textSize(14);
+                }
+
+                p.text(pt.s, 0, 0);
+                p.pop();
+
+                pt.angle += 0.005;
+            });
+        };
+
+        p.windowResized = () => {
+            p.resizeCanvas(p.windowWidth, p.windowHeight);
+            this.initGrid(p);
+        };
     }
-}
 
-/* ==========================================================================
-   p5.js Reactive Background (Instance Mode)
-   ========================================================================== */
-const sketch = (p) => {
-    let symbolsArr = ['+', '-', '•', '/'];
-    let points = [];
-    let spacing = 60;
-
-    p.setup = () => {
-        const canvas = p.createCanvas(p.windowWidth, p.windowHeight);
-        canvas.position(0, 0);
-        canvas.style('z-index', '-1');
-        p.textAlign(p.CENTER, p.CENTER);
-        initGrid();
-    };
-
-    const initGrid = () => {
-        points = [];
-        for (let x = 0; x < p.width; x += spacing) {
-            for (let y = 0; y < p.height; y += spacing) {
-                points.push({
-                    x: x + spacing / 2,
-                    y: y + spacing / 2,
-                    s: p.random(symbolsArr),
+    initGrid(p) {
+        this.points = [];
+        for (let x = 0; x < p.width; x += this.spacing) {
+            for (let y = 0; y < p.height; y += this.spacing) {
+                this.points.push({
+                    x: x + this.spacing / 2,
+                    y: y + this.spacing / 2,
+                    s: p.random(this.symbolsArr),
                     angle: p.random(p.TWO_PI)
                 });
             }
         }
-    };
-
-    p.draw = () => {
-        const { C1, C2 } = getThemeColors();
-        p.clear();
-
-        points.forEach(pt => {
-            let d = p.dist(p.mouseX, p.mouseY, pt.x, pt.y);
-            let maxDist = 200;
-            let influence = p.map(p.min(d, maxDist), 0, maxDist, 20, 0);
-            let angle = p.atan2(pt.y - p.mouseY, pt.x - p.mouseX);
-
-            p.push();
-            p.translate(pt.x + p.cos(angle) * influence, pt.y + p.sin(angle) * influence);
-            p.rotate(pt.angle + (d < maxDist ? p.map(d, 0, maxDist, p.PI/4, 0) : 0));
-
-            if (d < 150) {
-                p.fill(C2[0], C2[1], C2[2], 180);
-                p.textSize(20);
-            } else {
-                p.fill(C1[0], C1[1], C1[2], 60);
-                p.textSize(14);
-            }
-
-            p.text(pt.s, 0, 0);
-            p.pop();
-
-            pt.angle += 0.005;
-        });
-    };
-
-    p.windowResized = () => {
-        p.resizeCanvas(p.windowWidth, p.windowHeight);
-        initGrid();
-    };
-};
+    }
+}
 
 /* ==========================================================================
    Interactive Touches (Magnetic & Tilt)
