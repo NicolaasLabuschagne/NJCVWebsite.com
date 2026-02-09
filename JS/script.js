@@ -5,14 +5,11 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
-                if (entry.target.classList.contains('timeline-item')) {
-                    entry.target.classList.add('revealed');
-                }
             }
         });
     }, observerOptions);
 
-    document.querySelectorAll('.animate-reveal, .timeline-item').forEach(el => observer.observe(el));
+    document.querySelectorAll('.animate-reveal').forEach(el => observer.observe(el));
 
     // 2. Sticky header & Scroll Progress
     const header = document.querySelector('.header');
@@ -47,14 +44,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. Initialize Themes & Palette Switcher
     initThemeSystem();
 
-    // 5. Initialize Interactive Backgrounds
-    document.querySelectorAll('.interactive-bg').forEach(container => {
-        const mode = container.getAttribute('data-bg-mode') || 'symbols';
-        new InteractiveBackground(container, mode);
-    });
+    // 5. Initialize Binary Rain
+    startRain();
 
-    // 6. Interactive Touches (Magnetic & Tilt)
-    initInteractiveTouches();
+    // 6. Initialize p5.js Sketch in Instance Mode
+    new p5(sketch);
 });
 
 /* ==========================================================================
@@ -138,84 +132,69 @@ function getThemeColors() {
 }
 
 /* ==========================================================================
-   Interactive Background (p5.js Class)
+   Binary Rain
    ========================================================================== */
-class InteractiveBackground {
-    constructor(container, mode = 'symbols') {
-        this.container = container;
-        this.mode = mode;
-        this.symbolsArr = ['+', '-', '•', '/'];
-        this.points = []; // For symbols mode
-        this.streams = []; // For rain mode
-        this.spacing = 60;
-        this.instance = new p5(this.sketch.bind(this));
-    }
+function startRain() {
+    const cloud = document.querySelector('.cloud');
+    if (!cloud) return;
 
-    sketch(p) {
-        p.setup = () => {
-            const canvas = p.createCanvas(this.container.offsetWidth, this.container.offsetHeight);
-            canvas.parent(this.container);
-            canvas.style('position', 'absolute');
-            canvas.style('top', '0');
-            canvas.style('left', '0');
-            canvas.style('z-index', '-1');
-            canvas.style('pointer-events', 'none');
+    setInterval(() => {
+        const drop = document.createElement('div');
+        drop.className = 'drop';
+        drop.innerText = Math.random() > 0.5 ? '1' : '0';
 
-            p.textAlign(p.CENTER, p.CENTER);
-            this.initEffect(p);
-        };
+        const size = Math.random();
+        if (size < 0.3) drop.classList.add('small');
+        else if (size > 0.8) drop.classList.add('large');
 
-        p.draw = () => {
-            const { C1, C2 } = getThemeColors();
-            p.clear();
+        drop.style.left = Math.random() * 100 + 'vw';
+        drop.style.animationDuration = (1 + Math.random() * 2) + 's';
+        drop.style.setProperty('--horizontal-movement', (Math.random() * 40 - 20) + 'px');
 
-            if (this.mode === 'symbols') {
-                this.drawSymbols(p, C1, C2);
-            } else if (this.mode === 'rain') {
-                this.drawRain(p, C1, C2);
-            }
-        };
+        cloud.appendChild(drop);
+        drop.onanimationend = () => drop.remove();
+    }, window.innerWidth < 700 ? 150 : 80);
+}
 
-        p.windowResized = () => {
-            p.resizeCanvas(this.container.offsetWidth, this.container.offsetHeight);
-            this.initEffect(p);
-        };
-    }
+/* ==========================================================================
+   p5.js Reactive Background (Instance Mode)
+   ========================================================================== */
+const sketch = (p) => {
+    let symbolsArr = ['+', '-', '•', '/'];
+    let points = [];
+    let spacing = 60;
 
-    initEffect(p) {
-        if (this.mode === 'symbols') {
-            this.initGrid(p);
-        } else if (this.mode === 'rain') {
-            this.initRain(p);
-        }
-    }
+    p.setup = () => {
+        const canvas = p.createCanvas(p.windowWidth, p.windowHeight);
+        canvas.position(0, 0);
+        canvas.style('z-index', '-1');
+        p.textAlign(p.CENTER, p.CENTER);
+        initGrid();
+    };
 
-    /* Symbols Mode */
-    initGrid(p) {
-        this.points = [];
-        for (let x = 0; x < p.width; x += this.spacing) {
-            for (let y = 0; y < p.height; y += this.spacing) {
-                this.points.push({
-                    x: x + this.spacing / 2,
-                    y: y + this.spacing / 2,
-                    s: p.random(this.symbolsArr),
+    const initGrid = () => {
+        points = [];
+        for (let x = 0; x < p.width; x += spacing) {
+            for (let y = 0; y < p.height; y += spacing) {
+                points.push({
+                    x: x + spacing / 2,
+                    y: y + spacing / 2,
+                    s: p.random(symbolsArr),
                     angle: p.random(p.TWO_PI)
                 });
             }
         }
-    }
+    };
 
-    drawSymbols(p, C1, C2) {
-        // Adjust mouse coordinates relative to container
-        const rect = this.container.getBoundingClientRect();
-        const mX = p.mouseX;
-        const mY = p.mouseY;
+    p.draw = () => {
+        const { C1, C2 } = getThemeColors();
+        p.clear();
 
-        this.points.forEach(pt => {
-            let d = p.dist(mX, mY, pt.x, pt.y);
+        points.forEach(pt => {
+            let d = p.dist(p.mouseX, p.mouseY, pt.x, pt.y);
             let maxDist = 200;
             let influence = p.map(p.min(d, maxDist), 0, maxDist, 20, 0);
-            let angle = p.atan2(pt.y - mY, pt.x - mX);
+            let angle = p.atan2(pt.y - p.mouseY, pt.x - p.mouseX);
 
             p.push();
             p.translate(pt.x + p.cos(angle) * influence, pt.y + p.sin(angle) * influence);
@@ -234,91 +213,10 @@ class InteractiveBackground {
 
             pt.angle += 0.005;
         });
-    }
+    };
 
-    /* Rain Mode */
-    initRain(p) {
-        this.streams = [];
-        let x = 0;
-        for (let i = 0; i <= p.width / 20; i++) {
-            let stream = new Stream(p, x, p.random(-1000, 0));
-            this.streams.push(stream);
-            x += 20;
-        }
-    }
-
-    drawRain(p, C1, C2) {
-        p.textSize(16);
-        this.streams.forEach(stream => {
-            stream.render(p, C1, C2);
-        });
-    }
-}
-
-class Stream {
-    constructor(p, x, y) {
-        this.x = x;
-        this.y = y;
-        this.symbols = [];
-        this.totalSymbols = p.round(p.random(5, 30));
-        this.speed = p.random(2, 5);
-
-        for (let i = 0; i < this.totalSymbols; i++) {
-            this.symbols.push({
-                value: p.round(p.random(0, 1)) === 1 ? "1" : "0",
-                first: (i === 0 && p.random(1) > 0.5)
-            });
-        }
-    }
-
-    render(p, C1, C2) {
-        this.symbols.forEach((symbol, index) => {
-            if (symbol.first) {
-                p.fill(C2[0], C2[1], C2[2], 200);
-            } else {
-                p.fill(C1[0], C1[1], C1[2], p.map(index, 0, this.totalSymbols, 255, 50));
-            }
-            p.text(symbol.value, this.x, this.y + (index * 20));
-        });
-        this.y += this.speed;
-        if (this.y > p.height) {
-            this.y = p.random(-500, 0);
-        }
-    }
-}
-
-/* ==========================================================================
-   Interactive Touches (Magnetic & Tilt)
-   ========================================================================== */
-function initInteractiveTouches() {
-    // 1. Magnetic Buttons
-    document.querySelectorAll('.btn').forEach(btn => {
-        btn.addEventListener('mousemove', (e) => {
-            const rect = btn.getBoundingClientRect();
-            const x = e.clientX - rect.left - rect.width / 2;
-            const y = e.clientY - rect.top - rect.height / 2;
-            btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
-        });
-        btn.addEventListener('mouseleave', () => {
-            btn.style.transform = `translate(0, 0)`;
-        });
-    });
-
-    // 2. Card Tilt
-    document.querySelectorAll('.card').forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            const rotateX = (y - centerY) / 10;
-            const rotateY = (centerX - x) / 10;
-
-            card.style.transform = `translateY(-10px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
-        });
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = `translateY(0) rotateX(0) rotateY(0) scale(1)`;
-        });
-    });
-}
+    p.windowResized = () => {
+        p.resizeCanvas(p.windowWidth, p.windowHeight);
+        initGrid();
+    };
+};
