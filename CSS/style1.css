@@ -365,6 +365,7 @@ canvas {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
+    perspective: 1000px;
 }
 
 .card-tags {
@@ -388,10 +389,11 @@ canvas {
     background-color: var(--secondary-bg);
     padding: 40px;
     border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform 0.1s ease-out, border-color 0.4s, background-color 0.4s, box-shadow 0.4s;
     border-radius: 24px 4px 24px 4px;
     position: relative;
     overflow: hidden;
+    transform-style: preserve-3d;
 }
 
 .card::after {
@@ -607,14 +609,15 @@ canvas {
     box-shadow: 0 0 10px var(--primary-color);
 }
 
-.cloud {
-    position: fixed;
+.cloud-effect {
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 0;
-    z-index: 10;
+    height: 100%;
+    z-index: 0;
     pointer-events: none;
+    overflow: hidden;
 }
 
 .drop {
@@ -630,10 +633,10 @@ canvas {
 }
 
 @keyframes rain {
-    0% { transform: translateY(-20px) translateX(0); opacity: 0; }
-    10% { opacity: 0.5; }
-    90% { opacity: 0.5; }
-    100% { transform: translateY(100vh) translateX(var(--horizontal-movement, 0)); opacity: 0; }
+    0% { top: -5%; transform: translateX(0); opacity: 0; }
+    10% { opacity: 0.4; }
+    90% { opacity: 0.4; }
+    100% { top: 105%; transform: translateX(var(--horizontal-movement, 0)); opacity: 0; }
 }
 
 .drop.small { font-size: 8px; filter: blur(1px); opacity: 0.3; }
@@ -654,44 +657,75 @@ canvas {
 
 .timeline {
     position: relative;
-    max-width: 1000px;
-    margin: 0 auto;
-    padding-left: 50px;
+    display: flex;
+    overflow-x: auto;
+    padding: 60px 0 40px;
+    gap: 30px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) rgba(255,255,255,0.1);
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    perspective: 1000px;
+}
+
+.timeline::-webkit-scrollbar {
+    height: 6px;
+}
+
+.timeline::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+}
+
+.timeline::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 10px;
 }
 
 .timeline::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 20px;
-    height: 100%;
-    width: 2px;
-    background: linear-gradient(to bottom, var(--primary-color), var(--accent-color));
-    opacity: 0.3;
+    top: 77px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+    opacity: 0.2;
+    z-index: 0;
 }
 
 .timeline-item {
+    flex: 0 0 350px;
     position: relative;
-    margin-bottom: 60px;
+    padding-top: 50px;
+    opacity: 0;
+    transform: scale(0.8) rotate(-5deg) translateY(30px);
+    transition: all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.timeline-item.revealed {
+    opacity: 1;
+    transform: scale(1) rotate(0) translateY(0);
 }
 
 .timeline-dot {
     position: absolute;
-    left: -37px;
-    top: 5px;
-    width: 14px;
-    height: 14px;
+    top: 10px;
+    left: 40px;
+    width: 16px;
+    height: 16px;
     background: var(--bg-color);
-    border: 3px solid var(--primary-color);
+    border: 4px solid var(--primary-color);
     border-radius: 50%;
-    z-index: 1;
-    transition: all 0.3s ease;
+    z-index: 2;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .timeline-item:hover .timeline-dot {
     background: var(--accent-color);
     transform: scale(1.5);
-    box-shadow: 0 0 15px var(--accent-color);
+    box-shadow: 0 0 20px var(--accent-color);
+    border-color: #fff;
 }
 
 .timeline-content {
@@ -699,12 +733,16 @@ canvas {
     padding: 30px;
     border-radius: 4px 24px 4px 24px;
     border: 1px solid rgba(255,255,255,0.05);
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    z-index: 1;
 }
 
 .timeline-item:hover .timeline-content {
     border-color: var(--primary-color);
-    transform: translateX(10px);
+    transform: translateY(-10px);
+    background: #050505;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
 .timeline-date {
@@ -735,15 +773,12 @@ canvas {
 
 @media (max-width: 768px) {
     .timeline {
-        padding-left: 40px;
+        gap: 20px;
     }
-    .timeline::before {
-        left: 10px;
+    .timeline-item {
+        flex: 0 0 280px;
     }
-    .timeline-dot {
-        left: -37px;
-    }
-    .timeline-item:hover .timeline-content {
-        transform: none;
+    .timeline-content {
+        padding: 20px;
     }
 }

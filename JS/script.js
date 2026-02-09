@@ -5,11 +5,14 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
+                if (entry.target.classList.contains('timeline-item')) {
+                    entry.target.classList.add('revealed');
+                }
             }
         });
     }, observerOptions);
 
-    document.querySelectorAll('.animate-reveal').forEach(el => observer.observe(el));
+    document.querySelectorAll('.animate-reveal, .timeline-item').forEach(el => observer.observe(el));
 
     // 2. Sticky header & Scroll Progress
     const header = document.querySelector('.header');
@@ -44,11 +47,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. Initialize Themes & Palette Switcher
     initThemeSystem();
 
-    // 5. Initialize Binary Rain
-    startRain();
+    // 5. Initialize Binary Rain Effects
+    document.querySelectorAll('.cloud-effect').forEach(el => new CloudEffect(el));
 
     // 6. Initialize p5.js Sketch in Instance Mode
     new p5(sketch);
+
+    // 7. Interactive Touches (Magnetic & Tilt)
+    initInteractiveTouches();
 });
 
 /* ==========================================================================
@@ -132,28 +138,34 @@ function getThemeColors() {
 }
 
 /* ==========================================================================
-   Binary Rain
+   Binary Rain (CloudEffect)
    ========================================================================== */
-function startRain() {
-    const cloud = document.querySelector('.cloud');
-    if (!cloud) return;
+class CloudEffect {
+    constructor(container) {
+        this.container = container;
+        this.interval = null;
+        this.init();
+    }
 
-    setInterval(() => {
-        const drop = document.createElement('div');
-        drop.className = 'drop';
-        drop.innerText = Math.random() > 0.5 ? '1' : '0';
+    init() {
+        const rate = window.innerWidth < 700 ? 200 : 100;
+        this.interval = setInterval(() => {
+            const drop = document.createElement('div');
+            drop.className = 'drop';
+            drop.innerText = Math.random() > 0.5 ? '1' : '0';
 
-        const size = Math.random();
-        if (size < 0.3) drop.classList.add('small');
-        else if (size > 0.8) drop.classList.add('large');
+            const size = Math.random();
+            if (size < 0.3) drop.classList.add('small');
+            else if (size > 0.8) drop.classList.add('large');
 
-        drop.style.left = Math.random() * 100 + 'vw';
-        drop.style.animationDuration = (1 + Math.random() * 2) + 's';
-        drop.style.setProperty('--horizontal-movement', (Math.random() * 40 - 20) + 'px');
+            drop.style.left = Math.random() * 100 + '%';
+            drop.style.animationDuration = (1.5 + Math.random() * 2.5) + 's';
+            drop.style.setProperty('--horizontal-movement', (Math.random() * 60 - 30) + 'px');
 
-        cloud.appendChild(drop);
-        drop.onanimationend = () => drop.remove();
-    }, window.innerWidth < 700 ? 150 : 80);
+            this.container.appendChild(drop);
+            drop.onanimationend = () => drop.remove();
+        }, rate);
+    }
 }
 
 /* ==========================================================================
@@ -220,3 +232,39 @@ const sketch = (p) => {
         initGrid();
     };
 };
+
+/* ==========================================================================
+   Interactive Touches (Magnetic & Tilt)
+   ========================================================================== */
+function initInteractiveTouches() {
+    // 1. Magnetic Buttons
+    document.querySelectorAll('.btn').forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+        });
+        btn.addEventListener('mouseleave', () => {
+            btn.style.transform = `translate(0, 0)`;
+        });
+    });
+
+    // 2. Card Tilt
+    document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = (y - centerY) / 10;
+            const rotateY = (centerX - x) / 10;
+
+            card.style.transform = `translateY(-10px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = `translateY(0) rotateX(0) rotateY(0) scale(1)`;
+        });
+    });
+}
