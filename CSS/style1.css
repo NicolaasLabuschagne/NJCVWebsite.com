@@ -2,24 +2,18 @@
    Default Theme Variables
    =========================== */
 :root {
-    --primary-color: #17D900; /* Creative Green */
-    --primary-color-rgb: 23, 217, 0;
-
-    --accent-color: #E000E0;  /* Creative Magenta */
-    --accent-color-rgb: 224, 0, 224;
-
-    --bg-color: #000000;
-    --bg-color-rgb: 0, 0, 0;
-
-    --secondary-bg: #111111;
-    --secondary-bg-rgb: 17, 17, 17;
-
-    --text-color: #ffffff;
-    --text-color-rgb: 255, 255, 255;
-
-    --text-dim: #888888;
+    --primary-color: #A8E600;
+    --primary-color-rgb: 168, 230, 0;
+    --accent-color: #72BF78;
+    --accent-color-rgb: 114, 191, 120;
+    --bg-color-rgb: 28, 61, 46;
+    --bg-color: rgb(var(--bg-color-rgb));
+    --secondary-bg-rgb: 42, 85, 65;
+    --secondary-bg: rgb(var(--secondary-bg-rgb));
+    --text-color: #F1F8E8;
+    --text-color-rgb: 241, 248, 232;
+    --text-dim: rgba(241, 248, 232, 0.7);
     --text-dim-rgb: 136, 136, 136;
-
     --font-main: 'Montserrat', sans-serif;
 }
 
@@ -39,34 +33,6 @@
     --text-color: #F0F4F8;
     --text-color-rgb: 240, 244, 248;
     --text-dim: rgba(240, 244, 248, 0.7);
-}
-
-[data-theme="charcoal-blue"] {
-    --primary-color: #007BFF;
-    --primary-color-rgb: 0, 123, 255;
-    --accent-color: #4CC9FE;
-    --accent-color-rgb: 76, 201, 254;
-    --bg-color-rgb: 46, 46, 46;
-    --bg-color: rgb(var(--bg-color-rgb));
-    --secondary-bg-rgb: 64, 64, 64;
-    --secondary-bg: rgb(var(--secondary-bg-rgb));
-    --text-color: #E0E0E0;
-    --text-color-rgb: 224, 224, 224;
-    --text-dim: rgba(224, 224, 224, 0.7);
-}
-
-[data-theme="forest-lime"] {
-    --primary-color: #A8E600;
-    --primary-color-rgb: 168, 230, 0;
-    --accent-color: #72BF78;
-    --accent-color-rgb: 114, 191, 120;
-    --bg-color-rgb: 28, 61, 46;
-    --bg-color: rgb(var(--bg-color-rgb));
-    --secondary-bg-rgb: 42, 85, 65;
-    --secondary-bg: rgb(var(--secondary-bg-rgb));
-    --text-color: #F1F8E8;
-    --text-color-rgb: 241, 248, 232;
-    --text-dim: rgba(241, 248, 232, 0.7);
 }
 /* ===========================
    Global Reset & Base
@@ -101,6 +67,11 @@ body::before {
     opacity: 0.04;
     pointer-events: none;
     z-index: 9999;
+}
+
+.noise {
+    position: relative;
+    overflow: hidden;
 }
 
 canvas {
@@ -340,7 +311,7 @@ canvas {
 /* ===========================
    About
    =========================== */
-.about {
+.colorChange {
     background-color: rgba(var(--secondary-bg-rgb), 0.8);
 }
 
@@ -644,24 +615,30 @@ canvas {
    Timeline
    =========================== */
 .timeline-wrapper {
-    margin-top: 100px;
+  position: relative;
+  overflow: hidden;         /* block vertical scroll inside */
 }
 
 .timeline-title {
-    margin-bottom: 60px;
-    font-size: 2.5rem;
+  margin-bottom: 60px;
+  font-size: 2.5rem;
 }
 
 .timeline {
-    display: flex;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding: 40px 0;
-    position: relative;
-    gap: 0;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
+  position: relative;
+  display: flex;
+  height: 100%;
+  width: max-content;       /* expands to fit items horizontally */
+  overflow-x: auto;         /* horizontal scroll enabled */
+  padding: 60px 0 40px;
+  gap: 30px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-color) rgba(255,255,255,0.1);
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  perspective: 1000px;
 }
+
 
 /* Custom Scrollbar for Timeline */
 .timeline::-webkit-scrollbar {
@@ -679,9 +656,9 @@ canvas {
 .timeline::before {
     content: '';
     position: absolute;
-    top: 48px;
+    top: 77px;
     left: 0;
-    width: 200%; /* Spans beyond viewport to accommodate scroll */
+    width: 150%; /* Spans beyond viewport to accommodate scroll */
     height: 2px;
     background: linear-gradient(to right, var(--primary-color), var(--accent-color));
     opacity: 0.2;
@@ -690,35 +667,41 @@ canvas {
 
 .timeline-item {
     flex: 0 0 350px;
-    margin-right: 40px;
     position: relative;
-    scroll-snap-align: start;
-    white-space: normal;
+    padding-top: 50px;
+    opacity: 0;
+    transform: scale(0.8) rotate(-5deg) translateY(30px);
+    transition: all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.timeline-item.revealed {
+    opacity: 1;
+    transform: scale(1) rotate(0) translateY(0);
 }
 
 .timeline-dot {
-    position: relative;
-    left: 0;
-    top: 0;
-    margin-bottom: 25px;
-    width: 18px;
-    height: 18px;
+    position: absolute;
+    top: 10px;
+    left: 40px;
+    width: 16px;
+    height: 16px;
     background: var(--bg-color);
-    border: 3px solid var(--primary-color);
+    border: 4px solid var(--primary-color);
     border-radius: 50%;
     z-index: 2;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .timeline-item:hover .timeline-dot {
     background: var(--accent-color);
     transform: scale(1.3);
-    box-shadow: 0 0 15px var(--accent-color);
+    box-shadow: 0 0 20px var(--accent-color);
 }
 
 .timeline-content {
     background: var(--secondary-bg);
     padding: 30px;
+    height: 100%;
     border-radius: 4px 24px 4px 24px;
     border: 1px solid rgba(255,255,255,0.05);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);

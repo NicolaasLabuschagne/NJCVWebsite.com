@@ -47,8 +47,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // 5. Initialize Binary Rain
     startRain();
 
-    // 6. Initialize p5.js Sketch in Instance Mode
-    new p5(sketch);
+    // 6. Initialize Noise Backgrounds
+    document.querySelectorAll('.noise').forEach(section => {
+        attachNoiseBackground(`#${section.id}`);
+    });
 });
 
 /* ==========================================================================
@@ -56,8 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
    ========================================================================== */
 const THEMES = {
     "navy-orange": "#FF6B35",
-    "charcoal-blue": "#007BFF",
-    "forest-lime": "#A8E600"
+    "default": "#A8E600"
 };
 
 function initThemeSystem() {
@@ -157,66 +158,101 @@ function startRain() {
 }
 
 /* ==========================================================================
-   p5.js Reactive Background (Instance Mode)
+   p5.js Noise Background (Reusable)
    ========================================================================== */
-const sketch = (p) => {
-    let symbolsArr = ['+', '-', '•', '/'];
-    let points = [];
-    let spacing = 60;
+function attachNoiseBackground(selector) {
+    const container = document.querySelector(selector);
 
-    p.setup = () => {
-        const canvas = p.createCanvas(p.windowWidth, p.windowHeight);
-        canvas.position(0, 0);
-        canvas.style('z-index', '-1');
-        p.textAlign(p.CENTER, p.CENTER);
-        initGrid();
-    };
+    if (!container) return;
 
-    const initGrid = () => {
-        points = [];
-        for (let x = 0; x < p.width; x += spacing) {
-            for (let y = 0; y < p.height; y += spacing) {
-                points.push({
-                    x: x + spacing / 2,
-                    y: y + spacing / 2,
-                    s: p.random(symbolsArr),
-                    angle: p.random(p.TWO_PI)
-                });
+    const sketch = (p) => {
+        let symbolsArr = ['+', '-', '•', '/'];
+        let points = [];
+        let spacing = 60;
+
+        p.setup = () => {
+            const canvas = p.createCanvas(container.offsetWidth, container.offsetHeight);
+            canvas.parent(container); // attach canvas to the container
+            canvas.style('position', 'absolute');
+            canvas.style('top', '0');
+            canvas.style('left', '0');
+            canvas.style('z-index', '-1');
+            p.textAlign(p.CENTER, p.CENTER);
+            initGrid();
+        };
+
+        const initGrid = () => {
+            points = [];
+            for (let x = 0; x < p.width; x += spacing) {
+                for (let y = 0; y < p.height; y += spacing) {
+                    points.push({
+                        x: x + spacing / 2,
+                        y: y + spacing / 2,
+                        s: p.random(symbolsArr),
+                        angle: p.random(p.TWO_PI)
+                    });
+                }
             }
-        }
+        };
+
+        p.draw = () => {
+            const { C1, C2 } = getThemeColors(); // your theme function
+            p.clear();
+
+            points.forEach(pt => {
+                let d = p.dist(p.mouseX, p.mouseY, pt.x, pt.y);
+                let maxDist = 200;
+                let influence = p.map(p.min(d, maxDist), 0, maxDist, 20, 0);
+                let angle = p.atan2(pt.y - p.mouseY, pt.x - p.mouseX);
+
+                p.push();
+                p.translate(pt.x + p.cos(angle) * influence, pt.y + p.sin(angle) * influence);
+                p.rotate(pt.angle + (d < maxDist ? p.map(d, 0, maxDist, p.PI/4, 0) : 0));
+
+                if (d < 150) {
+                    p.fill(C2[0], C2[1], C2[2], 180);
+                    p.textSize(20);
+                } else {
+                    p.fill(C1[0], C1[1], C1[2], 60);
+                    p.textSize(14);
+                }
+
+                p.text(pt.s, 0, 0);
+                p.pop();
+
+                pt.angle += 0.005;
+            });
+        };
+
+        p.windowResized = () => {
+            p.resizeCanvas(container.offsetWidth, container.offsetHeight);
+            initGrid();
+        };
     };
 
-    p.draw = () => {
-        const { C1, C2 } = getThemeColors();
-        p.clear();
+    new p5(sketch);
+}
 
-        points.forEach(pt => {
-            let d = p.dist(p.mouseX, p.mouseY, pt.x, pt.y);
-            let maxDist = 200;
-            let influence = p.map(p.min(d, maxDist), 0, maxDist, 20, 0);
-            let angle = p.atan2(pt.y - p.mouseY, pt.x - p.mouseX);
+/*================================================================*/
+//                    Timeline Horizontal Scroll
+/*================================================================*/
 
-            p.push();
-            p.translate(pt.x + p.cos(angle) * influence, pt.y + p.sin(angle) * influence);
-            p.rotate(pt.angle + (d < maxDist ? p.map(d, 0, maxDist, p.PI/4, 0) : 0));
+const timelineWrapper = document.querySelector('.timeline-wrapper');
+const timeline = document.querySelector('.timeline');
 
-            if (d < 150) {
-                p.fill(C2[0], C2[1], C2[2], 180);
-                p.textSize(20);
-            } else {
-                p.fill(C1[0], C1[1], C1[2], 60);
-                p.textSize(14);
-            }
+timelineWrapper.addEventListener('wheel', (e) => {
+  e.preventDefault(); // stop default vertical scroll
 
-            p.text(pt.s, 0, 0);
-            p.pop();
+  const maxScroll = timeline.scrollWidth - window.innerWidth;
 
-            pt.angle += 0.005;
-        });
-    };
-
-    p.windowResized = () => {
-        p.resizeCanvas(p.windowWidth, p.windowHeight);
-        initGrid();
-    };
-};
+  // Scroll horizontally until the end
+  if (
+    (e.deltaY > 0 && timeline.scrollLeft < maxScroll) ||
+    (e.deltaY < 0 && timeline.scrollLeft > 0)
+  ) {
+    timeline.scrollLeft += e.deltaY;
+  } else {
+    // Resume normal vertical scroll once horizontal is finished
+    window.scrollBy(0, e.deltaY);
+  }
+}, { passive: false });
