@@ -74,6 +74,11 @@ body::before {
     overflow: hidden;
 }
 
+.contour {
+  position: relative;
+  overflow: hidden;
+}
+
 canvas {
     position: fixed;
     top: 0;
@@ -433,7 +438,6 @@ canvas {
 }
 
 .contact {
-    background-color: rgba(var(--secondary-bg-rgb), 0.8);
     text-align: center;
 }
 
