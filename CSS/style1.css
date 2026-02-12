@@ -18,23 +18,6 @@
 }
 
 /* ===========================
-   Theme Overrides
-   =========================== */
-
-[data-theme="navy-orange"] {
-    --primary-color: #FF6B35;
-    --primary-color-rgb: 255, 107, 53;
-    --accent-color: #FF9F1C;
-    --accent-color-rgb: 255, 159, 28;
-    --bg-color-rgb: 27, 42, 73;
-    --bg-color: rgb(var(--bg-color-rgb));
-    --secondary-bg-rgb: 38, 58, 100;
-    --secondary-bg: rgb(var(--secondary-bg-rgb));
-    --text-color: #F0F4F8;
-    --text-color-rgb: 240, 244, 248;
-    --text-dim: rgba(240, 244, 248, 0.7);
-}
-/* ===========================
    Global Reset & Base
    =========================== */
 * {
@@ -547,73 +530,22 @@ canvas {
     background: var(--primary-color);
 }
 
-.palette-switcher {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: 0 20px;
-}
-
-.palette-question {
-    font-size: 0.65rem;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    opacity: 0.8;
-}
-
-.palette-buttons {
-    display: flex;
-    gap: 6px;
-}
-
-.palette-btn {
-    width: 14px;
-    height: 14px;
-    border-radius: 3px;
-    border: 1px solid rgba(255,255,255,0.3);
-    cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.palette-btn:hover {
-    transform: scale(1.3) rotate(45deg);
-    border-color: #fff;
-    box-shadow: 0 0 10px var(--primary-color);
-}
 
 .cloud {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 0;
+    height: 100vh;
     z-index: 10;
     pointer-events: none;
 }
 
-.drop {
-    position: absolute;
-    color: var(--primary-color);
-    font-family: monospace;
-    font-size: 12px;
-    line-height: 1;
-    user-select: none;
-    pointer-events: none;
-    opacity: 0;
-    animation: rain linear forwards;
+#rain-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
 }
-
-@keyframes rain {
-    0% { transform: translateY(-20px) translateX(0); opacity: 0; }
-    10% { opacity: 0.5; }
-    90% { opacity: 0.5; }
-    100% { transform: translateY(100vh) translateX(var(--horizontal-movement, 0)); opacity: 0; }
-}
-
-.drop.small { font-size: 8px; filter: blur(1px); opacity: 0.3; }
-.drop.medium { font-size: 14px; opacity: 0.6; }
-.drop.large { font-size: 20px; font-weight: bold; opacity: 0.8; filter: drop-shadow(0 0 5px var(--primary-color)); }
 
 /* ===========================
    Timeline
