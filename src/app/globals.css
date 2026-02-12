@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0a0a0a;
+  --foreground: #ffffff;
+  --navy: #1B2A49;
+  --orange: #FF6B35;
+  --charcoal: #2E2E2E;
+  --electric-blue: #007BFF;
+  --forest-green: #1C3D2E;
+  --lime-green: #A8E600;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  overflow-x: hidden;
+}
+
+@layer base {
+  * {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+@layer components {
+  .brutal-border {
+    @apply border-2 border-foreground shadow-brutal transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none;
+  }
+
+  .terminal-window {
+    @apply border-2 border-foreground bg-black/80 backdrop-blur-sm overflow-hidden flex flex-col;
+  }
+
+  .terminal-header {
+    @apply border-b-2 border-foreground bg-foreground text-background px-4 py-1 flex justify-between items-center font-mono text-xs uppercase tracking-widest;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--orange);
+  border: 2px solid var(--background);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--foreground);
+}
