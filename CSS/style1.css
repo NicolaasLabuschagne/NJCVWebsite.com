@@ -2,18 +2,25 @@
    Default Theme Variables
    =========================== */
 :root {
-    --primary-color: #A8E600;
-    --primary-color-rgb: 168, 230, 0;
+    --primary-color: #A4F000;
+    --primary-color-rgb: 164, 240, 0;
+
     --accent-color: #72BF78;
     --accent-color-rgb: 114, 191, 120;
-    --bg-color-rgb: 28, 61, 46;
+
+    --bg-color-rgb: 0, 63, 58;
     --bg-color: rgb(var(--bg-color-rgb));
-    --secondary-bg-rgb: 42, 85, 65;
+
+    /* Secondary background: same hue, slightly lighter */
+    --secondary-bg-rgb: 0, 85, 78;
     --secondary-bg: rgb(var(--secondary-bg-rgb));
+
     --text-color: #F1F8E8;
     --text-color-rgb: 241, 248, 232;
+
     --text-dim: rgba(241, 248, 232, 0.7);
-    --text-dim-rgb: 136, 136, 136;
+    --text-dim-rgb: 169, 174, 163;
+
     --font-main: 'Montserrat', sans-serif;
 }
 
