@@ -35,13 +35,16 @@ const sketch = (p) => {
     p.draw = () => {
         p.clear();
 
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        const colorValue = isDark ? 255 : 0;
+
         symbols.forEach(s => {
             let dx = p.mouseX - s.x;
             let dy = p.mouseY - s.y;
             let dist = p.sqrt(dx*dx + dy*dy);
             let offset = p.map(p.min(dist, 200), 0, 200, 20, 0);
 
-            p.fill(0, 0, 0, p.map(p.min(dist, 300), 0, 300, 40, 5));
+            p.fill(colorValue, colorValue, colorValue, p.map(p.min(dist, 300), 0, 300, 40, 5));
             p.textSize(s.size);
             p.push();
             p.translate(s.x, s.y);
@@ -79,6 +82,149 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }, observerOptions);
+
+    /* ===========================
+       Theme Toggle
+       =========================== */
+    /* ===========================
+       Scroll Progress
+       =========================== */
+    const progressBar = document.getElementById('scroll-progress-bar');
+    window.addEventListener('scroll', () => {
+        const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrolled = (window.scrollY / windowHeight) * 100;
+        progressBar.style.width = scrolled + '%';
+    });
+
+    const themeToggle = document.getElementById('theme-toggle');
+    const currentTheme = localStorage.getItem('theme') || 'light';
+
+    if (currentTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    }
+
+    const updateThemeIcon = () => {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        const icon = themeToggle.querySelector('i');
+        if (isDark) {
+            icon.className = 'fa fa-moon-o'; // Bike with headlight vibe or just moon
+        } else {
+            icon.className = 'fa fa-sun-o';
+        }
+    };
+
+    if (currentTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    }
+    updateThemeIcon();
+
+    themeToggle.addEventListener('click', () => {
+        let theme = document.documentElement.getAttribute('data-theme');
+        if (theme === 'dark') {
+            document.documentElement.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'light');
+        } else {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+        }
+        updateThemeIcon();
+    });
+
+    /* ===========================
+       Journey Book Effect
+       =========================== */
+    const bookObserverOptions = {
+        threshold: [0, 0.1, 0.9, 1],
+        rootMargin: '0px'
+    };
+
+    const bookObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.intersectionRatio < 0.9 && entry.intersectionRatio > 0) {
+                entry.target.classList.add('turning');
+            } else {
+                entry.target.classList.remove('turning');
+            }
+        });
+    }, bookObserverOptions);
+
+    document.querySelectorAll('.page').forEach(page => {
+        bookObserver.observe(page);
+    });
+
+    /* ===========================
+       Random Skill Tag Press
+       =========================== */
+    const skillTags = document.querySelectorAll('.tags span');
+    const stickerColors = ['var(--lime-color)', 'var(--red-color)', 'var(--blue-color)', 'var(--yellow-color)', 'var(--purple-color)'];
+    if (skillTags.length > 0) {
+        setInterval(() => {
+            const randomTag = skillTags[Math.floor(Math.random() * skillTags.length)];
+            const randomColor = stickerColors[Math.floor(Math.random() * stickerColors.length)];
+
+            randomTag.style.transform = 'translate(4px, 4px)';
+            randomTag.style.boxShadow = '0px 0px 0px 0px var(--border-color)';
+            randomTag.style.backgroundColor = randomColor;
+
+            setTimeout(() => {
+                randomTag.style.transform = '';
+                randomTag.style.boxShadow = '';
+                randomTag.style.backgroundColor = '';
+            }, 500);
+        }, 3000);
+    }
+
+    /* ===========================
+       Highlight Animation Observer
+       =========================== */
+    const highlightObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.highlight').forEach(h => highlightObserver.observe(h));
+
+    /* ===========================
+       Interactive Map
+       =========================== */
+    const mapElement = document.getElementById('map');
+    if (mapElement) {
+        const map = L.map('map').setView([-25.864, 28.188], 10); // Centered on Centurion
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        const bikeIcon = L.divIcon({
+            html: '<div style="font-size: 24px; filter: drop-shadow(2px 2px 0px black);">🚲</div>',
+            className: 'custom-bike-icon',
+            iconSize: [30, 30],
+            iconAnchor: [15, 15]
+        });
+
+        const locations = [
+            { coords: [-25.864, 28.188], title: "Centurion", desc: "Systems Architect @ Estate Recoveries" },
+            { coords: [-26.204, 28.047], title: "Johannesburg", desc: "Lead Developer @ Creative Minds" },
+            { coords: [-25.747, 28.229], title: "Pretoria", desc: "Junior Software Engineer @ Tech Innovations" }
+        ];
+
+        locations.forEach(loc => {
+            L.marker(loc.coords, { icon: bikeIcon })
+                .addTo(map)
+                .bindPopup(`<b>${loc.title}</b><br>${loc.desc}`);
+        });
+
+        // Handle theme changes for map
+        const updateMapTheme = () => {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            // Leaflet doesn't have a native "dark mode", we use CSS filters in style.css
+        };
+        updateMapTheme();
+        themeToggle.addEventListener('click', updateMapTheme);
+    }
 
     const revealElements = document.querySelectorAll('.animate-reveal');
     revealElements.forEach((el, index) => {

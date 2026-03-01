@@ -10,9 +10,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
 </head>
 <body>
+    <div id="scroll-progress-container" class="scroll-progress-container">
+        <div id="scroll-progress-bar" class="scroll-progress-bar">
+            <div class="bike-icon">🚲</div>
+        </div>
+    </div>
+
     <header class="header">
         <nav class="nav">
             <div class="logo">NL</div>
@@ -22,23 +30,57 @@
                 <li><a href="#journey">Journey</a></li>
                 <li><a href="#skills">Skills</a></li>
             </ul>
-            <div class="nav-cta">
-                <a href="#contact" class="btn btn-nav">Get in Touch!</a>
+            <div class="nav-right">
+                <button id="theme-toggle" class="theme-toggle" title="Toggle Day/Night Mode">
+                    <i class="fa fa-bicycle"></i>
+                </button>
+                <div class="nav-cta">
+                    <a href="#contact" class="btn btn-nav">Get in Touch!</a>
+                </div>
             </div>
         </nav>
     </header>
 
-    <main>
-        <section id="hero" class="hero">
+    <main class="book-container">
+        <section id="hero" class="hero section page">
             <div class="container hero-grid">
-                <svg class="star-illustation" style="top: 15%; left: 70%; transform: rotate(15deg);" viewBox="0 0 24 24">
+                <svg class="star-illustation" style="top: 10%; left: 5%; transform: rotate(15deg);" viewBox="0 0 24 24">
                     <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
                 </svg>
+                <div class="hero-right animate-reveal">
+                    <div class="profile-container">
+                        <!-- Dimension lines for messy-engineered look -->
+                        <div style="position: absolute; top: -30px; left: 0; width: 100%; border-top: 1px dashed black; display: flex; justify-content: space-between; font-size: 10px; font-family: monospace;">
+                            <span>| 0.00</span>
+                            <span class="dim-bg" style="background: white; padding: 0 5px;">350mm</span>
+                            <span>| 1.00</span>
+                        </div>
+                        <div style="position: absolute; top: 0; left: -30px; height: 100%; border-left: 1px dashed black; display: flex; flex-direction: column; justify-content: space-between; font-size: 10px; font-family: monospace; transform: rotate(180deg); writing-mode: vertical-lr;">
+                            <span>| 0.00</span>
+                            <span class="dim-bg" style="background: white; padding: 5px 0; transform: rotate(-180deg);">350mm</span>
+                            <span>| 1.00</span>
+                        </div>
+
+                        <div class="tape" style="top: -15px; right: 40px;"></div>
+                        <div class="floating-icon icon-code">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                        </div>
+                        <div class="floating-icon icon-save">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                        </div>
+                        <div class="floating-icon icon-terminal">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+                        </div>
+                        <img src="images/myPic3.jpg" alt="Nicolaas Labuschagne" class="profile-img">
+                        <div class="profile-badge">Full-Stack Ninja</div>
+                    </div>
+                </div>
                 <div class="hero-left">
-                    <div class="hero-greeting animate-reveal">Hi there!</div>
+                    <div class="hero-greeting animate-reveal">Hi there! 👋</div>
                     <h1 class="hero-name animate-reveal">I'm Nicolaas <span class="scribble-underline">Labuschagne.</span></h1>
-                    <div class="sticker sticker-lime" style="top: -60px; left: 40%; transform: rotate(-10deg);">Systems Architect</div>
-                    <div class="sticker sticker-red" style="top: -20px; left: 70%; transform: rotate(15deg);">Amateur Cyclist</div>
+                    <div class="sticker sticker-lime" style="top: -60px; left: 180px; transform: rotate(-10deg);">Systems Architect</div>
+                    <div class="sticker sticker-red" style="top: -20px; left: 350px; transform: rotate(15deg);">Amateur Cyclist 🚲</div>
+                    <div class="sticker sticker-yellow" style="bottom: -30px; right: 80px; transform: rotate(10deg);">Full-Stack Dev</div>
                     <p class="hero-description animate-reveal">
                         Based in South Africa, I'm a <span class="highlight">Systems Architect</span> & Full Stack Developer. I love to work with distributed systems,
                         automated workflows, and modern web technologies. I'm passionate about
@@ -57,38 +99,10 @@
                                 <path d="M10,10 Q30,5 45,30" stroke="black" stroke-width="3" fill="none" />
                                 <path d="M38,25 L45,30 L48,22" stroke="black" stroke-width="3" fill="none" />
                             </svg>
-                            <a href="https://buymeacoffee.com/nj.labuschagne" target="_blank" class="btn-coffee-round">
+                            <a href="#" class="btn-coffee-round">
                                 <i class="fa fa-coffee"></i>
                             </a>
                         </div>
-                    </div>
-                </div>
-                <div class="hero-right animate-reveal">
-                    <div class="profile-container">
-                        <!-- Dimension lines for messy-engineered look -->
-                        <div style="position: absolute; top: -30px; left: 0; width: 100%; border-top: 1px dashed black; display: flex; justify-content: space-between; font-size: 10px; font-family: monospace;">
-                            <span>| 0.00</span>
-                            <span style="background: white; padding: 0 5px;">350mm</span>
-                            <span>| 1.00</span>
-                        </div>
-                        <div style="position: absolute; top: 0; left: -30px; height: 100%; border-left: 1px dashed black; display: flex; flex-direction: column; justify-content: space-between; font-size: 10px; font-family: monospace; transform: rotate(180deg); writing-mode: vertical-lr;">
-                            <span>| 0.00</span>
-                            <span style="background: white; padding: 5px 0; transform: rotate(-180deg);">350mm</span>
-                            <span>| 1.00</span>
-                        </div>
-
-                        <div class="tape" style="top: -15px; right: 40px;"></div>
-                        <div class="floating-icon icon-code">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
-                        </div>
-                        <div class="floating-icon icon-save">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
-                        </div>
-                        <div class="floating-icon icon-terminal">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
-                        </div>
-                        <img src="images/myPic.png" alt="Nicolaas Labuschagne" class="profile-img">
-                    <div class="sticker sticker-yellow" style="bottom: -30px; right: -30px; transform: rotate(10deg);">Full-Stack Dev</div>
                     </div>
                 </div>
             </div>
@@ -103,7 +117,21 @@
                 <span class="animate-reveal stagger">Docker</span>
             </div>
         </section>
-        <section id="about" class="about section">
+
+        <div class="marquee">
+            <div class="marquee-content">
+                <span>Systems Architect</span>
+                <span>Full Stack Developer</span>
+                <span>Automation Expert</span>
+                <span>Creative Problem Solver</span>
+                <span>Systems Architect</span>
+                <span>Full Stack Developer</span>
+                <span>Automation Expert</span>
+                <span>Creative Problem Solver</span>
+            </div>
+        </div>
+
+        <section id="about" class="about section page">
             <div class="container section-container">
                 <div class="sticker sticker-blue" style="top: 100px; right: 50px; transform: rotate(-15deg);">Cyclist 🚴‍♂️</div>
                 <div class="sticker sticker-lime" style="bottom: 50px; left: -20px; transform: rotate(10deg);">Business Minded 📈</div>
@@ -115,8 +143,8 @@
                 </svg>
                 <h2 class="section-title animate-reveal">ABOUT</h2>
                 <div class="about-content animate-reveal">
-                    <p>Highly experienced and dynamic <span class="hand-drawn-circle">systems architect</span> & software engineer with a passion for designing and constructing scalable distributed systems and immersive web experiences.</p>
-                    <p>When I'm not architecting systems or coding, you'll find me on my bike exploring the roads of South Africa or deep into a book. I'm an amateur cyclist with a professional's drive, and a lifelong learner of business and psychology.</p>
+                    <p>Highly experienced and dynamic <span class="hand-drawn-circle">systems architect</span> & software engineer with a passion for <span class="highlight">designing</span> and constructing <span class="highlight">scalable distributed systems</span> and immersive web experiences.</p>
+                    <p>When I'm not <span class="highlight">architecting systems</span> or coding, you'll find me on my bike exploring the roads of <span class="highlight">South Africa</span> or deep into a book. I'm an amateur cyclist with a professional's drive, and a <span class="highlight">lifelong learner</span> of business and psychology.</p>
 
                     <div class="current-reads" style="margin-top: 40px; display: flex; gap: 20px; align-items: center;">
                         <span style="font-weight: 800; font-size: 1.1rem;">Currently reading:</span>
@@ -132,10 +160,10 @@
             </svg>
         </section>
 
-        <section id="journey" class="journey section">
+        <section id="journey" class="journey section page">
             <div class="container section-container">
                 <!-- Technical Callout -->
-                <div style="position: absolute; top: -40px; right: 20%; font-family: monospace; font-size: 10px; border: 1px solid black; padding: 5px; background: white; transform: rotate(2deg);">
+                <div style="position: absolute; top: -40px; right: 20%; font-family: monospace; font-size: 10px; border: 1px solid var(--border-color); padding: 5px; background: var(--bg-color); color: var(--text-color); transform: rotate(2deg);">
                     REF_ID: 2026_TIMELINE<br>
                     SCALE: 1:100<br>
                     STATUS: ACTIVE
@@ -187,7 +215,7 @@
             </svg>
         </section>
 
-        <section id="skills" class="skills section">
+        <section id="skills" class="skills section page">
             <div class="container section-container">
                 <div class="sticker sticker-yellow" style="top: -30px; left: 150px; transform: rotate(-5deg);">Tools</div>
                 <svg class="blob-bg blob-2" viewBox="0 0 200 200">
@@ -235,7 +263,53 @@
             </div>
         </section>
 
-        <section id="contact" class="contact section">
+        <section id="experience-map" class="experience-map section page">
+            <div class="container section-container">
+                <div class="sticker sticker-red" style="top: -20px; right: 50px; transform: rotate(5deg);">Work Locations</div>
+                <h2 class="section-title animate-reveal">Global Reach</h2>
+                <div id="map" class="map-box animate-reveal"></div>
+            </div>
+        </section>
+
+        <section id="education" class="education section page">
+            <div class="container section-container">
+                <div class="sticker sticker-purple" style="top: -30px; left: 100px; transform: rotate(-10deg);">Academic</div>
+                <h2 class="section-title animate-reveal">Education</h2>
+                <div class="education-grid animate-reveal">
+                    <div class="education-card">
+                        <div class="education-header">
+                            <h3>BSc in Information Technology</h3>
+                            <span class="badge">2012 - 2015</span>
+                        </div>
+                        <p class="school-name">University of South Africa</p>
+                        <p>Specialized in Software Engineering and Systems Architecture.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="languages" class="languages section page">
+            <div class="container section-container">
+                <div class="sticker sticker-lime" style="bottom: -20px; right: 80px; transform: rotate(15deg);">Communication</div>
+                <h2 class="section-title animate-reveal">Languages</h2>
+                <div class="languages-grid animate-reveal">
+                    <div class="language-item">
+                        <span class="lang-name">English</span>
+                        <div class="lang-stars">
+                            <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="language-item">
+                        <span class="lang-name">Afrikaans</span>
+                        <div class="lang-stars">
+                            <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact section page">
             <div class="container">
                 <div class="contact-box animate-reveal">
                     <svg class="star-illustation" style="top: -25px; left: -25px; transform: rotate(-10deg);" viewBox="0 0 24 24">
@@ -268,6 +342,7 @@
                     <a href="#about">About</a>
                     <a href="#journey">Journey</a>
                     <a href="#skills">Skills</a>
+                    <a href="#experience-map">Map</a>
                 </div>
                 <div class="footer-copy">
                     &copy; 2026 Nicolaas Labuschagne
