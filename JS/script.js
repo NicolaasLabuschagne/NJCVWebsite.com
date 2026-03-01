@@ -104,11 +104,12 @@ function attachNoiseBackground(selector) {
 
         const initGrid = () => {
             points = [];
-            for (let x = 0; x < p.width; x += spacing) {
-                for (let y = 0; y < p.height; y += spacing) {
+            let currentSpacing = spacing * 1.5; // Even more minimal grid
+            for (let x = 0; x < p.width; x += currentSpacing) {
+                for (let y = 0; y < p.height; y += currentSpacing) {
                     points.push({
-                        x: x + spacing / 2,
-                        y: y + spacing / 2,
+                        x: x + currentSpacing / 2,
+                        y: y + currentSpacing / 2,
                         s: p.random(symbolsArr),
                         angle: p.random(p.TWO_PI)
                     });

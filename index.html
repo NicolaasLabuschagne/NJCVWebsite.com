@@ -6,98 +6,134 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nicolaas Labuschagne | Systems Architect & Creative Director</title>
     <link rel="stylesheet" href="CSS/style1.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <!-- p5.js library for interactive background -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
 </head>
 <body>
-    <div class="scroll-progress"></div>
     <header class="header">
         <nav class="nav">
-            <div class="logo">NL</div>
+            <a href="#home" class="logo">NL</a>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
+                <li><a href="#journey">Journey</a></li>
                 <li><a href="#skills">Skills</a></li>
-                <li><a href="#work">Work</a></li>
-                <li><a href="#experience">Journey</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#contact" class="btn btn-outline btn-header">Get in Touch!</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <div class="cloud"></div>
         <section id="home" class="hero section contour">
-            <div class="hero-content">
-                <p class="hero-greeting animate-reveal">Hi there! 👋 I'm</p>
-                <h1 class="hero-title animate-reveal">Nicolaas <br><span>Labuschagne</span></h1>
-                <p class="hero-subtitle animate-reveal">Systems Architect & Creative Director</p>
-                <div class="hero-cta animate-reveal">
-                    <a href="#contact" class="btn btn-primary">Get in Touch</a>
+            <div class="container">
+                <div class="hero-content">
+                    <span class="hero-greeting animate-reveal">Hi there! 👋</span>
+                    <h1 class="hero-title animate-reveal">I'm Nicolaas <br>Labuschagne.</h1>
+                    <p class="hero-subtitle animate-reveal">
+                        Based in London, I'm a Systems Architect & Creative Director. I design robust digital ecosystems and strategic automation tools.
+                    </p>
+                    <div class="tags animate-reveal">
+                        <span class="tag">Systems Architect</span>
+                        <span class="tag">Creative Director</span>
+                        <span class="tag">Next.js</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">TypeScript</span>
+                        <span class="tag">Supabase</span>
+                    </div>
+                    <div class="hero-cta animate-reveal">
+                        <a href="#contact" class="btn btn-primary">Get in Touch</a>
+                        <a href="CV/Nicolaas-Labuschagne-CV.pdf" download class="btn btn-outline btn-ml-15">Download CV</a>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="about" class="about section noise">
             <div class="container">
-                <div class="about-grid">
-                    <div class="about-content">
-                        <h2 class="section-title animate-reveal">Philosophy & <span>Strategy</span></h2>
-                        <div class="about-text animate-reveal">
-                            <p>I operate at the intersection of technical rigor and creative fluidity. As a systems architect and creative director, I design digital ecosystems that are as robust as they are expressive.</p>
-                            <p>My approach is rooted in "Messy Professionalism" — a belief that the most effective systems aren't sterile perfections, but living, evolving structures that embrace human intuition.</p>
-                            <p>Currently, I'm redefining operational velocity at Estate Recoveries, building tools that empower human talent through strategic automation.</p>
-                            <div class="about-cta">
-                                <a href="CV/Nicolaas-Labuschagne-CV.pdf" download class="btn btn-secondary">Download CV</a>
-                            </div>
-                        </div>
-                    </div>
+                <span class="section-title animate-reveal">About</span>
+                <div class="about-content">
+                    <p class="about-text animate-reveal">
+                        I operate at the intersection of technical rigor and creative fluidity. I build scalable architectures and interactive experiences that bridge the gap between human intuition and systemic efficiency.
+                    </p>
                 </div>
-            </div>
-        </section>
 
-        <section id="skills" class="skills section noise">
-            <div class="container">
-                <h2 class="section-title animate-reveal">Technical <span>Stack</span></h2>
-                <div class="skills-grid">
-                    <div class="skills-category animate-reveal">
+                <div id="skills" class="skills-container">
+                    <div class="skills-group animate-reveal">
                         <h3>Architecture</h3>
-                        <div class="skill-tags">
+                        <div class="skills-list">
                             <span>Systems Design</span>
                             <span>Scalable Infrastructure</span>
                             <span>Modular Logic</span>
                             <span>RBAC Systems</span>
                         </div>
                     </div>
-                    <div class="skills-category animate-reveal">
+                    <div class="skills-group animate-reveal">
                         <h3>Creative</h3>
-                        <div class="skill-tags">
+                        <div class="skills-list">
                             <span>Creative Direction</span>
                             <span>Interactive Art</span>
                             <span>Strategic UX</span>
                             <span>Design Systems</span>
                         </div>
                     </div>
-                    <div class="skills-category animate-reveal">
+                    <div class="skills-group animate-reveal">
                         <h3>Development</h3>
-                        <div class="skill-tags">
+                        <div class="skills-list">
                             <span>JavaScript / TypeScript</span>
-                            <span>Angular / React</span>
+                            <span>Angular / React / Next.js</span>
                             <span>Node.js</span>
                             <span>Supabase / SQL</span>
                         </div>
                     </div>
-                    <div class="skills-category animate-reveal">
+                    <div class="skills-group animate-reveal">
                         <h3>Operational</h3>
-                        <div class="skill-tags">
+                        <div class="skills-list">
                             <span>Process Automation</span>
                             <span>Operational Velocity</span>
                             <span>Workflow Optimization</span>
-                            <span>Human-Centric UI</span>
+                            <span>Project Strategy</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="journey" class="experience section noise">
+            <div class="container">
+                <span class="section-title animate-reveal">My Journey</span>
+                <div class="journey-timeline">
+                    <div class="journey-item animate-reveal">
+                        <span class="journey-date">2023 — PRESENT</span>
+                        <div class="journey-content">
+                            <h3>Lead Systems Architect</h3>
+                            <span class="journey-org">Estate Recoveries</span>
+                            <p class="journey-desc">Architecting automated debt recovery ecosystems and operational workflows with high-concurrency handling.</p>
+                        </div>
+                    </div>
+                    <div class="journey-item animate-reveal">
+                        <span class="journey-date">2021 — 2023</span>
+                        <div class="journey-content">
+                            <h3>Senior Creative Director</h3>
+                            <span class="journey-org">Studio Flux</span>
+                            <p class="journey-desc">Led the fusion of technical infrastructure with high-end aesthetic direction for interactive digital installations.</p>
+                        </div>
+                    </div>
+                    <div class="journey-item animate-reveal">
+                        <span class="journey-date">2019 — 2021</span>
+                        <div class="journey-content">
+                            <h3>Full-Stack Engineer</h3>
+                            <span class="journey-org">Prism Tech</span>
+                            <p class="journey-desc">Developed modular enterprise applications and scalable cloud architectures using modern JS frameworks.</p>
+                        </div>
+                    </div>
+                    <div class="journey-item animate-reveal">
+                        <span class="journey-date">2017 — 2019</span>
+                        <div class="journey-content">
+                            <h3>UI/UX Architect</h3>
+                            <span class="journey-org">Nebula Design</span>
+                            <p class="journey-desc">Designed complex user journeys for data-heavy systems, focusing on clarity and systemic elegance.</p>
                         </div>
                     </div>
                 </div>
@@ -106,90 +142,42 @@
 
         <section id="work" class="work section noise">
             <div class="container">
-                <h2 class="section-title animate-reveal">Selected <span>Works</span></h2>
-                <div class="work-grid">
-                    <div class="work-item animate-reveal">
-                        <div class="work-info">
-                            <h3>Architectural Helpdesk</h3>
-                            <p>Modular ticketing system with RBAC and escalation logic for high-concurrency ecosystems.</p>
-                            <div class="work-tags">
-                                <span>Angular</span>
-                                <span>Enterprise</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="work-item animate-reveal">
-                        <div class="work-info">
-                            <h3>Strategic Project Matrix</h3>
-                            <p>Priority-driven management board bridging agile handoff and release planning.</p>
-                            <div class="work-tags">
-                                <span>Supabase</span>
-                                <span>UX Strategy</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="work-item animate-reveal">
-                        <div class="work-info">
-                            <h3>Generative Environments</h3>
-                            <p>Interactive gallery of canvas backgrounds with dynamic particle logic.</p>
-                            <div class="work-tags">
-                                <span>JS</span>
-                                <span>Creative Direction</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="work-item animate-reveal">
-                        <div class="work-info">
-                            <h3>Asset Oversight Suite</h3>
-                            <p>Custom tools for debt recovery and tenant tracking, optimizing workflows.</p>
-                            <div class="work-tags">
-                                <span>Full-Stack</span>
-                                <span>Systems Architecture</span>
-                            </div>
+                <span class="section-title animate-reveal">Selected Works</span>
+
+                <div class="work-featured animate-reveal">
+                    <div class="work-featured-content">
+                        <h3>Architectural Helpdesk</h3>
+                        <p>A modular ticketing ecosystem built for high-concurrency environments. It features robust RBAC, automated escalation logic, and a focus on operational velocity.</p>
+                        <div class="tags">
+                            <span class="tag">Angular</span>
+                            <span class="tag">Node.js</span>
+                            <span class="tag">Enterprise Architecture</span>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <section id="experience" class="experience section noise">
-            <div class="container">
-                <h2 class="section-title animate-reveal">Professional <span>Journey</span></h2>
-                <div class="v-timeline">
-                    <div class="v-timeline-item animate-reveal">
-                        <div class="v-timeline-marker"></div>
-                        <div class="v-timeline-content">
-                            <span class="v-timeline-date">2023 — PRESENT</span>
-                            <h3>Lead Systems Architect</h3>
-                            <p class="v-timeline-org">Estate Recoveries</p>
-                            <p>Architecting automated debt recovery ecosystems and operational workflows with high-concurrency handling.</p>
+                <div class="work-grid">
+                    <div class="work-card animate-reveal">
+                        <h3>Strategic Project Matrix</h3>
+                        <p>Priority-driven management board bridging agile handoff and release planning.</p>
+                        <div class="tags">
+                            <span class="tag">Supabase</span>
+                            <span class="tag">UX Strategy</span>
                         </div>
                     </div>
-                    <div class="v-timeline-item animate-reveal">
-                        <div class="v-timeline-marker"></div>
-                        <div class="v-timeline-content">
-                            <span class="v-timeline-date">2021 — 2023</span>
-                            <h3>Senior Creative Director</h3>
-                            <p class="v-timeline-org">Studio Flux</p>
-                            <p>Led the fusion of technical infrastructure with high-end aesthetic direction for interactive digital installations.</p>
+                    <div class="work-card animate-reveal">
+                        <h3>Generative Environments</h3>
+                        <p>Interactive gallery of canvas backgrounds with dynamic particle logic.</p>
+                        <div class="tags">
+                            <span class="tag">JS</span>
+                            <span class="tag">Creative Direction</span>
                         </div>
                     </div>
-                    <div class="v-timeline-item animate-reveal">
-                        <div class="v-timeline-marker"></div>
-                        <div class="v-timeline-content">
-                            <span class="v-timeline-date">2019 — 2021</span>
-                            <h3>Full-Stack Engineer</h3>
-                            <p class="v-timeline-org">Prism Tech</p>
-                            <p>Developed modular enterprise applications and scalable cloud architectures using modern JS frameworks.</p>
-                        </div>
-                    </div>
-                    <div class="v-timeline-item animate-reveal">
-                        <div class="v-timeline-marker"></div>
-                        <div class="v-timeline-content">
-                            <span class="v-timeline-date">2017 — 2019</span>
-                            <h3>UI/UX Architect</h3>
-                            <p class="v-timeline-org">Nebula Design</p>
-                            <p>Designed complex user journeys for data-heavy systems, focusing on clarity and systemic elegance.</p>
+                    <div class="work-card animate-reveal">
+                        <h3>Asset Oversight Suite</h3>
+                        <p>Custom tools for debt recovery and tenant tracking, optimizing workflows.</p>
+                        <div class="tags">
+                            <span class="tag">Full-Stack</span>
                         </div>
                     </div>
                 </div>
@@ -198,29 +186,13 @@
 
         <section id="contact" class="contact section noise">
             <div class="container">
-                <h2 class="section-title animate-reveal">Get in <span>Touch</span></h2>
-                <div class="contact-grid">
-                    <div class="contact-form-container animate-reveal">
-                        <form class="contact-form">
-                            <div class="form-group">
-                                <input type="text" placeholder="Name" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="email" placeholder="Email" required>
-                            </div>
-                            <div class="form-group">
-                                <textarea placeholder="Message" rows="5" required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Send Message</button>
-                        </form>
-                    </div>
-                    <div class="contact-info animate-reveal">
-                        <p>Have a visionary project or a complex systems challenge? Let's discuss how we can build something amazing together.</p>
-                        <a href="mailto:NJ.Labuschagne@outlook.com" class="contact-link">NJ.Labuschagne@outlook.com</a>
-                        <div class="social-links">
-                            <a href="https://www.linkedin.com/in/nicolaas-labuschagne-919739286" target="_blank" class="fa fa-linkedin"></a>
-                            <a href="https://github.com/NicolaasLabuschagne" target="_blank" class="fa fa-github"></a>
-                        </div>
+                <span class="section-title animate-reveal">Get in Touch</span>
+                <div class="contact-content">
+                    <h2 class="contact-title animate-reveal">Let's build something <br>amazing together.</h2>
+                    <div class="social-links animate-reveal">
+                        <a href="https://linkedin.com/in/nicolaas-labuschagne-919739286" target="_blank">LinkedIn</a>
+                        <a href="https://github.com/NicolaasLabuschagne" target="_blank">GitHub</a>
+                        <a href="mailto:NJ.Labuschagne@outlook.com">Email</a>
                     </div>
                 </div>
             </div>
@@ -229,11 +201,9 @@
 
     <footer class="footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">NL</div>
-                <div class="footer-meta">
-                    <p>&copy; 2025 Nicolaas Labuschagne. Built with focus and intent.</p>
-                </div>
+            <div class="footer-inner">
+                <p>© 2025 Nicolaas Labuschagne</p>
+                <p>Built with Focus & Intent</p>
             </div>
         </div>
     </footer>
