@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nicolaas Labuschagne | Full Stack Developer</title>
+    <title>Nicolaas Labuschagne | Systems Architect & Full Stack Developer</title>
     <link rel="stylesheet" href="CSS/style1.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,98 +17,149 @@
         <nav class="nav">
             <div class="logo">NL</div>
             <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
+                <li><a href="#hero">Home</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#work">Work</a></li>
-                <li><a href="#experience">Experience</a></li>
+                <li><a href="#journey">Journey</a></li>
+                <li><a href="#skills">Skills</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            <div class="nav-cta">
+                <a href="#contact" class="btn btn-nav">Get in Touch!</a>
+            </div>
         </nav>
     </header>
 
     <main>
-        <section id="home" class="hero section">
+        <section id="hero" class="hero section">
             <div class="hero-bg-text">INNOVATIVE</div>
-            <div class="hero-content">
-                <h1 class="hero-title animate-reveal">NICOLAAS <br><span>LABUSCHAGNE</span></h1>
-                <p class="hero-subtitle animate-reveal">FULL STACK WEB & SOFTWARE DEVELOPER</p>
-                <div class="hero-cta animate-reveal">
-                    <a href="#contact" class="btn btn-primary">GET IN CONTACT</a>
+            <div class="container hero-grid">
+                <div class="hero-left animate-reveal">
+                    <div class="hero-greeting">Hi there! 👋</div>
+                    <h1 class="hero-name">I'm <span>Nicolaas Labuschagne</span></h1>
+                    <p class="hero-description">
+                        Systems Architect & Full Stack Developer. I love to work with distributed systems,
+                        automated workflows, and modern web technologies. I'm passionate about
+                        clean code, scalable architectures, and building impactful software.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="https://www.paypal.com/paypalme/yourlink" target="_blank" class="btn btn-coffee">
+                            BUY ME A COFFEE <i class="fa fa-coffee"></i>
+                        </a>
+                        <a href="#contact" class="btn btn-outline">GET IN TOUCH!</a>
+                    </div>
+                </div>
+                <div class="hero-right animate-reveal">
+                    <div class="profile-container">
+                        <img src="images/myPic3.jpg" alt="Nicolaas Labuschagne" class="profile-img">
+                        <div class="profile-badge">Full-Stack Ninja</div>
+                    </div>
+                    <div class="tech-stack-tags">
+                        <span>Node.js</span>
+                        <span>Angular</span>
+                        <span>Python</span>
+                        <span>JavaScript</span>
+                        <span>HTML</span>
+                        <span>TypeScript</span>
+                        <span>SQL</span>
+                        <span>Docker</span>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="about" class="about section">
             <div class="container">
-                <h2 class="section-title animate-reveal">MESSAGE FROM <span>NICOLAAS</span></h2>
-                <div class="about-grid">
-                    <div class="about-text animate-reveal">
-                        <p>I’m Nicolaas Labuschagne — a full-stack developer, systems architect, and creative problem-solver. I build software that works hard and looks good doing it. From debt recovery platforms to immersive web experiences, my work is rooted in clarity, scalability, and real-world impact.</p>
-                        <p>I’ve written custom tools for industries like property management, mining, and freelance design — always with clean code, strategic thinking, and a deep respect for the people using it. Whether I’m crafting a helpdesk system, automating workflows, or designing cinematic backgrounds, I bring curiosity, persistence, and a hands-on mindset.</p>
-                        <p>I think in grids, motion, and modular logic. I believe software should feel alive — not just functional. I’m currently working with Estate Recoveries, refining systems that help teams move faster and smarter.</p>
-                        <div class="about-cta">
-                            <a href="CV/Nicolaas-Labuschagne-CV.pdf" download class="btn btn-secondary">DOWNLOAD MY CV</a>
+                <h2 class="section-title animate-reveal">ABOUT</h2>
+                <div class="about-content animate-reveal">
+                    <p>Highly experienced and dynamic systems architect & software engineer with a passion for designing and constructing scalable distributed systems and immersive web experiences.</p>
+                    <p>Throughout my career, I've focused on building custom tools for industries like property management and debt recovery, always with a mindset of clean code, strategic thinking, and real-world impact. I thrive on staying updated with the latest trends and technologies in the ever-evolving tech landscape.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="journey" class="journey section">
+            <div class="container">
+                <h2 class="section-title animate-reveal">My Journey</h2>
+                <div class="timeline animate-reveal">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>Systems Architect @ Estate Recoveries</h3>
+                            <span class="timeline-date">Nov 2023 - Present</span>
+                            <p>Designing and building high-performance systems for debt recovery and property management. Implementing microservices and automated escalation flows.</p>
+                            <span class="timeline-location">Centurion, South Africa</span>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>Full Stack Developer @ Freelance</h3>
+                            <span class="timeline-date">Jan 2021 - Oct 2023</span>
+                            <p>Delivered custom web applications and automation tools for diverse clients. Focused on React, Node.js, and cloud integrations.</p>
+                            <span class="timeline-location">Remote</span>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>Lead Developer @ Creative Minds</h3>
+                            <span class="timeline-date">Mar 2018 - Dec 2020</span>
+                            <p>Led a team of developers in building interactive marketing platforms and cinematic web experiences. Optimized rendering pipelines and state management.</p>
+                            <span class="timeline-location">Johannesburg, South Africa</span>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>Junior Software Engineer @ Tech Innovations</h3>
+                            <span class="timeline-date">Jan 2016 - Feb 2018</span>
+                            <p>Developed core backend services and participated in the full software development lifecycle. Specialized in SQL optimization and API design.</p>
+                            <span class="timeline-location">Pretoria, South Africa</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="work" class="work section">
+        <section id="skills" class="skills section">
             <div class="container">
-                <h2 class="section-title animate-reveal">MY <span>WORK</span></h2>
-                <div class="work-grid">
-                    <div class="card animate-reveal">
-                        <h3>Helpdesk System</h3>
-                        <p>Modular ticketing, RBAC, audit logs, and escalation flows for property teams.</p>
-                        <div class="card-tags">
-                            <span>Angular</span>
-                            <span>ABP</span>
+                <h2 class="section-title animate-reveal">SKILLS</h2>
+                <div class="skills-grid animate-reveal">
+                    <div class="skills-category">
+                        <h3>Frontend</h3>
+                        <div class="tags">
+                            <span>Angular</span><span>React.js</span><span>Redux</span><span>Material-UI</span><span>Ionic</span>
                         </div>
                     </div>
-                    <div class="card animate-reveal">
-                        <h3>Project Board</h3>
-                        <p>Priority matrix, release planning, and developer handoff logic for agile squads.</p>
-                        <div class="card-tags">
-                            <span>Supabase</span>
-                            <span>UX</span>
+                    <div class="skills-category">
+                        <h3>Languages</h3>
+                        <div class="tags">
+                            <span>JavaScript</span><span>TypeScript</span><span>Python</span><span>C#</span><span>SQL</span><span>HTML</span><span>CSS</span>
                         </div>
                     </div>
-                    <div class="card animate-reveal">
-                        <h3>Cinematic Backgrounds</h3>
-                        <p>Interactive artistic gallery showcasing dynamic JavaScript backgrounds with particle systems.</p>
-                        <div class="card-tags">
-                            <span>JavaScript</span>
-                            <span>Canvas</span>
+                    <div class="skills-category">
+                        <h3>Backend</h3>
+                        <div class="tags">
+                            <span>Node.js</span><span>Express.js</span><span>ASP.NET Core</span><span>ABP Framework</span>
                         </div>
                     </div>
-                    <div class="card animate-reveal">
-                        <h3>Property Management Suite</h3>
-                        <p>Custom-built tools for debt recovery, tenant tracking, and portfolio oversight.</p>
-                        <div class="card-tags">
-                            <span>Razor Pages</span>
-                            <span>MySQL</span>
+                    <div class="skills-category">
+                        <h3>Cloud & DevOps</h3>
+                        <div class="tags">
+                            <span>Docker</span><span>Kubernetes</span><span>Azure</span><span>CI/CD</span><span>Terraform</span>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="experience" class="experience section">
-            <div class="container">
-                <h2 class="section-title animate-reveal">ON <span>TRACK</span></h2>
-                <div class="experience-grid">
-                    <div class="card animate-reveal">
-                        <h3>Full Stack Development</h3>
-                        <p>Expertise in both front-end and back-end technologies.</p>
+                    <div class="skills-category">
+                        <h3>Databases</h3>
+                        <div class="tags">
+                            <span>PostgreSQL</span><span>MySQL</span><span>SQL Server</span><span>Redis</span><span>MongoDB</span>
+                        </div>
                     </div>
-                    <div class="card animate-reveal">
-                        <h3>Problem Solving</h3>
-                        <p>Unwavering dedication to finding solutions for complex challenges.</p>
-                    </div>
-                    <div class="card animate-reveal">
-                        <h3>Continuous Learning</h3>
-                        <p>Committed to mastering new languages and frameworks.</p>
+                    <div class="skills-category">
+                        <h3>Architecture</h3>
+                        <div class="tags">
+                            <span>Microservices</span><span>SaaS</span><span>Event-Driven</span><span>Domain-Driven Design</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -116,29 +167,16 @@
 
         <section id="contact" class="contact section">
             <div class="container">
-                <h2 class="section-title animate-reveal">GET IN <span>TOUCH</span></h2>
-                <div class="contact-grid">
-                    <div class="contact-form-container animate-reveal">
-                        <form class="contact-form">
-                            <div class="form-group">
-                                <input type="text" placeholder="Name" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="email" placeholder="Email" required>
-                            </div>
-                            <div class="form-group">
-                                <textarea placeholder="Message" rows="5" required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Send Message</button>
-                        </form>
+                <div class="contact-box animate-reveal">
+                    <h2 class="section-title">GET IN TOUCH</h2>
+                    <p>Let's build something amazing together.</p>
+                    <div class="contact-links">
+                        <a href="https://linkedin.com/in/nicolaas-labuschagne-919739286" target="_blank" class="fa fa-linkedin"></a>
+                        <a href="https://github.com/NicolaasLabuschagne" target="_blank" class="fa fa-github"></a>
+                        <a href="mailto:NJ.Labuschagne@outlook.com" class="fa fa-envelope"></a>
                     </div>
-                    <div class="contact-info animate-reveal">
-                        <p>Have an idea? Let’s hear it. Reach out below or find me on social media.</p>
-                        <a href="mailto:NJ.Labuschagne@outlook.com" class="contact-link">NJ.Labuschagne@outlook.com</a>
-                        <div class="social-links">
-                            <a href="https://www.linkedin.com/in/nicolaas-labuschagne-919739286" class="fa fa-linkedin"></a>
-                            <a href="https://github.com/NicolaasLabuschagne" class="fa fa-github"></a>
-                        </div>
+                    <div class="contact-cta">
+                        <a href="#contact" class="btn btn-primary">HIRE ME!</a>
                     </div>
                 </div>
             </div>
@@ -148,13 +186,23 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-logo">NL</div>
-                <p>&copy; 2026 Nicolaas Labuschagne. All rights reserved.</p>
+                <div class="footer-info">
+                    <span class="footer-name">NICOLAAS LABUSCHAGNE</span>
+                    <span class="footer-role">Systems Architect & Full Stack Developer</span>
+                </div>
+                <div class="footer-links">
+                    <a href="#hero">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#journey">Journey</a>
+                    <a href="#skills">Skills</a>
+                </div>
+                <div class="footer-copy">
+                    &copy; 2026 Nicolaas Labuschagne
+                </div>
             </div>
         </div>
     </footer>
 
     <script src="JS/script.js"></script>
-    <script src="JS/contourLines.js"></script>
 </body>
 </html>
