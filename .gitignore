@@ -1,5 +1,6 @@
 # Dependency directories
 node_modules/
+next-env.d.ts
 
 # Logs
 logs
@@ -27,6 +28,7 @@ Thumbs.db
 .vscode/
 .idea/
 .vs/
+.next/
 *.swp
 *.swo
 
