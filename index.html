@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Caveat:wght@700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
 </head>
 <body>
@@ -21,7 +21,6 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#journey">Journey</a></li>
                 <li><a href="#skills">Skills</a></li>
-                <li><a href="#contact">Contact</a></li>
             </ul>
             <div class="nav-cta">
                 <a href="#contact" class="btn btn-nav">Get in Touch!</a>
@@ -31,59 +30,109 @@
 
     <main>
         <section id="hero" class="hero section">
-            <div class="hero-bg-text">INNOVATIVE</div>
             <div class="container hero-grid">
-                <div class="hero-left animate-reveal">
-                    <div class="hero-greeting">Hi there! 👋</div>
-                    <h1 class="hero-name">I'm <span>Nicolaas Labuschagne</span></h1>
-                    <p class="hero-description">
-                        Systems Architect & Full Stack Developer. I love to work with distributed systems,
+                <svg class="star-illustation" style="top: 10%; left: 5%; transform: rotate(15deg);" viewBox="0 0 24 24">
+                    <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
+                </svg>
+                <div class="hero-left">
+                    <div class="hero-greeting animate-reveal">Hi there! 👋</div>
+                    <h1 class="hero-name animate-reveal">I'm Nicolaas <span class="scribble-underline">Labuschagne.</span></h1>
+                    <div class="sticker sticker-purple" style="top: -50px; left: 150px; transform: rotate(-15deg);">Engineer</div>
+                    <div class="sticker sticker-yellow" style="bottom: -20px; right: 50px; transform: rotate(10deg);">Architect</div>
+                    <p class="hero-description animate-reveal">
+                        Based in South Africa, I'm a <span class="highlight">Systems Architect</span> & Full Stack Developer. I love to work with distributed systems,
                         automated workflows, and modern web technologies. I'm passionate about
-                        clean code, scalable architectures, and building impactful software.
+                        clean code, scalable architectures, and building cool stuff.
                     </p>
-                    <div class="hero-buttons">
-                        <a href="https://www.paypal.com/paypalme/yourlink" target="_blank" class="btn btn-coffee">
-                            BUY ME A COFFEE <i class="fa fa-coffee"></i>
-                        </a>
-                        <a href="#contact" class="btn btn-outline">GET IN TOUCH!</a>
+                    <div class="hero-socials animate-reveal">
+                        <a href="https://github.com/NicolaasLabuschagne" target="_blank" class="social-link"><i class="fa fa-github"></i></a>
+                        <a href="https://linkedin.com/in/nicolaas-labuschagne-919739286" target="_blank" class="social-link"><i class="fa fa-linkedin"></i></a>
+                        <a href="CV/Nicolaas-Labuschagne-CV.pdf" target="_blank" class="social-link"><i class="fa fa-file-pdf-o"></i></a>
+                    </div>
+                    <div class="hero-buttons animate-reveal">
+                        <a href="#contact" class="btn btn-outline">Get in Touch!</a>
+                        <div class="coffee-wrapper">
+                            <span class="coffee-text">Buy me a coffee</span>
+                            <svg class="coffee-arrow" width="60" height="40" viewBox="0 0 60 40">
+                                <path d="M10,10 Q30,5 45,30" stroke="black" stroke-width="3" fill="none" />
+                                <path d="M38,25 L45,30 L48,22" stroke="black" stroke-width="3" fill="none" />
+                            </svg>
+                            <a href="#" class="btn-coffee-round">
+                                <i class="fa fa-coffee"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="hero-right animate-reveal">
                     <div class="profile-container">
+                        <div class="tape" style="top: -15px; right: 40px;"></div>
+                        <div class="floating-icon icon-code">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                        </div>
+                        <div class="floating-icon icon-save">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                        </div>
+                        <div class="floating-icon icon-terminal">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+                        </div>
                         <img src="images/myPic3.jpg" alt="Nicolaas Labuschagne" class="profile-img">
                         <div class="profile-badge">Full-Stack Ninja</div>
                     </div>
-                    <div class="tech-stack-tags">
-                        <span>Node.js</span>
-                        <span>Angular</span>
-                        <span>Python</span>
-                        <span>JavaScript</span>
-                        <span>HTML</span>
-                        <span>TypeScript</span>
-                        <span>SQL</span>
-                        <span>Docker</span>
-                    </div>
                 </div>
+            </div>
+            <div class="tech-stack-tags container animate-reveal stagger-parent">
+                <span class="animate-reveal stagger">Node.js</span>
+                <span class="animate-reveal stagger">React</span>
+                <span class="animate-reveal stagger">Python</span>
+                <span class="animate-reveal stagger">JavaScript</span>
+                <span class="animate-reveal stagger">HTML</span>
+                <span class="animate-reveal stagger">TypeScript</span>
+                <span class="animate-reveal stagger">Google Cloud</span>
+                <span class="animate-reveal stagger">Docker</span>
             </div>
         </section>
 
+        <div class="marquee">
+            <div class="marquee-content">
+                <span>Systems Architect</span>
+                <span>Full Stack Developer</span>
+                <span>Automation Expert</span>
+                <span>Creative Problem Solver</span>
+                <span>Systems Architect</span>
+                <span>Full Stack Developer</span>
+                <span>Automation Expert</span>
+                <span>Creative Problem Solver</span>
+            </div>
+        </div>
+
         <section id="about" class="about section">
-            <div class="container">
+            <div class="container section-container">
+                <svg class="star-illustation" style="top: -20px; right: 10%; fill: var(--purple-color);" viewBox="0 0 24 24">
+                    <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
+                </svg>
+                <svg class="blob-bg blob-1" viewBox="0 0 200 200">
+                    <path d="M45,-60.1C58.1,-52.1,68.3,-38.4,73.4,-23.4C78.4,-8.4,78.2,7.9,73.1,22.8C68.1,37.6,58.2,50.9,45.3,60.1C32.4,69.4,16.2,74.5,0.7,73.6C-14.8,72.7,-29.6,65.8,-42.2,56C-54.8,46.1,-65.2,33.3,-69.5,18.9C-73.8,4.5,-72,-11.4,-65.3,-25.2C-58.7,-39,-47.2,-50.8,-34.1,-58.8C-21,-66.8,-10.5,-71.1,2.8,-74.9C16.1,-78.8,31.9,-68.2,45,-60.1Z" transform="translate(100 100)" />
+                </svg>
                 <h2 class="section-title animate-reveal">ABOUT</h2>
                 <div class="about-content animate-reveal">
-                    <p>Highly experienced and dynamic systems architect & software engineer with a passion for designing and constructing scalable distributed systems and immersive web experiences.</p>
+                    <p>Highly experienced and dynamic <span class="hand-drawn-circle">systems architect</span> & software engineer with a passion for designing and constructing scalable distributed systems and immersive web experiences.</p>
                     <p>Throughout my career, I've focused on building custom tools for industries like property management and debt recovery, always with a mindset of clean code, strategic thinking, and real-world impact. I thrive on staying updated with the latest trends and technologies in the ever-evolving tech landscape.</p>
                 </div>
             </div>
+            <svg class="wavy-divider" viewBox="0 0 1440 40" preserveAspectRatio="none">
+                <path d="M0,20 Q360,40 720,20 T1440,20 L1440,40 L0,40 Z" fill="#f8fafc"></path>
+            </svg>
         </section>
 
         <section id="journey" class="journey section">
-            <div class="container">
+            <div class="container section-container">
+                <div class="sticker sticker-blue" style="top: 0; right: 20px; transform: rotate(15deg);">Experience</div>
                 <h2 class="section-title animate-reveal">My Journey</h2>
                 <div class="timeline animate-reveal">
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
                         <div class="timeline-content">
+                            <div class="tape" style="top: -10px; left: 20px; width: 60px;"></div>
                             <h3>Systems Architect @ Estate Recoveries</h3>
                             <span class="timeline-date">Nov 2023 - Present</span>
                             <p>Designing and building high-performance systems for debt recovery and property management. Implementing microservices and automated escalation flows.</p>
@@ -119,43 +168,50 @@
                     </div>
                 </div>
             </div>
+            <svg class="wavy-divider" viewBox="0 0 1440 40" preserveAspectRatio="none">
+                <path d="M0,20 Q360,40 720,20 T1440,20 L1440,40 L0,40 Z" fill="white"></path>
+            </svg>
         </section>
 
         <section id="skills" class="skills section">
-            <div class="container">
+            <div class="container section-container">
+                <div class="sticker sticker-yellow" style="top: -30px; left: 150px; transform: rotate(-5deg);">Tools</div>
+                <svg class="blob-bg blob-2" viewBox="0 0 200 200">
+                    <path d="M40.3,-64.1C52.7,-58.5,63.6,-48.5,70.1,-36.3C76.6,-24.2,78.7,-9.9,76.7,3.9C74.6,17.7,68.4,30.9,59.3,42.4C50.1,53.8,38.1,63.4,24.5,69C10.9,74.6,-4.3,76.2,-19.1,72.9C-33.8,69.6,-48,61.4,-59.4,50C-70.8,38.5,-79.3,23.8,-81.9,8.2C-84.5,-7.4,-81.1,-24,-72.1,-37.6C-63,-51.2,-48.4,-61.7,-34.1,-66.3C-19.8,-70.9,-5.8,-69.6,7.2,-68.3C20.3,-67.1,33.7,-65.9,40.3,-64.1Z" transform="translate(100 100)" />
+                </svg>
                 <h2 class="section-title animate-reveal">SKILLS</h2>
-                <div class="skills-grid animate-reveal">
-                    <div class="skills-category">
+                <div class="skills-grid animate-reveal stagger-parent">
+                    <div class="skills-category animate-reveal stagger">
                         <h3>Frontend</h3>
                         <div class="tags">
                             <span>Angular</span><span>React.js</span><span>Redux</span><span>Material-UI</span><span>Ionic</span>
                         </div>
                     </div>
-                    <div class="skills-category">
+                    <div class="skills-category animate-reveal stagger">
                         <h3>Languages</h3>
                         <div class="tags">
                             <span>JavaScript</span><span>TypeScript</span><span>Python</span><span>C#</span><span>SQL</span><span>HTML</span><span>CSS</span>
                         </div>
                     </div>
-                    <div class="skills-category">
+                    <div class="skills-category animate-reveal stagger">
                         <h3>Backend</h3>
                         <div class="tags">
                             <span>Node.js</span><span>Express.js</span><span>ASP.NET Core</span><span>ABP Framework</span>
                         </div>
                     </div>
-                    <div class="skills-category">
+                    <div class="skills-category animate-reveal stagger">
                         <h3>Cloud & DevOps</h3>
                         <div class="tags">
                             <span>Docker</span><span>Kubernetes</span><span>Azure</span><span>CI/CD</span><span>Terraform</span>
                         </div>
                     </div>
-                    <div class="skills-category">
+                    <div class="skills-category animate-reveal stagger">
                         <h3>Databases</h3>
                         <div class="tags">
                             <span>PostgreSQL</span><span>MySQL</span><span>SQL Server</span><span>Redis</span><span>MongoDB</span>
                         </div>
                     </div>
-                    <div class="skills-category">
+                    <div class="skills-category animate-reveal stagger">
                         <h3>Architecture</h3>
                         <div class="tags">
                             <span>Microservices</span><span>SaaS</span><span>Event-Driven</span><span>Domain-Driven Design</span>
@@ -168,15 +224,18 @@
         <section id="contact" class="contact section">
             <div class="container">
                 <div class="contact-box animate-reveal">
+                    <svg class="star-illustation" style="top: -25px; left: -25px; transform: rotate(-10deg);" viewBox="0 0 24 24">
+                        <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
+                    </svg>
                     <h2 class="section-title">GET IN TOUCH</h2>
                     <p>Let's build something amazing together.</p>
                     <div class="contact-links">
-                        <a href="https://linkedin.com/in/nicolaas-labuschagne-919739286" target="_blank" class="fa fa-linkedin"></a>
-                        <a href="https://github.com/NicolaasLabuschagne" target="_blank" class="fa fa-github"></a>
-                        <a href="mailto:NJ.Labuschagne@outlook.com" class="fa fa-envelope"></a>
+                        <a href="https://linkedin.com/in/nicolaas-labuschagne-919739286" target="_blank"><i class="fa fa-linkedin"></i></a>
+                        <a href="https://github.com/NicolaasLabuschagne" target="_blank"><i class="fa fa-github"></i></a>
+                        <a href="mailto:NJ.Labuschagne@outlook.com"><i class="fa fa-envelope"></i></a>
                     </div>
                     <div class="contact-cta">
-                        <a href="#contact" class="btn btn-primary">HIRE ME!</a>
+                        <a href="mailto:NJ.Labuschagne@outlook.com" class="btn btn-primary">HIRE ME!</a>
                     </div>
                 </div>
             </div>

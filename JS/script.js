@@ -33,7 +33,7 @@ const sketch = (p) => {
     }
 
     p.draw = () => {
-        p.background(11, 11, 11);
+        p.clear();
 
         symbols.forEach(s => {
             let dx = p.mouseX - s.x;
@@ -41,7 +41,7 @@ const sketch = (p) => {
             let dist = p.sqrt(dx*dx + dy*dy);
             let offset = p.map(p.min(dist, 200), 0, 200, 20, 0);
 
-            p.fill(255, 255, 255, p.map(p.min(dist, 300), 0, 300, 100, 20));
+            p.fill(0, 0, 0, p.map(p.min(dist, 300), 0, 300, 40, 5));
             p.textSize(s.size);
             p.push();
             p.translate(s.x, s.y);
@@ -62,6 +62,8 @@ new p5(sketch);
 /* ===========================
    Intersection Observer for Reveals
    =========================== */
+document.documentElement.classList.add('js-enabled');
+
 document.addEventListener('DOMContentLoaded', () => {
     const observerOptions = {
         threshold: 0.15,
@@ -79,7 +81,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }, observerOptions);
 
     const revealElements = document.querySelectorAll('.animate-reveal');
-    revealElements.forEach(el => observer.observe(el));
+    revealElements.forEach((el, index) => {
+        // Add staggering delay if it's part of a group
+        if (el.classList.contains('stagger')) {
+            const parent = el.closest('.stagger-parent');
+            if (parent) {
+                const items = Array.from(parent.querySelectorAll('.stagger'));
+                const itemIndex = items.indexOf(el);
+                el.style.transitionDelay = `${itemIndex * 0.1}s`;
+            }
+        }
+        observer.observe(el);
+    });
 
     /* ===========================
        Sticky Header
@@ -87,9 +100,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const header = document.querySelector('.header');
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
-            header.classList.add('sticky');
+            header.style.top = '10px';
         } else {
-            header.classList.remove('sticky');
+            header.style.top = '20px';
         }
     });
 
