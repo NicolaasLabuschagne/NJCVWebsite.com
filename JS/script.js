@@ -38,13 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 4. Initialize Themes & Palette Switcher
-    initThemeSystem();
-
-    // 5. Initialize Binary Rain
-    startRain();
-
-    // 6. Initialize Noise Backgrounds
+    // 5. Initialize Noise Backgrounds
     document.querySelectorAll('.noise').forEach(section => {
         attachNoiseBackground(`#${section.id}`);
     });
@@ -74,109 +68,14 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.contour').forEach(section => contourObserver.observe(section));
 });
 
-/* ==========================================================================
-   Theme System
-   ========================================================================== */
-const THEMES = {
-    "navy-orange": "#FF6B35",
-    "default": "#A8E600"
-};
-
-function initThemeSystem() {
-    const keys = Object.keys(THEMES);
-    const saved = localStorage.getItem('theme');
-
-    let initialTheme = keys[Math.floor(Math.random() * keys.length)];
-    if (saved && keys.includes(saved)) {
-        initialTheme = saved;
-    }
-
-    setTheme(initialTheme);
-
-    // Keyboard shortcuts
-    window.addEventListener('keydown', (e) => {
-        if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
-        if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName) || document.activeElement.isContentEditable) return;
-
-        if (e.key === 'ArrowLeft') cycleTheme(-1);
-        else if (e.key === 'ArrowRight') cycleTheme(1);
-    });
-}
-
-function setTheme(theme) {
-    if (!THEMES[theme]) return;
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-    renderPaletteButtons(theme);
-}
-
-function cycleTheme(offset) {
-    const keys = Object.keys(THEMES);
-    const current = document.documentElement.getAttribute('data-theme');
-    let idx = keys.indexOf(current);
-    if (idx === -1) idx = 0;
-    const nextIdx = (idx + offset + keys.length) % keys.length;
-    setTheme(keys[nextIdx]);
-}
-
-function renderPaletteButtons(activeTheme) {
-    const switcher = document.querySelector('.palette-switcher');
-    if (!switcher) return;
-
-    switcher.innerHTML = '';
-
-    const q = document.createElement('div');
-    q.className = 'palette-question';
-    q.textContent = "Switch Palette:";
-    switcher.appendChild(q);
-
-    const buttonsContainer = document.createElement('div');
-    buttonsContainer.className = 'palette-buttons';
-    switcher.appendChild(buttonsContainer);
-
-    Object.keys(THEMES).forEach(name => {
-        if (name === activeTheme) return;
-        const btn = document.createElement('button');
-        btn.className = 'palette-btn';
-        btn.style.background = THEMES[name];
-        btn.onclick = () => setTheme(name);
-        btn.title = name.replace('-', ' ');
-        buttonsContainer.appendChild(btn);
-    });
-}
 
 function getThemeColors() {
     const styles = getComputedStyle(document.documentElement);
     const c1 = styles.getPropertyValue('--primary-color-rgb').trim() || "23, 217, 0";
     const c2 = styles.getPropertyValue('--accent-color-rgb').trim() || "224, 0, 224";
-    const bg = styles.getPropertyValue('--bg-color-rgb').trim() || "0, 0, 0"; // new line
+    const bg = styles.getPropertyValue('--bg-color-rgb').trim() || "0, 0, 0";
     const parse = str => str.split(',').map(v => parseInt(v, 10));
     return { C1: parse(c1), C2: parse(c2), BG: parse(bg) };
-}
-
-/* ==========================================================================
-   Binary Rain
-   ========================================================================== */
-function startRain() {
-    const cloud = document.querySelector('.cloud');
-    if (!cloud) return;
-
-    setInterval(() => {
-        const drop = document.createElement('div');
-        drop.className = 'drop';
-        drop.innerText = Math.random() > 0.5 ? '1' : '0';
-
-        const size = Math.random();
-        if (size < 0.3) drop.classList.add('small');
-        else if (size > 0.8) drop.classList.add('large');
-
-        drop.style.left = Math.random() * 100 + 'vw';
-        drop.style.animationDuration = (1 + Math.random() * 2) + 's';
-        drop.style.setProperty('--horizontal-movement', (Math.random() * 40 - 20) + 'px');
-
-        cloud.appendChild(drop);
-        drop.onanimationend = () => drop.remove();
-    }, window.innerWidth < 700 ? 150 : 80);
 }
 
 /* ==========================================================================
@@ -188,9 +87,9 @@ function attachNoiseBackground(selector) {
     if (!container) return;
 
     const sketch = (p) => {
-        let symbolsArr = ['+', '-', '•', '/'];
+        let symbolsArr = ['•', '•', '•', '+']; // More subtle symbols
         let points = [];
-        let spacing = 60;
+        let spacing = 100; // Increased spacing for a cleaner look
 
         p.setup = () => {
             const canvas = p.createCanvas(container.offsetWidth, container.offsetHeight);
@@ -218,13 +117,13 @@ function attachNoiseBackground(selector) {
         };
 
         p.draw = () => {
-            const { C1, C2 } = getThemeColors(); // your theme function
+            const { C1, C2 } = getThemeColors();
             p.clear();
 
             points.forEach(pt => {
                 let d = p.dist(p.mouseX, p.mouseY, pt.x, pt.y);
-                let maxDist = 200;
-                let influence = p.map(p.min(d, maxDist), 0, maxDist, 20, 0);
+                let maxDist = 150; // Reduced influence radius
+                let influence = p.map(p.min(d, maxDist), 0, maxDist, 10, 0); // Reduced influence distance
                 let angle = p.atan2(pt.y - p.mouseY, pt.x - p.mouseX);
 
                 p.push();
@@ -424,27 +323,3 @@ function drawInteractiveSegment(p, g, p1, p2, C1, C2, rez) {
 
     g.bezier(p1.x, p1.y, cp1.x, cp1.y, cp2.x, cp2.y, p2.x, p2.y);
 }
-
-/*================================================================
-                   Timeline Horizontal Scroll
-================================================================*/
-
-const timelineWrapper = document.querySelector('.timeline-wrapper');
-const timeline = document.querySelector('.timeline');
-
-timelineWrapper.addEventListener('wheel', (e) => {
-  e.preventDefault(); // stop default vertical scroll
-
-  const maxScroll = timeline.scrollWidth - window.innerWidth;
-
-  // Scroll horizontally until the end
-  if (
-    (e.deltaY > 0 && timeline.scrollLeft < maxScroll) ||
-    (e.deltaY < 0 && timeline.scrollLeft > 0)
-  ) {
-    timeline.scrollLeft += e.deltaY;
-  } else {
-    // Resume normal vertical scroll once horizontal is finished
-    window.scrollBy(0, e.deltaY);
-  }
-}, { passive: false });
