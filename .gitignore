@@ -26,6 +26,7 @@ Thumbs.db
 # Editor / IDE files
 .vscode/
 .idea/
+.next/
 .vs/
 *.swp
 *.swo

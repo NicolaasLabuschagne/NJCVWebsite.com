@@ -9,8 +9,8 @@
     --primary-color: #facc15; /* Vibrant Yellow */
     --primary-color-rgb: 250, 204, 21;
 
-    --accent-color: #7dd3fc; /* Sky Blue */
-    --accent-color-rgb: 125, 211, 252;
+    --accent-color: #7bc07e; /* Sky Blue */
+    --accent-color-rgb: 123, 192, 126;
 
     --success-color: #84cc16; /* Lime Green */
     --error-color: #ef4444; /* Red */
@@ -150,7 +150,7 @@ body::after {
     flex-direction: column;
     justify-content: center;
     position: relative;
-    padding-top: 150px;
+    padding-top: 10%;
     padding-bottom: 80px;
 }
 
@@ -332,6 +332,8 @@ body::after {
     border: var(--border-width) solid var(--border-color);
     border-radius: 12px;
     box-shadow: 10px 10px 0px 0px var(--border-color);
+    display: flex;
+    justify-content: center;
 }
 
 .tape {
@@ -345,7 +347,7 @@ body::after {
 }
 
 .profile-img {
-    width: 100%;
+    width: 70%;
     height: 100%;
     object-fit: cover;
     border-radius: 8px;
