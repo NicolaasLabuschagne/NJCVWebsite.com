@@ -26,7 +26,7 @@
         <nav class="nav">
             <div class="logo">NL</div>
             <ul class="nav-links">
-                <li><a href="#hero">Home</a></li>
+                <li><a href="#hero-left">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#journey">Journey</a></li>
                 <li><a href="#skills">Skills</a></li>
@@ -43,79 +43,79 @@
     </header>
 
     <main class="book-container">
+        <div class="book-spine-effect">
+            <div class="grommet"></div>
+            <div class="grommet"></div>
+            <div class="grommet"></div>
+        </div>
         <div id="book">
-        <section id="hero" class="hero section page my-page" data-density="hard">
-            <div class="container hero-grid">
-                <svg class="star-illustation" style="top: 15%; left: 70%; transform: rotate(15deg);" viewBox="0 0 24 24">
-                    <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
-                </svg>
-                <div class="hero-right animate-reveal">
-                    <div class="profile-container">
-                        <!-- Dimension lines for messy-engineered look -->
-                        <div style="position: absolute; top: -30px; left: 0; width: 100%; border-top: 1px dashed black; display: flex; justify-content: space-between; font-size: 10px; font-family: monospace;">
-                            <span>| 0.00</span>
-                            <span class="dim-bg" style="background: white; padding: 0 5px;">350mm</span>
-                            <span>| 1.00</span>
-                        </div>
-                        <div style="position: absolute; top: 0; left: -30px; height: 100%; border-left: 1px dashed black; display: flex; flex-direction: column; justify-content: space-between; font-size: 10px; font-family: monospace; transform: rotate(180deg); writing-mode: vertical-lr;">
-                            <span>| 0.00</span>
-                            <span class="dim-bg" style="background: white; padding: 5px 0; transform: rotate(-180deg);">350mm</span>
-                            <span>| 1.00</span>
-                        </div>
 
-                        <div class="tape" style="top: -15px; right: 40px;"></div>
-                        <div class="floating-icon icon-code">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
-                        </div>
-                        <div class="floating-icon icon-save">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
-                        </div>
-                        <div class="floating-icon icon-terminal">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
-                        </div>
-                        <img src="images/myPic.png" alt="Nicolaas Labuschagne" class="profile-img">
-                        <div class="sticker sticker-yellow" style="bottom: -30px; right: -30px; transform: rotate(10deg);">Full-Stack Dev</div>
+        <!-- FRONT COVER -->
+        <section class="page my-page cover-page" data-density="hard">
+            <div class="cover-content">
+                <div class="cover-inner">
+                    <h1 class="cover-title">OUR<br>ADVENTURE<br>BOOK</h1>
+                    <div class="house-badge">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="40" height="40">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
                     </div>
                 </div>
-                <div class="hero-left">
-                    <div class="hero-greeting animate-reveal">Hi there!</div>
-                    <h1 class="hero-name animate-reveal">I'm Nicolaas <span class="scribble-underline">Labuschagne.</span></h1>
-                    <div class="sticker sticker-lime" style="top: -60px; left: 40%; transform: rotate(-10deg);">Systems Architect</div>
-                    <div class="sticker sticker-red" style="top: -20px; left: 70%; transform: rotate(15deg);">Amateur Cyclist</div>
+            </div>
+        </section>
+
+        <!-- INTRO SPREAD: LEFT -->
+        <section id="hero-left" class="hero section page my-page">
+            <div class="container hero-grid">
+                <div class="hero-left animate-reveal">
+                    <div class="profile-container" style="margin-top: 20px;">
+                        <div class="speech-bubble">Hi, I'm Nicolaas!</div>
+                        <div class="tape" style="top: -15px; left: 40px; transform: rotate(-10deg);"></div>
+                        <img src="images/myPic.png" alt="Nicolaas Labuschagne" class="profile-img">
+                        <div class="sticker sticker-yellow" style="bottom: -20px; left: -20px; transform: rotate(-5deg);">Full-Stack Dev</div>
+                    </div>
+
+                    <div class="tech-stack-tags animate-reveal stagger-parent" style="margin-top: 40px;">
+                        <span class="animate-reveal stagger">Node.js</span>
+                        <span class="animate-reveal stagger">React</span>
+                        <span class="animate-reveal stagger">Python</span>
+                        <span class="animate-reveal stagger">Docker</span>
+                    </div>
+
+                    <svg class="star-illustation" style="bottom: 10%; right: 10%; transform: rotate(15deg);" viewBox="0 0 24 24">
+                        <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- INTRO SPREAD: RIGHT -->
+        <section id="hero-right" class="hero section page my-page">
+            <div class="container hero-grid">
+                <div class="hero-right">
+                    <div class="hero-greeting animate-reveal">Adventure Awaits!</div>
+                    <h1 class="hero-name animate-reveal">Nicolaas <span class="scribble-underline">Labuschagne</span></h1>
+                    <div class="sticker sticker-red" style="top: -30px; right: 20px; transform: rotate(10deg);">Systems Architect</div>
+
                     <p class="hero-description animate-reveal">
-                        Based in South Africa, I'm a <span class="highlight">Systems Architect</span> & Full Stack Developer. I love to work with distributed systems,
-                        automated workflows, and modern web technologies. I'm passionate about
-                        clean code, scalable architectures, and building cool stuff.
+                        Based in South Africa, I craft <span class="highlight">scalable distributed systems</span> and immersive digital journeys.
                     </p>
-                    <div class="hero-socials animate-reveal">
+
+                    <div class="hero-socials animate-reveal" style="margin-top: 20px;">
                         <a href="https://github.com/NicolaasLabuschagne" target="_blank" class="social-link"><i class="fa fa-github"></i></a>
                         <a href="https://linkedin.com/in/nicolaas-labuschagne-919739286" target="_blank" class="social-link"><i class="fa fa-linkedin"></i></a>
                         <a href="CV/Nicolaas-Labuschagne-CV.pdf" target="_blank" class="social-link"><i class="fa fa-file-pdf-o"></i></a>
                     </div>
-                    <div class="hero-buttons animate-reveal">
-                        <a href="#contact" class="btn btn-outline">Get in Touch!</a>
-                        <div class="coffee-wrapper">
-                            <span class="coffee-text">Buy me a coffee</span>
-                            <svg class="coffee-arrow" width="60" height="40" viewBox="0 0 60 40">
-                                <path d="M10,10 Q30,5 45,30" stroke="black" stroke-width="3" fill="none" />
-                                <path d="M38,25 L45,30 L48,22" stroke="black" stroke-width="3" fill="none" />
-                            </svg>
-                            <a href="https://buymeacoffee.com/nj.labuschagne" target="_blank" class="btn-coffee-round">
-                                <i class="fa fa-coffee"></i>
-                            </a>
-                        </div>
+
+                    <div class="hero-buttons animate-reveal" style="margin-top: 20px;">
+                        <a href="#contact" class="btn btn-outline">Start Journey</a>
                     </div>
+
+                    <svg class="star-illustation" style="top: 10%; left: -20px; width: 30px; height: 30px; opacity: 0.5;" viewBox="0 0 24 24">
+                        <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
+                    </svg>
                 </div>
-            </div>
-            <div class="tech-stack-tags container animate-reveal stagger-parent">
-                <span class="animate-reveal stagger">Node.js</span>
-                <span class="animate-reveal stagger">React</span>
-                <span class="animate-reveal stagger">Python</span>
-                <span class="animate-reveal stagger">JavaScript</span>
-                <span class="animate-reveal stagger">HTML</span>
-                <span class="animate-reveal stagger">TypeScript</span>
-                <span class="animate-reveal stagger">Google Cloud</span>
-                <span class="animate-reveal stagger">Docker</span>
             </div>
         </section>
 
@@ -304,8 +304,8 @@
                     <svg class="star-illustation" style="top: -25px; left: -25px; transform: rotate(-10deg);" viewBox="0 0 24 24">
                         <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
                     </svg>
-                    <h2 class="section-title">GET IN TOUCH</h2>
-                    <p>Let's build something amazing together.</p>
+                    <h2 class="section-title">Adventure is Out There!</h2>
+                    <p>Ready to start a new project together?</p>
                     <div class="contact-links">
                         <a href="https://linkedin.com/in/nicolaas-labuschagne-919739286" target="_blank"><i class="fa fa-linkedin"></i></a>
                         <a href="https://github.com/NicolaasLabuschagne" target="_blank"><i class="fa fa-github"></i></a>
@@ -328,7 +328,7 @@
                     <span class="footer-role">Systems Architect & Full Stack Developer</span>
                 </div>
                 <div class="footer-links">
-                    <a href="#hero">Home</a>
+                    <a href="#hero-left">Home</a>
                     <a href="#about">About</a>
                     <a href="#journey">Journey</a>
                     <a href="#skills">Skills</a>

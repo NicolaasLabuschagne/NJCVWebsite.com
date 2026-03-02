@@ -2,37 +2,44 @@
    Design Tokens
    =========================== */
 :root {
-    --bg-color: #f8fafc;
-    --bg-color-rgb: 248, 250, 252;
-    --secondary-bg: #ffffff;
+    --bg-color: #fdfcf0; /* Parchment cream */
+    --bg-color-rgb: 253, 252, 240;
+    --secondary-bg: #fcfaf2;
 
-    --primary-color: #facc15; /* Vibrant Yellow */
-    --primary-color-rgb: 250, 204, 21;
+    --primary-color: #d4af37; /* Gold */
+    --primary-color-rgb: 212, 175, 55;
 
-    --accent-color: #7bc07e; /* Sage Green */
-    --accent-color-rgb: 123, 192, 126;
+    --accent-color: #5d4037; /* Leather Brown */
+    --accent-color-rgb: 93, 64, 55;
 
-    --success-color: #84cc16; /* Lime Green */
-    --error-color: #ef4444; /* Red */
+    --success-color: #7bc07e; /* Sage Green (reused) */
+    --error-color: #b71c1c; /* Adventure Red */
+    --info-color: #38bdf8; /* Blue */
     --purple-color: #c084fc;
+    --secondary-color: #94a3b8; /* Slate */
 
-    --text-color: #000000;
-    --text-dim: #4b5563;
+    --text-color: #2c1e1a; /* Dark Brown for text */
+    --text-dim: #5d4037;
 
-    --border-color: #000000;
+    --border-color: #2c1e1a;
     --invert-amount: 0;
+
+    --spine-color: #b71c1c;
 }
 
 [data-theme="dark"] {
-    --bg-color: #0b0b0b;
-    --bg-color-rgb: 11, 11, 11;
-    --secondary-bg: #1a1a1a;
+    --bg-color: #1a1210; /* Very dark brown/black */
+    --bg-color-rgb: 26, 18, 16;
+    --secondary-bg: #2c1e1a;
 
-    --text-color: #ffffff;
-    --text-dim: #94a3b8;
+    --text-color: #fdfcf0;
+    --text-dim: #d4af37;
 
-    --border-color: #ffffff;
+    --border-color: #fdfcf0;
     --invert-amount: 1;
+
+    --primary-color: #facc15;
+    --spine-color: #7f0000;
 }
 
 :root {
@@ -58,11 +65,10 @@ html {
 }
 
 body {
-    background-color: transparent;
+    background-color: var(--bg-color);
     background-image:
-        linear-gradient(rgba(128,128,128,0.15) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(128,128,128,0.15) 1px, transparent 1px);
-    background-size: 30px 30px;
+        radial-gradient(circle at 2px 2px, rgba(93, 64, 55, 0.05) 1px, transparent 0);
+    background-size: 20px 20px;
     color: var(--text-color);
     font-family: var(--font-main);
     line-height: 1.6;
@@ -222,24 +228,71 @@ body::after {
 }
 
 /* ===========================
-   Hero Section
+   Hero Section & Adventure Book Layout
    =========================== */
 .hero {
-    min-height: 100vh;
+    min-height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     position: relative;
-    padding-top: 10%;
-    padding-bottom: 80px;
+    padding: 40px;
+}
+
+.cover-page {
+    background-color: var(--accent-color) !important;
+    background-image:
+        radial-gradient(circle at 10% 20%, rgba(0,0,0,0.1) 1px, transparent 1px),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='leather'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23leather)' opacity='0.15'/%3E%3C/svg%3E") !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--primary-color);
+}
+
+.cover-inner {
+    border: 10px double var(--primary-color);
+    padding: 60px 40px;
+    border-radius: 4px;
+    position: relative;
+    background: rgba(0,0,0,0.1);
+}
+
+.cover-title {
+    font-size: 3.5rem;
+    font-weight: 900;
+    line-height: 1.2;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: -2px;
+}
+
+.house-badge {
+    width: 80px;
+    height: 80px;
+    background: white;
+    border: 3px solid var(--border-color);
+    border-radius: 50%;
+    margin: 40px auto 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--accent-color);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
 .hero-grid {
     display: grid;
-    grid-template-columns: 0.9fr 1.1fr;
-    gap: 80px;
+    grid-template-columns: 1fr;
+    gap: 40px;
     align-items: center;
     width: 100%;
+}
+
+@media (min-width: 993px) {
+    .hero-grid {
+        grid-template-columns: 1fr; /* On desktop it's usually 1 per page in the book */
+    }
 }
 
 .hero-left, .hero-right {
@@ -247,19 +300,21 @@ body::after {
 }
 
 .hero-greeting {
-    color: var(--accent-color);
+    color: var(--error-color);
+    font-family: 'Caveat', cursive;
     font-weight: 800;
-    font-size: 2rem;
-    margin-bottom: 10px;
+    font-size: 2.5rem;
+    margin-bottom: 5px;
     text-align: left;
 }
 
 .hero-name {
-    font-size: 4.5rem;
+    font-size: 3.5rem;
     font-weight: 900;
     line-height: 1.1;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     text-align: left;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .scribble-underline {
@@ -579,19 +634,69 @@ body::after {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    padding: 100px 0;
+    padding: 120px 0;
+    position: relative;
+}
+
+.book-spine-effect {
+    position: absolute;
+    left: -40px;
+    top: 0;
+    width: 60px;
+    height: 100%;
+    background: var(--spine-color);
+    border: var(--border-width) solid var(--border-color);
+    border-radius: 8px 0 0 8px;
+    z-index: 100;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 40px 0;
+}
+
+.grommet {
+    width: 20px;
+    height: 20px;
+    background: #d4af37;
+    border: 3px solid #8b4513;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.5);
+}
+
+.grommet::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 200px;
+    background: rgba(0,0,0,0.2);
+    transform: translate(-50%, -50%);
+    z-index: -1;
 }
 
 #book {
-    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    box-shadow: 20px 20px 60px rgba(0,0,0,0.4);
     margin: 0 auto;
+    background: var(--accent-color); /* Leather texture base */
+    border: 5px solid var(--border-color);
+    border-radius: 0 12px 12px 0;
+}
+
+.stPageFlip {
+    background: var(--accent-color) !important;
 }
 
 .my-page {
-    background-color: rgba(var(--bg-color-rgb), 0.95);
-    backdrop-filter: blur(5px);
-    border: var(--border-width) solid var(--border-color);
+    background-color: var(--bg-color);
+    background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paperNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='5' stitchTiles='stitch'/%3E%3CfeComposite operator='in' in2='SourceGraphic'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paperNoise)' opacity='0.05'/%3E%3C/svg%3E");
+    border: 1px solid rgba(0,0,0,0.1);
     overflow: auto;
+    box-shadow: inset 0 0 100px rgba(139, 69, 19, 0.05);
 }
 
 .section {
@@ -1078,7 +1183,6 @@ body::after {
         padding: 0 20px;
     }
     .hero-grid {
-        grid-template-columns: 1fr;
         text-align: center;
         gap: 40px;
     }
