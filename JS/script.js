@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const header = document.querySelector('.header');
     const scrollProgress = document.querySelector('.scroll-progress');
 
-    window.addEventListener('scroll', () => {
+    window.addEventListener('scroll', throttle(() => {
         if (window.scrollY > 50) header.classList.add('sticky');
         else header.classList.remove('sticky');
 
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
         const scrolled = (winScroll / height) * 100;
         if (scrollProgress) scrollProgress.style.width = scrolled + "%";
-    });
+    }, 16));
 
     // 3. Smooth scroll
     document.querySelectorAll('.nav-links a').forEach(link => {
@@ -38,8 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 4. Initialize Themes & Palette Switcher
-    initThemeSystem();
+    // 4. Initialize Color Cache
+    updateColorCache();
 
     // 5. Initialize Binary Rain
     startRain();
@@ -54,129 +54,111 @@ document.addEventListener('DOMContentLoaded', () => {
         attachContourBackground(`#${section.id}`);
     });
 
-    // 8. IntersectionObserver to pause/resume contour canvases
-    const contourObserver = new IntersectionObserver(entries => {
+    // 8. IntersectionObserver to pause/resume all p5 background canvases
+    const bgObserver = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             const canvas = entry.target.querySelector('canvas');
             if (!canvas) return;
 
-            const p5Instance = canvas.__p5Instance; // reference stored by p5
+            const p5Instance = canvas.__p5Instance;
             if (!p5Instance) return;
 
             if (entry.isIntersecting) {
-                p5Instance.loop();   // resume drawing
+                p5Instance.loop();
             } else {
-                p5Instance.noLoop(); // pause drawing
+                p5Instance.noLoop();
             }
         });
     }, { threshold: 0.1 });
 
-    document.querySelectorAll('.contour').forEach(section => contourObserver.observe(section));
+    document.querySelectorAll('.noise, .contour').forEach(section => bgObserver.observe(section));
 });
 
 /* ==========================================================================
-   Theme System
+   Color System
    ========================================================================== */
-const THEMES = {
-    "navy-orange": "#FF6B35",
-    "default": "#A8E600"
-};
+let cachedColors = null;
 
-function initThemeSystem() {
-    const keys = Object.keys(THEMES);
-    const saved = localStorage.getItem('theme');
-
-    let initialTheme = keys[Math.floor(Math.random() * keys.length)];
-    if (saved && keys.includes(saved)) {
-        initialTheme = saved;
-    }
-
-    setTheme(initialTheme);
-
-    // Keyboard shortcuts
-    window.addEventListener('keydown', (e) => {
-        if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
-        if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName) || document.activeElement.isContentEditable) return;
-
-        if (e.key === 'ArrowLeft') cycleTheme(-1);
-        else if (e.key === 'ArrowRight') cycleTheme(1);
-    });
-}
-
-function setTheme(theme) {
-    if (!THEMES[theme]) return;
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-    renderPaletteButtons(theme);
-}
-
-function cycleTheme(offset) {
-    const keys = Object.keys(THEMES);
-    const current = document.documentElement.getAttribute('data-theme');
-    let idx = keys.indexOf(current);
-    if (idx === -1) idx = 0;
-    const nextIdx = (idx + offset + keys.length) % keys.length;
-    setTheme(keys[nextIdx]);
-}
-
-function renderPaletteButtons(activeTheme) {
-    const switcher = document.querySelector('.palette-switcher');
-    if (!switcher) return;
-
-    switcher.innerHTML = '';
-
-    const q = document.createElement('div');
-    q.className = 'palette-question';
-    q.textContent = "Switch Palette:";
-    switcher.appendChild(q);
-
-    const buttonsContainer = document.createElement('div');
-    buttonsContainer.className = 'palette-buttons';
-    switcher.appendChild(buttonsContainer);
-
-    Object.keys(THEMES).forEach(name => {
-        if (name === activeTheme) return;
-        const btn = document.createElement('button');
-        btn.className = 'palette-btn';
-        btn.style.background = THEMES[name];
-        btn.onclick = () => setTheme(name);
-        btn.title = name.replace('-', ' ');
-        buttonsContainer.appendChild(btn);
-    });
+function updateColorCache() {
+    const styles = getComputedStyle(document.documentElement);
+    const c1 = styles.getPropertyValue('--primary-color-rgb').trim() || "168, 230, 0";
+    const c2 = styles.getPropertyValue('--accent-color-rgb').trim() || "114, 191, 120";
+    const bg = styles.getPropertyValue('--bg-color-rgb').trim() || "28, 61, 46";
+    const parse = str => str.split(',').map(v => parseInt(v, 10));
+    cachedColors = { C1: parse(c1), C2: parse(c2), BG: parse(bg) };
 }
 
 function getThemeColors() {
-    const styles = getComputedStyle(document.documentElement);
-    const c1 = styles.getPropertyValue('--primary-color-rgb').trim() || "23, 217, 0";
-    const c2 = styles.getPropertyValue('--accent-color-rgb').trim() || "224, 0, 224";
-    const bg = styles.getPropertyValue('--bg-color-rgb').trim() || "0, 0, 0"; // new line
-    const parse = str => str.split(',').map(v => parseInt(v, 10));
-    return { C1: parse(c1), C2: parse(c2), BG: parse(bg) };
+    if (!cachedColors) updateColorCache();
+    return cachedColors;
 }
 
 /* ==========================================================================
    Binary Rain
    ========================================================================== */
 function startRain() {
-    const cloud = document.querySelector('.cloud');
-    if (!cloud) return;
+    const canvas = document.getElementById('rain-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
 
-    setInterval(() => {
-        const drop = document.createElement('div');
-        drop.className = 'drop';
-        drop.innerText = Math.random() > 0.5 ? '1' : '0';
+    let w, h, maxDrops;
+    const setCanvasSize = () => {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+        maxDrops = w < 700 ? 40 : 80;
+    };
+    setCanvasSize();
+    window.addEventListener('resize', setCanvasSize);
 
-        const size = Math.random();
-        if (size < 0.3) drop.classList.add('small');
-        else if (size > 0.8) drop.classList.add('large');
+    const drops = [];
 
-        drop.style.left = Math.random() * 100 + 'vw';
-        drop.style.animationDuration = (1 + Math.random() * 2) + 's';
-        drop.style.setProperty('--horizontal-movement', (Math.random() * 40 - 20) + 'px');
+    function createDrop() {
+        return {
+            x: Math.random() * w,
+            y: -20,
+            text: Math.random() > 0.5 ? '1' : '0',
+            speed: 2 + Math.random() * 4,
+            size: 10 + Math.random() * 10,
+            opacity: 0.2 + Math.random() * 0.6,
+            horizontal: (Math.random() * 2 - 1) * 0.3
+        };
+    }
 
-        cloud.appendChild(drop);
-        drop.onanimationend = () => drop.remove();
-    }, window.innerWidth < 700 ? 150 : 80);
+    let isVisible = true;
+    const observer = new IntersectionObserver(entries => {
+        isVisible = entries[0].isIntersecting;
+    }, { threshold: 0.01 });
+    observer.observe(canvas);
+
+    function animate() {
+        if (isVisible) {
+            ctx.clearRect(0, 0, w, h);
+
+            const colors = getThemeColors();
+            const c = colors.C1;
+
+            if (drops.length < maxDrops && Math.random() < 0.2) {
+                drops.push(createDrop());
+            }
+
+            for (let i = drops.length - 1; i >= 0; i--) {
+                const d = drops[i];
+                ctx.fillStyle = `rgba(${c[0]}, ${c[1]}, ${c[2]}, ${d.opacity})`;
+                ctx.font = `${d.size}px monospace`;
+                ctx.fillText(d.text, d.x, d.y);
+
+                d.y += d.speed;
+                d.x += d.horizontal;
+
+                if (d.y > h + 20) {
+                    drops.splice(i, 1);
+                }
+            }
+        }
+        requestAnimationFrame(animate);
+    }
+
+    animate();
 }
 
 /* ==========================================================================
@@ -194,6 +176,7 @@ function attachNoiseBackground(selector) {
 
         p.setup = () => {
             const canvas = p.createCanvas(container.offsetWidth, container.offsetHeight);
+            canvas.elt.__p5Instance = p;
             canvas.parent(container); // attach canvas to the container
             canvas.style('position', 'absolute');
             canvas.style('top', '0');
@@ -201,6 +184,7 @@ function attachNoiseBackground(selector) {
             canvas.style('z-index', '-1');
             p.textAlign(p.CENTER, p.CENTER);
             initGrid();
+            p.noLoop();
         };
 
         const initGrid = () => {
@@ -264,17 +248,16 @@ function attachContourBackground(selector) {
 
     const sketch = (p) => {
         let field = [];
-        let rez = 15; // fine detail but balanced
+        let rez = 25; // Optimized for performance
         let cols, rows;
         let increment = 0.04;
         let zoff = 0;
         let xShift = 0;
         let yShift = 0;
-        let C1, C2;
-        let buffer;
+        let C1, C2, BG;
 
         p.setup = () => {
-            const canvas = p.createCanvas(container.offsetWidth, container.offsetHeight, p.WEBGL);
+            const canvas = p.createCanvas(container.offsetWidth, container.offsetHeight);
             canvas.parent(container);
             canvas.style('position', 'absolute');
             canvas.style('top', '0');
@@ -290,21 +273,20 @@ function attachContourBackground(selector) {
             rows = 1 + Math.floor(p.height / rez);
             field = Array.from({ length: cols }, () => Array(rows).fill(0));
 
-            buffer = p.createGraphics(container.offsetWidth, container.offsetHeight);
-            buffer.strokeWeight(2);
-            buffer.noFill();
+            p.strokeWeight(2);
+            p.noFill();
 
             p.frameRate(30);
+            p.noLoop();
         };
 
         p.draw = () => {
-    const { C1: newC1, C2: newC2, BG: newBG } = getThemeColors();
-    C1 = newC1;
-    C2 = newC2;
-    BG = newBG;
+            const colors = getThemeColors();
+            C1 = colors.C1;
+            C2 = colors.C2;
+            BG = colors.BG;
 
-    // Clear buffer with background color
-    buffer.background(BG[0], BG[1], BG[2]);
+            p.background(BG[0], BG[1], BG[2]);
 
     // build drifting noise field
     let xoff = 0;
@@ -337,20 +319,20 @@ function attachContourBackground(selector) {
                 const state = getState(f0, f1, f2, f3);
 
                 switch (state) {
-                    case 1:  drawInteractiveSegment(p, buffer, c, d, C1, C2, rez); break;
-                    case 2:  drawInteractiveSegment(p, buffer, b, c, C1, C2, rez); break;
-                    case 3:  drawInteractiveSegment(p, buffer, b, d, C1, C2, rez); break;
-                    case 4:  drawInteractiveSegment(p, buffer, a, b, C1, C2, rez); break;
-                    case 5:  drawInteractiveSegment(p, buffer, a, d, C1, C2, rez); drawInteractiveSegment(p, buffer, b, c, C1, C2, rez); break;
-                    case 6:  drawInteractiveSegment(p, buffer, a, c, C1, C2, rez); break;
-                    case 7:  drawInteractiveSegment(p, buffer, a, d, C1, C2, rez); break;
-                    case 8:  drawInteractiveSegment(p, buffer, a, d, C1, C2, rez); break;
-                    case 9:  drawInteractiveSegment(p, buffer, a, c, C1, C2, rez); break;
-                    case 10: drawInteractiveSegment(p, buffer, a, b, C1, C2, rez); drawInteractiveSegment(p, buffer, c, d, C1, C2, rez); break;
-                    case 11: drawInteractiveSegment(p, buffer, a, b, C1, C2, rez); break;
-                    case 12: drawInteractiveSegment(p, buffer, b, d, C1, C2, rez); break;
-                    case 13: drawInteractiveSegment(p, buffer, b, c, C1, C2, rez); break;
-                    case 14: drawInteractiveSegment(p, buffer, c, d, C1, C2, rez); break;
+                    case 1:  drawInteractiveSegment(p, p, c, d, C1, C2, rez); break;
+                    case 2:  drawInteractiveSegment(p, p, b, c, C1, C2, rez); break;
+                    case 3:  drawInteractiveSegment(p, p, b, d, C1, C2, rez); break;
+                    case 4:  drawInteractiveSegment(p, p, a, b, C1, C2, rez); break;
+                    case 5:  drawInteractiveSegment(p, p, a, d, C1, C2, rez); drawInteractiveSegment(p, p, b, c, C1, C2, rez); break;
+                    case 6:  drawInteractiveSegment(p, p, a, c, C1, C2, rez); break;
+                    case 7:  drawInteractiveSegment(p, p, a, d, C1, C2, rez); break;
+                    case 8:  drawInteractiveSegment(p, p, a, d, C1, C2, rez); break;
+                    case 9:  drawInteractiveSegment(p, p, a, c, C1, C2, rez); break;
+                    case 10: drawInteractiveSegment(p, p, a, b, C1, C2, rez); drawInteractiveSegment(p, p, c, d, C1, C2, rez); break;
+                    case 11: drawInteractiveSegment(p, p, a, b, C1, C2, rez); break;
+                    case 12: drawInteractiveSegment(p, p, b, d, C1, C2, rez); break;
+                    case 13: drawInteractiveSegment(p, p, b, c, C1, C2, rez); break;
+                    case 14: drawInteractiveSegment(p, p, c, d, C1, C2, rez); break;
                 }
             }
         }
@@ -360,38 +342,36 @@ function attachContourBackground(selector) {
     zoff += 0.001;
     xShift += 0.002;
     yShift += 0.001;
-
-    // draw buffer to canvas
-    p.image(buffer, -p.width / 2, -p.height / 2);
 };
 
         p.windowResized = () => {
             p.resizeCanvas(container.offsetWidth, container.offsetHeight);
-            buffer = p.createGraphics(container.offsetWidth, container.offsetHeight);
-            buffer.strokeWeight(2);
-            buffer.noFill();
+            p.strokeWeight(2);
+            p.noFill();
             cols = 1 + Math.floor(p.width / rez);
             rows = 1 + Math.floor(p.height / rez);
             field = Array.from({ length: cols }, () => Array(rows).fill(0));
         };
 
-        // Pause when off-screen
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    p.loop();
-                } else {
-                    p.noLoop();
-                }
-            });
-        });
-        observer.observe(container);
     };
 
     new p5(sketch);
 }
 
 // Helpers
+function throttle(func, limit) {
+    let inThrottle;
+    return function() {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    }
+}
+
 function getState(a, b, c, d) {
     return (a > 0 ? 8 : 0) + (b > 0 ? 4 : 0) + (c > 0 ? 2 : 0) + (d > 0 ? 1 : 0);
 }
