@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
 </head>
 <body>
     <div id="scroll-progress-container" class="scroll-progress-container">
@@ -42,9 +43,10 @@
     </header>
 
     <main class="book-container">
-        <section id="hero" class="hero section page">
+        <div id="book">
+        <section id="hero" class="hero section page my-page" data-density="hard">
             <div class="container hero-grid">
-                <svg class="star-illustation" style="top: 10%; left: 5%; transform: rotate(15deg);" viewBox="0 0 24 24">
+                <svg class="star-illustation" style="top: 15%; left: 70%; transform: rotate(15deg);" viewBox="0 0 24 24">
                     <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
                 </svg>
                 <div class="hero-right animate-reveal">
@@ -71,16 +73,15 @@
                         <div class="floating-icon icon-terminal">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
                         </div>
-                        <img src="images/myPic3.jpg" alt="Nicolaas Labuschagne" class="profile-img">
-                        <div class="profile-badge">Full-Stack Ninja</div>
+                        <img src="images/myPic.png" alt="Nicolaas Labuschagne" class="profile-img">
+                        <div class="sticker sticker-yellow" style="bottom: -30px; right: -30px; transform: rotate(10deg);">Full-Stack Dev</div>
                     </div>
                 </div>
                 <div class="hero-left">
-                    <div class="hero-greeting animate-reveal">Hi there! 👋</div>
+                    <div class="hero-greeting animate-reveal">Hi there!</div>
                     <h1 class="hero-name animate-reveal">I'm Nicolaas <span class="scribble-underline">Labuschagne.</span></h1>
-                    <div class="sticker sticker-lime" style="top: -60px; left: 180px; transform: rotate(-10deg);">Systems Architect</div>
-                    <div class="sticker sticker-red" style="top: -20px; left: 350px; transform: rotate(15deg);">Amateur Cyclist 🚲</div>
-                    <div class="sticker sticker-yellow" style="bottom: -30px; right: 80px; transform: rotate(10deg);">Full-Stack Dev</div>
+                    <div class="sticker sticker-lime" style="top: -60px; left: 40%; transform: rotate(-10deg);">Systems Architect</div>
+                    <div class="sticker sticker-red" style="top: -20px; left: 70%; transform: rotate(15deg);">Amateur Cyclist</div>
                     <p class="hero-description animate-reveal">
                         Based in South Africa, I'm a <span class="highlight">Systems Architect</span> & Full Stack Developer. I love to work with distributed systems,
                         automated workflows, and modern web technologies. I'm passionate about
@@ -99,7 +100,7 @@
                                 <path d="M10,10 Q30,5 45,30" stroke="black" stroke-width="3" fill="none" />
                                 <path d="M38,25 L45,30 L48,22" stroke="black" stroke-width="3" fill="none" />
                             </svg>
-                            <a href="#" class="btn-coffee-round">
+                            <a href="https://buymeacoffee.com/nj.labuschagne" target="_blank" class="btn-coffee-round">
                                 <i class="fa fa-coffee"></i>
                             </a>
                         </div>
@@ -118,20 +119,8 @@
             </div>
         </section>
 
-        <div class="marquee">
-            <div class="marquee-content">
-                <span>Systems Architect</span>
-                <span>Full Stack Developer</span>
-                <span>Automation Expert</span>
-                <span>Creative Problem Solver</span>
-                <span>Systems Architect</span>
-                <span>Full Stack Developer</span>
-                <span>Automation Expert</span>
-                <span>Creative Problem Solver</span>
-            </div>
-        </div>
 
-        <section id="about" class="about section page">
+        <section id="about" class="about section page my-page">
             <div class="container section-container">
                 <div class="sticker sticker-blue" style="top: 100px; right: 50px; transform: rotate(-15deg);">Cyclist 🚴‍♂️</div>
                 <div class="sticker sticker-lime" style="bottom: 50px; left: -20px; transform: rotate(10deg);">Business Minded 📈</div>
@@ -160,7 +149,7 @@
             </svg>
         </section>
 
-        <section id="journey" class="journey section page">
+        <section id="journey" class="journey section page my-page">
             <div class="container section-container">
                 <!-- Technical Callout -->
                 <div style="position: absolute; top: -40px; right: 20%; font-family: monospace; font-size: 10px; border: 1px solid var(--border-color); padding: 5px; background: var(--bg-color); color: var(--text-color); transform: rotate(2deg);">
@@ -215,7 +204,7 @@
             </svg>
         </section>
 
-        <section id="skills" class="skills section page">
+        <section id="skills" class="skills section page my-page">
             <div class="container section-container">
                 <div class="sticker sticker-yellow" style="top: -30px; left: 150px; transform: rotate(-5deg);">Tools</div>
                 <svg class="blob-bg blob-2" viewBox="0 0 200 200">
@@ -263,7 +252,7 @@
             </div>
         </section>
 
-        <section id="experience-map" class="experience-map section page">
+        <section id="experience-map" class="experience-map section page my-page">
             <div class="container section-container">
                 <div class="sticker sticker-red" style="top: -20px; right: 50px; transform: rotate(5deg);">Work Locations</div>
                 <h2 class="section-title animate-reveal">Global Reach</h2>
@@ -271,7 +260,7 @@
             </div>
         </section>
 
-        <section id="education" class="education section page">
+        <section id="education" class="education section page my-page">
             <div class="container section-container">
                 <div class="sticker sticker-purple" style="top: -30px; left: 100px; transform: rotate(-10deg);">Academic</div>
                 <h2 class="section-title animate-reveal">Education</h2>
@@ -288,7 +277,7 @@
             </div>
         </section>
 
-        <section id="languages" class="languages section page">
+        <section id="languages" class="languages section page my-page">
             <div class="container section-container">
                 <div class="sticker sticker-lime" style="bottom: -20px; right: 80px; transform: rotate(15deg);">Communication</div>
                 <h2 class="section-title animate-reveal">Languages</h2>
@@ -309,7 +298,7 @@
             </div>
         </section>
 
-        <section id="contact" class="contact section page">
+        <section id="contact" class="contact section page my-page" data-density="hard">
             <div class="container">
                 <div class="contact-box animate-reveal">
                     <svg class="star-illustation" style="top: -25px; left: -25px; transform: rotate(-10deg);" viewBox="0 0 24 24">
@@ -328,6 +317,7 @@
                 </div>
             </div>
         </section>
+        </div>
     </main>
 
     <footer class="footer">

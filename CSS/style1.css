@@ -9,8 +9,8 @@
     --primary-color: #facc15; /* Vibrant Yellow */
     --primary-color-rgb: 250, 204, 21;
 
-    --accent-color: #7dd3fc; /* Sky Blue */
-    --accent-color-rgb: 125, 211, 252;
+    --accent-color: #7bc07e; /* Sage Green */
+    --accent-color-rgb: 123, 192, 126;
 
     --success-color: #84cc16; /* Lime Green */
     --error-color: #ef4444; /* Red */
@@ -54,10 +54,11 @@
 
 html {
     scroll-behavior: smooth;
+    background-color: var(--bg-color);
 }
 
 body {
-    background-color: var(--bg-color);
+    background-color: transparent;
     background-image:
         linear-gradient(rgba(128,128,128,0.15) 1px, transparent 1px),
         linear-gradient(90deg, rgba(128,128,128,0.15) 1px, transparent 1px);
@@ -229,7 +230,7 @@ body::after {
     flex-direction: column;
     justify-content: center;
     position: relative;
-    padding-top: 150px;
+    padding-top: 10%;
     padding-bottom: 80px;
 }
 
@@ -424,6 +425,8 @@ body::after {
     border: var(--border-width) solid var(--border-color);
     border-radius: 12px;
     box-shadow: 10px 10px 0px 0px var(--border-color);
+    display: flex;
+    justify-content: center;
 }
 
 .tape {
@@ -438,7 +441,7 @@ body::after {
 }
 
 .profile-img {
-    width: 100%;
+    width: 70%;
     height: 100%;
     object-fit: cover;
     border-radius: 8px;
@@ -572,22 +575,30 @@ body::after {
    =========================== */
 .book-container {
     perspective: 2000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 100px 0;
+}
+
+#book {
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    margin: 0 auto;
+}
+
+.my-page {
+    background-color: rgba(var(--bg-color-rgb), 0.95);
+    backdrop-filter: blur(5px);
+    border: var(--border-width) solid var(--border-color);
+    overflow: auto;
 }
 
 .section {
-    padding: 120px 0;
+    padding: 80px 0;
     position: relative;
-    transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 1s ease;
-    transform-origin: left center;
-}
-
-.page {
-    backface-visibility: hidden;
-}
-
-.page.turning {
-    transform: rotateY(-10deg) translateX(-20px);
-    opacity: 0.8;
+    width: 100%;
+    height: 100%;
 }
 
 .section-title {

@@ -90,24 +90,15 @@ document.addEventListener('DOMContentLoaded', () => {
        Scroll Progress
        =========================== */
     const progressBar = document.getElementById('scroll-progress-bar');
-    window.addEventListener('scroll', () => {
-        const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const scrolled = (window.scrollY / windowHeight) * 100;
-        progressBar.style.width = scrolled + '%';
-    });
 
     const themeToggle = document.getElementById('theme-toggle');
     const currentTheme = localStorage.getItem('theme') || 'light';
-
-    if (currentTheme === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'dark');
-    }
 
     const updateThemeIcon = () => {
         const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
         const icon = themeToggle.querySelector('i');
         if (isDark) {
-            icon.className = 'fa fa-moon-o'; // Bike with headlight vibe or just moon
+            icon.className = 'fa fa-moon-o';
         } else {
             icon.className = 'fa fa-sun-o';
         }
@@ -133,30 +124,50 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ===========================
        Journey Book Effect
        =========================== */
-    const bookObserverOptions = {
-        threshold: [0, 0.1, 0.9, 1],
-        rootMargin: '0px'
-    };
-
-    const bookObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.intersectionRatio < 0.9 && entry.intersectionRatio > 0) {
-                entry.target.classList.add('turning');
-            } else {
-                entry.target.classList.remove('turning');
-            }
+    const bookContainer = document.getElementById('book');
+    if (bookContainer) {
+        const pageFlip = new St.PageFlip(bookContainer, {
+            width: 400, // base page width
+            height: 600, // base page height
+            size: "stretch",
+            minWidth: 315,
+            maxWidth: 1000,
+            minHeight: 420,
+            maxHeight: 1350,
+            maxShadowOpacity: 0.5,
+            showCover: true,
+            mobileScrollSupport: false // library handles touch
         });
-    }, bookObserverOptions);
 
-    document.querySelectorAll('.page').forEach(page => {
-        bookObserver.observe(page);
-    });
+        pageFlip.loadFromHTML(document.querySelectorAll('.my-page'));
+
+        // Update progress bar on flip
+        pageFlip.on('flip', (e) => {
+            const pageCount = pageFlip.getPageCount();
+            const progress = ((e.data + 1) / pageCount) * 100;
+            progressBar.style.width = progress + '%';
+        });
+
+        // Optional: Update nav links to flip book
+        document.querySelectorAll('.nav-links a, .footer-links a').forEach((link, index) => {
+            link.addEventListener('click', (e) => {
+                const targetId = link.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                const pages = Array.from(document.querySelectorAll('.my-page'));
+                const pageIndex = pages.indexOf(targetSection);
+                if (pageIndex !== -1) {
+                    e.preventDefault();
+                    pageFlip.flip(pageIndex);
+                }
+            });
+        });
+    }
 
     /* ===========================
        Random Skill Tag Press
        =========================== */
     const skillTags = document.querySelectorAll('.tags span');
-    const stickerColors = ['var(--lime-color)', 'var(--red-color)', 'var(--blue-color)', 'var(--yellow-color)', 'var(--purple-color)'];
+    const stickerColors = ['var(--success-color)', 'var(--danger-color)', 'var(--info-color)', 'var(--primary-color)', 'var(--secondary-color)'];
     if (skillTags.length > 0) {
         setInterval(() => {
             const randomTag = skillTags[Math.floor(Math.random() * skillTags.length)];
@@ -255,16 +266,5 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ===========================
        Smooth Scrolling for Nav Links
        =========================== */
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                window.scrollTo({
-                    top: target.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
+    // Handled by StPageFlip link overrides above
 });
