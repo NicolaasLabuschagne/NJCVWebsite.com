@@ -4,8 +4,9 @@
    =========================== */
 const sketch = (p) => {
     let symbols = [];
-    const symbolChars = ['+', '-', '•', '/', '×'];
-    const gridSize = 40;
+    // More "Adventure/Scrapbook" style symbols
+    const symbolChars = ['★', '•', '✎', '➤', '❖'];
+    const gridSize = 50;
 
     p.setup = () => {
         let canvas = p.createCanvas(p.windowWidth, p.windowHeight);
@@ -22,11 +23,11 @@ const sketch = (p) => {
         for (let x = 0; x < p.width; x += gridSize) {
             for (let y = 0; y < p.height; y += gridSize) {
                 symbols.push({
-                    x: x,
-                    y: y,
+                    x: x + p.random(-10, 10),
+                    y: y + p.random(-10, 10),
                     char: p.random(symbolChars),
                     angle: p.random(p.TWO_PI),
-                    size: p.random(8, 14)
+                    size: p.random(10, 18)
                 });
             }
         }
@@ -36,19 +37,20 @@ const sketch = (p) => {
         p.clear();
 
         const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-        const colorValue = isDark ? 255 : 0;
+        // In "Adventure Book" mode, symbols look like faded ink
+        const colorValue = isDark ? 200 : 80;
 
         symbols.forEach(s => {
             let dx = p.mouseX - s.x;
             let dy = p.mouseY - s.y;
             let dist = p.sqrt(dx*dx + dy*dy);
-            let offset = p.map(p.min(dist, 200), 0, 200, 20, 0);
+            let offset = p.map(p.min(dist, 250), 0, 250, 15, 0);
 
-            p.fill(colorValue, colorValue, colorValue, p.map(p.min(dist, 300), 0, 300, 40, 5));
+            p.fill(colorValue, colorValue, colorValue, p.map(p.min(dist, 400), 0, 400, 30, 2));
             p.textSize(s.size);
             p.push();
             p.translate(s.x, s.y);
-            p.rotate(s.angle + dist * 0.005);
+            p.rotate(s.angle + dist * 0.002);
             p.text(s.char, offset, offset);
             p.pop();
         });
@@ -90,26 +92,17 @@ document.addEventListener('DOMContentLoaded', () => {
        Scroll Progress
        =========================== */
     const progressBar = document.getElementById('scroll-progress-bar');
-    window.addEventListener('scroll', () => {
-        const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const scrolled = (window.scrollY / windowHeight) * 100;
-        progressBar.style.width = scrolled + '%';
-    });
 
     const themeToggle = document.getElementById('theme-toggle');
     const currentTheme = localStorage.getItem('theme') || 'light';
-
-    if (currentTheme === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'dark');
-    }
 
     const updateThemeIcon = () => {
         const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
         const icon = themeToggle.querySelector('i');
         if (isDark) {
-            icon.className = 'fa fa-moon-o'; // Bike with headlight vibe or just moon
+            icon.className = 'fa fa-compass'; // Compass for dark mode adventure
         } else {
-            icon.className = 'fa fa-sun-o';
+            icon.className = 'fa fa-bicycle';
         }
     };
 
@@ -131,52 +124,71 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* ===========================
-       Journey Book Effect (StPageFlip)
+       Journey Book Effect
        =========================== */
-    const bookElement = document.getElementById('my-book');
-    const pages = document.querySelectorAll('.page');
-
-    if (bookElement && typeof St !== 'undefined') {
-        const pageFlip = new St.PageFlip(bookElement, {
-            width: 550,
-            height: 700,
+    const bookContainer = document.getElementById('book');
+    if (bookContainer) {
+        window.pageFlip = new St.PageFlip(bookContainer, {
+            width: 500, // wider for landscape adventure book
+            height: 600,
             size: "stretch",
-            minWidth: 315,
-            maxWidth: 1000,
-            minHeight: 420,
-            maxHeight: 1350,
-            maxShadowOpacity: 0.5,
+            minWidth: 350,
+            maxWidth: 1200,
+            minHeight: 450,
+            maxHeight: 1500,
+            maxShadowOpacity: 0.6,
             showCover: true,
             mobileScrollSupport: false,
-            flippingTime: 1000,
-            usePortrait: false,
-            startPage: 0
+            flippingTime: 1200 // slower, more tactile flip
         });
 
-        pageFlip.loadFromHTML(pages);
-        window.pageFlip = pageFlip;
+        window.pageFlip.loadFromHTML(document.querySelectorAll('.my-page'));
 
-        // Sync scroll with page flips
-        let lastScrollTime = 0;
+        // Update progress bar on flip
+        window.pageFlip.on('flip', (e) => {
+            const pageCount = window.pageFlip.getPageCount();
+            const progress = ((e.data + 1) / pageCount) * 100;
+            progressBar.style.width = progress + '%';
+        });
+
+        // Scroll to flip functionality
+        let lastFlip = 0;
+        const flipDelay = 1500;
         window.addEventListener('wheel', (e) => {
+            // Only flip if not currently flipping and enough time has passed
             const now = Date.now();
-            if (now - lastScrollTime < 1200) return;
+            if (now - lastFlip < flipDelay) return;
 
-            if (e.deltaY > 30) {
-                pageFlip.flipNext();
-                lastScrollTime = now;
-            } else if (e.deltaY < -30) {
-                pageFlip.flipPrev();
-                lastScrollTime = now;
+            if (Math.abs(e.deltaY) > 50) {
+                if (e.deltaY > 0) {
+                    window.pageFlip.flipNext();
+                } else {
+                    window.pageFlip.flipPrev();
+                }
+                lastFlip = now;
             }
         }, { passive: true });
+
+        // Optional: Update nav links to flip book
+        document.querySelectorAll('.nav-links a, .footer-links a').forEach((link, index) => {
+            link.addEventListener('click', (e) => {
+                const targetId = link.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                const pages = Array.from(document.querySelectorAll('.my-page'));
+                const pageIndex = pages.indexOf(targetSection);
+                if (pageIndex !== -1) {
+                    e.preventDefault();
+                    window.pageFlip.flip(pageIndex);
+                }
+            });
+        });
     }
 
     /* ===========================
        Random Skill Tag Press
        =========================== */
     const skillTags = document.querySelectorAll('.tags span');
-    const stickerColors = ['var(--lime-color)', 'var(--red-color)', 'var(--blue-color)', 'var(--yellow-color)', 'var(--purple-color)'];
+    const stickerColors = ['var(--success-color)', 'var(--danger-color)', 'var(--info-color)', 'var(--primary-color)', 'var(--secondary-color)'];
     if (skillTags.length > 0) {
         setInterval(() => {
             const randomTag = skillTags[Math.floor(Math.random() * skillTags.length)];
@@ -275,16 +287,5 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ===========================
        Smooth Scrolling for Nav Links
        =========================== */
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                window.scrollTo({
-                    top: target.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
+    // Handled by StPageFlip link overrides above
 });
