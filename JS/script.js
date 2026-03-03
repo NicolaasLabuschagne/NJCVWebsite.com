@@ -124,65 +124,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* ===========================
-       Journey Book Effect
+       Scroll Progress & Smooth Scroll
        =========================== */
-    const bookContainer = document.getElementById('book');
-    if (bookContainer) {
-        window.pageFlip = new St.PageFlip(bookContainer, {
-            width: 500, // wider for landscape adventure book
-            height: 600,
-            size: "stretch",
-            minWidth: 350,
-            maxWidth: 1200,
-            minHeight: 450,
-            maxHeight: 1500,
-            maxShadowOpacity: 0.6,
-            showCover: true,
-            mobileScrollSupport: false,
-            flippingTime: 1200 // slower, more tactile flip
-        });
+    window.addEventListener('scroll', () => {
+        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = (window.scrollY / totalHeight) * 100;
+        progressBar.style.width = progress + '%';
+    });
 
-        window.pageFlip.loadFromHTML(document.querySelectorAll('.my-page'));
-
-        // Update progress bar on flip
-        window.pageFlip.on('flip', (e) => {
-            const pageCount = window.pageFlip.getPageCount();
-            const progress = ((e.data + 1) / pageCount) * 100;
-            progressBar.style.width = progress + '%';
-        });
-
-        // Scroll to flip functionality
-        let lastFlip = 0;
-        const flipDelay = 1500;
-        window.addEventListener('wheel', (e) => {
-            // Only flip if not currently flipping and enough time has passed
-            const now = Date.now();
-            if (now - lastFlip < flipDelay) return;
-
-            if (Math.abs(e.deltaY) > 50) {
-                if (e.deltaY > 0) {
-                    window.pageFlip.flipNext();
-                } else {
-                    window.pageFlip.flipPrev();
-                }
-                lastFlip = now;
-            }
-        }, { passive: true });
-
-        // Optional: Update nav links to flip book
-        document.querySelectorAll('.nav-links a, .footer-links a').forEach((link, index) => {
-            link.addEventListener('click', (e) => {
-                const targetId = link.getAttribute('href').substring(1);
-                const targetSection = document.getElementById(targetId);
-                const pages = Array.from(document.querySelectorAll('.my-page'));
-                const pageIndex = pages.indexOf(targetSection);
-                if (pageIndex !== -1) {
+    document.querySelectorAll('.nav-links a, .footer-links a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const targetId = link.getAttribute('href');
+            if (targetId.startsWith('#')) {
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
                     e.preventDefault();
-                    window.pageFlip.flip(pageIndex);
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
                 }
-            });
+            }
         });
-    }
+    });
 
     /* ===========================
        Random Skill Tag Press

@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
 </head>
 <body>
     <div id="scroll-progress-container" class="scroll-progress-container">
@@ -26,7 +25,7 @@
         <nav class="nav">
             <div class="logo">NL</div>
             <ul class="nav-links">
-                <li><a href="#hero-left">Home</a></li>
+                <li><a href="#hero">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#journey">Journey</a></li>
                 <li><a href="#skills">Skills</a></li>
@@ -42,79 +41,55 @@
         </nav>
     </header>
 
-    <main class="book-container">
-        <div class="book-spine-effect">
-            <div class="grommet"></div>
-            <div class="grommet"></div>
-            <div class="grommet"></div>
-        </div>
-        <div id="book">
-
-        <!-- FRONT COVER -->
-        <section class="page my-page cover-page" data-density="hard">
-            <div class="cover-content">
-                <div class="cover-inner">
-                    <h1 class="cover-title">OUR<br>ADVENTURE<br>BOOK</h1>
-                    <div class="house-badge">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="40" height="40">
-                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- INTRO SPREAD: LEFT -->
-        <section id="hero-left" class="hero section page my-page">
+    <main>
+        <section id="hero" class="hero section page my-page">
             <div class="container hero-grid">
                 <div class="hero-left animate-reveal">
-                    <div class="profile-container" style="margin-top: 20px;">
-                        <div class="speech-bubble">Hi, I'm Nicolaas!</div>
-                        <div class="tape" style="top: -15px; left: 40px; transform: rotate(-10deg);"></div>
-                        <img src="images/myPic.png" alt="Nicolaas Labuschagne" class="profile-img">
-                        <div class="sticker sticker-yellow" style="bottom: -20px; left: -20px; transform: rotate(-5deg);">Full-Stack Dev</div>
+                    <div class="profile-card-tilted">
+                        <div class="speech-bubble-hero">Hi, I'm Nicolaas! 👋</div>
+                        <div class="tape-corner top-left"></div>
+                        <div class="tape-corner bottom-right"></div>
+                        <div class="profile-img-container">
+                            <img src="images/myPic.png" alt="Nicolaas Labuschagne" class="profile-img">
+                        </div>
+                        <div class="sticker sticker-yellow" style="bottom: -15px; right: -15px; transform: rotate(10deg);">Full-Stack Ninja</div>
+                    </div>
+                </div>
+
+                <div class="hero-right">
+                    <div class="hero-greeting animate-reveal">Adventure Awaits!</div>
+                    <h1 class="hero-name animate-reveal">Nicolaas <span class="scribble-underline">Labuschagne</span></h1>
+
+                    <div class="intro-box animate-reveal">
+                        <p class="hero-description">
+                            Based in South Africa, I'm a <span class="highlight">Systems Architect</span> & <span class="highlight">Full-Stack Developer</span>.
+                            I love building scalable distributed systems and immersive digital experiences.
+                        </p>
+
+                        <div class="hero-socials" style="margin-top: 20px;">
+                            <a href="https://github.com/NicolaasLabuschagne" target="_blank" class="social-link"><i class="fa fa-github"></i></a>
+                            <a href="https://linkedin.com/in/nicolaas-labuschagne-919739286" target="_blank" class="social-link"><i class="fa fa-linkedin"></i></a>
+                            <a href="CV/Nicolaas-Labuschagne-CV.pdf" target="_blank" class="social-link"><i class="fa fa-file-pdf-o"></i></a>
+                        </div>
+
+                        <div class="hero-buttons" style="margin-top: 30px;">
+                            <a href="#contact" class="btn btn-primary">Get in Touch!</a>
+                            <div class="coffee-wrapper">
+                                <span class="coffee-text">Buy me a coffee</span>
+                                <img src="images/arrow.png" alt="arrow" class="coffee-arrow" style="width: 40px; filter: invert(var(--invert-amount));">
+                                <a href="https://www.paypal.com/paypalme/NicolaasL" target="_blank" class="btn-coffee-round">☕</a>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="tech-stack-tags animate-reveal stagger-parent" style="margin-top: 40px;">
                         <span class="animate-reveal stagger">Node.js</span>
                         <span class="animate-reveal stagger">React</span>
                         <span class="animate-reveal stagger">Python</span>
+                        <span class="animate-reveal stagger">TypeScript</span>
                         <span class="animate-reveal stagger">Docker</span>
+                        <span class="animate-reveal stagger">Azure</span>
                     </div>
-
-                    <svg class="star-illustation" style="bottom: 10%; right: 10%; transform: rotate(15deg);" viewBox="0 0 24 24">
-                        <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
-                    </svg>
-                </div>
-            </div>
-        </section>
-
-        <!-- INTRO SPREAD: RIGHT -->
-        <section id="hero-right" class="hero section page my-page">
-            <div class="container hero-grid">
-                <div class="hero-right">
-                    <div class="hero-greeting animate-reveal">Adventure Awaits!</div>
-                    <h1 class="hero-name animate-reveal">Nicolaas <span class="scribble-underline">Labuschagne</span></h1>
-                    <div class="sticker sticker-red" style="top: -30px; right: 20px; transform: rotate(10deg);">Systems Architect</div>
-
-                    <p class="hero-description animate-reveal">
-                        Based in South Africa, I craft <span class="highlight">scalable distributed systems</span> and immersive digital journeys.
-                    </p>
-
-                    <div class="hero-socials animate-reveal" style="margin-top: 20px;">
-                        <a href="https://github.com/NicolaasLabuschagne" target="_blank" class="social-link"><i class="fa fa-github"></i></a>
-                        <a href="https://linkedin.com/in/nicolaas-labuschagne-919739286" target="_blank" class="social-link"><i class="fa fa-linkedin"></i></a>
-                        <a href="CV/Nicolaas-Labuschagne-CV.pdf" target="_blank" class="social-link"><i class="fa fa-file-pdf-o"></i></a>
-                    </div>
-
-                    <div class="hero-buttons animate-reveal" style="margin-top: 20px;">
-                        <a href="#contact" class="btn btn-outline">Start Journey</a>
-                    </div>
-
-                    <svg class="star-illustation" style="top: 10%; left: -20px; width: 30px; height: 30px; opacity: 0.5;" viewBox="0 0 24 24">
-                        <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
-                    </svg>
                 </div>
             </div>
         </section>
@@ -316,8 +291,7 @@
                     </div>
                 </div>
             </div>
-        </section>
-        </div>
+            </section>
     </main>
 
     <footer class="footer">
@@ -328,7 +302,7 @@
                     <span class="footer-role">Systems Architect & Full Stack Developer</span>
                 </div>
                 <div class="footer-links">
-                    <a href="#hero-left">Home</a>
+                    <a href="#hero">Home</a>
                     <a href="#about">About</a>
                     <a href="#journey">Journey</a>
                     <a href="#skills">Skills</a>
