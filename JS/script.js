@@ -34,13 +34,22 @@ const sketch = (p) => {
         }
 
         eyes = [];
-        for (let i = 0; i < 20; i++) {
+        const eyeColors = [
+            [255, 255, 0],   // Toxic Yellow
+            [255, 85, 51],   // Toxic Orange/Red
+            [193, 214, 78],  // Moss Green
+            [74, 222, 128]   // Glow Green
+        ];
+
+        for (let i = 0; i < 25; i++) {
             eyes.push({
                 x: p.random(p.width),
                 y: p.random(p.height),
-                size: p.random(2, 6),
-                blinkTimer: p.random(100, 300),
-                isBlinking: false
+                size: p.random(3, 8),
+                blinkTimer: p.random(100, 400),
+                isBlinking: false,
+                color: p.random(eyeColors),
+                eyeGap: p.random(1.2, 2.0)
             });
         }
     }
@@ -56,18 +65,37 @@ const sketch = (p) => {
                 e.blinkTimer--;
                 if (e.blinkTimer <= 0) {
                     if (e.isBlinking) {
-                        e.blinkTimer = p.random(100, 300);
+                        e.blinkTimer = p.random(100, 400);
                         e.isBlinking = false;
                     } else {
-                        e.blinkTimer = p.random(5, 15);
+                        e.blinkTimer = p.random(5, 20);
                         e.isBlinking = true;
                     }
                 }
 
                 if (!e.isBlinking) {
-                    p.fill(255, 255, 0, 150); // Yellow glow eyes
+                    // Pupil tracking
+                    let dx = p.mouseX - e.x;
+                    let dy = p.mouseY - e.y;
+                    let angle = p.atan2(dy, dx);
+                    let dist = p.min(p.dist(p.mouseX, p.mouseY, e.x, e.y), 50);
+                    let pupilOffsetX = p.cos(angle) * (e.size * 0.2);
+                    let pupilOffsetY = p.sin(angle) * (e.size * 0.1);
+
+                    // Draw Outer Glow
+                    p.fill(e.color[0], e.color[1], e.color[2], 50);
+                    p.ellipse(e.x, e.y, e.size * 2, e.size);
+                    p.ellipse(e.x + e.size * e.eyeGap, e.y, e.size * 2, e.size);
+
+                    // Draw Main Eye Color
+                    p.fill(e.color[0], e.color[1], e.color[2], 200);
                     p.ellipse(e.x, e.y, e.size, e.size / 2);
-                    p.ellipse(e.x + e.size * 1.5, e.y, e.size, e.size / 2);
+                    p.ellipse(e.x + e.size * e.eyeGap, e.y, e.size, e.size / 2);
+
+                    // Draw Pupils
+                    p.fill(0, 0, 0, 220);
+                    p.ellipse(e.x + pupilOffsetX, e.y + pupilOffsetY, e.size * 0.4, e.size * 0.3);
+                    p.ellipse(e.x + e.size * e.eyeGap + pupilOffsetX, e.y + pupilOffsetY, e.size * 0.4, e.size * 0.3);
                 }
             });
         }
