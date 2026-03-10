@@ -1,70 +1,5 @@
 
 /* ===========================
-   P5.js Background Sketch
-   =========================== */
-const sketch = (p) => {
-    let symbols = [];
-    // More "Adventure/Scrapbook" style symbols
-    const symbolChars = ['★', '•', '✎', '➤', '❖'];
-    const gridSize = 50;
-
-    p.setup = () => {
-        let canvas = p.createCanvas(p.windowWidth, p.windowHeight);
-        canvas.position(0, 0);
-        canvas.style('z-index', '-1');
-        p.noStroke();
-        p.textFont('Montserrat');
-
-        initSymbols();
-    };
-
-    function initSymbols() {
-        symbols = [];
-        for (let x = 0; x < p.width; x += gridSize) {
-            for (let y = 0; y < p.height; y += gridSize) {
-                symbols.push({
-                    x: x + p.random(-10, 10),
-                    y: y + p.random(-10, 10),
-                    char: p.random(symbolChars),
-                    angle: p.random(p.TWO_PI),
-                    size: p.random(10, 18)
-                });
-            }
-        }
-    }
-
-    p.draw = () => {
-        p.clear();
-
-        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-        // In "Adventure Book" mode, symbols look like faded ink
-        const colorValue = isDark ? 200 : 80;
-
-        symbols.forEach(s => {
-            let dx = p.mouseX - s.x;
-            let dy = p.mouseY - s.y;
-            let dist = p.sqrt(dx*dx + dy*dy);
-            let offset = p.map(p.min(dist, 250), 0, 250, 15, 0);
-
-            p.fill(colorValue, colorValue, colorValue, p.map(p.min(dist, 400), 0, 400, 30, 2));
-            p.textSize(s.size);
-            p.push();
-            p.translate(s.x, s.y);
-            p.rotate(s.angle + dist * 0.002);
-            p.text(s.char, offset, offset);
-            p.pop();
-        });
-    };
-
-    p.windowResized = () => {
-        p.resizeCanvas(p.windowWidth, p.windowHeight);
-        initSymbols();
-    };
-};
-
-new p5(sketch);
-
-/* ===========================
    Intersection Observer for Reveals
    =========================== */
 document.documentElement.classList.add('js-enabled');
@@ -79,20 +14,16 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
-                // Optional: stop observing once revealed
-                // observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
+    const revealElements = document.querySelectorAll('.animate-reveal');
+    revealElements.forEach(el => observer.observe(el));
+
     /* ===========================
        Theme Toggle
        =========================== */
-    /* ===========================
-       Scroll Progress
-       =========================== */
-    const progressBar = document.getElementById('scroll-progress-bar');
-
     const themeToggle = document.getElementById('theme-toggle');
     const currentTheme = localStorage.getItem('theme') || 'light';
 
@@ -100,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
         const icon = themeToggle.querySelector('i');
         if (isDark) {
-            icon.className = 'fa fa-compass'; // Compass for dark mode adventure
+            icon.className = 'fa fa-compass';
         } else {
             icon.className = 'fa fa-bicycle';
         }
@@ -124,68 +55,83 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* ===========================
-       Scroll Progress & Smooth Scroll
+       Book Navigation Logic
        =========================== */
-    window.addEventListener('scroll', () => {
-        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const progress = (window.scrollY / totalHeight) * 100;
-        progressBar.style.width = progress + '%';
+    const pages = document.querySelectorAll('.page');
+    const nextBtn = document.getElementById('next-page');
+    const prevBtn = document.getElementById('prev-page');
+    let currentPageIndex = 0;
+
+    const updatePages = () => {
+        pages.forEach((page, index) => {
+            // Remove previous states
+            page.classList.remove('active', 'flipped');
+
+            if (index === currentPageIndex) {
+                page.classList.add('active');
+            } else if (index < currentPageIndex) {
+                page.classList.add('flipped');
+            }
+        });
+
+        // Disable buttons at ends
+        prevBtn.disabled = (currentPageIndex === 0);
+        nextBtn.disabled = (currentPageIndex === pages.length - 1);
+        prevBtn.style.opacity = prevBtn.disabled ? '0.5' : '1';
+        nextBtn.style.opacity = nextBtn.disabled ? '0.5' : '1';
+
+        // Re-initialize map if on the map page
+        const mapPage = document.getElementById('page-map');
+        if (mapPage && mapPage.classList.contains('active')) {
+            setTimeout(() => {
+                if (window.portfolioMap) {
+                    window.portfolioMap.invalidateSize();
+                }
+            }, 800);
+        }
+
+        // Trigger animations for new page
+        const activePageReveals = pages[currentPageIndex].querySelectorAll('.animate-reveal');
+        activePageReveals.forEach(el => el.classList.add('active'));
+    };
+
+    nextBtn.addEventListener('click', () => {
+        if (currentPageIndex < pages.length - 1) {
+            currentPageIndex++;
+            updatePages();
+        }
     });
 
-    document.querySelectorAll('.nav-links a, .footer-links a').forEach(link => {
+    prevBtn.addEventListener('click', () => {
+        if (currentPageIndex > 0) {
+            currentPageIndex--;
+            updatePages();
+        }
+    });
+
+    // Nav link clicks to jump to pages
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
         link.addEventListener('click', (e) => {
-            const targetId = link.getAttribute('href');
-            if (targetId.startsWith('#')) {
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    e.preventDefault();
-                    targetElement.scrollIntoView({ behavior: 'smooth' });
+            const targetId = link.getAttribute('href').substring(1);
+            const targetPage = document.getElementById('page-' + targetId);
+            if (targetPage) {
+                e.preventDefault();
+                const pageIndex = Array.from(pages).indexOf(targetPage);
+                if (pageIndex !== -1) {
+                    currentPageIndex = pageIndex;
+                    updatePages();
                 }
             }
         });
     });
 
     /* ===========================
-       Random Skill Tag Press
-       =========================== */
-    const skillTags = document.querySelectorAll('.tags span');
-    const stickerColors = ['var(--success-color)', 'var(--danger-color)', 'var(--info-color)', 'var(--primary-color)', 'var(--secondary-color)'];
-    if (skillTags.length > 0) {
-        setInterval(() => {
-            const randomTag = skillTags[Math.floor(Math.random() * skillTags.length)];
-            const randomColor = stickerColors[Math.floor(Math.random() * stickerColors.length)];
-
-            randomTag.style.transform = 'translate(4px, 4px)';
-            randomTag.style.boxShadow = '0px 0px 0px 0px var(--border-color)';
-            randomTag.style.backgroundColor = randomColor;
-
-            setTimeout(() => {
-                randomTag.style.transform = '';
-                randomTag.style.boxShadow = '';
-                randomTag.style.backgroundColor = '';
-            }, 500);
-        }, 3000);
-    }
-
-    /* ===========================
-       Highlight Animation Observer
-       =========================== */
-    const highlightObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-            }
-        });
-    }, { threshold: 0.5 });
-
-    document.querySelectorAll('.highlight').forEach(h => highlightObserver.observe(h));
-
-    /* ===========================
        Interactive Map
        =========================== */
     const mapElement = document.getElementById('map');
     if (mapElement) {
-        const map = L.map('map').setView([-25.864, 28.188], 10); // Centered on Centurion
+        const map = L.map('map').setView([-25.864, 28.188], 10);
+        window.portfolioMap = map;
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap contributors'
@@ -209,44 +155,82 @@ document.addEventListener('DOMContentLoaded', () => {
                 .addTo(map)
                 .bindPopup(`<b>${loc.title}</b><br>${loc.desc}`);
         });
-
-        // Handle theme changes for map
-        const updateMapTheme = () => {
-            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-            // Leaflet doesn't have a native "dark mode", we use CSS filters in style.css
-        };
-        updateMapTheme();
-        themeToggle.addEventListener('click', updateMapTheme);
     }
 
-    const revealElements = document.querySelectorAll('.animate-reveal');
-    revealElements.forEach((el, index) => {
-        // Add staggering delay if it's part of a group
-        if (el.classList.contains('stagger')) {
-            const parent = el.closest('.stagger-parent');
-            if (parent) {
-                const items = Array.from(parent.querySelectorAll('.stagger'));
-                const itemIndex = items.indexOf(el);
-                el.style.transitionDelay = `${itemIndex * 0.1}s`;
+    /* ===========================
+       Random Skill Tag Press
+       =========================== */
+    const skillTags = document.querySelectorAll('.tags span');
+    const stickerColors = ['var(--success-color)', 'var(--error-color)', 'var(--info-color)', 'var(--primary-color)', 'var(--purple-color)'];
+    if (skillTags.length > 0) {
+        setInterval(() => {
+            const randomTag = skillTags[Math.floor(Math.random() * skillTags.length)];
+            const randomColor = stickerColors[Math.floor(Math.random() * stickerColors.length)];
+
+            randomTag.style.transform = 'translate(4px, 4px)';
+            randomTag.style.boxShadow = '0px 0px 0px 0px var(--border-color)';
+            randomTag.style.backgroundColor = randomColor;
+
+            setTimeout(() => {
+                randomTag.style.transform = '';
+                randomTag.style.boxShadow = '';
+                randomTag.style.backgroundColor = '';
+            }, 500);
+        }, 3000);
+    }
+
+    // Initial state
+    updatePages();
+});
+
+/* ===========================
+   p5.js Architectural Sketch
+   =========================== */
+let sketch = (p) => {
+    let symbols = ['+', '-', '•', '/', '×'];
+    let spacing = 40;
+
+    p.setup = () => {
+        let canvas = p.createCanvas(p.windowWidth, p.windowHeight);
+        canvas.position(0, 0);
+        canvas.style('z-index', '1');
+        canvas.style('pointer-events', 'none');
+        canvas.style('opacity', '0.3');
+        p.noFill();
+    };
+
+    p.draw = () => {
+        p.clear();
+
+        // Get theme colors
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        p.stroke(isDark ? 255 : 0);
+        p.strokeWeight(1);
+
+        for (let x = spacing / 2; x < p.width; x += spacing) {
+            for (let y = spacing / 2; y < p.height; y += spacing) {
+                // Subtle interaction with mouse
+                let d = p.dist(p.mouseX, p.mouseY, x, y);
+                if (d < 150) {
+                    let angle = p.map(d, 0, 150, p.TWO_PI, 0);
+                    p.push();
+                    p.translate(x, y);
+                    p.rotate(angle);
+                    let symbol = symbols[Math.floor((x + y) / spacing) % symbols.length];
+                    p.textAlign(p.CENTER, p.CENTER);
+                    p.textSize(12);
+                    p.text(symbol, 0, 0);
+                    p.pop();
+                } else {
+                    p.point(x, y);
+                }
             }
         }
-        observer.observe(el);
-    });
+    };
 
-    /* ===========================
-       Sticky Header
-       =========================== */
-    const header = document.querySelector('.header');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.style.top = '10px';
-        } else {
-            header.style.top = '20px';
-        }
-    });
+    p.windowResized = () => {
+        p.resizeCanvas(p.windowWidth, p.windowHeight);
+    };
+};
 
-    /* ===========================
-       Smooth Scrolling for Nav Links
-       =========================== */
-    // Handled by StPageFlip link overrides above
-});
+new p5(sketch);

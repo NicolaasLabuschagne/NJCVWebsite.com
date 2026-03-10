@@ -23,7 +23,7 @@
 
     <header class="header">
         <nav class="nav">
-            <div class="logo">NL</div>
+            <div class="logo"><a href="#hero" style="text-decoration: none; color: inherit;">NL</a></div>
             <ul class="nav-links">
                 <li><a href="#hero">Home</a></li>
                 <li><a href="#about">About</a></li>
@@ -41,257 +41,236 @@
         </nav>
     </header>
 
-    <main>
-        <section id="hero" class="hero section page my-page">
-            <div class="container hero-grid">
-                <div class="hero-left animate-reveal">
-                    <div class="profile-card-tilted">
-                        <div class="speech-bubble-hero">Hi, I'm Nicolaas! 👋</div>
-                        <div class="tape-corner top-left"></div>
-                        <div class="tape-corner bottom-right"></div>
-                        <div class="profile-img-container">
-                            <img src="images/myPic.png" alt="Nicolaas Labuschagne" class="profile-img">
-                        </div>
-                        <div class="sticker sticker-yellow" style="bottom: -15px; right: -15px; transform: rotate(10deg);">Full-Stack Ninja</div>
-                    </div>
-                </div>
+    <main class="desk-scene">
+        <div class="table-top"></div>
 
-                <div class="hero-right">
-                    <div class="hero-greeting animate-reveal">Adventure Awaits!</div>
-                    <h1 class="hero-name animate-reveal">Nicolaas <span class="scribble-underline">Labuschagne</span></h1>
-
-                    <div class="intro-box animate-reveal">
-                        <p class="hero-description">
-                            Based in South Africa, I'm a <span class="highlight">Systems Architect</span> & <span class="highlight">Full-Stack Developer</span>.
-                            I love building scalable distributed systems and immersive digital experiences.
-                        </p>
-
-                        <div class="hero-socials" style="margin-top: 20px;">
-                            <a href="https://github.com/NicolaasLabuschagne" target="_blank" class="social-link"><i class="fa fa-github"></i></a>
-                            <a href="https://linkedin.com/in/nicolaas-labuschagne-919739286" target="_blank" class="social-link"><i class="fa fa-linkedin"></i></a>
-                            <a href="CV/Nicolaas-Labuschagne-CV.pdf" target="_blank" class="social-link"><i class="fa fa-file-pdf-o"></i></a>
-                        </div>
-
-                        <div class="hero-buttons" style="margin-top: 30px;">
-                            <a href="#contact" class="btn btn-primary">Get in Touch!</a>
-                            <div class="coffee-wrapper">
-                                <span class="coffee-text">Buy me a coffee</span>
-                                <img src="images/arrow.png" alt="arrow" class="coffee-arrow" style="width: 40px; filter: invert(var(--invert-amount));">
-                                <a href="https://www.paypal.com/paypalme/NicolaasL" target="_blank" class="btn-coffee-round">☕</a>
+        <div class="book-container">
+            <div class="book" id="portfolio-book">
+                <!-- Page 1: Hero -->
+                <div class="page" id="page-hero">
+                    <div class="page-left"></div>
+                    <div class="page-right">
+                        <section id="hero" class="hero-content">
+                            <div class="hero-grid">
+                                <div class="hero-left animate-reveal">
+                                    <div class="profile-card-tilted">
+                                        <div class="speech-bubble-hero">Hi, I'm Nicolaas! 👋</div>
+                                        <div class="tape-corner top-left"></div>
+                                        <div class="tape-corner bottom-right"></div>
+                                        <div class="profile-img-container">
+                                            <img src="images/myPic.png" alt="Nicolaas Labuschagne" class="profile-img">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hero-right">
+                                    <div class="hero-greeting animate-reveal">Adventure Awaits!</div>
+                                    <h1 class="hero-name animate-reveal">Nicolaas <span class="scribble-underline">Labuschagne</span></h1>
+                                    <div class="intro-box animate-reveal">
+                                        <p class="hero-description">
+                                            Based in South Africa, I'm a <span class="highlight">Systems Architect</span> & <span class="highlight">Full-Stack Developer</span>.
+                                            I love building scalable distributed systems and immersive digital experiences.
+                                        </p>
+                                        <div class="hero-socials">
+                                            <a href="https://github.com/NicolaasLabuschagne" target="_blank" class="social-link"><i class="fa fa-github"></i></a>
+                                            <a href="https://linkedin.com/in/nicolaas-labuschagne-919739286" target="_blank" class="social-link"><i class="fa fa-linkedin"></i></a>
+                                            <a href="CV/Nicolaas-Labuschagne-CV.pdf" target="_blank" class="social-link"><i class="fa fa-file-pdf-o"></i></a>
+                                        </div>
+                                        <div class="hero-buttons">
+                                            <a href="#contact" class="btn btn-primary">Get in Touch!</a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </section>
                     </div>
+                </div>
 
-                    <div class="tech-stack-tags animate-reveal stagger-parent" style="margin-top: 40px;">
-                        <span class="animate-reveal stagger">Node.js</span>
-                        <span class="animate-reveal stagger">React</span>
-                        <span class="animate-reveal stagger">Python</span>
-                        <span class="animate-reveal stagger">TypeScript</span>
-                        <span class="animate-reveal stagger">Docker</span>
-                        <span class="animate-reveal stagger">Azure</span>
+                <!-- Page 2: About -->
+                <div class="page" id="page-about">
+                    <div class="page-left"></div>
+                    <div class="page-right">
+                        <section id="about" class="section-container">
+                            <h2 class="section-title animate-reveal">ABOUT</h2>
+                            <div class="about-content animate-reveal">
+                                <p>Highly experienced and dynamic <span class="hand-drawn-circle">systems architect</span> & software engineer with a passion for <span class="highlight">designing</span> and constructing <span class="highlight">scalable distributed systems</span> and immersive web experiences.</p>
+                                <p>When I'm not <span class="highlight">architecting systems</span> or coding, you'll find me on my bike exploring the roads of <span class="highlight">South Africa</span>. I'm an amateur cyclist with a professional's drive, and a <span class="highlight">lifelong learner</span> of business and psychology.</p>
+                                <div class="current-reads" style="margin-top: 20px;">
+                                    <span style="font-weight: 800;">Currently reading:</span>
+                                    <div class="tags" style="margin-top: 10px;">
+                                        <span title="The Psychology of Money">Psychology of Money 📚</span>
+                                        <span title="Rich Dad Poor Dad">Rich Dad Poor Dad 💰</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <!-- Page 3: Journey -->
+                <div class="page" id="page-journey">
+                    <div class="page-left"></div>
+                    <div class="page-right">
+                        <section id="journey" class="section-container">
+                            <h2 class="section-title animate-reveal">My Journey</h2>
+                            <div class="timeline animate-reveal">
+                                <div class="timeline-item">
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content">
+                                        <h3>Systems Architect @ Estate Recoveries</h3>
+                                        <span class="timeline-date">Nov 2023 - Present</span>
+                                        <p>Designing and building high-performance systems for debt recovery and property management. Implementing microservices and automated escalation flows.</p>
+                                        <span class="timeline-location">Centurion, South Africa</span>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content">
+                                        <h3>Full Stack Developer @ Freelance</h3>
+                                        <span class="timeline-date">Jan 2021 - Oct 2023</span>
+                                        <p>Delivered custom web applications and automation tools for diverse clients. Focused on React, Node.js, and cloud integrations.</p>
+                                        <span class="timeline-location">Remote</span>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content">
+                                        <h3>Lead Developer @ Creative Minds</h3>
+                                        <span class="timeline-date">Mar 2018 - Dec 2020</span>
+                                        <p>Led a team of developers in building interactive marketing platforms and cinematic web experiences. Optimized rendering pipelines.</p>
+                                        <span class="timeline-location">Johannesburg, South Africa</span>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content">
+                                        <h3>Junior Software Engineer @ Tech Innovations</h3>
+                                        <span class="timeline-date">Jan 2016 - Feb 2018</span>
+                                        <p>Developed core backend services and participated in the full software development lifecycle. Specialized in SQL optimization and API design.</p>
+                                        <span class="timeline-location">Pretoria, South Africa</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <!-- Page 4: Skills -->
+                <div class="page" id="page-skills">
+                    <div class="page-left"></div>
+                    <div class="page-right">
+                        <section id="skills" class="section-container">
+                            <h2 class="section-title animate-reveal">SKILLS</h2>
+                            <div class="skills-grid animate-reveal">
+                                <div class="skills-category">
+                                    <h3>Frontend</h3>
+                                    <div class="tags">
+                                        <span>Angular</span><span>React.js</span><span>Redux</span><span>Material-UI</span><span>Ionic</span>
+                                    </div>
+                                </div>
+                                <div class="skills-category">
+                                    <h3>Languages</h3>
+                                    <div class="tags">
+                                        <span>JavaScript</span><span>TypeScript</span><span>Python</span><span>C#</span><span>SQL</span><span>HTML</span><span>CSS</span>
+                                    </div>
+                                </div>
+                                <div class="skills-category">
+                                    <h3>Backend</h3>
+                                    <div class="tags">
+                                        <span>Node.js</span><span>Express.js</span><span>ASP.NET Core</span><span>ABP Framework</span>
+                                    </div>
+                                </div>
+                                <div class="skills-category">
+                                    <h3>Cloud & DevOps</h3>
+                                    <div class="tags">
+                                        <span>Docker</span><span>Kubernetes</span><span>Azure</span><span>CI/CD</span><span>Terraform</span>
+                                    </div>
+                                </div>
+                                <div class="skills-category">
+                                    <h3>Databases</h3>
+                                    <div class="tags">
+                                        <span>PostgreSQL</span><span>MySQL</span><span>SQL Server</span><span>Redis</span><span>MongoDB</span>
+                                    </div>
+                                </div>
+                                <div class="skills-category">
+                                    <h3>Architecture</h3>
+                                    <div class="tags">
+                                        <span>Microservices</span><span>SaaS</span><span>Event-Driven</span><span>Domain-Driven Design</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <!-- Page 5: Map -->
+                <div class="page" id="page-map">
+                    <div class="page-left"></div>
+                    <div class="page-right">
+                        <section id="experience-map" class="section-container">
+                            <h2 class="section-title animate-reveal">Global Reach</h2>
+                            <div id="map" class="map-box animate-reveal" style="height: 400px;"></div>
+                        </section>
+                    </div>
+                </div>
+
+                <!-- Page 6: Education & Languages -->
+                <div class="page" id="page-education">
+                    <div class="page-left"></div>
+                    <div class="page-right">
+                        <section id="education" class="section-container">
+                            <h2 class="section-title animate-reveal">Education</h2>
+                            <div class="education-card animate-reveal">
+                                <h3>BSc in Information Technology</h3>
+                                <p class="school-name">University of South Africa</p>
+                                <span class="badge">2012 - 2015</span>
+                                <p style="margin-top: 10px;">Specialized in Software Engineering and Systems Architecture.</p>
+                            </div>
+                            <h2 class="section-title animate-reveal" style="margin-top: 40px;">Languages</h2>
+                            <div class="languages-grid animate-reveal">
+                                <div class="language-item">
+                                    <span class="lang-name">English</span>
+                                    <div class="lang-stars">
+                                        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+                                    </div>
+                                </div>
+                                <div class="language-item">
+                                    <span class="lang-name">Afrikaans</span>
+                                    <div class="lang-stars">
+                                        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <!-- Page 7: Contact -->
+                <div class="page" id="page-contact">
+                    <div class="page-left"></div>
+                    <div class="page-right">
+                        <section id="contact" class="section-container">
+                            <div class="contact-box animate-reveal">
+                                <h2 class="section-title">Get in Touch!</h2>
+                                <p>Ready to start a new project together?</p>
+                                <div class="contact-links">
+                                    <a href="https://linkedin.com/in/nicolaas-labuschagne-919739286" target="_blank"><i class="fa fa-linkedin"></i></a>
+                                    <a href="https://github.com/NicolaasLabuschagne" target="_blank"><i class="fa fa-github"></i></a>
+                                    <a href="mailto:NJ.Labuschagne@outlook.com"><i class="fa fa-envelope"></i></a>
+                                </div>
+                                <div class="contact-cta" style="margin-top: 30px;">
+                                    <a href="mailto:NJ.Labuschagne@outlook.com" class="btn btn-primary">HIRE ME!</a>
+                                </div>
+                            </div>
+                        </section>
                     </div>
                 </div>
             </div>
-        </section>
 
-
-        <section id="about" class="about section page my-page">
-            <div class="container section-container">
-                <div class="sticker sticker-blue" style="top: 100px; right: 50px; transform: rotate(-15deg);">Cyclist 🚴‍♂️</div>
-                <div class="sticker sticker-lime" style="bottom: 50px; left: -20px; transform: rotate(10deg);">Business Minded 📈</div>
-                <svg class="star-illustation" style="top: -20px; right: 10%; fill: var(--purple-color);" viewBox="0 0 24 24">
-                    <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
-                </svg>
-                <svg class="blob-bg blob-1" viewBox="0 0 200 200">
-                    <path d="M45,-60.1C58.1,-52.1,68.3,-38.4,73.4,-23.4C78.4,-8.4,78.2,7.9,73.1,22.8C68.1,37.6,58.2,50.9,45.3,60.1C32.4,69.4,16.2,74.5,0.7,73.6C-14.8,72.7,-29.6,65.8,-42.2,56C-54.8,46.1,-65.2,33.3,-69.5,18.9C-73.8,4.5,-72,-11.4,-65.3,-25.2C-58.7,-39,-47.2,-50.8,-34.1,-58.8C-21,-66.8,-10.5,-71.1,2.8,-74.9C16.1,-78.8,31.9,-68.2,45,-60.1Z" transform="translate(100 100)" />
-                </svg>
-                <h2 class="section-title animate-reveal">ABOUT</h2>
-                <div class="about-content animate-reveal">
-                    <p>Highly experienced and dynamic <span class="hand-drawn-circle">systems architect</span> & software engineer with a passion for <span class="highlight">designing</span> and constructing <span class="highlight">scalable distributed systems</span> and immersive web experiences.</p>
-                    <p>When I'm not <span class="highlight">architecting systems</span> or coding, you'll find me on my bike exploring the roads of <span class="highlight">South Africa</span> or deep into a book. I'm an amateur cyclist with a professional's drive, and a <span class="highlight">lifelong learner</span> of business and psychology.</p>
-
-                    <div class="current-reads" style="margin-top: 40px; display: flex; gap: 20px; align-items: center;">
-                        <span style="font-weight: 800; font-size: 1.1rem;">Currently reading:</span>
-                        <div class="tags">
-                            <span title="The Psychology of Money">Psychology of Money 📚</span>
-                            <span title="Rich Dad Poor Dad">Rich Dad Poor Dad 💰</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="book-nav">
+                <button id="prev-page" class="btn btn-primary"><i class="fa fa-chevron-left"></i> Prev</button>
+                <button id="next-page" class="btn btn-primary">Next <i class="fa fa-chevron-right"></i></button>
             </div>
-            <svg class="wavy-divider" viewBox="0 0 1440 40" preserveAspectRatio="none">
-                <path d="M0,20 Q360,40 720,20 T1440,20 L1440,40 L0,40 Z" fill="#f8fafc"></path>
-            </svg>
-        </section>
-
-        <section id="journey" class="journey section page my-page">
-            <div class="container section-container">
-                <!-- Technical Callout -->
-                <div style="position: absolute; top: -40px; right: 20%; font-family: monospace; font-size: 10px; border: 1px solid var(--border-color); padding: 5px; background: var(--bg-color); color: var(--text-color); transform: rotate(2deg);">
-                    REF_ID: 2026_TIMELINE<br>
-                    SCALE: 1:100<br>
-                    STATUS: ACTIVE
-                </div>
-                <div class="sticker sticker-blue" style="top: 0; right: 20px; transform: rotate(15deg);">Experience</div>
-                <h2 class="section-title animate-reveal">My Journey</h2>
-                <div class="timeline animate-reveal">
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <div class="tape" style="top: -10px; left: 20px; width: 60px;"></div>
-                            <h3>Systems Architect @ Estate Recoveries</h3>
-                            <span class="timeline-date">Nov 2023 - Present</span>
-                            <p>Designing and building high-performance systems for debt recovery and property management. Implementing microservices and automated escalation flows.</p>
-                            <span class="timeline-location">Centurion, South Africa</span>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <h3>Full Stack Developer @ Freelance</h3>
-                            <span class="timeline-date">Jan 2021 - Oct 2023</span>
-                            <p>Delivered custom web applications and automation tools for diverse clients. Focused on React, Node.js, and cloud integrations.</p>
-                            <span class="timeline-location">Remote</span>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <h3>Lead Developer @ Creative Minds</h3>
-                            <span class="timeline-date">Mar 2018 - Dec 2020</span>
-                            <p>Led a team of developers in building interactive marketing platforms and cinematic web experiences. Optimized rendering pipelines and state management.</p>
-                            <span class="timeline-location">Johannesburg, South Africa</span>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <h3>Junior Software Engineer @ Tech Innovations</h3>
-                            <span class="timeline-date">Jan 2016 - Feb 2018</span>
-                            <p>Developed core backend services and participated in the full software development lifecycle. Specialized in SQL optimization and API design.</p>
-                            <span class="timeline-location">Pretoria, South Africa</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <svg class="wavy-divider" viewBox="0 0 1440 40" preserveAspectRatio="none">
-                <path d="M0,20 Q360,40 720,20 T1440,20 L1440,40 L0,40 Z" fill="white"></path>
-            </svg>
-        </section>
-
-        <section id="skills" class="skills section page my-page">
-            <div class="container section-container">
-                <div class="sticker sticker-yellow" style="top: -30px; left: 150px; transform: rotate(-5deg);">Tools</div>
-                <svg class="blob-bg blob-2" viewBox="0 0 200 200">
-                    <path d="M40.3,-64.1C52.7,-58.5,63.6,-48.5,70.1,-36.3C76.6,-24.2,78.7,-9.9,76.7,3.9C74.6,17.7,68.4,30.9,59.3,42.4C50.1,53.8,38.1,63.4,24.5,69C10.9,74.6,-4.3,76.2,-19.1,72.9C-33.8,69.6,-48,61.4,-59.4,50C-70.8,38.5,-79.3,23.8,-81.9,8.2C-84.5,-7.4,-81.1,-24,-72.1,-37.6C-63,-51.2,-48.4,-61.7,-34.1,-66.3C-19.8,-70.9,-5.8,-69.6,7.2,-68.3C20.3,-67.1,33.7,-65.9,40.3,-64.1Z" transform="translate(100 100)" />
-                </svg>
-                <h2 class="section-title animate-reveal">SKILLS</h2>
-                <div class="skills-grid animate-reveal stagger-parent">
-                    <div class="skills-category animate-reveal stagger">
-                        <h3>Frontend</h3>
-                        <div class="tags">
-                            <span>Angular</span><span>React.js</span><span>Redux</span><span>Material-UI</span><span>Ionic</span>
-                        </div>
-                    </div>
-                    <div class="skills-category animate-reveal stagger">
-                        <h3>Languages</h3>
-                        <div class="tags">
-                            <span>JavaScript</span><span>TypeScript</span><span>Python</span><span>C#</span><span>SQL</span><span>HTML</span><span>CSS</span>
-                        </div>
-                    </div>
-                    <div class="skills-category animate-reveal stagger">
-                        <h3>Backend</h3>
-                        <div class="tags">
-                            <span>Node.js</span><span>Express.js</span><span>ASP.NET Core</span><span>ABP Framework</span>
-                        </div>
-                    </div>
-                    <div class="skills-category animate-reveal stagger">
-                        <h3>Cloud & DevOps</h3>
-                        <div class="tags">
-                            <span>Docker</span><span>Kubernetes</span><span>Azure</span><span>CI/CD</span><span>Terraform</span>
-                        </div>
-                    </div>
-                    <div class="skills-category animate-reveal stagger">
-                        <h3>Databases</h3>
-                        <div class="tags">
-                            <span>PostgreSQL</span><span>MySQL</span><span>SQL Server</span><span>Redis</span><span>MongoDB</span>
-                        </div>
-                    </div>
-                    <div class="skills-category animate-reveal stagger">
-                        <h3>Architecture</h3>
-                        <div class="tags">
-                            <span>Microservices</span><span>SaaS</span><span>Event-Driven</span><span>Domain-Driven Design</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="experience-map" class="experience-map section page my-page">
-            <div class="container section-container">
-                <div class="sticker sticker-red" style="top: -20px; right: 50px; transform: rotate(5deg);">Work Locations</div>
-                <h2 class="section-title animate-reveal">Global Reach</h2>
-                <div id="map" class="map-box animate-reveal"></div>
-            </div>
-        </section>
-
-        <section id="education" class="education section page my-page">
-            <div class="container section-container">
-                <div class="sticker sticker-purple" style="top: -30px; left: 100px; transform: rotate(-10deg);">Academic</div>
-                <h2 class="section-title animate-reveal">Education</h2>
-                <div class="education-grid animate-reveal">
-                    <div class="education-card">
-                        <div class="education-header">
-                            <h3>BSc in Information Technology</h3>
-                            <span class="badge">2012 - 2015</span>
-                        </div>
-                        <p class="school-name">University of South Africa</p>
-                        <p>Specialized in Software Engineering and Systems Architecture.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="languages" class="languages section page my-page">
-            <div class="container section-container">
-                <div class="sticker sticker-lime" style="bottom: -20px; right: 80px; transform: rotate(15deg);">Communication</div>
-                <h2 class="section-title animate-reveal">Languages</h2>
-                <div class="languages-grid animate-reveal">
-                    <div class="language-item">
-                        <span class="lang-name">English</span>
-                        <div class="lang-stars">
-                            <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-                        </div>
-                    </div>
-                    <div class="language-item">
-                        <span class="lang-name">Afrikaans</span>
-                        <div class="lang-stars">
-                            <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="contact section page my-page" data-density="hard">
-            <div class="container">
-                <div class="contact-box animate-reveal">
-                    <svg class="star-illustation" style="top: -25px; left: -25px; transform: rotate(-10deg);" viewBox="0 0 24 24">
-                        <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
-                    </svg>
-                    <h2 class="section-title">Adventure is Out There!</h2>
-                    <p>Ready to start a new project together?</p>
-                    <div class="contact-links">
-                        <a href="https://linkedin.com/in/nicolaas-labuschagne-919739286" target="_blank"><i class="fa fa-linkedin"></i></a>
-                        <a href="https://github.com/NicolaasLabuschagne" target="_blank"><i class="fa fa-github"></i></a>
-                        <a href="mailto:NJ.Labuschagne@outlook.com"><i class="fa fa-envelope"></i></a>
-                    </div>
-                    <div class="contact-cta">
-                        <a href="mailto:NJ.Labuschagne@outlook.com" class="btn btn-primary">HIRE ME!</a>
-                    </div>
-                </div>
-            </div>
-            </section>
+        </div>
     </main>
 
     <footer class="footer">
@@ -306,7 +285,6 @@
                     <a href="#about">About</a>
                     <a href="#journey">Journey</a>
                     <a href="#skills">Skills</a>
-                    <a href="#experience-map">Map</a>
                 </div>
                 <div class="footer-copy">
                     &copy; 2026 Nicolaas Labuschagne
