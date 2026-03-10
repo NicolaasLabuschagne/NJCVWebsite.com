@@ -11,8 +11,11 @@ const sketch = (p) => {
 
     p.setup = () => {
         let canvas = p.createCanvas(p.windowWidth, p.windowHeight);
-        canvas.position(0, 0);
-        canvas.style('z-index', '-1');
+        canvas.style('position', 'fixed');
+        canvas.style('top', '0');
+        canvas.style('left', '0');
+        canvas.style('z-index', '100');
+        canvas.style('pointer-events', 'none');
         p.noStroke();
         p.textFont('Montserrat');
 
@@ -62,6 +65,10 @@ const sketch = (p) => {
         if (isDark) {
             // Blinking Eyes in the dark
             eyes.forEach(e => {
+                // Adjust position based on window scroll to appear stationary in the viewport
+                // But since canvas is position: fixed, we don't need to add scrollY
+                // BUT p5 mouseX/mouseY are relative to the canvas (viewport)
+
                 e.blinkTimer--;
                 if (e.blinkTimer <= 0) {
                     if (e.isBlinking) {
