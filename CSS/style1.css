@@ -2,43 +2,43 @@
    Design Tokens
    =========================== */
 :root {
-    --bg-color: #fdfcf0; /* Parchment cream */
-    --bg-color-rgb: 253, 252, 240;
-    --secondary-bg: #fcfaf2;
+    --bg-color: #2b3d2b; /* Murky swamp green */
+    --bg-color-rgb: 43, 61, 43;
+    --secondary-bg: #1e2b1e;
 
-    --primary-color: #d4af37; /* Gold */
-    --primary-color-rgb: 212, 175, 55;
+    --primary-color: #c1d64e; /* Toxic moss green */
+    --primary-color-rgb: 193, 214, 78;
 
-    --accent-color: #5d4037; /* Leather Brown */
+    --accent-color: #5d4037; /* Muddy Brown */
     --accent-color-rgb: 93, 64, 55;
 
-    --success-color: #7bc07e; /* Sage Green (reused) */
-    --error-color: #b71c1c; /* Adventure Red */
+    --success-color: #88cc88; /* Swamp Green */
+    --error-color: #ff5533; /* Toxic Orange */
     --info-color: #38bdf8; /* Blue */
     --purple-color: #c084fc;
     --secondary-color: #94a3b8; /* Slate */
 
-    --text-color: #2c1e1a; /* Dark Brown for text */
-    --text-dim: #5d4037;
+    --text-color: #fdfcf0; /* Light parchment for contrast */
+    --text-dim: #a8a8a8;
 
-    --border-color: #2c1e1a;
+    --border-color: #1a241a;
     --invert-amount: 0;
 
-    --spine-color: #b71c1c;
+    --spine-color: #3e5c3e;
 }
 
 [data-theme="dark"] {
-    --bg-color: #0d0d0d; /* Deep forest night */
-    --bg-color-rgb: 13, 13, 13;
-    --secondary-bg: #1a1a1a;
+    --bg-color: #0a0f0a; /* Midnight swamp */
+    --bg-color-rgb: 10, 15, 10;
+    --secondary-bg: #121a12;
 
     --text-color: #e0e0e0;
-    --text-dim: #a0a0a0;
+    --text-dim: #888888;
 
-    --border-color: #333333;
+    --border-color: #000000;
     --invert-amount: 1;
 
-    --primary-color: #4ade80; /* Glow green for night mode */
+    --primary-color: #4ade80; /* Glow green */
     --spine-color: #000000;
     --accent-color: #1a1a1a;
 }
@@ -51,10 +51,36 @@
 }
 
 [data-theme="dark"] .my-page {
-    background-color: #121212;
+    background-color: #050805;
     background-image: none;
-    box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.8);
-    color: #e0e0e0;
+    box-shadow: inset 0 0 100px rgba(0, 0, 0, 1);
+    color: var(--primary-color);
+    text-shadow: 0 0 5px rgba(var(--primary-color-rgb), 0.5);
+}
+
+[data-theme="dark"] .section-title,
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3 {
+    color: var(--primary-color);
+    text-shadow: 0 0 10px var(--primary-color), 0 0 20px rgba(var(--primary-color-rgb), 0.3);
+}
+
+[data-theme="dark"] .intro-box,
+[data-theme="dark"] .skills-category,
+[data-theme="dark"] .education-card,
+[data-theme="dark"] .contact-box,
+[data-theme="dark"] .timeline-content,
+[data-theme="dark"] .nav {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 15px var(--primary-color), inset 0 0 5px var(--primary-color);
+}
+
+[data-theme="dark"] .btn,
+[data-theme="dark"] .social-link,
+[data-theme="dark"] .tags span {
+    border-color: var(--primary-color);
+    box-shadow: 4px 4px 0px 0px #000, 0 0 10px var(--primary-color);
 }
 
 [data-theme="dark"] .highlight {
@@ -106,8 +132,8 @@ body::after {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3%3Ffilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.15; /* Increased for swampy grunge */
     pointer-events: none;
     z-index: 9999;
 }
@@ -115,7 +141,7 @@ body::after {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 40px;
+    padding: 0 50px;
 }
 
 /* ===========================
@@ -259,31 +285,37 @@ body::after {
     flex-direction: column;
     justify-content: center;
     position: relative;
-    padding: 100px 40px;
+    padding: 120px 0;
 }
 
 .hero-grid {
     display: grid;
     grid-template-columns: 1fr 1.2fr;
-    gap: 80px;
+    gap: 100px;
     align-items: center;
     width: 100%;
+    margin-top: 60px;
 }
 
 .hero-left, .hero-right {
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .profile-card-tilted {
     position: relative;
-    width: 400px;
-    height: 500px;
+    width: 100%; /* More responsive */
+    max-width: 400px;
+    height: auto;
+    aspect-ratio: 4 / 5;
     background: #fff;
     padding: 20px 20px 80px 20px;
     border: 1px solid #ddd;
     box-shadow: 15px 15px 40px rgba(0,0,0,0.1);
     transform: rotate(-3deg);
     transition: transform 0.3s ease;
+    align-self: center;
 }
 
 .profile-card-tilted:hover {
@@ -453,9 +485,11 @@ body::after {
 
 .hero-buttons {
     display: flex;
-    gap: 20px;
+    gap: 40px;
     align-items: center;
     justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-top: 40px;
 }
 
 .btn {
@@ -489,49 +523,74 @@ body::after {
 }
 
 .coffee-wrapper {
-    position: relative;
     display: flex;
     align-items: center;
+    gap: 20px;
+    position: relative;
 }
 
 .coffee-text {
-    position: absolute;
-    top: -45px;
-    left: -10px;
     font-family: 'Caveat', cursive;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: 700;
-    transform: rotate(-10deg);
     white-space: nowrap;
+    color: var(--primary-color);
+    transform: rotate(-2deg);
 }
 
 .coffee-arrow {
-    position: absolute;
-    top: -25px;
-    left: 80px;
-    transform: rotate(10deg);
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    animation: arrow-bounce 1s infinite alternate;
+}
+
+@keyframes arrow-bounce {
+    from { transform: translateX(0); }
+    to { transform: translateX(10px); }
 }
 
 .btn-coffee-round {
-    background: var(--bg-color);
+    background: var(--primary-color);
     border: var(--border-width) solid var(--border-color);
     border-radius: 50%;
-    width: 55px;
-    height: 55px;
+    width: 60px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 4px 4px 0px 0px var(--border-color);
     font-size: 1.5rem;
-    color: var(--text-color);
+    color: #000;
     text-decoration: none;
     transition: var(--transition-base);
-    margin-left: 100px;
+    position: relative;
+    z-index: 1;
+}
+
+.btn-coffee-round::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background: var(--primary-color);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    opacity: 0.5;
+    transition: var(--transition-base);
 }
 
 .btn-coffee-round:hover {
-    transform: translate(4px, 4px);
-    box-shadow: 0px 0px 0px 0px var(--border-color);
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0px 0px 25px var(--primary-color);
+}
+
+.btn-coffee-round:hover::after {
+    width: 140%;
+    height: 140%;
+    opacity: 0;
 }
 
 .profile-container {
@@ -694,17 +753,17 @@ body::after {
 .my-page {
     background-color: var(--bg-color);
     background-image:
-        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paperNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='5' stitchTiles='stitch'/%3E%3CfeComposite operator='in' in2='SourceGraphic'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paperNoise)' opacity='0.05'/%3E%3C/svg%3E");
+        radial-gradient(circle at 50% 50%, rgba(var(--primary-color-rgb), 0.05) 0%, transparent 70%),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paperNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='5' stitchTiles='stitch'/%3E%3CfeComposite operator='in' in2='SourceGraphic'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paperNoise)' opacity='0.08'/%3E%3C/svg%3E");
     border-bottom: var(--border-width) solid var(--border-color);
-    padding: 100px 50px;
+    padding: 120px 0;
     position: relative;
 }
 
 .section {
-    padding: 80px 0;
+    padding: 120px 0;
     position: relative;
     width: 100%;
-    height: 100%;
 }
 
 .section-title {

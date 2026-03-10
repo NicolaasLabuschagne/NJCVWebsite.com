@@ -4,9 +4,10 @@
    =========================== */
 const sketch = (p) => {
     let symbols = [];
-    // More "Adventure/Scrapbook" style symbols
-    const symbolChars = ['★', '•', '✎', '➤', '❖'];
-    const gridSize = 50;
+    let eyes = [];
+    // Swamp Attack style symbols
+    const symbolChars = ['🌿', '🍄', '🦟', '🦴', '🐊', '💀', '🍃', '🕸️'];
+    const gridSize = 60;
 
     p.setup = () => {
         let canvas = p.createCanvas(p.windowWidth, p.windowHeight);
@@ -31,27 +32,67 @@ const sketch = (p) => {
                 });
             }
         }
+
+        eyes = [];
+        for (let i = 0; i < 20; i++) {
+            eyes.push({
+                x: p.random(p.width),
+                y: p.random(p.height),
+                size: p.random(2, 6),
+                blinkTimer: p.random(100, 300),
+                isBlinking: false
+            });
+        }
     }
 
     p.draw = () => {
         p.clear();
 
         const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-        // In "Adventure Book" mode, symbols look like faded ink
-        const colorValue = isDark ? 200 : 80;
+
+        if (isDark) {
+            // Blinking Eyes in the dark
+            eyes.forEach(e => {
+                e.blinkTimer--;
+                if (e.blinkTimer <= 0) {
+                    if (e.isBlinking) {
+                        e.blinkTimer = p.random(100, 300);
+                        e.isBlinking = false;
+                    } else {
+                        e.blinkTimer = p.random(5, 15);
+                        e.isBlinking = true;
+                    }
+                }
+
+                if (!e.isBlinking) {
+                    p.fill(255, 255, 0, 150); // Yellow glow eyes
+                    p.ellipse(e.x, e.y, e.size, e.size / 2);
+                    p.ellipse(e.x + e.size * 1.5, e.y, e.size, e.size / 2);
+                }
+            });
+        }
+
+        // Swampy faded look
+        const opacityBase = isDark ? 60 : 20;
+        const fillColor = isDark ? [43, 61, 43] : [0, 0, 0]; // Murky green in dark, black in light
 
         symbols.forEach(s => {
             let dx = p.mouseX - s.x;
             let dy = p.mouseY - s.y;
             let dist = p.sqrt(dx*dx + dy*dy);
-            let offset = p.map(p.min(dist, 250), 0, 250, 15, 0);
 
-            p.fill(colorValue, colorValue, colorValue, p.map(p.min(dist, 400), 0, 400, 30, 2));
+            // Interaction: symbols move slightly away from mouse
+            let force = p.map(p.min(dist, 200), 0, 200, 20, 0);
+            let angle = p.atan2(dy, dx);
+            let offsetX = p.cos(angle) * -force;
+            let offsetY = p.sin(angle) * -force;
+
+            p.fill(fillColor[0], fillColor[1], fillColor[2], p.map(p.min(dist, 500), 0, 500, opacityBase * 2, opacityBase));
             p.textSize(s.size);
             p.push();
-            p.translate(s.x, s.y);
-            p.rotate(s.angle + dist * 0.002);
-            p.text(s.char, offset, offset);
+            p.translate(s.x + offsetX, s.y + offsetY);
+            p.rotate(s.angle + (p.frameCount * 0.01)); // Constant slow rotation
+            p.text(s.char, 0, 0);
             p.pop();
         });
     };
