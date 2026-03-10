@@ -4,14 +4,18 @@
    =========================== */
 const sketch = (p) => {
     let symbols = [];
-    // More "Adventure/Scrapbook" style symbols
-    const symbolChars = ['★', '•', '✎', '➤', '❖'];
-    const gridSize = 50;
+    let eyes = [];
+    // Swamp Attack style symbols
+    const symbolChars = ['🌿', '🍄', '🦟', '🦴', '🐊', '💀', '🍃', '🕸️'];
+    const gridSize = 60;
 
     p.setup = () => {
         let canvas = p.createCanvas(p.windowWidth, p.windowHeight);
-        canvas.position(0, 0);
-        canvas.style('z-index', '-1');
+        canvas.style('position', 'fixed');
+        canvas.style('top', '0');
+        canvas.style('left', '0');
+        canvas.style('z-index', '100');
+        canvas.style('pointer-events', 'none');
         p.noStroke();
         p.textFont('Montserrat');
 
@@ -31,27 +35,99 @@ const sketch = (p) => {
                 });
             }
         }
+
+        eyes = [];
+        const eyeColors = [
+            [255, 255, 0],   // Toxic Yellow
+            [255, 85, 51],   // Toxic Orange/Red
+            [193, 214, 78],  // Moss Green
+            [74, 222, 128]   // Glow Green
+        ];
+
+        for (let i = 0; i < 25; i++) {
+            eyes.push({
+                x: p.random(p.width),
+                y: p.random(p.height),
+                size: p.random(3, 8),
+                blinkTimer: p.random(100, 400),
+                isBlinking: false,
+                color: p.random(eyeColors),
+                eyeGap: p.random(1.2, 2.0)
+            });
+        }
     }
 
     p.draw = () => {
         p.clear();
 
         const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-        // In "Adventure Book" mode, symbols look like faded ink
-        const colorValue = isDark ? 200 : 80;
+
+        if (isDark) {
+            // Blinking Eyes in the dark
+            eyes.forEach(e => {
+                // Adjust position based on window scroll to appear stationary in the viewport
+                // But since canvas is position: fixed, we don't need to add scrollY
+                // BUT p5 mouseX/mouseY are relative to the canvas (viewport)
+
+                e.blinkTimer--;
+                if (e.blinkTimer <= 0) {
+                    if (e.isBlinking) {
+                        e.blinkTimer = p.random(100, 400);
+                        e.isBlinking = false;
+                    } else {
+                        e.blinkTimer = p.random(5, 20);
+                        e.isBlinking = true;
+                    }
+                }
+
+                if (!e.isBlinking) {
+                    // Pupil tracking
+                    let dx = p.mouseX - e.x;
+                    let dy = p.mouseY - e.y;
+                    let angle = p.atan2(dy, dx);
+                    let dist = p.min(p.dist(p.mouseX, p.mouseY, e.x, e.y), 50);
+                    let pupilOffsetX = p.cos(angle) * (e.size * 0.2);
+                    let pupilOffsetY = p.sin(angle) * (e.size * 0.1);
+
+                    // Draw Outer Glow
+                    p.fill(e.color[0], e.color[1], e.color[2], 50);
+                    p.ellipse(e.x, e.y, e.size * 2, e.size);
+                    p.ellipse(e.x + e.size * e.eyeGap, e.y, e.size * 2, e.size);
+
+                    // Draw Main Eye Color
+                    p.fill(e.color[0], e.color[1], e.color[2], 200);
+                    p.ellipse(e.x, e.y, e.size, e.size / 2);
+                    p.ellipse(e.x + e.size * e.eyeGap, e.y, e.size, e.size / 2);
+
+                    // Draw Pupils
+                    p.fill(0, 0, 0, 220);
+                    p.ellipse(e.x + pupilOffsetX, e.y + pupilOffsetY, e.size * 0.4, e.size * 0.3);
+                    p.ellipse(e.x + e.size * e.eyeGap + pupilOffsetX, e.y + pupilOffsetY, e.size * 0.4, e.size * 0.3);
+                }
+            });
+        }
+
+        // Swampy faded look
+        const opacityBase = isDark ? 60 : 20;
+        const fillColor = isDark ? [43, 61, 43] : [0, 0, 0]; // Murky green in dark, black in light
 
         symbols.forEach(s => {
             let dx = p.mouseX - s.x;
             let dy = p.mouseY - s.y;
             let dist = p.sqrt(dx*dx + dy*dy);
-            let offset = p.map(p.min(dist, 250), 0, 250, 15, 0);
 
-            p.fill(colorValue, colorValue, colorValue, p.map(p.min(dist, 400), 0, 400, 30, 2));
+            // Interaction: symbols move slightly away from mouse
+            let force = p.map(p.min(dist, 200), 0, 200, 20, 0);
+            let angle = p.atan2(dy, dx);
+            let offsetX = p.cos(angle) * -force;
+            let offsetY = p.sin(angle) * -force;
+
+            p.fill(fillColor[0], fillColor[1], fillColor[2], p.map(p.min(dist, 500), 0, 500, opacityBase * 2, opacityBase));
             p.textSize(s.size);
             p.push();
-            p.translate(s.x, s.y);
-            p.rotate(s.angle + dist * 0.002);
-            p.text(s.char, offset, offset);
+            p.translate(s.x + offsetX, s.y + offsetY);
+            p.rotate(s.angle + (p.frameCount * 0.01)); // Constant slow rotation
+            p.text(s.char, 0, 0);
             p.pop();
         });
     };
