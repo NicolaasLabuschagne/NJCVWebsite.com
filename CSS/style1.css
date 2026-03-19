@@ -2,45 +2,47 @@
    Design Tokens
    =========================== */
 :root {
-    --bg-color: #fdfcf0; /* Parchment cream */
-    --bg-color-rgb: 253, 252, 240;
-    --secondary-bg: #fcfaf2;
+    --bg-color: #ffffff;
+    --bg-color-rgb: 255, 255, 255;
+    --secondary-bg: #f8fafc;
 
-    --primary-color: #d4af37; /* Gold */
-    --primary-color-rgb: 212, 175, 55;
+    --primary-color: #66d9ef; /* Cyan */
+    --primary-color-rgb: 102, 217, 239;
 
-    --accent-color: #5d4037; /* Leather Brown */
-    --accent-color-rgb: 93, 64, 55;
+    --secondary-color: #ffd93d; /* Yellow */
+    --secondary-color-rgb: 255, 217, 61;
 
-    --success-color: #7bc07e; /* Sage Green (reused) */
-    --error-color: #b71c1c; /* Adventure Red */
-    --info-color: #38bdf8; /* Blue */
+    --accent-color: #ff6b9d; /* Pink */
+    --accent-color-rgb: 255, 107, 157;
+
+    --mint-color: #a8e6cf;
     --purple-color: #c084fc;
-    --secondary-color: #94a3b8; /* Slate */
+    --success-color: #4ade80;
+    --error-color: #ff6b9d;
 
-    --text-color: #2c1e1a; /* Dark Brown for text */
-    --text-dim: #5d4037;
+    --text-color: #000000;
+    --text-dim: #475569;
 
-    --border-color: #2c1e1a;
+    --border-color: #000000;
     --invert-amount: 0;
 
-    --spine-color: #b71c1c;
+    --spine-color: #000000;
 }
 
 [data-theme="dark"] {
-    --bg-color: #0d0d0d; /* Deep forest night */
-    --bg-color-rgb: 13, 13, 13;
-    --secondary-bg: #1a1a1a;
+    --bg-color: #1a1a1a;
+    --bg-color-rgb: 26, 26, 26;
+    --secondary-bg: #111827;
 
-    --text-color: #e0e0e0;
-    --text-dim: #a0a0a0;
+    --text-color: #ffffff;
+    --text-dim: #94a3b8;
 
-    --border-color: #333333;
+    --border-color: #a8e6cf;
     --invert-amount: 1;
 
-    --primary-color: #4ade80; /* Glow green for night mode */
+    --primary-color: #66d9ef;
     --spine-color: #000000;
-    --accent-color: #1a1a1a;
+    --accent-color: #ff6b9d;
 }
 
 [data-theme="dark"] .desk-scene {
@@ -69,11 +71,14 @@
 }
 
 :root {
-    --border-width: 3px;
-    --shadow-offset: 4px;
+    --border-width: 4px;
+    --border-width-thick: 6px;
+    --shadow-offset: 8px;
 
-    --font-main: 'Montserrat', sans-serif;
-    --transition-base: all 0.2s ease;
+    --font-main: 'Space Grotesk', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+    --font-cursive: 'Caveat', cursive;
+    --transition-base: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 /* ===========================
@@ -126,18 +131,19 @@ body::after {
     top: 0;
     left: 0;
     width: 100%;
-    height: 10px;
+    height: 14px;
     background: var(--bg-color);
     z-index: 2000;
-    border-bottom: 2px solid var(--border-color);
+    border-bottom: var(--border-width) solid var(--border-color);
 }
 
 .scroll-progress-bar {
     height: 100%;
     width: 0%;
-    background: var(--success-color);
+    background: var(--secondary-color);
     position: relative;
     transition: width 0.1s ease-out;
+    border-right: var(--border-width) solid var(--border-color);
 }
 
 .bike-icon {
@@ -170,17 +176,17 @@ body::after {
     background: var(--primary-color);
     padding: 10px 30px;
     border: var(--border-width) solid var(--border-color);
-    border-radius: 12px;
+    border-radius: 0px;
     box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--border-color);
 }
 
 .logo {
     font-size: 1.5rem;
     font-weight: 900;
-    background: var(--accent-color);
+    background: var(--secondary-color);
     padding: 5px 15px;
     border: var(--border-width) solid var(--border-color);
-    border-radius: 8px;
+    border-radius: 0px;
 }
 
 .nav-links {
@@ -205,11 +211,11 @@ body::after {
     background: var(--accent-color);
     padding: 8px 20px;
     border: var(--border-width) solid var(--border-color);
-    border-radius: 8px;
+    border-radius: 0px;
     color: var(--text-color);
     font-weight: 800;
     text-decoration: none;
-    box-shadow: 3px 3px 0px 0px var(--border-color);
+    box-shadow: 4px 4px 0px 0px var(--border-color);
     transition: var(--transition-base);
 }
 
@@ -262,6 +268,50 @@ body::after {
     padding: 100px 40px;
 }
 
+.hero-shapes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.shape {
+    position: absolute;
+    border: 2px solid var(--border-color);
+    opacity: 0.1;
+}
+
+.shape-1 {
+    width: 200px;
+    height: 200px;
+    top: 10%;
+    left: 5%;
+    background: var(--primary-color);
+    transform: rotate(15deg);
+}
+
+.shape-2 {
+    width: 150px;
+    height: 150px;
+    bottom: 15%;
+    right: 10%;
+    background: var(--accent-color);
+    border-radius: 50%;
+}
+
+.shape-3 {
+    width: 100px;
+    height: 100px;
+    top: 50%;
+    left: 45%;
+    background: var(--secondary-color);
+    transform: rotate(-10deg);
+}
+
 .hero-grid {
     display: grid;
     grid-template-columns: 1fr 1.2fr;
@@ -274,20 +324,20 @@ body::after {
     position: relative;
 }
 
-.profile-card-tilted {
+.profile-card-neo {
     position: relative;
     width: 400px;
     height: 500px;
-    background: #fff;
-    padding: 20px 20px 80px 20px;
-    border: 1px solid #ddd;
-    box-shadow: 15px 15px 40px rgba(0,0,0,0.1);
-    transform: rotate(-3deg);
-    transition: transform 0.3s ease;
+    background: var(--bg-color);
+    padding: 20px;
+    border: var(--border-width-thick) solid var(--border-color);
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--border-color);
+    transition: var(--transition-base);
 }
 
-.profile-card-tilted:hover {
-    transform: rotate(0deg) scale(1.02);
+.profile-card-neo:hover {
+    transform: translate(calc(var(--shadow-offset) * -0.5), calc(var(--shadow-offset) * -0.5));
+    box-shadow: calc(var(--shadow-offset) * 1.5) calc(var(--shadow-offset) * 1.5) 0px 0px var(--border-color);
 }
 
 .profile-img-container {
@@ -357,18 +407,22 @@ body::after {
     background: var(--bg-color);
     border: var(--border-width) solid var(--border-color);
     padding: 40px;
-    border-radius: 20px;
-    box-shadow: 10px 10px 0px 0px var(--border-color);
+    border-radius: 0px;
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--border-color);
     position: relative;
 }
 
 .hero-greeting {
-    color: var(--error-color);
-    font-family: 'Caveat', cursive;
-    font-weight: 800;
-    font-size: 2.5rem;
+    color: var(--text-color);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 1.5rem;
     margin-bottom: 5px;
     text-align: left;
+    background: var(--secondary-color);
+    display: inline-block;
+    padding: 5px 15px;
+    border: var(--border-width) solid var(--border-color);
 }
 
 .hero-name {
@@ -464,11 +518,12 @@ body::after {
     font-weight: 800;
     font-size: 1rem;
     border: var(--border-width) solid var(--border-color);
-    border-radius: 8px;
+    border-radius: 0px;
     transition: var(--transition-base);
     display: inline-flex;
     align-items: center;
     gap: 10px;
+    font-family: var(--font-mono);
 }
 
 .btn-coffee {
@@ -847,21 +902,27 @@ body::after {
     position: absolute;
     left: -12px;
     top: 5px;
-    width: 20px;
-    height: 20px;
-    background: var(--primary-color);
+    width: 24px;
+    height: 24px;
+    background: var(--secondary-color);
     border: var(--border-width) solid var(--border-color);
-    border-radius: 50%;
+    border-radius: 0%;
     box-shadow: 4px 4px 0px 0px var(--border-color);
 }
 
 .timeline-content {
     background: var(--bg-color);
-    border: 1px solid rgba(0,0,0,0.1);
-    padding: 20px;
-    border-radius: 4px;
-    box-shadow: 2px 2px 10px rgba(0,0,0,0.05);
+    border: var(--border-width) solid var(--border-color);
+    padding: 30px;
+    border-radius: 0px;
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--border-color);
     position: relative;
+    transition: var(--transition-base);
+}
+
+.timeline-content:hover {
+    transform: translate(calc(var(--shadow-offset) * -0.5), calc(var(--shadow-offset) * -0.5));
+    box-shadow: calc(var(--shadow-offset) * 1.5) calc(var(--shadow-offset) * 1.5) 0px 0px var(--border-color);
 }
 
 .timeline-content::before {
@@ -918,8 +979,8 @@ body::after {
     background: var(--bg-color);
     border: var(--border-width) solid var(--border-color);
     padding: 30px;
-    border-radius: 15px;
-    box-shadow: 8px 8px 0px 0px var(--border-color);
+    border-radius: 0px;
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--border-color);
 }
 
 .skills-category h3 {
@@ -929,8 +990,9 @@ body::after {
     background: var(--primary-color);
     display: inline-block;
     padding: 5px 15px;
-    border: 2px solid var(--border-color);
-    border-radius: 6px;
+    border: var(--border-width) solid var(--border-color);
+    border-radius: 0px;
+    font-family: var(--font-mono);
 }
 
 .tags {
@@ -942,13 +1004,14 @@ body::after {
 .tags span {
     background: var(--bg-color);
     padding: 10px 20px;
-    border: 2px solid var(--border-color);
-    border-radius: 8px;
+    border: var(--border-width) solid var(--border-color);
+    border-radius: 0px;
     font-size: 0.9rem;
     font-weight: 700;
     transition: var(--transition-base);
     box-shadow: 4px 4px 0px 0px var(--border-color);
     cursor: pointer;
+    font-family: var(--font-mono);
 }
 
 .tags span:hover {
@@ -1105,8 +1168,8 @@ body::after {
    =========================== */
 .footer {
     padding: 80px 0;
-    background: var(--text-color);
-    color: var(--bg-color);
+    background: var(--bg-color);
+    color: var(--text-color);
     border-top: var(--border-width) solid var(--border-color);
 }
 

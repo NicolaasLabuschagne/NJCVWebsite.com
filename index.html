@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Space+Mono:wght@400;700&family=Caveat:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
@@ -43,27 +43,30 @@
 
     <main>
         <section id="hero" class="hero section page my-page">
+            <div class="hero-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
             <div class="container hero-grid">
                 <div class="hero-left animate-reveal">
-                    <div class="profile-card-tilted">
+                    <div class="profile-card-neo">
                         <div class="speech-bubble-hero">Hi, I'm Nicolaas! 👋</div>
-                        <div class="tape-corner top-left"></div>
-                        <div class="tape-corner bottom-right"></div>
                         <div class="profile-img-container">
                             <img src="images/myPic.png" alt="Nicolaas Labuschagne" class="profile-img">
                         </div>
-                        <div class="sticker sticker-yellow" style="bottom: -15px; right: -15px; transform: rotate(10deg);">Full-Stack Ninja</div>
+                        <div class="sticker sticker-yellow" style="bottom: -20px; right: -20px; transform: rotate(10deg);">Systems Architect</div>
                     </div>
                 </div>
 
                 <div class="hero-right">
-                    <div class="hero-greeting animate-reveal">Adventure Awaits!</div>
-                    <h1 class="hero-name animate-reveal">Nicolaas <span class="scribble-underline">Labuschagne</span></h1>
+                    <div class="hero-greeting animate-reveal">HI THERE!</div>
+                    <h1 class="hero-name animate-reveal">I'm Nicolaas <span class="scribble-underline">Labuschagne</span></h1>
 
                     <div class="intro-box animate-reveal">
                         <p class="hero-description">
                             Based in South Africa, I'm a <span class="highlight">Systems Architect</span> & <span class="highlight">Full-Stack Developer</span>.
-                            I love building scalable distributed systems and immersive digital experiences.
+                            I love building scalable distributed systems, data pipelines, and immersive digital experiences.
                         </p>
 
                         <div class="hero-socials" style="margin-top: 20px;">
@@ -76,7 +79,9 @@
                             <a href="#contact" class="btn btn-primary">Get in Touch!</a>
                             <div class="coffee-wrapper">
                                 <span class="coffee-text">Buy me a coffee</span>
-                                <img src="images/arrow.png" alt="arrow" class="coffee-arrow" style="width: 40px; filter: invert(var(--invert-amount));">
+                                <svg class="coffee-arrow" width="40" height="20" viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter: invert(var(--invert-amount));">
+                                    <path d="M2 10C2 10 15 10 35 10M35 10L28 3M35 10L28 17" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
                                 <a href="https://www.paypal.com/paypalme/NicolaasL" target="_blank" class="btn-coffee-round">☕</a>
                             </div>
                         </div>
@@ -138,7 +143,6 @@
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
                         <div class="timeline-content">
-                            <div class="tape" style="top: -10px; left: 20px; width: 60px;"></div>
                             <h3>Systems Architect @ Estate Recoveries</h3>
                             <span class="timeline-date">Nov 2023 - Present</span>
                             <p>Designing and building high-performance systems for debt recovery and property management. Implementing microservices and automated escalation flows.</p>
