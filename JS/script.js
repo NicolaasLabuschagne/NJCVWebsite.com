@@ -181,6 +181,19 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.highlight').forEach(h => highlightObserver.observe(h));
 
     /* ===========================
+       Scribble Animation Observer
+       =========================== */
+    const scribbleObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-scribble');
+            }
+        });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.scribble-underline, .hand-drawn-circle').forEach(s => scribbleObserver.observe(s));
+
+    /* ===========================
        Interactive Map
        =========================== */
     const mapElement = document.getElementById('map');

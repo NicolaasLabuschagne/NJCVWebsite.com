@@ -169,6 +169,10 @@ body::after {
     transition: var(--transition-base);
 }
 
+main {
+    padding-top: 100px;
+}
+
 .nav {
     display: flex;
     justify-content: space-between;
@@ -345,13 +349,14 @@ body::after {
     height: 100%;
     overflow: hidden;
     background: #eee;
-    border: 1px solid #ccc;
+    border: var(--border-width) solid var(--border-color);
 }
 
 .profile-img-container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
 }
 
 .speech-bubble-hero {
@@ -439,17 +444,28 @@ body::after {
     display: inline-block;
 }
 
-.scribble-underline::after {
-    content: '';
+.scribble-svg {
     position: absolute;
-    bottom: 5px;
+    bottom: -5px;
     left: 0;
     width: 100%;
-    height: 8px;
-    background: var(--primary-color);
+    height: 15px;
     z-index: -1;
-    border-radius: 10px;
-    transform: rotate(-1deg);
+    pointer-events: none;
+}
+
+.scribble-svg path {
+    stroke: var(--primary-color);
+    stroke-width: 6;
+    stroke-linecap: round;
+    fill: none;
+    stroke-dasharray: 600;
+    stroke-dashoffset: 600;
+    transition: stroke-dashoffset 1s ease-out;
+}
+
+.animate-scribble .scribble-svg path {
+    stroke-dashoffset: 0;
 }
 
 .hero-description {
@@ -501,8 +517,10 @@ body::after {
 }
 
 .social-link:hover {
-    transform: translate(4px, 4px);
-    box-shadow: 0px 0px 0px 0px var(--border-color);
+    transform: translate(-4px, -4px);
+    box-shadow: 12px 12px 0px 0px var(--border-color);
+    background: var(--primary-color);
+    color: white;
 }
 
 .hero-buttons {
@@ -562,17 +580,24 @@ body::after {
 
 .coffee-arrow {
     position: absolute;
-    top: -25px;
-    left: 80px;
-    transform: rotate(10deg);
+    top: -35px;
+    left: 100px;
+    transform: rotate(15deg);
+    color: var(--text-color);
+    animation: bounce-arrow 2s infinite ease-in-out;
+}
+
+@keyframes bounce-arrow {
+    0%, 100% { transform: translate(0, 0) rotate(15deg); }
+    50% { transform: translate(5px, 5px) rotate(15deg); }
 }
 
 .btn-coffee-round {
     background: var(--bg-color);
     border: var(--border-width) solid var(--border-color);
     border-radius: 50%;
-    width: 55px;
-    height: 55px;
+    width: 75px;
+    height: 75px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -581,7 +606,12 @@ body::after {
     color: var(--text-color);
     text-decoration: none;
     transition: var(--transition-base);
-    margin-left: 100px;
+    margin-left: 130px;
+    overflow: hidden;
+}
+
+.btn-coffee-round img {
+    border-radius: 50%;
 }
 
 .btn-coffee-round:hover {
@@ -614,10 +644,9 @@ body::after {
 }
 
 .profile-img {
-    width: 70%;
+    width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 8px;
 }
 
 .profile-badge {
@@ -653,23 +682,41 @@ body::after {
 .sticker-lime { background: var(--success-color); }
 .sticker-red { background: var(--error-color); color: white; }
 
+.sticker:hover {
+    animation: wiggle 0.4s ease-in-out infinite;
+    cursor: pointer;
+    z-index: 100;
+}
+
 .hand-drawn-circle {
     position: relative;
     display: inline-block;
-    padding: 0 10px;
+    padding: 0 5px;
 }
 
-.hand-drawn-circle::before {
-    content: '';
+.circle-svg {
     position: absolute;
     top: 50%;
     left: 50%;
     width: 110%;
-    height: 120%;
-    transform: translate(-50%, -50%) rotate(-2deg);
-    border: 3px solid var(--purple-color);
-    border-radius: 50% 45% 55% 48% / 48% 52% 48% 52%;
+    height: 140%;
+    transform: translate(-50%, -50%) rotate(-1deg);
     z-index: -1;
+    pointer-events: none;
+}
+
+.circle-svg path {
+    stroke: var(--purple-color);
+    stroke-width: 4;
+    stroke-linecap: round;
+    fill: none;
+    stroke-dasharray: 800;
+    stroke-dashoffset: 800;
+    transition: stroke-dashoffset 1.2s ease-out;
+}
+
+.animate-scribble .circle-svg path {
+    stroke-dashoffset: 0;
 }
 
 .floating-icon {
@@ -700,6 +747,28 @@ body::after {
 @keyframes float {
     0%, 100% { transform: translateY(0) rotate(var(--rot, -10deg)); }
     50% { transform: translateY(-15px) rotate(calc(var(--rot, -10deg) + 5deg)); }
+}
+
+@keyframes floating-bg {
+    0%, 100% { transform: translateY(0) rotate(0); }
+    50% { transform: translateY(-20px) rotate(10deg); }
+}
+
+@keyframes wiggle {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    25% { transform: scale(1.1) rotate(-3deg); }
+    75% { transform: scale(1.1) rotate(3deg); }
+}
+
+.floating-star {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    fill: var(--warning-color);
+    z-index: -1;
+    opacity: 0.6;
+    animation: floating-bg 6s ease-in-out infinite;
+    pointer-events: none;
 }
 
 .icon-code { --rot: -10deg; }
@@ -821,14 +890,19 @@ body::after {
    Marquee
    =========================== */
 .marquee {
-    background: var(--text-color);
-    color: var(--bg-color);
-    padding: 20px 0;
-    border-top: var(--border-width) solid var(--border-color);
-    border-bottom: var(--border-width) solid var(--border-color);
+    background: var(--secondary-color);
+    color: #000;
+    padding: 15px 0;
+    border-top: var(--border-width-thick) solid var(--border-color);
+    border-bottom: var(--border-width-thick) solid var(--border-color);
     overflow: hidden;
     white-space: nowrap;
     display: flex;
+    transform: rotate(-1deg);
+    width: calc(100% + 10px);
+    margin-left: -5px;
+    z-index: 100;
+    box-shadow: 0 10px 0 rgba(0,0,0,0.1);
 }
 
 .marquee-content {
@@ -844,6 +918,13 @@ body::after {
     display: flex;
     align-items: center;
     gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .marquee-content span {
+        font-size: 1.5rem;
+        padding: 0 20px;
+    }
 }
 
 .marquee-content span::after {
@@ -900,21 +981,21 @@ body::after {
 
 .timeline-dot {
     position: absolute;
-    left: -12px;
+    left: -16px;
     top: 5px;
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
     background: var(--secondary-color);
     border: var(--border-width) solid var(--border-color);
-    border-radius: 0%;
+    border-radius: 50%;
     box-shadow: 4px 4px 0px 0px var(--border-color);
 }
 
 .timeline-content {
     background: var(--bg-color);
-    border: var(--border-width) solid var(--border-color);
-    padding: 30px;
-    border-radius: 0px;
+    border: var(--border-width-thick) solid var(--border-color);
+    padding: 40px;
+    border-radius: 20px;
     box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--border-color);
     position: relative;
     transition: var(--transition-base);
@@ -977,10 +1058,16 @@ body::after {
 
 .skills-category {
     background: var(--bg-color);
-    border: var(--border-width) solid var(--border-color);
-    padding: 30px;
-    border-radius: 0px;
+    border: var(--border-width-thick) solid var(--border-color);
+    padding: 35px;
+    border-radius: 24px;
     box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--border-color);
+    transition: var(--transition-base);
+}
+
+.skills-category:hover {
+    transform: translate(calc(var(--shadow-offset) * -0.3), calc(var(--shadow-offset) * -0.3));
+    box-shadow: calc(var(--shadow-offset) * 1.3) calc(var(--shadow-offset) * 1.3) 0px 0px var(--border-color);
 }
 
 .skills-category h3 {
@@ -1193,8 +1280,9 @@ body::after {
 }
 
 .footer-role {
-    color: #94a3b8;
+    color: var(--text-dim);
     font-size: 0.9rem;
+    font-weight: 600;
 }
 
 .footer-links {
@@ -1204,10 +1292,11 @@ body::after {
 
 .footer-links a {
     text-decoration: none;
-    color: var(--bg-color);
+    color: var(--text-color);
     font-size: 0.9rem;
-    font-weight: 700;
+    font-weight: 800;
     transition: var(--transition-base);
+    border-bottom: 2px solid transparent;
 }
 
 .footer-links a:hover {
@@ -1259,12 +1348,29 @@ body::after {
     .container {
         padding: 0 20px;
     }
+    .header {
+        top: 10px;
+        width: 95%;
+    }
+    .hero {
+        padding-top: 60px;
+    }
     .hero-grid {
+        display: flex;
+        flex-direction: column;
         text-align: center;
-        gap: 40px;
+        gap: 60px;
     }
     .hero-grid .hero-right {
         order: -1;
+    }
+    .hero-left {
+        display: flex;
+        justify-content: center;
+    }
+    .profile-card-neo {
+        width: 320px;
+        height: 400px;
     }
     .hero-greeting, .hero-name, .hero-description {
         text-align: center;
