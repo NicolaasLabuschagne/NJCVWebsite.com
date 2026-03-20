@@ -1,4 +1,0 @@
-[submodule "brain"]
-	path = brain
-	url = https://github.com/NicolaasLabuschagne/AI-Brain.git
-	branch = main
