@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Space+Mono:wght@400;700&family=Caveat:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
@@ -43,27 +43,37 @@
 
     <main>
         <section id="hero" class="hero section page my-page">
+            <div class="hero-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+                <!-- Animated background elements -->
+                <svg class="floating-star" style="top: 10%; left: 5%;" viewBox="0 0 24 24"><path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" /></svg>
+                <svg class="floating-star" style="bottom: 15%; right: 10%; animation-delay: 1s;" viewBox="0 0 24 24"><path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" /></svg>
+            </div>
             <div class="container hero-grid">
                 <div class="hero-left animate-reveal">
-                    <div class="profile-card-tilted">
+                    <div class="profile-card-neo">
                         <div class="speech-bubble-hero">Hi, I'm Nicolaas! 👋</div>
-                        <div class="tape-corner top-left"></div>
-                        <div class="tape-corner bottom-right"></div>
                         <div class="profile-img-container">
                             <img src="images/myPic.png" alt="Nicolaas Labuschagne" class="profile-img">
                         </div>
-                        <div class="sticker sticker-yellow" style="bottom: -15px; right: -15px; transform: rotate(10deg);">Full-Stack Ninja</div>
+                        <div class="sticker sticker-yellow" style="bottom: -20px; right: -20px; transform: rotate(10deg);">Systems Architect</div>
                     </div>
                 </div>
 
                 <div class="hero-right">
-                    <div class="hero-greeting animate-reveal">Adventure Awaits!</div>
-                    <h1 class="hero-name animate-reveal">Nicolaas <span class="scribble-underline">Labuschagne</span></h1>
+                    <div class="hero-greeting animate-reveal">HI THERE!</div>
+                    <h1 class="hero-name animate-reveal">I'm Nicolaas <span class="scribble-underline">Labuschagne
+                        <svg class="scribble-svg" viewBox="0 0 400 20" preserveAspectRatio="none">
+                            <path d="M0,15 Q100,5 200,15 T400,15" />
+                        </svg>
+                    </span></h1>
 
                     <div class="intro-box animate-reveal">
                         <p class="hero-description">
                             Based in South Africa, I'm a <span class="highlight">Systems Architect</span> & <span class="highlight">Full-Stack Developer</span>.
-                            I love building scalable distributed systems and immersive digital experiences.
+                            I love building scalable distributed systems, data pipelines, and immersive digital experiences.
                         </p>
 
                         <div class="hero-socials" style="margin-top: 20px;">
@@ -76,8 +86,12 @@
                             <a href="#contact" class="btn btn-primary">Get in Touch!</a>
                             <div class="coffee-wrapper">
                                 <span class="coffee-text">Buy me a coffee</span>
-                                <img src="images/arrow.png" alt="arrow" class="coffee-arrow" style="width: 40px; filter: invert(var(--invert-amount));">
-                                <a href="https://www.paypal.com/paypalme/NicolaasL" target="_blank" class="btn-coffee-round">☕</a>
+                                <svg class="coffee-arrow" width="60" height="40" viewBox="0 0 60 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 35C15 35 25 10 55 15M55 15L45 5M55 15L50 25" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <a href="https://www.paypal.com/paypalme/NicolaasL" target="_blank" class="btn-coffee-round">
+                                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpwaHl5Z3o4Z3p4eHp4eHp4eHp4eHp4eHp4eHp4eHp4eHAmZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/3o7TKDkDbIDJieKbVm/giphy.gif" alt="Coffee" style="width: 55px; height: 55px;">
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -94,12 +108,29 @@
             </div>
         </section>
 
+        <div class="marquee">
+            <div class="marquee-content">
+                <span>Systems Architect</span>
+                <span>Full Stack Developer</span>
+                <span>Creative Director</span>
+                <span>Amateur Cyclist</span>
+                <span>Problem Solver</span>
+                <span>Immersive Experiences</span>
+                <!-- Duplicate for seamless loop -->
+                <span>Systems Architect</span>
+                <span>Full Stack Developer</span>
+                <span>Creative Director</span>
+                <span>Amateur Cyclist</span>
+                <span>Problem Solver</span>
+                <span>Immersive Experiences</span>
+            </div>
+        </div>
 
         <section id="about" class="about section page my-page">
             <div class="container section-container">
                 <div class="sticker sticker-blue" style="top: 100px; right: 50px; transform: rotate(-15deg);">Cyclist 🚴‍♂️</div>
                 <div class="sticker sticker-lime" style="bottom: 50px; left: -20px; transform: rotate(10deg);">Business Minded 📈</div>
-                <svg class="star-illustation" style="top: -20px; right: 10%; fill: var(--purple-color);" viewBox="0 0 24 24">
+                <svg class="star-illustation floating-star" style="top: -20px; right: 10%; fill: var(--purple-color);" viewBox="0 0 24 24">
                     <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
                 </svg>
                 <svg class="blob-bg blob-1" viewBox="0 0 200 200">
@@ -107,7 +138,11 @@
                 </svg>
                 <h2 class="section-title animate-reveal">ABOUT</h2>
                 <div class="about-content animate-reveal">
-                    <p>Highly experienced and dynamic <span class="hand-drawn-circle">systems architect</span> & software engineer with a passion for <span class="highlight">designing</span> and constructing <span class="highlight">scalable distributed systems</span> and immersive web experiences.</p>
+                    <p>Highly experienced and dynamic <span class="hand-drawn-circle">systems architect
+                        <svg class="circle-svg" viewBox="0 0 250 80" preserveAspectRatio="none">
+                            <path d="M245,40 C245,60 200,75 125,75 C50,75 5,60 5,40 C5,20 50,5 125,5 C200,5 245,20 245,40 Z" />
+                        </svg>
+                    </span> & software engineer with a passion for <span class="highlight">designing</span> and constructing <span class="highlight">scalable distributed systems</span> and immersive web experiences.</p>
                     <p>When I'm not <span class="highlight">architecting systems</span> or coding, you'll find me on my bike exploring the roads of <span class="highlight">South Africa</span> or deep into a book. I'm an amateur cyclist with a professional's drive, and a <span class="highlight">lifelong learner</span> of business and psychology.</p>
 
                     <div class="current-reads" style="margin-top: 40px; display: flex; gap: 20px; align-items: center;">
@@ -138,7 +173,6 @@
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
                         <div class="timeline-content">
-                            <div class="tape" style="top: -10px; left: 20px; width: 60px;"></div>
                             <h3>Systems Architect @ Estate Recoveries</h3>
                             <span class="timeline-date">Nov 2023 - Present</span>
                             <p>Designing and building high-performance systems for debt recovery and property management. Implementing microservices and automated escalation flows.</p>
@@ -182,6 +216,7 @@
         <section id="skills" class="skills section page my-page">
             <div class="container section-container">
                 <div class="sticker sticker-yellow" style="top: -30px; left: 150px; transform: rotate(-5deg);">Tools</div>
+                <svg class="floating-star" style="top: 10%; right: 5%; fill: var(--success-color);" viewBox="0 0 24 24"><path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" /></svg>
                 <svg class="blob-bg blob-2" viewBox="0 0 200 200">
                     <path d="M40.3,-64.1C52.7,-58.5,63.6,-48.5,70.1,-36.3C76.6,-24.2,78.7,-9.9,76.7,3.9C74.6,17.7,68.4,30.9,59.3,42.4C50.1,53.8,38.1,63.4,24.5,69C10.9,74.6,-4.3,76.2,-19.1,72.9C-33.8,69.6,-48,61.4,-59.4,50C-70.8,38.5,-79.3,23.8,-81.9,8.2C-84.5,-7.4,-81.1,-24,-72.1,-37.6C-63,-51.2,-48.4,-61.7,-34.1,-66.3C-19.8,-70.9,-5.8,-69.6,7.2,-68.3C20.3,-67.1,33.7,-65.9,40.3,-64.1Z" transform="translate(100 100)" />
                 </svg>
