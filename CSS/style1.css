@@ -1,4 +1,29 @@
 /* ===========================
+   Zine / Glow-Cartoon Styles
+   =========================== */
+.grid-bg {
+    background-image: radial-gradient(circle, #4a5d23 1px, transparent 1px);
+    background-size: 30px 30px;
+}
+.hard-shadow {
+    box-shadow: 8px 8px 0px 0px #131313;
+}
+.hard-shadow-pink {
+    box-shadow: 6px 6px 0px 0px #ff4a8d;
+}
+.hard-shadow-lime {
+    box-shadow: 6px 6px 0px 0px #bef264;
+}
+.glow-lime { text-shadow: 0 0 10px rgba(190, 242, 100, 0.6); }
+.glow-pink { text-shadow: 0 0 10px rgba(255, 0, 127, 0.6); }
+.sticker-rotate-ccw { transform: rotate(-1.5deg); }
+.sticker-rotate-cw { transform: rotate(1.2deg); }
+.sticker-hover:hover {
+    transform: translate(4px, 4px);
+    box-shadow: 0px 0px 0px 0px #131313;
+}
+
+/* ===========================
    Design Tokens
    =========================== */
 :root {
@@ -6,8 +31,8 @@
     --bg-color-rgb: 255, 255, 255;
     --secondary-bg: #f8fafc;
 
-    --primary-color: #66d9ef; /* Cyan */
-    --primary-color-rgb: 102, 217, 239;
+    --primary-color: #bef264; /* Lime Green */
+    --primary-color-rgb: 190, 242, 100;
 
     --secondary-color: #ffd93d; /* Yellow */
     --secondary-color-rgb: 255, 217, 61;
@@ -40,7 +65,7 @@
     --border-color: #a8e6cf;
     --invert-amount: 1;
 
-    --primary-color: #66d9ef;
+    --primary-color: #bef264;
     --spine-color: #000000;
     --accent-color: #ff6b9d;
 }
@@ -97,7 +122,7 @@ html, body {
 }
 
 body {
-    background-color: #1a1210;
+    background-color: var(--bg-color);
     color: var(--text-color);
     font-family: var(--font-main);
     line-height: 1.6;
@@ -677,9 +702,8 @@ main {
 }
 
 .sticker-yellow { background: var(--primary-color); }
-.sticker-blue { background: var(--accent-color); }
+.sticker-lime { background: #bef264; }
 .sticker-purple { background: var(--purple-color); }
-.sticker-lime { background: var(--success-color); }
 .sticker-red { background: var(--error-color); color: white; }
 
 .sticker:hover {
@@ -1453,4 +1477,89 @@ main {
     .nav-cta {
         display: none;
     }
+}
+
+/* ===========================
+   Speech Bubbles Styling
+   =========================== */
+.speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 30px;
+    border-width: 20px 20px 0 0;
+    border-style: solid;
+    border-color: #e5e2e1 transparent transparent transparent;
+}
+.speech-bubble-outline::after {
+    content: '';
+    position: absolute;
+    bottom: -24px;
+    left: 28px;
+    border-width: 22px(22px 0 0);
+    border-style: solid;
+    border-color: #131313 transparent transparent transparent;
+    z-index: -1;
+}
+
+/* ===========================
+   Interactive Pet & Theme Styles
+   =========================== */
+.pet-element {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 3rem;
+    cursor: pointer;
+    z-index: 1000;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    user-select: none;
+}
+
+.pet-element:hover {
+    transform: scale(1.2) rotate(10deg);
+}
+
+/* Theme: Fun / Cartoony */
+body.theme-fun {
+    --primary-color: #ff4a8d;
+    --secondary-color: #ffda35;
+    --bg-color: #fff8eb;
+    --text-color: #590028;
+    --border-radius: 2rem;
+    --font-main: 'Plus Jakarta Sans', sans-serif;
+}
+body.theme-fun .btn, body.theme-fun .hard-shadow {
+    border-radius: 9999px;
+    box-shadow: 6px 6px 0px 0px #ffda35;
+}
+
+/* Theme: Professional */
+body.theme-professional {
+    --primary-color: #334155;
+    --secondary-color: #94a3b8;
+    --bg-color: #f8fafc;
+    --text-color: #0f172a;
+    --border-radius: 0.25rem;
+    --font-main: 'Inter', sans-serif;
+}
+body.theme-professional .hard-shadow, body.theme-professional .sticker-hover {
+    box-shadow: none;
+    border: 1px solid #e2e8f0;
+}
+
+/* Theme: Creative */
+body.theme-creative {
+    --primary-color: #c084fc;
+    --secondary-color: #2dd4bf;
+    --bg-color: #0f172a;
+    --text-color: #f8fafc;
+    --font-main: 'Space Grotesk', sans-serif;
+}
+body.theme-creative .animate-reveal {
+    animation: creative-float 3s ease-in-out infinite;
+}
+@keyframes creative-float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(1deg); }
 }

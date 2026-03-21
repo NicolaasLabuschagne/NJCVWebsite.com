@@ -39,6 +39,7 @@ const sketch = (p) => {
         const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
         // In "Adventure Book" mode, symbols look like faded ink
         const colorValue = isDark ? 200 : 80;
+        const limeGreen = [190, 242, 100]; // #bef264
 
         symbols.forEach(s => {
             let dx = p.mouseX - s.x;
@@ -46,7 +47,11 @@ const sketch = (p) => {
             let dist = p.sqrt(dx*dx + dy*dy);
             let offset = p.map(p.min(dist, 250), 0, 250, 15, 0);
 
-            p.fill(colorValue, colorValue, colorValue, p.map(p.min(dist, 400), 0, 400, 30, 2));
+            if (dist < 200) {
+                p.fill(limeGreen[0], limeGreen[1], limeGreen[2], p.map(p.min(dist, 200), 0, 200, 150, 2));
+            } else {
+                p.fill(colorValue, colorValue, colorValue, p.map(p.min(dist, 400), 0, 400, 30, 2));
+            }
             p.textSize(s.size);
             p.push();
             p.translate(s.x, s.y);
@@ -98,16 +103,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const updateThemeIcon = () => {
         const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-        const icon = themeToggle.querySelector('i');
+        const iconSpan = themeToggle.querySelector('.material-symbols-outlined');
         if (isDark) {
-            icon.className = 'fa fa-compass'; // Compass for dark mode adventure
+            iconSpan.textContent = 'terminal';
         } else {
-            icon.className = 'fa fa-bicycle';
+            iconSpan.textContent = 'terminal';
         }
     };
 
     if (currentTheme === 'dark') {
         document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.classList.add('dark');
     }
     updateThemeIcon();
 
@@ -115,9 +121,11 @@ document.addEventListener('DOMContentLoaded', () => {
         let theme = document.documentElement.getAttribute('data-theme');
         if (theme === 'dark') {
             document.documentElement.removeAttribute('data-theme');
+            document.documentElement.classList.remove('dark');
             localStorage.setItem('theme', 'light');
         } else {
             document.documentElement.setAttribute('data-theme', 'dark');
+            document.documentElement.classList.add('dark');
             localStorage.setItem('theme', 'dark');
         }
         updateThemeIcon();
@@ -205,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }).addTo(map);
 
         const bikeIcon = L.divIcon({
-            html: '<div style="font-size: 24px; filter: drop-shadow(2px 2px 0px black);">🚲</div>',
+            html: '<div style="font-size: 24px; filter: drop-shadow(2px 2px 0px #bef264);">🚲</div>',
             className: 'custom-bike-icon',
             iconSize: [30, 30],
             iconAnchor: [15, 15]
@@ -262,4 +270,37 @@ document.addEventListener('DOMContentLoaded', () => {
        Smooth Scrolling for Nav Links
        =========================== */
     // Handled by StPageFlip link overrides above
+});
+
+/* ===========================
+   Interactive Pet & Theme Cycling
+   =========================== */
+document.addEventListener('DOMContentLoaded', () => {
+    const pet = document.getElementById('interactive-pet');
+    const themes = ['theme-fun', 'theme-professional', 'theme-creative'];
+    let currentThemeIndex = -1;
+
+    if (pet) {
+        pet.addEventListener('click', () => {
+            // Remove previous theme class
+            if (currentThemeIndex !== -1) {
+                document.body.classList.remove(themes[currentThemeIndex]);
+            }
+
+            // Cycle to next theme
+            currentThemeIndex = (currentThemeIndex + 1) % (themes.length + 1);
+
+            // Apply new theme class if not back to default (-1)
+            if (currentThemeIndex < themes.length) {
+                document.body.classList.add(themes[currentThemeIndex]);
+                // Change pet emoji based on theme
+                const emojis = ['🐱', '💼', '🎨'];
+                pet.textContent = emojis[currentThemeIndex];
+            } else {
+                // Reset to default
+                currentThemeIndex = -1;
+                pet.textContent = '🐶';
+            }
+        });
+    }
 });
