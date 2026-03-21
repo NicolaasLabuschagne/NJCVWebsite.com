@@ -1,33 +1,33 @@
 # Nicolaas Labuschagne Portfolio - Style & Theme Guide
 
-This document provides a comprehensive guide to the "Adventure Book / Messy Professional" style and theme used in this portfolio. Any AI agent or developer working on this project should adhere to these guidelines to maintain visual and functional consistency.
+This document provides a comprehensive guide to the "Neon Zine / Global Dev" design system used in this portfolio. Any AI agent or developer working on this project should adhere to these guidelines to maintain visual and functional consistency.
 
 ## 1. Core Brand & Theme
-- **Theme Name:** Adventure Book / Messy Professional.
-- **Concept:** The website is designed to look like a curated scrapbook or a physical "Adventure Book". It balances technical rigor ("Systems Architect") with a human, adventurous side ("Amateur Cyclist").
-- **Aesthetic:** "Globally competitive" but intentionally "messy" (imperfect). It avoids sterile, minimalist perfection in favor of high-contrast borders, overlapping elements, and "hand-drawn" accents.
+- **Theme Name:** Neon Zine / Global Dev (Glow-Cartoon).
+- **Concept:** The website is designed as a high-contrast, interactive "Zine" or dossier. It balances technical rigor ("Global Dev") with a creative, vibrant aesthetic.
+- **Aesthetic:** Neo-brutalist with "Glow-Cartoon" accents. Features thick borders (4px-6px), hard shadows (no blur), and vibrant neon highlights.
+- **Theme Cycling:** Features a tri-state theme engine (Creative, Fun, Professional) toggled via an interactive pet (🐾).
 
 ## 2. Color Palette (Design Tokens)
 
-### Light Mode (Parchment/Scrapbook)
-- **Background:** `#fdfcf0` (Parchment cream)
-- **Primary (Accent):** `#d4af37` (Gold)
-- **Secondary (Accents):** `#5d4037` (Leather Brown)
-- **Text:** `#2c1e1a` (Dark Brown)
-- **Success:** `#7bc07e` (Sage Green)
-- **Error/Adventure:** `#b71c1c` (Adventure Red)
-- **Purple:** `#c084fc`
+### Global Constants (Creative/Zine Default)
+- **Primary:** `#bef264` (Lime Green - User Preferred)
+- **Secondary:** `#ffda35` (Yellow)
+- **Accent/Pink:** `#ff4a8d` (Pink)
+- **Background:** `#131313` (Dark)
+- **Text:** `#e5e2e1` (Off-white)
+- **Borders:** `#131313` or themed equivalents.
 
-### Dark Mode (Deep Forest Night)
-- **Background:** `#0d0d0d` (Deep forest night)
-- **Text:** `#e0e0e0`
-- **Primary:** `#4ade80` (Glow green)
-- **Spine/Accent:** `#000000`
-- **Borders:** `#333333`
+### Theme Variations (via CSS Variables)
+- **Creative:** The default high-contrast dark theme with lime highlights.
+- **Fun:** Rounded corners (`2rem`), bright parchment background (`#fff8eb`), and deep pink highlights.
+- **Professional:** Clean, minimalist style with Slate colors, thin borders (1px), and standard shadows.
 
 ## 3. Typography
-- **Primary Font:** 'Montserrat', sans-serif (Weights: 400, 700, 900). Used for most text and headings.
-- **Accent Font:** 'Caveat', cursive (Weight: 700). Used for hand-drawn notes, speech bubbles, and "scribble" accents.
+- **Headlines:** 'Space Grotesk', sans-serif (Weights: 700, 900). Variable: `var(--font-main)`.
+- **Body:** 'Plus Jakarta Sans', sans-serif. Variable: `var(--font-body)`.
+- **Mono:** 'Space Mono', monospace. Variable: `var(--font-mono)`.
+- **Hand:** 'Caveat', cursive. Variable: `var(--font-cursive)`.
 
 ## 4. UI/UX Principles
 - **High-Contrast Borders:** Use `var(--border-width)` (3px) and `var(--border-color)` (`#2c1e1a`) for almost all containers and buttons.
