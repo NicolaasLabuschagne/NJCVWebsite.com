@@ -1,65 +1,54 @@
 /* ===========================
-   Zine / Glow-Cartoon Styles
+   Core Design System
    =========================== */
 :root {
-    --surface: #131313;
-    --surface-low: #1c1b1b;
-    --surface-high: #2a2a2a;
-    --surface-highest: #353535;
-    --surface-lowest: #0e0e0e;
-}
-
-.grid-bg {
-    background-image: radial-gradient(circle, #4a5d23 1px, transparent 1px);
-    background-size: 30px 30px;
-}
-.hard-shadow {
-    box-shadow: 8px 8px 0px 0px #131313;
-}
-.hard-shadow-pink {
-    box-shadow: 6px 6px 0px 0px #ff4a8d;
-}
-.hard-shadow-lime {
-    box-shadow: 6px 6px 0px 0px #bef264;
-}
-.glow-lime { text-shadow: 0 0 10px rgba(190, 242, 100, 0.6); }
-.glow-pink { text-shadow: 0 0 10px rgba(255, 0, 127, 0.6); }
-.sticker-rotate-ccw { transform: rotate(-1.5deg); }
-.sticker-rotate-cw { transform: rotate(1.2deg); }
-.sticker-hover:hover {
-    transform: translate(4px, 4px);
-    box-shadow: 0px 0px 0px 0px #131313;
-}
-
-/* ===========================
-   Design Tokens
-   =========================== */
-:root {
-    --bg-color: #ffffff;
-    --bg-color-rgb: 255, 255, 255;
-    --secondary-bg: #f8fafc;
-
+    --border-width-thick: 6px;
+    /* Colors */
     --primary-color: #bef264; /* Lime Green */
     --primary-color-rgb: 190, 242, 100;
-
     --secondary-color: #ffd93d; /* Yellow */
-    --secondary-color-rgb: 255, 217, 61;
-
     --accent-color: #ff6b9d; /* Pink */
-    --accent-color-rgb: 255, 107, 157;
-
-    --mint-color: #a8e6cf;
     --purple-color: #c084fc;
     --success-color: #4ade80;
     --error-color: #ff6b9d;
 
-    --text-color: #000000;
-    --text-dim: #475569;
+    --bg-color: #ffffff;
+    --text-color: #0f172a;
+    --text-dim: #64748b;
+    --border-color: #0f172a;
 
-    --border-color: #000000;
-    --invert-amount: 0;
+    /* Surfaces */
+    --surface: #ffffff;
+    --surface-low: #f8fafc;
+    --surface-high: #f1f5f9;
+    --surface-highest: #e2e8f0;
+    --surface-lowest: #ffffff;
 
-    --spine-color: #000000;
+    /* Spacing & Layout */
+    --space-unit: 8px;
+    --section-padding: 120px;
+    --container-max: 1280px;
+
+    /* Borders & Radii */
+    --border-width-sm: 2px;
+    --border-width-lg: 4px;
+    --border-width: var(--border-width-sm);
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 16px;
+    --radius-full: 9999px;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-brutal: 6px 6px 0px 0px var(--border-color);
+    --shadow-brutal-pink: 6px 6px 0px 0px var(--accent-color);
+    --shadow-brutal-lime: 6px 6px 0px 0px var(--primary-color);
+
+    /* Animation Defaults */
+    --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 [data-theme="dark"] {
@@ -104,14 +93,9 @@
 }
 
 :root {
-    --border-width: 4px;
-    --border-width-thick: 6px;
-    --shadow-offset: 8px;
-
     --font-main: 'Space Grotesk', sans-serif;
     --font-mono: 'Space Mono', monospace;
     --font-cursive: 'Caveat', cursive;
-    --transition-base: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 /* ===========================
@@ -135,6 +119,7 @@ body {
     font-family: var(--font-main);
     line-height: 1.6;
     position: relative;
+    transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 body::after {
@@ -1344,6 +1329,43 @@ main {
 }
 
 /* ===========================
+   Base Typography & Global Elements
+   =========================== */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-main);
+    line-height: 1.1;
+    font-weight: 900;
+}
+
+h1 { font-size: clamp(3rem, 10vw, 6rem); }
+h2 { font-size: clamp(2.5rem, 8vw, 4rem); }
+h3 { font-size: clamp(1.5rem, 5vw, 2.5rem); }
+h4 { font-size: clamp(1.2rem, 3vw, 1.5rem); }
+
+.btn-action {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-unit);
+    padding: calc(var(--space-unit) * 1.5) calc(var(--space-unit) * 3);
+    border: var(--border-width) solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-family: var(--font-mono);
+    font-weight: 800;
+    text-transform: uppercase;
+    transition: var(--transition-bounce);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.card-bento {
+    background: var(--surface);
+    border: var(--border-width) solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: calc(var(--space-unit) * 4);
+    transition: var(--transition-bounce);
+}
+
+/* ===========================
    Animations
    =========================== */
 .animate-reveal {
@@ -1532,45 +1554,34 @@ main {
 /* theme-fun: Cartoony / Playful */
 body.theme-fun {
     --bg-color: #fff8eb;
-    --surface: #fff8eb;
-    --surface-low: #fef3c7;
-    --surface-high: #fde68a;
-    --surface-highest: #fcd34d;
-    --surface-lowest: #fffbeb;
+    --surface: #ffffff;
+    --surface-low: #fffbeb;
+    --surface-high: #fef3c7;
+    --surface-highest: #fde68a;
     --text-color: #590028;
     --text-dim: #92400e;
+    --border-color: #590028;
     --primary-color: #bef264;
     --secondary-color: #ffda35;
     --accent-color: #ff4a8d;
-    --border-color: #590028;
     --border-width: 4px;
-    --border-radius: 40px;
+    --radius-lg: 40px;
+    --radius-md: 20px;
     --font-main: 'Fredoka', sans-serif;
     --font-body: 'Fredoka', sans-serif;
-    --font-mono: 'Space Mono', monospace;
-    --shadow-type: 10px 10px 0px 0px var(--secondary-color);
+    --shadow-brutal: 8px 8px 0px 0px var(--secondary-color);
 }
 
-body.theme-fun * {
-    transition: border-radius 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+body.theme-fun .card-bento, body.theme-fun .btn-action, body.theme-fun .nav {
+    border-radius: var(--radius-lg) !important;
+    box-shadow: var(--shadow-brutal) !important;
 }
 
-body.theme-fun .header, body.theme-fun .nav, body.theme-fun .btn,
-body.theme-fun .intro-box, body.theme-fun .profile-card-neo,
-body.theme-fun .timeline-content, body.theme-fun .skills-category,
-body.theme-fun .contact-box, body.theme-fun .social-link, body.theme-fun .tags span,
-body.theme-fun .education-card, body.theme-fun .language-item,
-body.theme-fun .skill-card, body.theme-fun .journey-card {
-    border-radius: var(--border-radius) !important;
-    box-shadow: 8px 8px 0px 0px var(--secondary-color) !important;
-}
-
-body.theme-fun .btn:hover {
+body.theme-fun .btn-action:hover {
     animation: wiggle 0.4s ease-in-out infinite;
 }
 
-body.theme-fun .hero-name {
-    font-family: 'Fredoka', sans-serif;
+body.theme-fun h1, body.theme-fun h2, body.theme-fun h3 {
     color: var(--accent-color);
 }
 
@@ -1578,68 +1589,43 @@ body.theme-fun .marquee {
     background: var(--accent-color);
     color: white;
     transform: rotate(2deg);
-    border-radius: 0;
 }
 
 /* theme-professional: Serious / Clean */
 body.theme-professional {
     --bg-color: #ffffff;
+    --text-color: #0f172a;
+    --text-dim: #64748b;
+    --border-color: #e2e8f0;
+    --primary-color: #0f172a;
+    --accent-color: #bef264;
     --surface: #ffffff;
     --surface-low: #f8fafc;
     --surface-high: #f1f5f9;
-    --surface-highest: #e2e8f0;
-    --surface-lowest: #ffffff;
-    --text-color: #1e293b;
-    --text-dim: #64748b;
-    --primary-color: #0f172a;
-    --secondary-color: #f1f5f9;
-    --accent-color: #2563eb;
-    --border-color: #e2e8f0;
     --border-width: 1px;
-    --border-radius: 4px;
+    --radius-lg: 12px;
+    --radius-md: 6px;
     --font-main: 'Inter', sans-serif;
     --font-body: 'Inter', sans-serif;
-    --font-mono: 'Inter', sans-serif;
-    --shadow-type: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-brutal: 0 10px 30px -10px rgba(0,0,0,0.05);
 }
 
-body.theme-professional .header, body.theme-professional .nav, body.theme-professional .btn,
-body.theme-professional .intro-box, body.theme-professional .profile-card-neo,
-body.theme-professional .timeline-content, body.theme-professional .skills-category,
-body.theme-professional .contact-box, body.theme-professional .social-link, body.theme-professional .tags span,
-body.theme-professional .education-card, body.theme-professional .language-item,
-body.theme-professional .skill-card, body.theme-professional .journey-card {
-    border-radius: var(--border-radius) !important;
-    box-shadow: var(--shadow-type) !important;
-    border-color: var(--border-color) !important;
-    background: #ffffff !important;
-    color: var(--text-color) !important;
+body.theme-professional .card-bento, body.theme-professional .btn-action, body.theme-professional .nav {
+    box-shadow: var(--shadow-brutal) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius-lg) !important;
 }
 
-body.theme-professional .btn {
+body.theme-professional .btn-action {
     background: var(--primary-color) !important;
-    color: #ffffff !important;
-}
-
-body.theme-professional .nav {
-    background: #ffffff !important;
-    border-bottom: 1px solid #e2e8f0 !important;
-    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05) !important;
-}
-
-body.theme-professional .hero-name {
-    font-family: 'Inter', sans-serif;
-    letter-spacing: -0.05em;
-    font-weight: 800;
+    color: white !important;
 }
 
 body.theme-professional .marquee {
     background: #f8fafc;
     color: #94a3b8;
     transform: none;
-    border: none;
-    border-top: 1px solid #e2e8f0;
-    border-bottom: 1px solid #e2e8f0;
+    border-y: 1px solid var(--border-color);
 }
 
 body.theme-professional .glow-lime, body.theme-professional .glow-pink,
@@ -1651,66 +1637,39 @@ body.theme-professional .sticker {
 
 /* theme-creative: Experimental / Expressive */
 body.theme-creative {
-    --surface: #131313;
-    --surface-low: #1c1b1b;
-    --surface-high: #2a2a2a;
-    --surface-highest: #353535;
-    --surface-lowest: #0e0e0e;
-    --bg-color: #000000;
+    --bg-color: #050505;
     --text-color: #bef264;
     --text-dim: #4d7c0f;
-    --primary-color: #bef264;
-    --secondary-color: #ffda35;
-    --accent-color: #c084fc;
     --border-color: #bef264;
-    --border-width: 2px;
-    --border-radius: 0px;
+    --surface: #0a0a0a;
+    --surface-low: #111;
+    --surface-high: #1a1a1a;
+    --border-width: 3px;
+    --radius-lg: 0px;
     --font-main: 'Space Mono', monospace;
     --font-body: 'Space Mono', monospace;
-    --font-mono: 'Space Mono', monospace;
-    --shadow-type: 12px -12px 0px 0px var(--accent-color);
+    --shadow-brutal: 12px 12px 0px 0px var(--accent-color);
 }
 
-body.theme-creative .nav, body.theme-creative .intro-box,
-body.theme-creative .timeline-content, body.theme-creative .skills-category,
-body.theme-creative .contact-box, body.theme-creative .education-card,
-body.theme-creative .skill-card, body.theme-creative .journey-card {
-    background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%) !important;
-    border: 2px solid var(--primary-color) !important;
-    box-shadow: var(--shadow-type) !important;
+body.theme-creative .card-bento, body.theme-creative .btn-action, body.theme-creative .nav {
+    background: linear-gradient(145deg, #111, #050505) !important;
+    box-shadow: var(--shadow-brutal) !important;
     transform: skewX(-1deg);
 }
 
-body.theme-creative .hero-name {
-    font-family: 'Space Mono', monospace;
+body.theme-creative h1, body.theme-creative h2, body.theme-creative h3 {
     text-transform: uppercase;
-    background: linear-gradient(to right, #bef264, #ffda35, #ff4a8d);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(4px 4px 0px #000);
-}
-
-body.theme-creative .profile-card-neo {
-    transform: rotate(3deg) scale(1.05);
-    border-style: dashed !important;
+    letter-spacing: -0.05em;
 }
 
 body.theme-creative .marquee {
-    background: linear-gradient(90deg, #bef264, #ffda35);
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
     color: #000;
-    transform: rotate(-3deg) translateY(-20px);
-    mix-blend-mode: screen;
+    transform: rotate(-2deg);
 }
 
-body.theme-creative .btn {
-    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
-    background: var(--primary-color) !important;
-    color: #000 !important;
-    box-shadow: none !important;
-}
-
-body.theme-creative .btn:hover {
-    transform: skewX(-10deg) scale(1.1);
+body.theme-creative .btn-action {
+    clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%);
 }
 
 /* Universal Overrides based on CSS Variables */
