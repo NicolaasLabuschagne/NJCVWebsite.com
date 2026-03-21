@@ -43,11 +43,15 @@ const sketch = (p) => {
         p.clear();
 
         const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-        const colorValue = isDark ? 200 : 80;
 
-        const primaryRGB = getComputedStyle(document.documentElement)
+        // Use primary color if it's visible enough, else gray
+        const primaryRGB = getComputedStyle(document.body)
             .getPropertyValue('--primary-color-rgb') || '190, 242, 100';
         const primaryColor = primaryRGB.split(',').map(c => parseInt(c.trim()));
+
+        const textColorRGB = getComputedStyle(document.body)
+            .getPropertyValue('--text-color-rgb') || (isDark ? '255,255,255' : '0,0,0');
+        const textColor = textColorRGB.split(',').map(c => parseInt(c.trim()));
 
         symbols.forEach(s => {
             let dx = p.mouseX - s.x;
@@ -58,7 +62,7 @@ const sketch = (p) => {
             if (dist < 200) {
                 p.fill(primaryColor[0], primaryColor[1], primaryColor[2], p.map(p.min(dist, 200), 0, 200, 150, 2));
             } else {
-                p.fill(colorValue, colorValue, colorValue, p.map(p.min(dist, 400), 0, 400, 30, 2));
+                p.fill(textColor[0], textColor[1], textColor[2], p.map(p.min(dist, 400), 0, 400, 30, 2));
             }
             p.textSize(s.size);
             p.push();
@@ -121,6 +125,9 @@ const PortfolioEngine = {
         if (savedMode === 'dark') {
             document.documentElement.classList.add('dark');
             document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.setAttribute('data-theme', 'light');
         }
         updateThemeIcon();
 

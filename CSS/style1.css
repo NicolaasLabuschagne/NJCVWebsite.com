@@ -13,7 +13,9 @@
     --error-color: #ff6b9d;
 
     --bg-color: #ffffff;
+    --bg-color-rgb: 255, 255, 255;
     --text-color: #0f172a;
+    --text-color-rgb: 15, 23, 42;
     --text-dim: #64748b;
     --border-color: #0f172a;
 
@@ -57,9 +59,10 @@
     --secondary-bg: #111827;
 
     --text-color: #ffffff;
+    --text-color-rgb: 255, 255, 255;
     --text-dim: #94a3b8;
 
-    --border-color: #a8e6cf;
+    --border-color: #bef264;
     --invert-amount: 1;
 
     --primary-color: #bef264;
@@ -1554,6 +1557,7 @@ h4 { font-size: clamp(1.2rem, 3vw, 1.5rem); }
 /* theme-fun: Cartoony / Playful */
 body.theme-fun {
     --bg-color: #fff8eb;
+    --bg-color-rgb: 255, 248, 235;
     --surface: #ffffff;
     --surface-low: #fffbeb;
     --surface-high: #fef3c7;
@@ -1572,6 +1576,19 @@ body.theme-fun {
     --shadow-brutal: 8px 8px 0px 0px var(--secondary-color);
 }
 
+[data-theme="dark"] body.theme-fun {
+    --bg-color: #2d1b0d;
+    --bg-color-rgb: 45, 27, 13;
+    --surface: #3d2b1d;
+    --surface-low: #2d1b0d;
+    --surface-high: #4d3b2d;
+    --text-color: #ffe4e6;
+    --text-color-rgb: 255, 228, 230;
+    --text-dim: #ffb1c4;
+    --border-color: #ff4a8d;
+    --shadow-brutal: 8px 8px 0px 0px #590028;
+}
+
 body.theme-fun .card-bento, body.theme-fun .btn-action, body.theme-fun .nav {
     border-radius: var(--radius-lg) !important;
     box-shadow: var(--shadow-brutal) !important;
@@ -1585,15 +1602,28 @@ body.theme-fun h1, body.theme-fun h2, body.theme-fun h3 {
     color: var(--accent-color);
 }
 
+body.theme-fun .text-on-surface-variant {
+    color: var(--text-dim);
+}
+
 body.theme-fun .marquee {
     background: var(--accent-color);
     color: white;
     transform: rotate(2deg);
 }
 
+body.theme-fun .text-on-surface {
+    color: var(--text-color);
+}
+
+body.theme-fun .text-on-primary {
+    color: var(--bg-color);
+}
+
 /* theme-professional: Serious / Clean */
 body.theme-professional {
     --bg-color: #ffffff;
+    --bg-color-rgb: 255, 255, 255;
     --text-color: #0f172a;
     --text-dim: #64748b;
     --border-color: #e2e8f0;
@@ -1610,6 +1640,19 @@ body.theme-professional {
     --shadow-brutal: 0 10px 30px -10px rgba(0,0,0,0.05);
 }
 
+[data-theme="dark"] body.theme-professional {
+    --bg-color: #0f172a;
+    --bg-color-rgb: 15, 23, 42;
+    --text-color: #f1f5f9;
+    --text-color-rgb: 241, 245, 249;
+    --text-dim: #94a3b8;
+    --border-color: #1e293b;
+    --primary-color: #f1f5f9;
+    --surface: #1e293b;
+    --surface-low: #0f172a;
+    --surface-high: #334155;
+}
+
 body.theme-professional .card-bento, body.theme-professional .btn-action, body.theme-professional .nav {
     box-shadow: var(--shadow-brutal) !important;
     border: 1px solid var(--border-color) !important;
@@ -1618,12 +1661,12 @@ body.theme-professional .card-bento, body.theme-professional .btn-action, body.t
 
 body.theme-professional .btn-action {
     background: var(--primary-color) !important;
-    color: white !important;
+    color: var(--bg-color) !important;
 }
 
 body.theme-professional .marquee {
-    background: #f8fafc;
-    color: #94a3b8;
+    background: var(--surface-low);
+    color: var(--text-dim);
     transform: none;
     border-y: 1px solid var(--border-color);
 }
@@ -1635,26 +1678,55 @@ body.theme-professional .sticker {
     display: none !important;
 }
 
+body.theme-professional .text-on-surface-variant {
+    color: var(--text-dim);
+}
+
+body.theme-professional .text-on-surface {
+    color: var(--text-color);
+}
+
 /* theme-creative: Experimental / Expressive */
 body.theme-creative {
+    --bg-color: #f5f5f5;
+    --bg-color-rgb: 245, 245, 245;
+    --text-color: #050505;
+    --text-color-rgb: 5, 5, 5;
+    --text-dim: #333;
+    --border-color: #bef264;
+    --surface: #ffffff;
+    --surface-low: #eee;
+    --surface-high: #ddd;
+    --border-width: 3px;
+    --radius-lg: 0px;
+    --font-main: 'Space Mono', monospace;
+    --font-body: 'Space Mono', monospace;
+    --shadow-brutal: 12px 12px 0px 0px #050505;
+}
+
+[data-theme="dark"] body.theme-creative {
     --bg-color: #050505;
+    --bg-color-rgb: 5, 5, 5;
     --text-color: #bef264;
+    --text-color-rgb: 190, 242, 100;
     --text-dim: #4d7c0f;
     --border-color: #bef264;
     --surface: #0a0a0a;
     --surface-low: #111;
     --surface-high: #1a1a1a;
-    --border-width: 3px;
-    --radius-lg: 0px;
-    --font-main: 'Space Mono', monospace;
-    --font-body: 'Space Mono', monospace;
     --shadow-brutal: 12px 12px 0px 0px var(--accent-color);
 }
 
 body.theme-creative .card-bento, body.theme-creative .btn-action, body.theme-creative .nav {
-    background: linear-gradient(145deg, #111, #050505) !important;
+    background: var(--surface) !important;
     box-shadow: var(--shadow-brutal) !important;
     transform: skewX(-1deg);
+}
+
+[data-theme="dark"] body.theme-creative .card-bento,
+[data-theme="dark"] body.theme-creative .btn-action,
+[data-theme="dark"] body.theme-creative .nav {
+    background: linear-gradient(145deg, #111, #050505) !important;
 }
 
 body.theme-creative h1, body.theme-creative h2, body.theme-creative h3 {
@@ -1672,20 +1744,15 @@ body.theme-creative .btn-action {
     clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%);
 }
 
+body.theme-creative .text-on-surface-variant {
+    color: var(--text-dim);
+}
+
+body.theme-creative .text-on-surface {
+    color: var(--text-color);
+}
+
 /* Universal Overrides based on CSS Variables */
 .btn, .hard-shadow, .sticker-hover, .profile-card-neo {
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-[data-theme="dark"].theme-professional {
-    --bg-color: #0f172a;
-    --text-color: #f1f5f9;
-    --border-color: #1e293b;
-    --secondary-color: #1e293b;
-}
-
-[data-theme="dark"].theme-fun {
-    --bg-color: #2d1b0d;
-    --text-color: #ffe4e6;
-    --border-color: #ff4a8d;
 }
