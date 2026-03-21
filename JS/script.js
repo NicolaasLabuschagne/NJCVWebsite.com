@@ -290,7 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('pet-theme');
     if (savedTheme && themes.includes(savedTheme)) {
         currentThemeIndex = themes.indexOf(savedTheme);
-        document.body.className = savedTheme;
+        document.body.classList.add(savedTheme);
         updatePetIcon(currentThemeIndex);
     } else {
         document.body.classList.add(themes[0]);
