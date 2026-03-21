@@ -40,7 +40,6 @@
               "on-tertiary-fixed": "#221b00",
               "on-secondary-fixed": "#3f001a",
               "tertiary": "#fff8eb",
-              "on-secondary-container": "#590028",
               "error": "#ffb4ab",
               "tertiary-fixed-dim": "#e9c400",
               "on-surface": "var(--text-color)",
@@ -116,8 +115,8 @@
 
     <main>
         <!-- Hero Section -->
-        <section id="hero" class="hero pt-40 pb-20 px-6 max-w-7xl mx-auto grid-bg animate-reveal">
-            <div class="hero-grid flex flex-col lg:flex-row items-center gap-16">
+        <section id="hero" class="hero grid-bg animate-reveal">
+            <div class="container hero-grid flex flex-col lg:flex-row items-center gap-16">
                 <!-- Central Portrait -->
                 <div class="relative group">
                     <div class="absolute -inset-4 bg-secondary-container opacity-20 blur-2xl group-hover:opacity-40 transition-opacity"></div>
@@ -207,8 +206,8 @@
             </svg>
         </section>
 
-        <section id="journey" class="py-24 bg-surface-container-lowest overflow-hidden animate-reveal">
-            <div class="max-w-7xl mx-auto px-6">
+        <section id="journey" class="section bg-surface-container-lowest overflow-hidden animate-reveal">
+            <div class="container">
                 <h2 class="uppercase text-center mb-16 flex items-center justify-center gap-4">
                     <span class="material-symbols-outlined text-secondary-container" style="font-size: 48px;">history_edu</span>
                     The Journey Narrative
@@ -228,24 +227,24 @@
                     </div>
                     <!-- Scaling Systems -->
                     <div class="relative group sticker-rotate-cw pt-8 md:pt-0">
-                        <div class="journey-card bg-surface-container-high border-4 border-on-surface p-8 rounded-2xl hard-shadow group-hover:-translate-y-2 transition-transform h-full">
+                        <div class="journey-card card-bento bg-surface-container-high hard-shadow group-hover:-translate-y-2 h-full">
                             <div class="flex justify-between items-start mb-6">
                                 <span class="bg-secondary-container text-on-accent px-3 py-1 font-mono font-bold rounded">PANEL_02</span>
                                 <span class="material-symbols-outlined text-4xl text-primary" style="font-variation-settings: 'FILL' 1;">hub</span>
                             </div>
-                            <h3 class="font-headline text-3xl font-black text-on-surface uppercase mb-4">Scaling</h3>
+                            <h3 class="uppercase mb-4">Scaling</h3>
                             <p class="font-body text-on-surface-variant mb-6">Architecting systems for millions. Moving from single nodes to global distributed clusters with zero-latency goals.</p>
                             <div class="font-hand text-tertiary-fixed text-xl">"Where throughput meets magic!"</div>
                         </div>
                     </div>
                     <!-- Future -->
                     <div class="relative group sticker-rotate-ccw pt-8 md:pt-0">
-                        <div class="journey-card bg-surface-container-high border-4 border-on-surface p-8 rounded-2xl hard-shadow group-hover:-translate-y-2 transition-transform h-full">
+                        <div class="journey-card card-bento bg-surface-container-high hard-shadow group-hover:-translate-y-2 h-full">
                             <div class="flex justify-between items-start mb-6">
                                 <span class="bg-primary text-on-primary px-3 py-1 font-mono font-bold rounded">PANEL_03</span>
                                 <span class="material-symbols-outlined text-4xl text-primary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
                             </div>
-                            <h3 class="font-headline text-3xl font-black text-on-surface uppercase mb-4">Future</h3>
+                            <h3 class="uppercase mb-4">Future</h3>
                             <p class="font-body text-on-surface-variant mb-6">Pioneering edge AI and autonomous infra. Building the next generation of self-healing software ecosystems.</p>
                             <div class="font-hand text-primary text-xl">"The code is evolving..."</div>
                         </div>
@@ -255,8 +254,8 @@
         </section>
 
         <!-- Artifact Gallery Section -->
-        <section id="skills" class="py-24 animate-reveal">
-            <div class="max-w-7xl mx-auto px-6">
+        <section id="skills" class="section animate-reveal">
+            <div class="container">
                 <div class="inline-block bg-secondary-container text-white font-label px-4 py-1 -rotate-2 mb-4 hard-shadow-pink">
                     ARTIFACT_GALLERY.v2
                 </div>
@@ -362,8 +361,8 @@
         </section>
 
         <!-- The Lab Section -->
-        <section id="the-lab" class="py-24 bg-surface-container-lowest overflow-hidden animate-reveal">
-            <div class="max-w-7xl mx-auto px-6">
+        <section id="the-lab" class="section bg-surface-container-lowest overflow-hidden animate-reveal">
+            <div class="container">
                 <header class="relative z-10 mb-20">
                     <div class="flex flex-col md:flex-row items-end gap-4 mb-4">
                         <h1 class="uppercase tracking-tighter text-primary leading-none">The Lab</h1>
@@ -386,15 +385,58 @@
                                 <h3 class="text-secondary-container mb-2 uppercase">Doodle Physics</h3>
                                 <p class="text-sm font-body text-on-surface-variant mb-4">A custom physics engine that treats hand-drawn SVG paths as rigid bodies.</p>
                             </div>
+                            <!-- Experiment Card 3 (Large/Wide) -->
+                            <div class="md:col-span-2 group relative card-bento bg-surface-container-lowest hard-shadow sticker-hover -rotate-1">
+                                <div class="flex flex-col md:flex-row gap-8">
+                                    <div class="md:w-1/2 aspect-video bg-surface-container rounded-lg overflow-hidden border-2 border-primary relative">
+                                        <div class="absolute top-2 left-2 bg-primary text-on-primary text-[10px] font-mono px-2 py-0.5 rounded uppercase">Artifact_092.sh</div>
+                                        <div class="p-4 font-mono text-xs text-primary overflow-hidden h-full">
+                                            <pre class="opacity-80">void mainImage() {
+  vec2 uv = fragCoord/iResolution.xy;
+  fragColor = vec4(uv, 0.5, 1.0);
+}</pre>
+                                        </div>
+                                    </div>
+                                    <div class="md:w-1/2 flex flex-col justify-center">
+                                        <h3 class="mb-4 uppercase leading-none">GLSL Soundscape</h3>
+                                        <p class="text-on-surface-variant mb-6 font-body">Synthesizing audio buffers directly from fragment shader color outputs.</p>
+                                        <button class="w-fit btn-primary">Initialize Core</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
-
+                    <!-- Sidebar: Upcoming Logs -->
+                    <aside class="lg:col-span-4">
+                        <div class="sticky top-32 space-y-8">
+                            <div class="relative card-bento bg-surface-container-low hard-shadow overflow-hidden">
+                                <div class="relative z-10">
+                                    <h2 class="text-on-surface mb-6 uppercase border-b-4 border-on-surface pb-2">Upcoming Logs</h2>
+                                    <div class="space-y-6">
+                                        <div class="group cursor-pointer">
+                                            <div class="flex items-center justify-between mb-1">
+                                                <span class="font-mono text-[10px] text-secondary-container font-bold">PROJECT_OMEGA</span>
+                                                <span class="font-mono text-[10px] text-on-surface-variant">WEEK 42</span>
+                                            </div>
+                                            <h4 class="font-bold text-lg group-hover:text-primary transition-colors">Neural Style Transfer</h4>
+                                            <div class="font-hand text-tertiary-container mt-1">Pending verification...</div>
+                                        </div>
+                                        <div class="group cursor-pointer">
+                                            <div class="flex items-center justify-between mb-1">
+                                                <span class="font-mono text-[10px] text-primary font-bold">UI_KIT_v2</span>
+                                                <span class="font-mono text-[10px] text-on-surface-variant">WEEK 43</span>
+                                            </div>
+                                            <h4 class="font-bold text-lg group-hover:text-primary transition-colors">Sticker Library</h4>
+                                            <div class="font-hand text-tertiary-container mt-1">Almost stickered.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
         <!-- Global Reach World Map Section -->
-        <section id="experience-map" class="py-24 relative animate-reveal">
-            <div class="max-w-7xl mx-auto px-6">
+        <section id="experience-map" class="section relative animate-reveal">
+            <div class="container">
                 <div class="bg-surface-container border-4 border-on-surface rounded-3xl p-8 md:p-12 overflow-hidden relative">
                     <div class="relative z-10 flex flex-col md:flex-row justify-between items-end gap-12">
                         <div class="max-w-xl">
@@ -427,8 +469,8 @@
 
 
         <!-- Testimonials Speech Bubbles -->
-        <section class="max-w-7xl mx-auto px-6 py-20 animate-reveal">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
+        <section id="testimonials" class="section animate-reveal">
+            <div class="container grid grid-cols-1 md:grid-cols-3 gap-16">
                 <!-- Bubble 1 -->
                 <div class="relative pt-10">
                     <div class="speech-bubble bg-surface-highest text-on-surface p-8 rounded-2xl relative border-4 border-on-surface">
@@ -472,8 +514,8 @@
         </section>
 
         <!-- Distributed Workflow Section -->
-        <section class="bg-surface-container-low border-y-4 border-on-surface py-24 px-6 overflow-hidden animate-reveal">
-            <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 items-center">
+        <section id="workflow" class="section bg-surface-container-low border-y-4 border-on-surface animate-reveal">
+            <div class="container flex flex-col md:flex-row gap-16 items-center">
                 <div class="md:w-1/2">
                     <h2 class="tracking-tighter uppercase mb-6 leading-[0.9]">
                         DISTRIBUTED <br/>
@@ -505,8 +547,8 @@
         </section>
 
         <!-- Final CTA / Contact Section -->
-        <section id="contact" class="max-w-4xl mx-auto px-6 py-32 text-center animate-reveal">
-            <div class="bg-primary p-12 border-4 border-background hard-shadow relative overflow-hidden">
+        <section id="contact" class="section animate-reveal">
+            <div class="container bg-primary p-12 border-4 border-background hard-shadow relative overflow-hidden text-center">
                 <div class="absolute inset-0 bg-white/10 opacity-50 mix-blend-overlay"></div>
                 <h2 class="text-on-primary italic tracking-tighter mb-8 relative z-10">READY TO LINK UP?</h2>
                 <div class="flex flex-col md:flex-row justify-center gap-6 relative z-10">
