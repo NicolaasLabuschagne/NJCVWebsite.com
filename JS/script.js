@@ -39,7 +39,11 @@ const sketch = (p) => {
         const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
         // In "Adventure Book" mode, symbols look like faded ink
         const colorValue = isDark ? 200 : 80;
-        const limeGreen = [190, 242, 100]; // #bef264
+
+        // Get primary color from CSS variables
+        const primaryRGB = getComputedStyle(document.documentElement)
+            .getPropertyValue('--primary-color-rgb') || '190, 242, 100';
+        const primaryColor = primaryRGB.split(',').map(c => parseInt(c.trim()));
 
         symbols.forEach(s => {
             let dx = p.mouseX - s.x;
@@ -48,7 +52,7 @@ const sketch = (p) => {
             let offset = p.map(p.min(dist, 250), 0, 250, 15, 0);
 
             if (dist < 200) {
-                p.fill(limeGreen[0], limeGreen[1], limeGreen[2], p.map(p.min(dist, 200), 0, 200, 150, 2));
+                p.fill(primaryColor[0], primaryColor[1], primaryColor[2], p.map(p.min(dist, 200), 0, 200, 150, 2));
             } else {
                 p.fill(colorValue, colorValue, colorValue, p.map(p.min(dist, 400), 0, 400, 30, 2));
             }
@@ -105,9 +109,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
         const iconSpan = themeToggle.querySelector('.material-symbols-outlined');
         if (isDark) {
-            iconSpan.textContent = 'terminal';
+            iconSpan.textContent = 'dark_mode';
         } else {
-            iconSpan.textContent = 'terminal';
+            iconSpan.textContent = 'light_mode';
         }
     };
 
@@ -213,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }).addTo(map);
 
         const bikeIcon = L.divIcon({
-            html: '<div style="font-size: 24px; filter: drop-shadow(2px 2px 0px #bef264);">🚲</div>',
+            html: '<div style="font-size: 24px; filter: drop-shadow(2px 2px 0px var(--primary-color));">🚲</div>',
             className: 'custom-bike-icon',
             iconSize: [30, 30],
             iconAnchor: [15, 15]
@@ -277,30 +281,43 @@ document.addEventListener('DOMContentLoaded', () => {
    =========================== */
 document.addEventListener('DOMContentLoaded', () => {
     const pet = document.getElementById('interactive-pet');
-    const themes = ['theme-fun', 'theme-professional', 'theme-creative'];
-    let currentThemeIndex = -1;
+
+    // Theme Cycle: Creative (Default) -> Fun -> Professional
+    const themes = ['theme-creative', 'theme-fun', 'theme-professional'];
+    let currentThemeIndex = 0; // Standard on Creative
+
+    // Load persisted theme choice if available
+    const savedTheme = localStorage.getItem('pet-theme');
+    if (savedTheme && themes.includes(savedTheme)) {
+        currentThemeIndex = themes.indexOf(savedTheme);
+        document.body.className = savedTheme;
+        updatePetIcon(currentThemeIndex);
+    } else {
+        document.body.classList.add(themes[0]);
+    }
+
+    function updatePetIcon(index) {
+        const icons = ['🎨', '🐾', '💼'];
+        pet.textContent = icons[index];
+    }
 
     if (pet) {
         pet.addEventListener('click', () => {
             // Remove previous theme class
-            if (currentThemeIndex !== -1) {
-                document.body.classList.remove(themes[currentThemeIndex]);
-            }
+            document.body.classList.remove(themes[currentThemeIndex]);
 
             // Cycle to next theme
-            currentThemeIndex = (currentThemeIndex + 1) % (themes.length + 1);
+            currentThemeIndex = (currentThemeIndex + 1) % themes.length;
 
-            // Apply new theme class if not back to default (-1)
-            if (currentThemeIndex < themes.length) {
-                document.body.classList.add(themes[currentThemeIndex]);
-                // Change pet emoji based on theme
-                const emojis = ['🐱', '💼', '🎨'];
-                pet.textContent = emojis[currentThemeIndex];
-            } else {
-                // Reset to default
-                currentThemeIndex = -1;
-                pet.textContent = '🐶';
-            }
+            // Apply new theme class
+            const newTheme = themes[currentThemeIndex];
+            document.body.classList.add(newTheme);
+            localStorage.setItem('pet-theme', newTheme);
+
+            // Visual feedback
+            updatePetIcon(currentThemeIndex);
+
+            console.log(`Switched to: ${newTheme}`);
         });
     }
 });

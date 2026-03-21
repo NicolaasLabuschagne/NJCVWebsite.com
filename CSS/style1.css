@@ -1496,7 +1496,7 @@ main {
     position: absolute;
     bottom: -24px;
     left: 28px;
-    border-width: 22px(22px 0 0);
+    border-width: 22px 22px 0 0;
     border-style: solid;
     border-color: #131313 transparent transparent transparent;
     z-index: -1;
@@ -1520,46 +1520,122 @@ main {
     transform: scale(1.2) rotate(10deg);
 }
 
-/* Theme: Fun / Cartoony */
+/* Global Default: Creative / Zine Theme */
+:root {
+    --primary-color: #bef264; /* Lime Green */
+    --on-primary-color: #1a2e05;
+    --secondary-color: #ffda35; /* Yellow */
+    --accent-color: #ff4a8d; /* Pink */
+    --bg-color: #131313;
+    --text-color: #e5e2e1;
+    --border-color: #131313;
+    --border-width: 4px;
+    --border-radius: 0.75rem;
+    --font-main: 'Space Grotesk', sans-serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+    --font-cursive: 'Caveat', cursive;
+    --shadow-type: 8px 8px 0px 0px #131313;
+}
+
+/* theme-fun: Bright, cheerful, rounded */
 body.theme-fun {
     --primary-color: #ff4a8d;
+    --on-primary-color: #ffffff;
     --secondary-color: #ffda35;
+    --accent-color: #60a5fa;
     --bg-color: #fff8eb;
     --text-color: #590028;
+    --border-color: #590028;
+    --border-width: 3px;
     --border-radius: 2rem;
     --font-main: 'Plus Jakarta Sans', sans-serif;
-}
-body.theme-fun .btn, body.theme-fun .hard-shadow {
-    border-radius: 9999px;
-    box-shadow: 6px 6px 0px 0px #ffda35;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+    --shadow-type: 6px 6px 0px 0px #ffda35;
 }
 
-/* Theme: Professional */
+body.theme-fun .hard-shadow,
+body.theme-fun .sticker-hover,
+body.theme-fun .btn,
+body.theme-fun .profile-card-neo,
+body.theme-fun section,
+body.theme-fun div {
+    border-radius: var(--border-radius) !important;
+}
+
+body.theme-fun .marquee {
+    background: var(--primary-color);
+    color: white;
+    transform: rotate(1deg);
+}
+
+/* theme-professional: Clean, modern, sharp */
 body.theme-professional {
-    --primary-color: #334155;
-    --secondary-color: #94a3b8;
-    --bg-color: #f8fafc;
+    --primary-color: #1e293b; /* Slate 800 */
+    --on-primary-color: #ffffff;
+    --secondary-color: #64748b; /* Slate 500 */
+    --accent-color: #2563eb; /* Blue 600 */
+    --bg-color: #ffffff;
     --text-color: #0f172a;
-    --border-radius: 0.25rem;
+    --border-color: #e2e8f0;
+    --border-width: 1px;
+    --border-radius: 0.125rem;
     --font-main: 'Inter', sans-serif;
-}
-body.theme-professional .hard-shadow, body.theme-professional .sticker-hover {
-    box-shadow: none;
-    border: 1px solid #e2e8f0;
+    --font-body: 'Inter', sans-serif;
+    --shadow-type: 0 4px 6px -1px rgb(0 0 0 / 0.1);
 }
 
-/* Theme: Creative */
-body.theme-creative {
-    --primary-color: #c084fc;
-    --secondary-color: #2dd4bf;
-    --bg-color: #0f172a;
-    --text-color: #f8fafc;
-    --font-main: 'Space Grotesk', sans-serif;
+body.theme-professional .hard-shadow,
+body.theme-professional .hard-shadow-pink,
+body.theme-professional .hard-shadow-lime {
+    box-shadow: var(--shadow-type) !important;
+    border-color: var(--border-color) !important;
 }
+
+body.theme-professional .sticker-hover:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1) !important;
+}
+
+body.theme-professional .marquee {
+    background: #f1f5f9;
+    color: #475569;
+    transform: none;
+    border-top: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+body.theme-professional .glow-lime,
+body.theme-professional .glow-pink {
+    text-shadow: none !important;
+}
+
+/* theme-creative (Explicit for consistency) */
+body.theme-creative {
+    --primary-color: #bef264;
+    --bg-color: #131313;
+    --text-color: #e5e2e1;
+}
+
 body.theme-creative .animate-reveal {
     animation: creative-float 3s ease-in-out infinite;
 }
+
 @keyframes creative-float {
     0%, 100% { transform: translateY(0) rotate(0deg); }
     50% { transform: translateY(-10px) rotate(1deg); }
+}
+
+/* Universal Overrides based on CSS Variables */
+.btn, .hard-shadow, .sticker-hover, .profile-card-neo {
+    transition: all 0.2s ease;
+}
+
+body.theme-fun .btn:hover {
+    transform: scale(1.05);
+}
+
+body.theme-professional .btn {
+    text-transform: none;
+    letter-spacing: normal;
 }

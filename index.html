@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Caveat:wght@400..700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Caveat:wght@400..700&family=Inter:wght@400;700&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script id="tailwind-config">
@@ -20,18 +20,18 @@
             colors: {
               "surface-container-low": "#1c1b1b",
               "surface": "#131313",
-              "tertiary-container": "#ffda35",
+              "tertiary-container": "var(--secondary-color)",
               "inverse-surface": "#e5e2e1",
               "surface-dim": "#131313",
-              "on-primary-container": "#1a2e05",
+              "on-primary-container": "var(--on-primary-color)",
               "secondary": "#ffb1c4",
-              "surface-tint": "#bef264",
+              "surface-tint": "var(--primary-color)",
               "outline-variant": "#4a5d23",
               "secondary-fixed": "#ffd9e1",
               "inverse-primary": "#4d7c0f",
               "on-tertiary": "#3a3000",
-              "on-primary": "#000000",
-              "on-primary-fixed-variant": "#1a2e05",
+              "on-primary": "var(--on-primary-color)",
+              "on-primary-fixed-variant": "var(--on-primary-color)",
               "surface-container-high": "#2a2a2a",
               "on-tertiary-fixed": "#221b00",
               "on-secondary-fixed": "#3f001a",
@@ -39,11 +39,11 @@
               "on-secondary-container": "#590028",
               "error": "#ffb4ab",
               "tertiary-fixed-dim": "#e9c400",
-              "on-surface": "#e5e2e1",
+              "on-surface": "var(--text-color)",
               "surface-container": "#20201f",
-              "primary": "#f7fee7",
+              "primary": "var(--primary-color)",
               "surface-container-highest": "#353535",
-              "on-primary-fixed": "#1a2e05",
+              "on-primary-fixed": "var(--on-primary-color)",
               "error-container": "#93000a",
               "surface-container-lowest": "#0e0e0e",
               "outline": "#849494",
@@ -51,26 +51,25 @@
               "on-secondary": "#65002e",
               "on-tertiary-fixed-variant": "#544600",
               "on-tertiary-container": "#725f00",
-              "primary-fixed": "#bef264",
-              "primary-fixed-dim": "#bef264",
+              "primary-fixed": "var(--primary-color)",
+              "primary-fixed-dim": "var(--primary-color)",
               "on-error": "#690005",
-              "primary-container": "#bef264",
-              "on-primary-container": "#1a2e05",
+              "primary-container": "var(--primary-color)",
               "surface-bright": "#393939",
               "inverse-on-surface": "#313030",
               "on-error-container": "#ffdad6",
               "secondary-fixed-dim": "#ffb1c4",
               "on-background": "var(--text-color)",
-              "secondary-container": "#ff4a8d",
+              "secondary-container": "var(--accent-color)",
               "on-secondary-fixed-variant": "#8f0044",
               "background": "var(--bg-color)",
               "tertiary-fixed": "#ffe16d"
             },
             fontFamily: {
-              "headline": ["Space Grotesk"],
-              "body": ["Plus Jakarta Sans"],
-              "label": ["Space Mono"],
-              "hand": ["Caveat"]
+              "headline": ["var(--font-main)"],
+              "body": ["var(--font-body)"],
+              "label": ["var(--font-mono)"],
+              "hand": ["var(--font-cursive)"]
             },
             borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
           },
@@ -89,22 +88,22 @@
     </div>
 
     <!-- TopAppBar Navigation -->
-    <nav class="fixed top-0 w-full z-50 bg-[#131313] backdrop-blur-xl bg-opacity-80 border-b-4 border-[#131313] bg-gradient-to-b from-[#bef264]/10 to-transparent shadow-[0_4px_0_0_#131313]">
+    <nav class="fixed top-0 w-full z-50 bg-background backdrop-blur-xl bg-opacity-80 border-b-4 border-background bg-gradient-to-b from-primary/10 to-transparent shadow-[0_4px_0_0_var(--bg-color)]">
         <div class="flex justify-between items-center px-8 py-4 max-w-full mx-auto">
-            <div class="text-2xl font-black text-[#bef264] italic tracking-tighter font-headline uppercase">
+            <div class="text-2xl font-black text-primary italic tracking-tighter font-headline uppercase">
                 GLOBAL_DEV
             </div>
             <div class="hidden md:flex gap-8 items-center font-headline font-bold tracking-tight uppercase">
-                <a class="text-[#bef264] border-b-4 border-[#bef264] pb-1 shadow-[0_2px_10px_rgba(190,242,100,0.5)] transition-all duration-150" href="#skills">Projects</a>
-                <a class="text-gray-400 hover:text-white transition-colors hover:scale-105 hover:-rotate-1" href="#the-lab">The Lab</a>
-                <a class="text-gray-400 hover:text-white transition-colors hover:scale-105 hover:-rotate-1" href="#experience-map">World Hub</a>
-                <a class="text-gray-400 hover:text-white transition-colors hover:scale-105 hover:-rotate-1" href="#contact">Contact</a>
+                <a class="text-primary border-b-4 border-primary pb-1 shadow-[0_2px_10px_var(--primary-color)] transition-all duration-150" href="#skills">Projects</a>
+                <a class="text-on-surface-variant hover:text-on-surface transition-colors hover:scale-105 hover:-rotate-1" href="#the-lab">The Lab</a>
+                <a class="text-on-surface-variant hover:text-on-surface transition-colors hover:scale-105 hover:-rotate-1" href="#experience-map">World Hub</a>
+                <a class="text-on-surface-variant hover:text-on-surface transition-colors hover:scale-105 hover:-rotate-1" href="#contact">Contact</a>
             </div>
             <div class="flex items-center gap-4">
-                <div class="text-[#bef264] flex items-center justify-center w-10 h-10 border-2 border-[#bef264] rounded-md cursor-pointer hover:rotate-12 transition-transform" id="theme-toggle">
+                <div class="text-primary flex items-center justify-center w-10 h-10 border-2 border-primary rounded-md cursor-pointer hover:rotate-12 transition-transform" id="theme-toggle">
                     <span class="material-symbols-outlined">terminal</span>
                 </div>
-                <button class="bg-[#bef264] text-[#1a2e05] font-headline font-bold uppercase px-6 py-2 rounded-full border-2 border-on-surface hover:scale-105 hover:-rotate-1 active:translate-y-1 transition-all">
+                <button class="bg-primary text-on-primary font-headline font-bold uppercase px-6 py-2 rounded-full border-2 border-on-surface hover:scale-105 hover:-rotate-1 active:translate-y-1 transition-all">
                     Hire Me
                 </button>
             </div>
@@ -132,17 +131,17 @@
                 <!-- Hero Text -->
                 <div class="flex-1 text-center lg:text-left">
                     <div class="mb-4 flex flex-wrap justify-center lg:justify-start gap-2">
-                        <span class="bg-secondary text-on-secondary px-4 py-1 rounded-full font-mono text-xs font-bold tracking-widest uppercase">Senior Engineer</span>
-                        <span class="bg-[#bef264] text-[#1a2e05] px-4 py-1 rounded-full font-mono text-xs font-bold tracking-widest uppercase">Cloud Native</span>
+                        <span class="bg-secondary-container text-on-secondary-container px-4 py-1 rounded-full font-mono text-xs font-bold tracking-widest uppercase">Senior Engineer</span>
+                        <span class="bg-primary text-on-primary px-4 py-1 rounded-full font-mono text-xs font-bold tracking-widest uppercase">Cloud Native</span>
                     </div>
-                    <h1 class="font-headline text-6xl md:text-8xl font-black text-[#bef264] leading-none tracking-tighter uppercase mb-6 drop-shadow-[4px_4px_0px_#131313] glow-lime">
+                    <h1 class="font-headline text-6xl md:text-8xl font-black text-primary leading-none tracking-tighter uppercase mb-6 drop-shadow-[4px_4px_0px_var(--bg-color)] glow-lime">
                         BUILDING THE <br/> <span class="text-white italic">CYBER FUTURE</span>
                     </h1>
                     <p class="font-body text-xl text-on-surface-variant max-w-xl mb-10 leading-relaxed">
                         Based in South Africa. Crafting high-performance distributed systems with a focus on scalability, resilience, and clean-sheet architectural design.
                     </p>
                     <div class="flex flex-wrap justify-center lg:justify-start gap-6">
-                        <a href="CV/Nicolaas-Labuschagne-CV.pdf" target="_blank" class="bg-[#bef264] text-[#1a2e05] px-8 py-4 rounded-xl font-headline font-bold text-xl uppercase border-4 border-on-surface hard-shadow-pink hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all">
+                        <a href="CV/Nicolaas-Labuschagne-CV.pdf" target="_blank" class="bg-primary text-on-primary px-8 py-4 rounded-xl font-headline font-bold text-xl uppercase border-4 border-on-surface hard-shadow-pink hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all">
                             View Dossier
                         </a>
                         <a href="#skills" class="bg-surface-container-high text-on-surface px-8 py-4 rounded-xl font-headline font-bold text-xl uppercase border-4 border-on-surface hard-shadow-lime hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all">
@@ -216,9 +215,9 @@
                         <div class="bg-surface-container-high border-4 border-on-surface p-8 rounded-2xl hard-shadow group-hover:-translate-y-2 transition-transform h-full">
                             <div class="flex justify-between items-start mb-6">
                                 <span class="bg-tertiary-container text-on-tertiary-container px-3 py-1 font-mono font-bold rounded">PANEL_01</span>
-                                <span class="material-symbols-outlined text-4xl text-[#bef264]" style="font-variation-settings: 'FILL' 1;">rocket_launch</span>
+                                <span class="material-symbols-outlined text-4xl text-primary" style="font-variation-settings: 'FILL' 1;">rocket_launch</span>
                             </div>
-                            <h3 class="font-headline text-3xl font-black text-white uppercase mb-4">Genesis</h3>
+                            <h3 class="font-headline text-3xl font-black text-on-surface uppercase mb-4">Genesis</h3>
                             <p class="font-body text-on-surface-variant mb-6">Born into the terminal. Early days of hacking kernels and understanding the raw metal foundations of computing.</p>
                             <div class="font-hand text-secondary text-xl">"Hello World was just the start..."</div>
                         </div>
@@ -227,10 +226,10 @@
                     <div class="relative group sticker-rotate-cw pt-8 md:pt-0">
                         <div class="bg-surface-container-high border-4 border-on-surface p-8 rounded-2xl hard-shadow group-hover:-translate-y-2 transition-transform h-full">
                             <div class="flex justify-between items-start mb-6">
-                                <span class="bg-secondary-container text-white px-3 py-1 font-mono font-bold rounded">PANEL_02</span>
-                                <span class="material-symbols-outlined text-4xl text-[#bef264]" style="font-variation-settings: 'FILL' 1;">hub</span>
+                                <span class="bg-secondary-container text-on-secondary-container px-3 py-1 font-mono font-bold rounded">PANEL_02</span>
+                                <span class="material-symbols-outlined text-4xl text-primary" style="font-variation-settings: 'FILL' 1;">hub</span>
                             </div>
-                            <h3 class="font-headline text-3xl font-black text-white uppercase mb-4">Scaling</h3>
+                            <h3 class="font-headline text-3xl font-black text-on-surface uppercase mb-4">Scaling</h3>
                             <p class="font-body text-on-surface-variant mb-6">Architecting systems for millions. Moving from single nodes to global distributed clusters with zero-latency goals.</p>
                             <div class="font-hand text-tertiary-fixed text-xl">"Where throughput meets magic!"</div>
                         </div>
@@ -239,12 +238,12 @@
                     <div class="relative group sticker-rotate-ccw pt-8 md:pt-0">
                         <div class="bg-surface-container-high border-4 border-on-surface p-8 rounded-2xl hard-shadow group-hover:-translate-y-2 transition-transform h-full">
                             <div class="flex justify-between items-start mb-6">
-                                <span class="bg-[#bef264] text-[#1a2e05] px-3 py-1 font-mono font-bold rounded">PANEL_03</span>
-                                <span class="material-symbols-outlined text-4xl text-[#bef264]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                                <span class="bg-primary text-on-primary px-3 py-1 font-mono font-bold rounded">PANEL_03</span>
+                                <span class="material-symbols-outlined text-4xl text-primary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
                             </div>
-                            <h3 class="font-headline text-3xl font-black text-white uppercase mb-4">Future</h3>
+                            <h3 class="font-headline text-3xl font-black text-on-surface uppercase mb-4">Future</h3>
                             <p class="font-body text-on-surface-variant mb-6">Pioneering edge AI and autonomous infra. Building the next generation of self-healing software ecosystems.</p>
-                            <div class="font-hand text-[#bef264] text-xl">"The code is evolving..."</div>
+                            <div class="font-hand text-primary text-xl">"The code is evolving..."</div>
                         </div>
                     </div>
                 </div>
@@ -257,16 +256,16 @@
                 <div class="inline-block bg-secondary-container text-white font-label px-4 py-1 -rotate-2 mb-4 hard-shadow-pink">
                     ARTIFACT_GALLERY.v2
                 </div>
-                <h2 class="text-6xl md:text-8xl font-headline font-extrabold tracking-tighter leading-none mb-12">
+                <h2 class="text-6xl md:text-8xl font-headline font-extrabold tracking-tighter leading-none mb-12 text-on-surface">
                     HIGH-LOAD <br/>
-                    <span class="text-[#bef264] italic underline decoration-secondary-container decoration-8 underline-offset-8">ARCHITECTURES</span>
+                    <span class="text-primary italic underline decoration-secondary-container decoration-8 underline-offset-8">ARCHITECTURES</span>
                 </h2>
                 <!-- Bento Grid Skills -->
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
                     <!-- Skills: Frontend & Languages -->
                     <div class="md:col-span-8 group">
                         <div class="bg-surface-container-lowest border-4 border-on-surface rounded-xl p-6 hard-shadow sticker-hover transition-all duration-150 cursor-pointer">
-                            <h3 class="text-4xl font-headline font-black text-[#bef264] mb-6 uppercase">Interface & Logic</h3>
+                            <h3 class="text-4xl font-headline font-black text-primary mb-6 uppercase">Interface & Logic</h3>
                             <div class="grid md:grid-cols-2 gap-8">
                                 <div>
                                     <h4 class="font-headline font-bold text-xl mb-4">Frontend</h4>
@@ -303,7 +302,7 @@
                                 </p>
                             </div>
                             <div class="flex justify-between items-center">
-                                <span class="font-label text-xs text-[#bef264] tracking-widest uppercase">Blueprint_v2</span>
+                                <span class="font-label text-xs text-primary tracking-widest uppercase">Blueprint_v2</span>
                                 <span class="material-symbols-outlined text-on-surface-variant">arrow_outward</span>
                             </div>
                         </div>
@@ -328,15 +327,15 @@
                     </div>
                     <!-- Skills: Cloud & DevOps -->
                     <div class="md:col-span-7 group -rotate-1">
-                        <div class="bg-[#1a1a1a] border-4 border-on-surface rounded-xl overflow-hidden hard-shadow sticker-hover transition-all duration-150 relative">
-                            <div class="absolute top-0 right-0 w-32 h-32 bg-[#bef264]/20 blur-3xl rounded-full"></div>
+                        <div class="bg-surface-container-low border-4 border-on-surface rounded-xl overflow-hidden hard-shadow sticker-hover transition-all duration-150 relative">
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-primary/20 blur-3xl rounded-full"></div>
                             <div class="p-8 relative z-10">
                                 <div class="flex justify-between items-start mb-8">
                                     <h3 class="text-3xl font-headline font-black uppercase text-on-surface">Cloud & DevOps</h3>
                                     <div class="flex gap-1">
                                         <div class="w-3 h-3 rounded-full bg-error border border-on-surface"></div>
                                         <div class="w-3 h-3 rounded-full bg-tertiary-container border border-on-surface"></div>
-                                        <div class="w-3 h-3 rounded-full bg-[#bef264] border border-on-surface"></div>
+                                        <div class="w-3 h-3 rounded-full bg-primary border border-on-surface"></div>
                                     </div>
                                 </div>
                                 <div class="grid md:grid-cols-2 gap-8">
@@ -347,7 +346,7 @@
                                         <span class="bg-surface-container-high px-3 py-1 rounded border border-outline-variant font-label text-xs">TERRAFORM</span>
                                     </div>
                                     <div class="bg-surface-container-lowest p-6 rounded-xl border-4 border-on-surface flex flex-col items-center justify-center text-center">
-                                        <div class="text-[#bef264] mb-2 font-headline font-black text-5xl">99.9%</div>
+                                        <div class="text-primary mb-2 font-headline font-black text-5xl">99.9%</div>
                                         <div class="text-xs font-label uppercase text-on-surface-variant tracking-widest">Uptime_Metric</div>
                                     </div>
                                 </div>
@@ -363,7 +362,7 @@
             <div class="max-w-7xl mx-auto px-6">
                 <header class="relative z-10 mb-20">
                     <div class="flex flex-col md:flex-row items-end gap-4 mb-4">
-                        <h1 class="text-6xl md:text-8xl font-headline font-black uppercase tracking-tighter text-[#bef264] leading-none">The Lab</h1>
+                        <h1 class="text-6xl md:text-8xl font-headline font-black uppercase tracking-tighter text-primary leading-none">The Lab</h1>
                         <span class="font-hand text-tertiary-container text-2xl rotate-[-5deg] pb-2">/experimental_zone</span>
                     </div>
                     <p class="max-w-2xl text-xl font-body text-on-surface-variant">
@@ -375,7 +374,7 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div class="group relative bg-surface-container-lowest border-4 border-on-surface p-6 rounded-xl hard-shadow sticker-hover transition-all duration-150">
                                 <div class="absolute -top-4 -right-4 bg-tertiary-container text-on-tertiary-container font-mono text-xs px-3 py-1 border-2 border-on-surface rotate-6 uppercase font-bold">Live GLSL</div>
-                                <h3 class="text-2xl font-headline font-bold text-[#bef264] mb-2 uppercase">Neon Ripple</h3>
+                                <h3 class="text-2xl font-headline font-bold text-primary mb-2 uppercase">Neon Ripple</h3>
                                 <p class="text-sm font-body text-on-surface-variant mb-4">Perlin noise-based distortion field affecting local DOM elements.</p>
                             </div>
                             <div class="group relative bg-surface-container-lowest border-4 border-on-surface p-6 rounded-xl hard-shadow sticker-hover transition-all duration-150 rotate-1">
@@ -395,11 +394,11 @@
                 <div class="bg-surface-container border-4 border-on-surface rounded-3xl p-8 md:p-12 overflow-hidden relative">
                     <div class="relative z-10 flex flex-col md:flex-row justify-between items-end gap-12">
                         <div class="max-w-xl">
-                            <div class="inline-flex items-center gap-2 bg-secondary-container text-white px-4 py-1 rounded-full mb-6 font-mono text-xs font-bold uppercase">
+                            <div class="inline-flex items-center gap-2 bg-secondary-container text-on-secondary-container px-4 py-1 rounded-full mb-6 font-mono text-xs font-bold uppercase">
                                 <span class="material-symbols-outlined text-sm">public</span>
                                 Network Status: Active
                             </div>
-                            <h2 class="font-headline text-5xl md:text-7xl font-black uppercase text-[#bef264] mb-6">Global Reach</h2>
+                            <h2 class="font-headline text-5xl md:text-7xl font-black uppercase text-primary mb-6">Global Reach</h2>
                             <p class="font-body text-lg text-on-surface-variant leading-relaxed">
                                 Deploying solutions across multiple continents. From silicon valley startups to enterprise hubs, the architecture remains robust and boundaryless.
                             </p>
@@ -407,12 +406,12 @@
                         <div class="flex flex-col gap-4 w-full md:w-auto">
                             <!-- Bento Map Stat Cards -->
                             <div class="bg-surface-container-highest border-2 border-on-surface p-4 rounded-xl flex items-center gap-4 sticker-rotate-cw">
-                                <div class="w-12 h-12 rounded-lg bg-[#bef264] flex items-center justify-center text-[#1a2e05]">
+                                <div class="w-12 h-12 rounded-lg bg-primary flex items-center justify-center text-on-primary">
                                     <span class="material-symbols-outlined">map</span>
                                 </div>
                                 <div>
-                                    <div class="font-mono text-2xl font-bold text-white">12+</div>
-                                    <div class="font-label text-xs uppercase opacity-60">Global Hubs</div>
+                                    <div class="font-mono text-2xl font-bold text-on-surface">12+</div>
+                                    <div class="font-label text-xs uppercase opacity-60 text-on-surface-variant">Global Hubs</div>
                                 </div>
                             </div>
                         </div>
@@ -444,7 +443,7 @@
                     <div class="speech-bubble bg-[#e5e2e1] text-[#131313] p-8 rounded-2xl relative border-4 border-[#131313] rotate-2">
                         <p class="font-headline font-bold text-xl leading-tight uppercase">"Finally a hub that feels as chaotic and creative as our sprints."</p>
                         <div class="mt-4 flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-[#bef264] border-2 border-[#131313]"></div>
+                            <div class="w-10 h-10 rounded-full bg-primary border-2 border-[#131313]"></div>
                             <div>
                                 <p class="font-mono text-xs font-bold">@CYBER_PUNK</p>
                                 <p class="font-mono text-[10px] opacity-70">BERLIN NODES</p>
@@ -481,16 +480,16 @@
                     </p>
                     <div class="flex flex-wrap gap-4">
                         <span class="bg-tertiary-container text-on-tertiary-container font-mono text-sm px-4 py-2 border-2 border-on-surface hard-shadow">#GITHUB_ACTIONS</span>
-                        <span class="bg-[#bef264] text-[#1a2e05] font-mono text-sm px-4 py-2 border-2 border-on-surface hard-shadow">#SLACK_SYNC</span>
-                        <span class="bg-secondary-container text-white font-mono text-sm px-4 py-2 border-2 border-on-surface hard-shadow">#LIVE_NODES</span>
+                        <span class="bg-primary text-on-primary font-mono text-sm px-4 py-2 border-2 border-on-surface hard-shadow">#SLACK_SYNC</span>
+                        <span class="bg-secondary-container text-on-secondary-container font-mono text-sm px-4 py-2 border-2 border-on-surface hard-shadow">#LIVE_NODES</span>
                     </div>
                 </div>
                 <div class="md:w-1/2 grid grid-cols-2 gap-6 relative">
                     <!-- Tool Cards -->
                     <div class="bg-surface-container-highest p-8 rounded-xl border-4 border-on-surface hard-shadow -rotate-2 hover:rotate-0 transition-transform cursor-pointer group">
-                        <span class="material-symbols-outlined text-5xl text-[#bef264] mb-4 block group-hover:scale-110 transition-transform">terminal</span>
-                        <h3 class="font-headline font-bold text-xl uppercase">GitHub</h3>
-                        <p class="font-hand text-lg opacity-60">Push code, break things.</p>
+                        <span class="material-symbols-outlined text-5xl text-primary mb-4 block group-hover:scale-110 transition-transform">terminal</span>
+                        <h3 class="font-headline font-bold text-xl uppercase text-on-surface">GitHub</h3>
+                        <p class="font-hand text-lg opacity-60 text-on-surface-variant">Push code, break things.</p>
                     </div>
                     <div class="bg-surface-container-highest p-8 rounded-xl border-4 border-on-surface hard-shadow rotate-3 hover:rotate-0 transition-transform cursor-pointer group">
                         <span class="material-symbols-outlined text-5xl text-secondary-container mb-4 block group-hover:scale-110 transition-transform">forum</span>
@@ -503,14 +502,14 @@
 
         <!-- Final CTA / Contact Section -->
         <section id="contact" class="max-w-4xl mx-auto px-6 py-32 text-center animate-reveal">
-            <div class="bg-[#bef264] p-12 border-4 border-[#131313] hard-shadow relative overflow-hidden">
+            <div class="bg-primary p-12 border-4 border-background hard-shadow relative overflow-hidden">
                 <div class="absolute inset-0 bg-white/10 opacity-50 mix-blend-overlay"></div>
-                <h2 class="font-headline text-5xl font-black text-[#1a2e05] italic tracking-tighter mb-8 relative z-10">READY TO LINK UP?</h2>
+                <h2 class="font-headline text-5xl font-black text-on-primary italic tracking-tighter mb-8 relative z-10">READY TO LINK UP?</h2>
                 <div class="flex flex-col md:flex-row justify-center gap-6 relative z-10">
-                    <a href="mailto:NJ.Labuschagne@outlook.com" class="bg-[#131313] text-[#e5e2e1] px-10 py-4 rounded-full font-black uppercase tracking-widest border-4 border-[#131313] hover:scale-105 transition-transform">HIRE ME!</a>
-                    <a href="https://linkedin.com/in/nicolaas-labuschagne-919739286" target="_blank" class="bg-transparent text-[#131313] px-10 py-4 rounded-full font-black uppercase tracking-widest border-4 border-[#131313] hover:bg-[#131313] hover:text-[#e5e2e1] transition-colors">LINKEDIN</a>
+                    <a href="mailto:NJ.Labuschagne@outlook.com" class="bg-background text-on-background px-10 py-4 rounded-full font-black uppercase tracking-widest border-4 border-background hover:scale-105 transition-transform">HIRE ME!</a>
+                    <a href="https://linkedin.com/in/nicolaas-labuschagne-919739286" target="_blank" class="bg-transparent text-background px-10 py-4 rounded-full font-black uppercase tracking-widest border-4 border-background hover:bg-background hover:text-on-background transition-colors">LINKEDIN</a>
                 </div>
-                <div class="mt-8 font-hand text-2xl text-[#1a2e05] rotate-1">Don't be a stranger, we don't bite (mostly).</div>
+                <div class="mt-8 font-hand text-2xl text-on-primary-fixed-variant rotate-1">Don't be a stranger, we don't bite (mostly).</div>
             </div>
         </section>
     </main>
@@ -519,11 +518,11 @@
     <footer class="w-full py-12 px-8 border-t-4 border-[#131313] bg-[#131313] bg-gradient-to-t from-[#ff007f]/5 to-transparent">
         <div class="flex flex-col md:flex-row justify-between items-center gap-6 w-full max-w-7xl mx-auto">
             <div class="text-lg font-bold text-[#ff007f] font-headline">NEON ZINE DEV.</div>
-            <div class="flex gap-8 font-label text-xs uppercase tracking-widest text-gray-500">
-                <a class="hover:text-[#bef264] transition-all hover:skew-x-2" href="https://github.com/NicolaasLabuschagne" target="_blank">GitHub</a>
-                <a class="hover:text-[#bef264] transition-all hover:skew-x-2" href="https://linkedin.com/in/nicolaas-labuschagne-919739286" target="_blank">LinkedIn</a>
-                <a class="hover:text-[#bef264] transition-all hover:skew-x-2" href="#">Source</a>
-                <a class="hover:text-[#bef264] transition-all hover:skew-x-2" href="#">Status</a>
+            <div class="flex gap-8 font-label text-xs uppercase tracking-widest text-on-surface-variant">
+                <a class="hover:text-primary transition-all hover:skew-x-2" href="https://github.com/NicolaasLabuschagne" target="_blank">GitHub</a>
+                <a class="hover:text-primary transition-all hover:skew-x-2" href="https://linkedin.com/in/nicolaas-labuschagne-919739286" target="_blank">LinkedIn</a>
+                <a class="hover:text-primary transition-all hover:skew-x-2" href="#">Source</a>
+                <a class="hover:text-primary transition-all hover:skew-x-2" href="#">Status</a>
             </div>
             <div class="text-[#ff007f] font-label text-xs uppercase tracking-widest">
                 © 2026 NEON ZINE DEV. STICKERED IN CYBERSPACE.
@@ -532,7 +531,7 @@
     </footer>
 
     <!-- Interactive Pet Element -->
-    <div id="interactive-pet" class="pet-element" title="Click me to change the vibe!">🐶</div>
+    <div id="interactive-pet" class="pet-element" title="Click me to change the vibe!">🐾</div>
 
     <script src="JS/script.js"></script>
 </body>
