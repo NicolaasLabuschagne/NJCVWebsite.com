@@ -6,7 +6,12 @@ const sketch = (p) => {
     let symbols = [];
     // More "Adventure/Scrapbook" style symbols
     const symbolChars = ['★', '•', '✎', '➤', '❖'];
-    const gridSize = 50;
+    const gridSize = 65; // Increased grid size for better performance
+
+    // Smooth mouse tracking
+    let easedMouseX = 0;
+    let easedMouseY = 0;
+    const easing = 0.08;
 
     p.setup = () => {
         let canvas = p.createCanvas(p.windowWidth, p.windowHeight);
@@ -42,6 +47,10 @@ const sketch = (p) => {
 
         p.clear();
 
+        // Ease the mouse position
+        easedMouseX = p.lerp(easedMouseX, p.mouseX, easing);
+        easedMouseY = p.lerp(easedMouseY, p.mouseY, easing);
+
         const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
 
         // Use primary color if it's visible enough, else gray
@@ -54,16 +63,36 @@ const sketch = (p) => {
         const textColor = textColorRGB.split(',').map(c => parseInt(c.trim()));
 
         symbols.forEach(s => {
-            let dx = p.mouseX - s.x;
-            let dy = p.mouseY - s.y;
-            let dist = p.sqrt(dx*dx + dy*dy);
-            let offset = p.map(p.min(dist, 250), 0, 250, 15, 0);
+            const dx = easedMouseX - s.x;
+            const dy = easedMouseY - s.y;
+            const distSq = dx*dx + dy*dy;
 
-            if (dist < 200) {
-                p.fill(primaryColor[0], primaryColor[1], primaryColor[2], p.map(p.min(dist, 200), 0, 200, 150, 2));
+            let dist = 250;
+            let alpha;
+            let color;
+            let offset = 0;
+
+            // Only calculate square root and complex logic if within 400px
+            if (distSq < 160000) {
+                dist = p.sqrt(distSq);
+
+                if (dist < 250) {
+                    offset = p.map(dist, 0, 250, 15, 0);
+                }
+
+                if (dist < 200) {
+                    alpha = p.map(dist, 0, 200, 150, 2);
+                    color = primaryColor;
+                } else {
+                    alpha = p.map(p.min(dist, 400), 0, 400, 30, 2);
+                    color = textColor;
+                }
             } else {
-                p.fill(textColor[0], textColor[1], textColor[2], p.map(p.min(dist, 400), 0, 400, 30, 2));
+                alpha = 2;
+                color = textColor;
             }
+
+            p.fill(color[0], color[1], color[2], alpha);
             p.textSize(s.size);
             p.push();
             p.translate(s.x, s.y);
