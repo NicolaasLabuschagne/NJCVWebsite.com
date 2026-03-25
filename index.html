@@ -91,22 +91,20 @@
     </div>
 
     <!-- TopAppBar Navigation -->
-    <nav class="header nav fixed top-0 w-full z-50 bg-background backdrop-blur-xl bg-opacity-80 border-b-4 border-background bg-gradient-to-b from-primary/10 to-transparent shadow-[0_4px_0_0_var(--bg-color)]">
-        <div class="flex justify-between items-center px-8 py-4 max-w-full mx-auto">
+    <nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b-4 border-on-surface bg-gradient-to-b from-primary/10 to-transparent shadow-[0_4px_0_0_var(--on-surface)]">
+        <div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
             <div class="text-2xl font-black text-primary italic tracking-tighter font-headline uppercase">
                 GLOBAL_DEV
             </div>
             <div class="hidden md:flex gap-8 items-center font-headline font-bold tracking-tight uppercase">
-                <a class="text-primary border-b-4 border-primary pb-1 shadow-[0_2px_10px_var(--primary-color)] transition-all duration-150" href="#skills">Projects</a>
+                <a class="text-primary border-b-4 border-primary pb-1 shadow-[0_2px_10px_rgba(190,242,100,0.5)] transition-all duration-150" href="#skills">Projects</a>
                 <a class="text-on-surface-variant hover:text-on-surface transition-colors hover:scale-105 hover:-rotate-1" href="#the-lab">The Lab</a>
                 <a class="text-on-surface-variant hover:text-on-surface transition-colors hover:scale-105 hover:-rotate-1" href="#experience-map">World Hub</a>
                 <a class="text-on-surface-variant hover:text-on-surface transition-colors hover:scale-105 hover:-rotate-1" href="#contact">Contact</a>
             </div>
             <div class="flex items-center gap-4">
-                <div class="text-primary flex items-center justify-center w-10 h-10 border-2 border-primary rounded-md cursor-pointer hover:rotate-12 transition-transform" id="theme-toggle">
-                    <span class="material-symbols-outlined">terminal</span>
-                </div>
-                <button class="bg-primary text-on-primary font-headline font-bold uppercase px-6 py-2 rounded-full border-2 border-on-surface hover:scale-105 hover:-rotate-1 active:translate-y-1 transition-all">
+                <button class="material-symbols-outlined text-primary hover:scale-110 transition-transform" id="theme-toggle">terminal</button>
+                <button class="bg-primary text-on-primary font-headline font-bold uppercase px-6 py-2 rounded-full border-2 border-on-surface active:translate-y-1 transition-all">
                     Hire Me
                 </button>
             </div>
@@ -115,14 +113,14 @@
 
     <main>
         <!-- Hero Section -->
-        <section id="hero" class="hero grid-bg animate-reveal">
-            <div class="container hero-grid flex flex-col lg:flex-row items-center gap-16">
+        <section id="hero" class="relative z-10 pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto blueprint-bg animate-reveal">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
                 <!-- Central Portrait -->
                 <div class="relative group">
                     <div class="absolute -inset-4 bg-secondary-container opacity-20 blur-2xl group-hover:opacity-40 transition-opacity"></div>
                     <div class="relative w-72 h-72 md:w-96 md:h-96 border-4 border-on-surface bg-surface-container-highest rounded-2xl overflow-hidden hard-shadow-pink sticker-rotate-ccw">
                         <img src="images/myPic.png" alt="Nicolaas Portrait" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500">
-                        <div class="absolute bottom-4 left-4 bg-tertiary-container text-on-secondary px-3 py-1 font-mono text-xs font-bold rounded-md border-2 border-on-surface">
+                        <div class="absolute bottom-4 left-4 bg-tertiary-container text-on-tertiary-container px-3 py-1 font-mono text-xs font-bold rounded-md border-2 border-on-surface">
                             SYSTEM_ARCHITECT_V2
                         </div>
                     </div>
@@ -132,24 +130,24 @@
                     </div>
                 </div>
                 <!-- Hero Text -->
-                <div class="hero-left intro-box card-bento flex-1 text-center lg:text-left hard-shadow">
+                <div class="flex-1 text-center lg:text-left">
                     <div class="mb-4 flex flex-wrap justify-center lg:justify-start gap-2">
-                        <span class="bg-secondary-container text-on-secondary-container px-4 py-1 rounded-full font-mono text-xs font-bold tracking-widest uppercase">Senior Engineer</span>
-                        <span class="bg-primary text-on-primary px-4 py-1 rounded-full font-mono text-xs font-bold tracking-widest uppercase">Cloud Native</span>
+                        <span class="bg-secondary text-on-secondary px-4 py-1 rounded-full font-mono text-xs font-bold tracking-widest uppercase">Senior Engineer</span>
+                        <span class="bg-primary-fixed-dim text-on-primary-fixed px-4 py-1 rounded-full font-mono text-xs font-bold tracking-widest uppercase">Cloud Native</span>
                     </div>
-                    <h1 class="text-primary tracking-tighter uppercase mb-6 drop-shadow-[4px_4px_0px_var(--bg-color)] glow-lime">
+                    <h1 class="font-headline text-6xl md:text-8xl font-black text-primary-container leading-none tracking-tighter uppercase mb-6 drop-shadow-[4px_4px_0px_#131313] glow-lime">
                         BUILDING THE <br/> <span class="text-white italic">CYBER FUTURE</span>
                     </h1>
                     <p class="font-body text-xl text-on-surface-variant max-w-xl mb-10 leading-relaxed">
-                        Based in South Africa. Crafting high-performance distributed systems with a focus on scalability, resilience, and clean-sheet architectural design.
+                        Crafting high-performance distributed systems with a focus on scalability, resilience, and clean-sheet architectural design.
                     </p>
                     <div class="flex flex-wrap justify-center lg:justify-start gap-6">
-                        <a href="CV/Nicolaas-Labuschagne-CV.pdf" target="_blank" class="btn-action bg-primary text-on-primary hard-shadow-pink hover:translate-x-1 hover:translate-y-1 hover:shadow-none">
+                        <a href="CV/Nicolaas-Labuschagne-CV.pdf" target="_blank" class="bg-primary-container text-on-primary-fixed-variant px-8 py-4 rounded-xl font-headline font-bold text-xl uppercase border-4 border-on-surface hard-shadow-pink hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all">
                             View Dossier
                         </a>
-                        <a href="#skills" class="btn-action bg-surface-container-high text-on-surface hard-shadow-lime hover:translate-x-1 hover:translate-y-1 hover:shadow-none">
+                        <button class="bg-surface-container-high text-on-surface px-8 py-4 rounded-xl font-headline font-bold text-xl uppercase border-4 border-on-surface hard-shadow-lime hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all">
                             The Stack
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -206,45 +204,45 @@
             </svg>
         </section>
 
-        <section id="journey" class="section bg-surface-container-lowest overflow-hidden animate-reveal">
-            <div class="container">
-                <h2 class="uppercase text-center mb-16 flex items-center justify-center gap-4">
+        <section id="journey" class="py-24 bg-surface-container-lowest overflow-hidden animate-reveal">
+            <div class="max-w-7xl mx-auto px-6">
+                <h2 class="font-headline text-4xl font-black uppercase text-center mb-16 flex items-center justify-center gap-4">
                     <span class="material-symbols-outlined text-secondary-container" style="font-size: 48px;">history_edu</span>
                     The Journey Narrative
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
                     <!-- Genesis -->
                     <div class="relative group sticker-rotate-ccw">
-                        <div class="journey-card card-bento bg-surface-container-high hard-shadow group-hover:-translate-y-2 h-full">
+                        <div class="bg-surface-container-high border-4 border-on-surface p-8 rounded-2xl hard-shadow group-hover:-translate-y-2 transition-transform h-full">
                             <div class="flex justify-between items-start mb-6">
-                                <span class="bg-tertiary-container text-on-secondary px-3 py-1 font-mono font-bold rounded">PANEL_01</span>
-                                <span class="material-symbols-outlined text-4xl text-primary" style="font-variation-settings: 'FILL' 1;">rocket_launch</span>
+                                <span class="bg-tertiary-container text-on-tertiary-container px-3 py-1 font-mono font-bold rounded">PANEL_01</span>
+                                <span class="material-symbols-outlined text-4xl text-primary-container" style="font-variation-settings: 'FILL' 1;">rocket_launch</span>
                             </div>
-                            <h3 class="uppercase mb-4">Genesis</h3>
+                            <h3 class="font-headline text-3xl font-black text-white uppercase mb-4">Genesis</h3>
                             <p class="font-body text-on-surface-variant mb-6">Born into the terminal. Early days of hacking kernels and understanding the raw metal foundations of computing.</p>
                             <div class="font-hand text-secondary text-xl">"Hello World was just the start..."</div>
                         </div>
                     </div>
                     <!-- Scaling Systems -->
                     <div class="relative group sticker-rotate-cw pt-8 md:pt-0">
-                        <div class="journey-card card-bento bg-surface-container-high hard-shadow group-hover:-translate-y-2 h-full">
+                        <div class="bg-surface-container-high border-4 border-on-surface p-8 rounded-2xl hard-shadow group-hover:-translate-y-2 transition-transform h-full">
                             <div class="flex justify-between items-start mb-6">
-                                <span class="bg-secondary-container text-on-accent px-3 py-1 font-mono font-bold rounded">PANEL_02</span>
-                                <span class="material-symbols-outlined text-4xl text-primary" style="font-variation-settings: 'FILL' 1;">hub</span>
+                                <span class="bg-secondary-container text-on-secondary-container px-3 py-1 font-mono font-bold rounded">PANEL_02</span>
+                                <span class="material-symbols-outlined text-4xl text-primary-container" style="font-variation-settings: 'FILL' 1;">hub</span>
                             </div>
-                            <h3 class="uppercase mb-4">Scaling</h3>
+                            <h3 class="font-headline text-3xl font-black text-white uppercase mb-4">Scaling</h3>
                             <p class="font-body text-on-surface-variant mb-6">Architecting systems for millions. Moving from single nodes to global distributed clusters with zero-latency goals.</p>
                             <div class="font-hand text-tertiary-fixed text-xl">"Where throughput meets magic!"</div>
                         </div>
                     </div>
                     <!-- Future -->
                     <div class="relative group sticker-rotate-ccw pt-8 md:pt-0">
-                        <div class="journey-card card-bento bg-surface-container-high hard-shadow group-hover:-translate-y-2 h-full">
+                        <div class="bg-surface-container-high border-4 border-on-surface p-8 rounded-2xl hard-shadow group-hover:-translate-y-2 transition-transform h-full">
                             <div class="flex justify-between items-start mb-6">
-                                <span class="bg-primary text-on-primary px-3 py-1 font-mono font-bold rounded">PANEL_03</span>
-                                <span class="material-symbols-outlined text-4xl text-primary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                                <span class="bg-primary-container text-on-primary-fixed px-3 py-1 font-mono font-bold rounded">PANEL_03</span>
+                                <span class="material-symbols-outlined text-4xl text-primary-container" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
                             </div>
-                            <h3 class="uppercase mb-4">Future</h3>
+                            <h3 class="font-headline text-3xl font-black text-white uppercase mb-4">Future</h3>
                             <p class="font-body text-on-surface-variant mb-6">Pioneering edge AI and autonomous infra. Building the next generation of self-healing software ecosystems.</p>
                             <div class="font-hand text-primary text-xl">"The code is evolving..."</div>
                         </div>
@@ -254,104 +252,101 @@
         </section>
 
         <!-- Artifact Gallery Section -->
-        <section id="skills" class="section animate-reveal">
-            <div class="container">
-                <div class="inline-block bg-secondary-container text-white font-label px-4 py-1 -rotate-2 mb-4 hard-shadow-pink">
-                    ARTIFACT_GALLERY.v2
+        <section id="skills" class="relative z-10 pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto animate-reveal">
+            <div class="inline-block bg-secondary-container text-white font-label px-4 py-1 -rotate-2 mb-4 hard-shadow-pink">
+                ARTIFACT_GALLERY.v2
+            </div>
+            <h2 class="text-6xl md:text-8xl font-headline font-extrabold tracking-tighter leading-none mb-12">
+                HIGH-LOAD <br/>
+                <span class="text-primary-container italic underline decoration-secondary-container decoration-8 underline-offset-8">ARCHITECTURES</span>
+            </h2>
+            <p class="max-w-2xl text-xl font-body text-on-surface-variant leading-relaxed mb-16">
+                Building distributed systems that don't melt under pressure. Detailed technical blueprints for microservices, crafted with pixel-perfect chaos.
+            </p>
+            <!-- Bento Grid Skills -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+                <!-- Project 1: Large Panel -->
+                <div class="md:col-span-8 group">
+                    <div class="bg-surface-container-lowest border-4 border-on-surface rounded-xl p-6 overflow-hidden hard-shadow sticker-hover transition-all duration-150 cursor-pointer">
+                        <h3 class="text-4xl font-headline font-black text-primary-container mb-6">INTERFACE & LOGIC</h3>
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="font-headline font-bold text-xl mb-4 text-on-surface">Frontend</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-primary-container text-on-primary-fixed font-label text-[10px] px-2 py-1 rounded border border-on-surface">ANGULAR</span>
+                                    <span class="bg-primary-container text-on-primary-fixed font-label text-[10px] px-2 py-1 rounded border border-on-surface">REACT.JS</span>
+                                    <span class="bg-primary-container text-on-primary-fixed font-label text-[10px] px-2 py-1 rounded border border-on-surface">IONIC</span>
+                                    <span class="bg-primary-container text-on-primary-fixed font-label text-[10px] px-2 py-1 rounded border border-on-surface">REDUX</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-headline font-bold text-xl mb-4 text-on-surface">Languages</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-secondary-container text-white font-label text-[10px] px-2 py-1 rounded border border-on-surface">TYPESCRIPT</span>
+                                    <span class="bg-secondary-container text-white font-label text-[10px] px-2 py-1 rounded border border-on-surface">PYTHON</span>
+                                    <span class="bg-secondary-container text-white font-label text-[10px] px-2 py-1 rounded border border-on-surface">C#</span>
+                                    <span class="bg-secondary-container text-white font-label text-[10px] px-2 py-1 rounded border border-on-surface">SQL</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <h2 class="tracking-tighter leading-none mb-12 text-on-surface">
-                    HIGH-LOAD <br/>
-                    <span class="text-primary italic underline decoration-secondary-container decoration-8 underline-offset-8">ARCHITECTURES</span>
-                </h2>
-                <!-- Bento Grid Skills -->
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
-                    <!-- Skills: Frontend & Languages -->
-                    <div class="md:col-span-8 group">
-                        <div class="skill-card card-bento bg-surface-container-lowest hard-shadow sticker-hover cursor-pointer">
-                            <h3 class="text-primary mb-6 uppercase">Interface & Logic</h3>
+                <!-- Project 2: Vertical Panel -->
+                <div class="md:col-span-4 group">
+                    <div class="h-full bg-surface-container border-4 border-on-surface rounded-xl p-6 hard-shadow sticker-hover transition-all duration-150 flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-lg bg-secondary-container flex items-center justify-center border-2 border-on-surface mb-6">
+                                <span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">bolt</span>
+                            </div>
+                            <h3 class="text-2xl font-headline font-bold mb-4 uppercase text-on-surface">Systems Design</h3>
+                            <p class="font-body text-sm text-on-surface-variant leading-relaxed mb-6">
+                                Microservices, SaaS, Event-Driven, and Domain-Driven Design (DDD).
+                            </p>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-label text-xs text-primary-container tracking-widest">BUILD_742</span>
+                            <span class="material-symbols-outlined text-on-surface-variant">arrow_outward</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 3: Medium Panel -->
+                <div class="md:col-span-5 group rotate-1">
+                    <div class="bg-surface-container-high border-4 border-on-surface rounded-xl p-6 hard-shadow-pink sticker-hover transition-all duration-150">
+                        <h3 class="text-2xl font-headline font-bold text-on-surface mb-4 uppercase">Core Infrastructure</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-[10px] font-label px-2 py-1 bg-surface border border-outline-variant rounded">NODE.JS</span>
+                            <span class="text-[10px] font-label px-2 py-1 bg-surface border border-outline-variant rounded">ASP.NET CORE</span>
+                            <span class="text-[10px] font-label px-2 py-1 bg-surface border border-outline-variant rounded">POSTGRESQL</span>
+                            <span class="text-[10px] font-label px-2 py-1 bg-surface border border-outline-variant rounded">REDIS</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 4: Interactive/Tech Detail Panel -->
+                <div class="md:col-span-7 group -rotate-1">
+                    <div class="bg-[#1a1a1a] border-4 border-on-surface rounded-xl overflow-hidden hard-shadow sticker-hover transition-all duration-150 relative">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-primary-container/20 blur-3xl rounded-full"></div>
+                        <div class="p-8 relative z-10">
+                            <div class="flex justify-between items-start mb-8">
+                                <h3 class="text-3xl font-headline font-black uppercase text-on-surface">Cloud & DevOps</h3>
+                                <div class="flex gap-1">
+                                    <div class="w-3 h-3 rounded-full bg-error border border-on-surface"></div>
+                                    <div class="w-3 h-3 rounded-full bg-tertiary-container border border-on-surface"></div>
+                                    <div class="w-3 h-3 rounded-full bg-primary-container border border-on-surface"></div>
+                                </div>
+                            </div>
                             <div class="grid md:grid-cols-2 gap-8">
                                 <div>
-                                    <h4 class="font-headline font-bold text-xl mb-4">Frontend</h4>
+                                    <p class="font-body text-sm text-on-surface-variant mb-6">
+                                        Containerized orchestration with Docker & Kubernetes. Automated infrastructure provisioning with Terraform.
+                                    </p>
                                     <div class="flex flex-wrap gap-2">
-                                        <span class="bg-surface-container-high px-3 py-1 rounded border border-outline-variant font-label text-xs">ANGULAR</span>
-                                        <span class="bg-surface-container-high px-3 py-1 rounded border border-outline-variant font-label text-xs">REACT.JS</span>
-                                        <span class="bg-surface-container-high px-3 py-1 rounded border border-outline-variant font-label text-xs">REDUX</span>
-                                        <span class="bg-surface-container-high px-3 py-1 rounded border border-outline-variant font-label text-xs">MATERIAL-UI</span>
-                                        <span class="bg-surface-container-high px-3 py-1 rounded border border-outline-variant font-label text-xs">IONIC</span>
+                                        <span class="bg-surface-container-high px-2 py-1 rounded font-mono text-[10px] text-outline uppercase">AZURE</span>
+                                        <span class="bg-surface-container-high px-2 py-1 rounded font-mono text-[10px] text-outline uppercase">TERRAFORM</span>
                                     </div>
                                 </div>
-                                <div>
-                                    <h4 class="font-headline font-bold text-xl mb-4">Languages</h4>
-                                    <div class="flex flex-wrap gap-2">
-                                        <span class="bg-surface-container-high px-3 py-1 rounded border border-outline-variant font-label text-xs">TYPESCRIPT</span>
-                                        <span class="bg-surface-container-high px-3 py-1 rounded border border-outline-variant font-label text-xs">PYTHON</span>
-                                        <span class="bg-surface-container-high px-3 py-1 rounded border border-outline-variant font-label text-xs">C#</span>
-                                        <span class="bg-surface-container-high px-3 py-1 rounded border border-outline-variant font-label text-xs">SQL</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Skills: Architecture -->
-                    <div class="md:col-span-4 group">
-                        <div class="skill-card card-bento h-full bg-surface-container hard-shadow sticker-hover flex flex-col justify-between">
-                            <div>
-                                <div class="w-12 h-12 rounded-lg bg-secondary-container flex items-center justify-center border-2 border-on-surface mb-6">
-                                    <span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">bolt</span>
-                                </div>
-                                <h3 class="uppercase mb-4">Systems Design</h3>
-                                <p class="font-body text-sm text-on-surface-variant leading-relaxed">
-                                    Microservices, SaaS, Event-Driven, and Domain-Driven Design (DDD).
-                                </p>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="font-label text-xs text-primary tracking-widest uppercase">Blueprint_v2</span>
-                                <span class="material-symbols-outlined text-on-surface-variant">arrow_outward</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Skills: Backend & Databases -->
-                    <div class="md:col-span-5 group rotate-1">
-                        <div class="skill-card card-bento bg-surface-container-high hard-shadow-pink sticker-hover">
-                            <h3 class="text-on-surface mb-4 uppercase">Core Infrastructure</h3>
-                            <div class="space-y-6">
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="text-[10px] font-label px-2 py-1 bg-surface border border-outline-variant rounded">NODE.JS</span>
-                                    <span class="text-[10px] font-label px-2 py-1 bg-surface border border-outline-variant rounded">ASP.NET CORE</span>
-                                    <span class="text-[10px] font-label px-2 py-1 bg-surface border border-outline-variant rounded">ABP FRAMEWORK</span>
-                                </div>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="text-[10px] font-label px-2 py-1 bg-surface border border-outline-variant rounded">POSTGRESQL</span>
-                                    <span class="text-[10px] font-label px-2 py-1 bg-surface border border-outline-variant rounded">REDIS</span>
-                                    <span class="text-[10px] font-label px-2 py-1 bg-surface border border-outline-variant rounded">MONGODB</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Skills: Cloud & DevOps -->
-                    <div class="md:col-span-7 group -rotate-1">
-                        <div class="skill-card card-bento bg-surface-container-low overflow-hidden hard-shadow sticker-hover relative">
-                            <div class="absolute top-0 right-0 w-32 h-32 bg-primary/20 blur-3xl rounded-full"></div>
-                            <div class="p-8 relative z-10">
-                                <div class="flex justify-between items-start mb-8">
-                                    <h3 class="uppercase text-on-surface">Cloud & DevOps</h3>
-                                    <div class="flex gap-1">
-                                        <div class="w-3 h-3 rounded-full bg-error border border-on-surface"></div>
-                                        <div class="w-3 h-3 rounded-full bg-tertiary-container border border-on-surface"></div>
-                                        <div class="w-3 h-3 rounded-full bg-primary border border-on-surface"></div>
-                                    </div>
-                                </div>
-                                <div class="grid md:grid-cols-2 gap-8">
-                                    <div class="flex flex-wrap gap-2">
-                                        <span class="bg-surface-container-high px-3 py-1 rounded border border-outline-variant font-label text-xs">DOCKER</span>
-                                        <span class="bg-surface-container-high px-3 py-1 rounded border border-outline-variant font-label text-xs">KUBERNETES</span>
-                                        <span class="bg-surface-container-high px-3 py-1 rounded border border-outline-variant font-label text-xs">AZURE</span>
-                                        <span class="bg-surface-container-high px-3 py-1 rounded border border-outline-variant font-label text-xs">TERRAFORM</span>
-                                    </div>
-                                    <div class="bg-surface-container-lowest p-6 rounded-xl border-4 border-on-surface flex flex-col items-center justify-center text-center">
-                                        <div class="text-primary mb-2 font-headline font-black text-5xl">99.9%</div>
-                                        <div class="text-xs font-label uppercase text-on-surface-variant tracking-widest">Uptime_Metric</div>
-                                    </div>
+                                <div class="bg-surface-container-lowest p-6 rounded-xl border-4 border-on-surface flex flex-col items-center justify-center text-center">
+                                    <div class="text-primary-container mb-2 font-headline font-black text-5xl">99.9%</div>
+                                    <div class="text-xs font-label uppercase text-on-surface-variant tracking-widest">Uptime_Metric</div>
                                 </div>
                             </div>
                         </div>
@@ -361,94 +356,112 @@
         </section>
 
         <!-- The Lab Section -->
-        <section id="the-lab" class="section bg-surface-container-lowest overflow-hidden animate-reveal">
-            <div class="container">
-                <header class="relative z-10 mb-20">
-                    <div class="flex flex-col md:flex-row items-end gap-4 mb-4">
-                        <h1 class="uppercase tracking-tighter text-primary leading-none">The Lab</h1>
-                        <span class="font-hand text-tertiary-container text-2xl rotate-[-5deg] pb-2">/experimental_zone</span>
-                    </div>
-                    <p class="max-w-2xl text-xl font-body text-on-surface-variant">
-                        Where pixels get weird. Floating artifacts, broken shaders, and digital debris from the edge of my creative exploration.
-                    </p>
-                </header>
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10">
-                    <div class="lg:col-span-8 space-y-12">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div class="group relative card-bento bg-surface-container-lowest hard-shadow sticker-hover">
-                            <div class="absolute -top-4 -right-4 bg-tertiary-container text-on-secondary font-mono text-xs px-3 py-1 border-2 border-on-surface rotate-6 uppercase font-bold">Live GLSL</div>
-                                <h3 class="text-primary mb-2 uppercase">Neon Ripple</h3>
-                                <p class="text-sm font-body text-on-surface-variant mb-4">Perlin noise-based distortion field affecting local DOM elements.</p>
-                            </div>
-                            <div class="group relative card-bento bg-surface-container-lowest hard-shadow sticker-hover rotate-1">
-                                <div class="absolute -top-4 -right-4 bg-secondary-container text-white font-mono text-xs px-3 py-1 border-2 border-on-surface -rotate-3 uppercase font-bold">Interactive</div>
-                                <h3 class="text-secondary-container mb-2 uppercase">Doodle Physics</h3>
-                                <p class="text-sm font-body text-on-surface-variant mb-4">A custom physics engine that treats hand-drawn SVG paths as rigid bodies.</p>
-                            </div>
-                            <!-- Experiment Card 3 (Large/Wide) -->
-                            <div class="md:col-span-2 group relative card-bento bg-surface-container-lowest hard-shadow sticker-hover -rotate-1">
-                                <div class="flex flex-col md:flex-row gap-8">
-                                    <div class="md:w-1/2 aspect-video bg-surface-container rounded-lg overflow-hidden border-2 border-primary relative">
-                                        <div class="absolute top-2 left-2 bg-primary text-on-primary text-[10px] font-mono px-2 py-0.5 rounded uppercase">Artifact_092.sh</div>
-                                        <div class="p-4 font-mono text-xs text-primary overflow-hidden h-full">
-                                            <pre class="opacity-80">void mainImage() {
-  vec2 uv = fragCoord/iResolution.xy;
-  fragColor = vec4(uv, 0.5, 1.0);
-}</pre>
-                                        </div>
-                                    </div>
-                                    <div class="md:w-1/2 flex flex-col justify-center">
-                                        <h3 class="mb-4 uppercase leading-none">GLSL Soundscape</h3>
-                                        <p class="text-on-surface-variant mb-6 font-body">Synthesizing audio buffers directly from fragment shader color outputs.</p>
-                                        <button class="w-fit btn-primary">Initialize Core</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Sidebar: Upcoming Logs -->
-                    <aside class="lg:col-span-4">
-                        <div class="sticky top-32 space-y-8">
-                            <div class="relative card-bento bg-surface-container-low hard-shadow overflow-hidden">
-                                <div class="relative z-10">
-                                    <h2 class="text-on-surface mb-6 uppercase border-b-4 border-on-surface pb-2">Upcoming Logs</h2>
-                                    <div class="space-y-6">
-                                        <div class="group cursor-pointer">
-                                            <div class="flex items-center justify-between mb-1">
-                                                <span class="font-mono text-[10px] text-secondary-container font-bold">PROJECT_OMEGA</span>
-                                                <span class="font-mono text-[10px] text-on-surface-variant">WEEK 42</span>
-                                            </div>
-                                            <h4 class="font-bold text-lg group-hover:text-primary transition-colors">Neural Style Transfer</h4>
-                                            <div class="font-hand text-tertiary-container mt-1">Pending verification...</div>
-                                        </div>
-                                        <div class="group cursor-pointer">
-                                            <div class="flex items-center justify-between mb-1">
-                                                <span class="font-mono text-[10px] text-primary font-bold">UI_KIT_v2</span>
-                                                <span class="font-mono text-[10px] text-on-surface-variant">WEEK 43</span>
-                                            </div>
-                                            <h4 class="font-bold text-lg group-hover:text-primary transition-colors">Sticker Library</h4>
-                                            <div class="font-hand text-tertiary-container mt-1">Almost stickered.</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </aside>
+        <section id="the-lab" class="relative z-10 pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto animate-reveal">
+            <header class="relative z-10 mb-20">
+                <div class="flex flex-col md:flex-row items-end gap-4 mb-4">
+                    <h1 class="text-6xl md:text-8xl font-headline font-black uppercase tracking-tighter glow-lime leading-none">The Lab</h1>
+                    <span class="font-hand text-tertiary-container text-2xl rotate-[-5deg] pb-2">/experimental_zone</span>
                 </div>
+                <p class="max-w-2xl text-xl font-body text-on-surface-variant">
+                    Where pixels get weird. Floating artifacts, broken shaders, and digital debris from the edge of my creative exploration.
+                </p>
+            </header>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10">
+                <div class="lg:col-span-8 space-y-12">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Experiment Card 1 -->
+                        <div class="group relative bg-surface-container-lowest border-4 border-on-surface p-6 rounded-xl sticker-shadow hover:translate-x-[-4px] hover:translate-y-[-4px] transition-all duration-150">
+                            <div class="absolute -top-4 -right-4 bg-tertiary-container text-on-tertiary-container font-mono text-xs px-3 py-1 border-2 border-on-surface rotate-6 uppercase font-bold">Live GLSL</div>
+                            <div class="aspect-video bg-surface rounded-lg mb-6 overflow-hidden border-2 border-outline-variant flex items-center justify-center relative">
+                                <div class="absolute inset-0 bg-gradient-to-br from-primary-container/20 to-secondary-container/20 opacity-50"></div>
+                                <span class="material-symbols-outlined text-6xl text-primary-container opacity-50">blur_on</span>
+                            </div>
+                            <h3 class="text-2xl font-headline font-bold text-primary-container mb-2 uppercase">Neon Ripple v0.4</h3>
+                            <p class="text-sm font-body text-on-surface-variant mb-4">Perlin noise-based distortion field affecting local DOM elements. High GPU overhead, use with caution.</p>
+                            <div class="flex gap-2">
+                                <span class="bg-surface-container-high px-2 py-1 rounded font-mono text-[10px] text-outline uppercase tracking-tighter">React</span>
+                                <span class="bg-surface-container-high px-2 py-1 rounded font-mono text-[10px] text-outline uppercase tracking-tighter">Three.js</span>
+                            </div>
+                        </div>
+                        <!-- Experiment Card 2 -->
+                        <div class="group relative bg-surface-container-lowest border-4 border-on-surface p-6 rounded-xl sticker-shadow hover:translate-x-[-4px] hover:translate-y-[-4px] transition-all duration-150 rotate-1">
+                            <div class="absolute -top-4 -right-4 bg-secondary-container text-on-secondary-fixed font-mono text-xs px-3 py-1 border-2 border-on-surface -rotate-3 uppercase font-bold">Interactive</div>
+                            <div class="aspect-video bg-surface rounded-lg mb-6 overflow-hidden border-2 border-outline-variant flex items-center justify-center relative">
+                                <span class="material-symbols-outlined text-6xl text-secondary-container opacity-50">gesture</span>
+                            </div>
+                            <h3 class="text-2xl font-headline font-bold text-secondary-container mb-2 uppercase">Doodle Physics</h3>
+                            <p class="text-sm font-body text-on-surface-variant mb-4">A custom physics engine that treats hand-drawn SVG paths as rigid bodies. Collision detection is 80% accurate.</p>
+                            <div class="flex gap-2">
+                                <span class="bg-surface-container-high px-2 py-1 rounded font-mono text-[10px] text-outline uppercase tracking-tighter">Canvas API</span>
+                                <span class="bg-surface-container-high px-2 py-1 rounded font-mono text-[10px] text-outline uppercase tracking-tighter">Math</span>
+                            </div>
+                        </div>
+                        <!-- Experiment Card 3 (Large/Wide) -->
+                        <div class="md:col-span-2 group relative bg-surface-container-lowest border-4 border-on-surface p-8 rounded-xl sticker-shadow hover:translate-x-[-4px] hover:translate-y-[-4px] transition-all duration-150 -rotate-1">
+                            <div class="flex flex-col md:flex-row gap-8">
+                                <div class="md:w-1/2 aspect-video bg-surface-container rounded-lg overflow-hidden border-2 border-primary-container relative">
+                                    <div class="absolute top-2 left-2 bg-primary-container text-on-primary-fixed text-[10px] font-mono px-2 py-0.5 rounded uppercase">Artifact_092.sh</div>
+                                    <div class="p-4 font-mono text-xs text-primary-container overflow-hidden h-full">
+                                        <pre class="opacity-80">void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
+    vec2 uv = fragCoord/iResolution.xy;
+    vec3 col = 0.5 + 0.5*cos(iTime+uv.xyx+vec3(0,2,4));
+    fragColor = vec4(col,1.0);
+}</pre>
+                                    </div>
+                                </div>
+                                <div class="md:w-1/2 flex flex-col justify-center">
+                                    <h3 class="text-4xl font-headline font-black text-on-surface mb-4 uppercase leading-none">GLSL Soundscape</h3>
+                                    <p class="text-on-surface-variant mb-6 font-body">Synthesizing audio buffers directly from fragment shader color outputs. A synesthetic experiment in pure math.</p>
+                                    <button class="w-fit bg-primary-container text-on-primary px-8 py-3 rounded-lg font-headline font-bold uppercase border-2 border-on-surface sticker-shadow active:translate-x-1 active:translate-y-1 active:shadow-none">Initialize Core</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sidebar: Upcoming Logs -->
+                <aside class="lg:col-span-4">
+                    <div class="sticky top-32 space-y-8">
+                        <div class="relative bg-surface-container-low border-4 border-on-surface p-8 rounded-xl sticker-shadow overflow-hidden">
+                            <div class="absolute -top-24 -left-24 w-48 h-48 bg-primary-container/20 blur-[60px] rounded-full"></div>
+                            <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-secondary-container/20 blur-[60px] rounded-full"></div>
+                            <div class="relative z-10">
+                                <h2 class="text-3xl font-headline font-black text-on-surface mb-6 uppercase border-b-4 border-on-surface pb-2">Upcoming Logs</h2>
+                                <div class="space-y-6">
+                                    <div class="group cursor-pointer">
+                                        <div class="flex items-center justify-between mb-1">
+                                            <span class="font-mono text-[10px] text-secondary-container font-bold">PROJECT_OMEGA</span>
+                                            <span class="font-mono text-[10px] text-outline">WEEK 42</span>
+                                        </div>
+                                        <h4 class="font-headline font-bold text-lg group-hover:text-primary-container transition-colors text-on-surface">Neural Style Transfer in WebGL</h4>
+                                        <div class="font-hand text-tertiary-container mt-1">Pending verification...</div>
+                                    </div>
+                                    <div class="group cursor-pointer">
+                                        <div class="flex items-center justify-between mb-1">
+                                            <span class="font-mono text-[10px] text-primary-container font-bold">UI_KIT_v2</span>
+                                            <span class="font-mono text-[10px] text-outline">WEEK 43</span>
+                                        </div>
+                                        <h4 class="font-headline font-bold text-lg group-hover:text-primary-container transition-colors text-on-surface">The "Sticker" Interaction Library</h4>
+                                        <div class="font-hand text-tertiary-container mt-1">Almost stickered.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
             </div>
         </section>
 
         <!-- Global Reach World Map Section -->
-        <section id="experience-map" class="section relative animate-reveal">
-            <div class="container">
+        <section id="experience-map" class="py-24 relative animate-reveal">
+            <div class="max-w-7xl mx-auto px-6">
                 <div class="bg-surface-container border-4 border-on-surface rounded-3xl p-8 md:p-12 overflow-hidden relative">
                     <div class="relative z-10 flex flex-col md:flex-row justify-between items-end gap-12">
                         <div class="max-w-xl">
-                            <div class="inline-flex items-center gap-2 bg-secondary-container text-on-accent px-4 py-1 rounded-full mb-6 font-mono text-xs font-bold uppercase">
+                            <div class="inline-flex items-center gap-2 bg-secondary-container text-on-secondary-container px-4 py-1 rounded-full mb-6 font-mono text-xs font-bold uppercase">
                                 <span class="material-symbols-outlined text-sm">public</span>
                                 Network Status: Active
                             </div>
-                            <h2 class="uppercase text-primary mb-6">Global Reach</h2>
+                            <h2 class="font-headline text-5xl md:text-7xl font-black uppercase text-primary-container mb-6">Global Reach</h2>
                             <p class="font-body text-lg text-on-surface-variant leading-relaxed">
                                 Deploying solutions across multiple continents. From silicon valley startups to enterprise hubs, the architecture remains robust and boundaryless.
                             </p>
@@ -456,7 +469,7 @@
                         <div class="flex flex-col gap-4 w-full md:w-auto">
                             <!-- Bento Map Stat Cards -->
                             <div class="bg-surface-container-highest border-2 border-on-surface p-4 rounded-xl flex items-center gap-4 sticker-rotate-cw">
-                                <div class="w-12 h-12 rounded-lg bg-primary flex items-center justify-center text-on-primary">
+                                <div class="w-12 h-12 rounded-lg bg-primary-container flex items-center justify-center text-on-primary-fixed">
                                     <span class="material-symbols-outlined">map</span>
                                 </div>
                                 <div>
@@ -471,45 +484,47 @@
             </div>
         </section>
 
-
         <!-- Testimonials Speech Bubbles -->
-        <section id="testimonials" class="section animate-reveal">
-            <div class="container grid grid-cols-1 md:grid-cols-3 gap-16">
+        <section id="testimonials" class="py-20 animate-reveal">
+            <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-16">
                 <!-- Bubble 1 -->
                 <div class="relative pt-10">
-                    <div class="speech-bubble bg-surface-highest text-on-surface p-8 rounded-2xl relative border-4 border-on-surface">
-                        <p class="font-headline font-bold text-xl leading-tight uppercase">"The decentralized workflow changed everything for our dev ops."</p>
+                    <div class="speech-bubble-outline absolute inset-0"></div>
+                    <div class="speech-bubble bg-on-surface text-surface p-8 rounded-2xl relative border-4 border-on-surface">
+                        <p class="font-headline font-bold text-xl leading-tight uppercase">"THE DECENTRALIZED WORKFLOW CHANGED EVERYTHING FOR OUR DEV OPS."</p>
                         <div class="mt-4 flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-secondary-container border-2 border-[#131313]"></div>
+                            <div class="w-10 h-10 rounded-full bg-secondary-container border-2 border-surface"></div>
                             <div>
-                                <p class="font-mono text-xs font-bold">@VOID_RUNNER</p>
-                                <p class="font-mono text-[10px] opacity-70">NEO-SEOUL TEAM</p>
+                                <p class="font-mono text-xs font-bold text-surface">@VOID_RUNNER</p>
+                                <p class="font-mono text-[10px] opacity-70 text-surface">NEO-SEOUL TEAM</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- Bubble 2 -->
                 <div class="relative pt-10 md:mt-12">
-                    <div class="speech-bubble bg-surface-highest text-on-surface p-8 rounded-2xl relative border-4 border-on-surface rotate-2">
-                        <p class="font-headline font-bold text-xl leading-tight uppercase">"Finally a hub that feels as chaotic and creative as our sprints."</p>
+                    <div class="speech-bubble-outline absolute inset-0"></div>
+                    <div class="speech-bubble bg-on-surface text-surface p-8 rounded-2xl relative border-4 border-on-surface rotate-2">
+                        <p class="font-headline font-bold text-xl leading-tight uppercase">"FINALLY A HUB THAT FEELS AS CHAOTIC AND CREATIVE AS OUR Sprints."</p>
                         <div class="mt-4 flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-primary border-2 border-[#131313]"></div>
+                            <div class="w-10 h-10 rounded-full bg-primary-container border-2 border-surface"></div>
                             <div>
-                                <p class="font-mono text-xs font-bold">@CYBER_PUNK</p>
-                                <p class="font-mono text-[10px] opacity-70">BERLIN NODES</p>
+                                <p class="font-mono text-xs font-bold text-surface">@CYBER_PUNK</p>
+                                <p class="font-mono text-[10px] opacity-70 text-surface">BERLIN NODES</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- Bubble 3 -->
                 <div class="relative pt-10">
-                    <div class="speech-bubble bg-surface-highest text-on-surface p-8 rounded-2xl relative border-4 border-on-surface -rotate-1">
-                        <p class="font-headline font-bold text-xl leading-tight uppercase">"Speed, security, and the coolest terminal themes we've seen."</p>
+                    <div class="speech-bubble-outline absolute inset-0"></div>
+                    <div class="speech-bubble bg-on-surface text-surface p-8 rounded-2xl relative border-4 border-on-surface -rotate-1">
+                        <p class="font-headline font-bold text-xl leading-tight uppercase">"SPEED, SECURITY, AND THE COOLEST TERMINAL THEMES WE'VE SEEN."</p>
                         <div class="mt-4 flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-tertiary-container border-2 border-[#131313]"></div>
+                            <div class="w-10 h-10 rounded-full bg-tertiary-container border-2 border-surface"></div>
                             <div>
-                                <p class="font-mono text-xs font-bold">@GHOST_IN_SHELL</p>
-                                <p class="font-mono text-[10px] opacity-70">AUSTIN HUB</p>
+                                <p class="font-mono text-xs font-bold text-surface">@GHOST_IN_SHELL</p>
+                                <p class="font-mono text-[10px] opacity-70 text-surface">AUSTIN HUB</p>
                             </div>
                         </div>
                     </div>
@@ -518,33 +533,33 @@
         </section>
 
         <!-- Distributed Workflow Section -->
-        <section id="workflow" class="section bg-surface-container-low border-y-4 border-on-surface animate-reveal">
-            <div class="container flex flex-col md:flex-row gap-16 items-center">
+        <section id="workflow" class="bg-surface-container-low border-y-4 border-on-surface py-24 px-6 overflow-hidden animate-reveal">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 items-center">
                 <div class="md:w-1/2">
-                    <h2 class="tracking-tighter uppercase mb-6 leading-[0.9]">
+                    <h2 class="font-headline text-5xl font-black tracking-tighter uppercase mb-6 leading-[0.9] text-on-surface">
                         DISTRIBUTED <br/>
-                        <span class="text-secondary-container bg-surface px-4 py-2 border-4 border-on-surface inline-block rotate-2 mt-4 hard-shadow-pink">WORKFLOW</span>
+                        <span class="text-secondary-container bg-surface px-4 py-2 border-4 border-on-surface inline-block rotate-2 mt-4 sticker-shadow-pink">WORKFLOW</span>
                     </h2>
                     <p class="text-lg text-on-surface-variant mb-8 max-w-md">
                         Our toolset is optimized for the midnight oil burners and the global roamers. Integrated, automated, and sticker-fied.
                     </p>
                     <div class="flex flex-wrap gap-4">
-                        <span class="bg-tertiary-container text-on-secondary font-mono text-sm px-4 py-2 border-2 border-on-surface hard-shadow">#GITHUB_ACTIONS</span>
-                        <span class="bg-primary text-on-primary font-mono text-sm px-4 py-2 border-2 border-on-surface hard-shadow">#SLACK_SYNC</span>
-                        <span class="bg-secondary-container text-on-accent font-mono text-sm px-4 py-2 border-2 border-on-surface hard-shadow">#LIVE_NODES</span>
+                        <span class="bg-tertiary-container text-on-tertiary-container font-mono text-sm px-4 py-2 border-2 border-on-surface sticker-shadow">#GITHUB_ACTIONS</span>
+                        <span class="bg-primary-container text-on-primary-container font-mono text-sm px-4 py-2 border-2 border-on-surface sticker-shadow">#SLACK_SYNC</span>
+                        <span class="bg-secondary-container text-on-secondary-container font-mono text-sm px-4 py-2 border-2 border-on-surface sticker-shadow">#LIVE_NODES</span>
                     </div>
                 </div>
                 <div class="md:w-1/2 grid grid-cols-2 gap-6 relative">
                     <!-- Tool Cards -->
-                    <div class="card-bento bg-surface-container-highest hard-shadow -rotate-2 hover:rotate-0 transition-transform cursor-pointer group">
-                        <span class="material-symbols-outlined text-5xl text-primary mb-4 block group-hover:scale-110 transition-transform">terminal</span>
-                        <h3 class="uppercase text-on-surface">GitHub</h3>
+                    <div class="bg-surface-container-highest p-8 rounded-xl border-4 border-on-surface sticker-shadow -rotate-2 hover:rotate-0 transition-transform cursor-pointer group">
+                        <span class="material-symbols-outlined text-5xl text-primary-container mb-4 block group-hover:scale-110 transition-transform">terminal</span>
+                        <h3 class="font-headline font-bold text-xl uppercase text-on-surface">GitHub</h3>
                         <p class="font-hand text-lg opacity-60 text-on-surface-variant">Push code, break things.</p>
                     </div>
-                    <div class="card-bento bg-surface-container-highest hard-shadow rotate-3 hover:rotate-0 transition-transform cursor-pointer group">
+                    <div class="bg-surface-container-highest p-8 rounded-xl border-4 border-on-surface sticker-shadow rotate-3 hover:rotate-0 transition-transform cursor-pointer group">
                         <span class="material-symbols-outlined text-5xl text-secondary-container mb-4 block group-hover:scale-110 transition-transform">forum</span>
-                        <h3 class="uppercase">Slack</h3>
-                        <p class="font-hand text-lg opacity-60">Ping. Ping. Pong.</p>
+                        <h3 class="font-headline font-bold text-xl uppercase text-on-surface">Slack</h3>
+                        <p class="font-hand text-lg opacity-60 text-on-surface-variant">Ping. Ping. Pong.</p>
                     </div>
                 </div>
             </div>

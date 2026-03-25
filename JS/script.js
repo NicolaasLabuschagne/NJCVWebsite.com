@@ -121,21 +121,36 @@ const PortfolioEngine = {
             if (iconSpan) iconSpan.textContent = isDark ? 'dark_mode' : 'light_mode';
         };
 
-        const savedMode = localStorage.getItem('theme') || 'dark';
-        if (savedMode === 'dark') {
-            document.documentElement.classList.add('dark');
-            document.documentElement.setAttribute('data-theme', 'dark');
+        const applyTheme = (mode) => {
+            if (mode === 'dark') {
+                document.documentElement.classList.add('dark');
+                document.documentElement.setAttribute('data-theme', 'dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+            updateThemeIcon();
+        };
+
+        const savedMode = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+        if (savedMode) {
+            applyTheme(savedMode);
         } else {
-            document.documentElement.classList.remove('dark');
-            document.documentElement.setAttribute('data-theme', 'light');
+            applyTheme(systemPrefersDark.matches ? 'dark' : 'light');
         }
-        updateThemeIcon();
 
         themeToggle.addEventListener('click', () => {
-            const isDark = document.documentElement.classList.toggle('dark');
-            document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            const isDark = !document.documentElement.classList.contains('dark');
+            applyTheme(isDark ? 'dark' : 'light');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            updateThemeIcon();
+        });
+
+        systemPrefersDark.addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                applyTheme(e.matches ? 'dark' : 'light');
+            }
         });
     },
 
@@ -215,7 +230,11 @@ const PortfolioEngine = {
    =========================== */
 const VibeEngine = {
     themes: ['theme-creative', 'theme-fun', 'theme-professional'],
-    icons: ['🎨', '🐾', '💼'],
+    icons: [
+        `<svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="w-10 h-10"><path d="M12 2C7.58 2 4 5.58 4 10V22L6 20L8 22L10 20L12 22L14 20L16 22L18 20L20 22V10C20 5.58 16.42 2 12 2ZM9 11C8.45 11 8 10.55 8 10C8 9.45 8.45 9 9 9C9.55 9 10 9.45 10 10C10 10.55 9.55 11 9 11ZM15 11C14.45 11 14 10.55 14 10C14 9.45 14.45 9 15 9C15.55 9 16 9.45 16 10C16 10.55 15.55 11 15 11Z"/></svg>`,
+        `<svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="w-10 h-10"><path d="M12 2C7.58 2 4 5.58 4 10V22L6 20L8 22L10 20L12 22L14 20L16 22L18 20L20 22V10C20 5.58 16.42 2 12 2ZM12 16C10.34 16 9 14.66 9 13H15C15 14.66 13.66 16 12 16ZM9 11C8.45 11 8 10.55 8 10C8 9.45 8.45 9 9 9C9.55 9 10 9.45 10 10C10 10.55 9.55 11 9 11ZM15 11C14.45 11 14 10.55 14 10C14 9.45 14.45 9 15 9C15.55 9 16 9.45 16 10C16 10.55 15.55 11 15 11Z"/></svg>`,
+        `<svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="w-10 h-10"><path d="M12 2C7.58 2 4 5.58 4 10V22L6 20L8 22L10 20L12 22L14 20L16 22L18 20L20 22V10C20 5.58 16.42 2 12 2ZM9 11C8.45 11 8 10.55 8 10C8 9.45 8.45 9 9 9C9.55 9 10 9.45 10 10C10 10.55 9.55 11 9 11ZM15 11C14.45 11 14 10.55 14 10C14 9.45 14.45 9 15 9C15.55 9 16 9.45 16 10C16 10.55 15.55 11 15 11Z"/><rect x="7" y="14" width="10" height="2" rx="1"/></svg>`
+    ],
     currentIndex: 0,
 
     init() {
@@ -234,7 +253,10 @@ const VibeEngine = {
         localStorage.setItem('pet-theme', current);
 
         const pet = document.getElementById('interactive-pet');
-        if (pet) pet.textContent = this.icons[this.currentIndex];
+        if (pet) {
+            pet.innerHTML = this.icons[this.currentIndex];
+            pet.setAttribute('data-vibe', current);
+        }
 
         window.dispatchEvent(new CustomEvent('themeChanged', { detail: current }));
     },
