@@ -1403,7 +1403,7 @@ h4 { font-size: clamp(var(--font-size-xl), 3vw, var(--font-size-2xl)); }
 p {
     margin-bottom: var(--space-md);
     font-size: var(--font-size-lg);
-    color: var(--text-dim);
+    /*color: var(--text-dim);*/
     max-width: 65ch;
 }
 
@@ -1559,16 +1559,6 @@ p {
     border-style: solid;
     border-color: var(--on-surface) transparent transparent transparent;
 }
-.speech-bubble-outline::after {
-    content: '';
-    position: absolute;
-    bottom: -24px;
-    left: 28px;
-    border-width: 22px 22px 0 0;
-    border-style: solid;
-    border-color: var(--bg-color) transparent transparent transparent;
-    z-index: -1;
-}
 
 /* Ensure hero is visible if JS fails */
 .hero .animate-reveal {
@@ -1710,17 +1700,7 @@ p {
     left: 30px;
     border-width: 20px 20px 0 0;
     border-style: solid;
-    border-color: #e5e2e1 transparent transparent transparent;
-}
-.speech-bubble-outline::after {
-    content: '';
-    position: absolute;
-    bottom: -24px;
-    left: 28px;
-    border-width: 22px 22px 0 0;
-    border-style: solid;
-    border-color: #131313 transparent transparent transparent;
-    z-index: -1;
+    border-color: var(--text-color) transparent transparent transparent;
 }
 
 /* ===========================
