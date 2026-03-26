@@ -216,27 +216,81 @@ const PortfolioEngine = {
         const mapElement = document.getElementById('map');
         if (!mapElement) return;
 
-        const map = L.map('map', { scrollWheelZoom: false }).setView([-25.864, 28.188], 10);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap'
-        }).addTo(map);
+        // Initialize map with a global view
+        const map = L.map('map', {
+            scrollWheelZoom: false,
+            zoomControl: true,
+            attributionControl: false
+        }).setView([15, 20], 2);
 
-        const bikeIcon = L.divIcon({
-            html: '<div style="font-size: 24px; filter: drop-shadow(2px 2px 0px var(--primary-color));">🚲</div>',
-            className: 'custom-bike-icon',
-            iconSize: [30, 30],
-            iconAnchor: [15, 15]
-        });
+        const workHistory = ['AGO', 'AUS', 'BWA', 'ZAF'];
+        let geojsonLayer;
 
-        const locations = [
-            { coords: [-25.864, 28.188], title: "Centurion", desc: "Systems Architect" },
-            { coords: [-26.204, 28.047], title: "Johannesburg", desc: "Lead Developer" },
-            { coords: [-25.747, 28.229], title: "Pretoria", desc: "Intermediate Architect" }
-        ];
+        const getStyle = (feature) => {
+            const isDark = document.documentElement.classList.contains('dark') ||
+                           document.documentElement.getAttribute('data-theme') === 'dark';
+            const isWorkRegion = workHistory.includes(feature.id);
+            const bodyClass = document.body.className;
+            const isProfessional = bodyClass.includes('theme-professional');
+            const isFun = bodyClass.includes('theme-fun');
 
-        locations.forEach(loc => {
-            L.marker(loc.coords, { icon: bikeIcon }).addTo(map).bindPopup(`<b>${loc.title}</b><br>${loc.desc}`);
-        });
+            if (isDark) {
+                return {
+                    fillColor: isWorkRegion ? 'var(--primary-color)' : 'transparent',
+                    fillOpacity: isWorkRegion ? (isProfessional ? 0.2 : 0.4) : 0,
+                    color: 'var(--primary-color)',
+                    weight: isWorkRegion ? 3 : 1.2,
+                    className: isProfessional ? '' : 'neon-map-outline',
+                    dashArray: ''
+                };
+            } else {
+                return {
+                    fillColor: isWorkRegion ? '#bef264' : 'transparent',
+                    fillOpacity: isWorkRegion ? (isProfessional ? 0.2 : 0.4) : 0,
+                    color: isWorkRegion ? (isFun ? '#ff4a8d' : '#333333') : '#999999',
+                    weight: isWorkRegion ? 2.5 : 1.2,
+                    dashArray: isWorkRegion || isProfessional ? '' : '3, 6'
+                };
+            }
+        };
+
+        // Fetch and load world GeoJSON
+        fetch('https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json')
+            .then(response => response.json())
+            .then(data => {
+                geojsonLayer = L.geoJSON(data, {
+                    style: getStyle,
+                    onEachFeature: (feature, layer) => {
+                        if (workHistory.includes(feature.id)) {
+                            layer.bindPopup(`
+                                <div class="font-headline font-bold uppercase text-primary-container">
+                                    Project Territory: ${feature.properties.name}
+                                </div>
+                                <div class="font-mono text-xs mt-1 text-on-surface-variant">
+                                    Strategic Industrial Integration
+                                </div>
+                            `);
+
+                            layer.on('mouseover', function() {
+                                this.setStyle({
+                                    fillOpacity: 0.3,
+                                    weight: 4
+                                });
+                            });
+
+                            layer.on('mouseout', function() {
+                                geojsonLayer.resetStyle(this);
+                            });
+                        }
+                    }
+                }).addTo(map);
+
+                // Update style when theme changes
+                window.addEventListener('themeChanged', () => {
+                    if (geojsonLayer) geojsonLayer.setStyle(getStyle);
+                });
+            })
+            .catch(err => console.error('Map loading failed:', err));
     },
 
     initSkillAnimations() {
