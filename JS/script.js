@@ -231,7 +231,7 @@ const PortfolioEngine = {
         const locations = [
             { coords: [-25.864, 28.188], title: "Centurion", desc: "Systems Architect" },
             { coords: [-26.204, 28.047], title: "Johannesburg", desc: "Lead Developer" },
-            { coords: [-25.747, 28.229], title: "Pretoria", desc: "Senior Engineer" }
+            { coords: [-25.747, 28.229], title: "Pretoria", desc: "Intermediate Architect" }
         ];
 
         locations.forEach(loc => {
