@@ -11,6 +11,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Caveat:wght@400..700&family=Inter:wght@400;700&family=Montserrat:wght@400;700;900&family=Fredoka:wght@400;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+    <!-- GitHub Calendar Library -->
+    <link rel="stylesheet" href="https://unpkg.com/github-calendar@latest/dist/github-calendar-responsive.css" />
+    <script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
+
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script id="tailwind-config">
       tailwind.config = {
@@ -477,11 +482,11 @@
                                 <div class="flex flex-col gap-2">
                                     <span class="font-label text-xs uppercase text-on-surface-variant mb-1">Scientific Stack</span>
                                     <div class="flex flex-wrap gap-3">
-                                        <span class="bg-surface-container-highest text-on-surface px-4 py-2 rounded-lg border-2 border-on-surface font-mono font-bold text-sm sticker-shadow">ANACONDA</span>
-                                        <span class="bg-surface-container-highest text-on-surface px-4 py-2 rounded-lg border-2 border-on-surface font-mono font-bold text-sm sticker-shadow">PANDAS</span>
-                                        <span class="bg-surface-container-highest text-on-surface px-4 py-2 rounded-lg border-2 border-on-surface font-mono font-bold text-sm sticker-shadow">NUMPY</span>
-                                        <span class="bg-surface-container-highest text-on-surface px-4 py-2 rounded-lg border-2 border-on-surface font-mono font-bold text-sm sticker-shadow">SCIPY</span>
-                                        <span class="bg-surface-container-highest text-on-surface px-4 py-2 rounded-lg border-2 border-on-surface font-mono font-bold text-sm sticker-shadow">SCIKIT-LEARN</span>
+                                        <span class="bg-surface-container-highest text-secondary-container px-4 py-2 rounded-lg border-2 border-on-surface font-mono font-bold text-sm sticker-shadow">ANACONDA</span>
+                                        <span class="bg-surface-container-highest text-secondary-container px-4 py-2 rounded-lg border-2 border-on-surface font-mono font-bold text-sm sticker-shadow">PANDAS</span>
+                                        <span class="bg-surface-container-highest text-secondary-container px-4 py-2 rounded-lg border-2 border-on-surface font-mono font-bold text-sm sticker-shadow">NUMPY</span>
+                                        <span class="bg-surface-container-highest text-secondary-container px-4 py-2 rounded-lg border-2 border-on-surface font-mono font-bold text-sm sticker-shadow">SCIPY</span>
+                                        <span class="bg-surface-container-highest text-secondary-container px-4 py-2 rounded-lg border-2 border-on-surface font-mono font-bold text-sm sticker-shadow">SCIKIT-LEARN</span>
                                     </div>
                                 </div>
                                 <div class="flex flex-col gap-2 ml-0 md:ml-12">
@@ -510,6 +515,18 @@
             </header>
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10">
                 <div class="lg:col-span-8 space-y-12">
+                    <!-- GitHub Contribution Calendar -->
+                    <div class="group relative bg-surface-container-lowest border-4 border-on-surface p-8 rounded-xl sticker-shadow hover:translate-x-[-4px] hover:translate-y-[-4px] transition-all duration-150">
+                        <div class="absolute -top-4 -right-4 bg-primary-container text-on-primary-container font-mono text-xs px-3 py-1 border-2 border-on-surface -rotate-3 uppercase font-bold">Contribution Activity</div>
+                        <h3 class="text-2xl font-headline font-bold text-primary-container mb-6 uppercase">Commit History</h3>
+                        <div class="calendar p-2 overflow-hidden rounded-lg bg-surface-container border border-on-surface/10">
+                            <!-- Loading stuff -->
+                            <div class="flex items-center justify-center p-8 font-mono text-on-surface-variant animate-pulse">
+                                Initializing digital footprint...
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <!-- Experiment Card 1 -->
                         <div class="group relative bg-surface-container-lowest border-4 border-on-surface p-6 rounded-xl sticker-shadow hover:translate-x-[-4px] hover:translate-y-[-4px] transition-all duration-150">
@@ -741,5 +758,12 @@
     <div id="interactive-pet" class="pet-element" title="Click me to change the vibe!">🐾</div>
 
     <script src="JS/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof GitHubCalendar !== 'undefined') {
+                GitHubCalendar(".calendar", "NicolaasLabuschagne", { responsive: true });
+            }
+        });
+    </script>
 </body>
 </html>

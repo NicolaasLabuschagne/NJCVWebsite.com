@@ -1964,3 +1964,46 @@ body.theme-fun .btn-hero-coffee:hover {
     transform: scale(1.02) rotate(0deg) translate(0, 0); /* Reset base for wiggle */
     box-shadow: 12px 12px 0px 0px var(--secondary-color) !important;
 }
+
+/* Digital Debris Interaction Area */
+.digital-debris {
+    position: absolute;
+    font-family: var(--font-mono);
+    font-weight: 900;
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    cursor: grab;
+    user-select: none;
+    z-index: 5;
+    opacity: 0.3;
+    transition: opacity 0.3s, filter 0.3s;
+    pointer-events: auto;
+    filter: drop-shadow(2px 2px 0px var(--border-color));
+}
+
+.digital-debris:hover {
+    opacity: 0.9;
+    filter: drop-shadow(0 0 10px var(--primary-color)) drop-shadow(4px 4px 0px var(--border-color));
+    z-index: 20;
+}
+
+.digital-debris.dragging {
+    cursor: grabbing;
+    opacity: 1;
+    z-index: 1000;
+    filter: drop-shadow(0 0 20px var(--primary-color)) drop-shadow(8px 8px 0px var(--border-color));
+    transform: scale(1.4) !important;
+}
+
+@keyframes debris-glitch {
+    0% { transform: translate(0) scale(1) rotate(var(--rot)); }
+    2% { transform: translate(4px, -2px) scale(1.1) rotate(var(--rot)); }
+    4% { transform: translate(-2px, 2px) scale(0.9) rotate(var(--rot)); }
+    6% { transform: translate(0) scale(1) rotate(var(--rot)); }
+    100% { transform: translate(0) scale(1) rotate(var(--rot)); }
+}
+
+.debris-animate {
+    animation: debris-glitch 4s infinite;
+    animation-delay: var(--delay);
+}

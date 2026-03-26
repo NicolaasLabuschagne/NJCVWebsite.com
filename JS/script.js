@@ -254,6 +254,90 @@ const PortfolioEngine = {
                 }, 1000);
             }, 3000);
         }
+        this.initDigitalDebris();
+    },
+
+    initDigitalDebris() {
+        const labSection = document.getElementById('the-lab');
+        if (!labSection) return;
+
+        const debrisChars = ['{ }', '[]', '</>', '01', '!', '??', '#', '/* */', '=>', '&&', '||'];
+        const debrisCount = 12;
+
+        for (let i = 0; i < debrisCount; i++) {
+            const debris = document.createElement('div');
+            debris.className = 'digital-debris debris-animate';
+            debris.textContent = debrisChars[Math.floor(Math.random() * debrisChars.length)];
+
+            // Random positioning
+            const top = Math.random() * 80 + 10; // 10% to 90%
+            const left = Math.random() * 80 + 10; // 10% to 90%
+            const rot = (Math.random() - 0.5) * 60; // -30 to 30 deg
+
+            debris.style.top = `${top}%`;
+            debris.style.left = `${left}%`;
+            debris.style.setProperty('--rot', `${rot}deg`);
+            debris.style.setProperty('--delay', `${Math.random() * 5}s`);
+            debris.style.transform = `rotate(${rot}deg)`;
+
+            this.makeDraggable(debris);
+            labSection.appendChild(debris);
+        }
+    },
+
+    makeDraggable(el) {
+        let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+
+        el.onmousedown = dragMouseDown;
+        el.ontouchstart = dragMouseDown;
+
+        function dragMouseDown(e) {
+            e.preventDefault();
+            el.classList.add('dragging');
+            el.classList.remove('debris-animate');
+
+            if (e.type === 'touchstart') {
+                pos3 = e.touches[0].clientX;
+                pos4 = e.touches[0].clientY;
+            } else {
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+            }
+
+            document.onmouseup = closeDragElement;
+            document.ontouchend = closeDragElement;
+            document.onmousemove = elementDrag;
+            document.ontouchmove = elementDrag;
+        }
+
+        function elementDrag(e) {
+            e.preventDefault();
+            let clientX, clientY;
+
+            if (e.type === 'touchmove') {
+                clientX = e.touches[0].clientX;
+                clientY = e.touches[0].clientY;
+            } else {
+                clientX = e.clientX;
+                clientY = e.clientY;
+            }
+
+            pos1 = pos3 - clientX;
+            pos2 = pos4 - clientY;
+            pos3 = clientX;
+            pos4 = clientY;
+
+            el.style.top = (el.offsetTop - pos2) + "px";
+            el.style.left = (el.offsetLeft - pos1) + "px";
+        }
+
+        function closeDragElement() {
+            el.classList.remove('dragging');
+            document.onmouseup = null;
+            document.ontouchend = null;
+            document.onmousemove = null;
+            document.ontouchmove = null;
+        }
     }
 };
 
