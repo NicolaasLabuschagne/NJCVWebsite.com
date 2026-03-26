@@ -4,14 +4,26 @@
    =========================== */
 const sketch = (p) => {
     let symbols = [];
-    // More "Adventure/Scrapbook" style symbols
     const symbolChars = ['★', '•', '✎', '➤', '❖'];
-    const gridSize = 65; // Increased grid size for better performance
+    const gridSize = 65;
 
-    // Smooth mouse tracking
     let easedMouseX = 0;
     let easedMouseY = 0;
     const easing = 0.08;
+
+    let primaryColor = [190, 242, 100];
+    let textColor = [0, 0, 0];
+
+    function updateColors() {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        const style = getComputedStyle(document.body);
+
+        const pRGB = style.getPropertyValue('--primary-color-rgb') || '190, 242, 100';
+        primaryColor = pRGB.split(',').map(c => parseInt(c.trim()));
+
+        const tRGB = style.getPropertyValue('--text-color-rgb') || (isDark ? '255,255,255' : '0,0,0');
+        textColor = tRGB.split(',').map(c => parseInt(c.trim()));
+    }
 
     p.setup = () => {
         let canvas = p.createCanvas(p.windowWidth, p.windowHeight);
@@ -20,7 +32,10 @@ const sketch = (p) => {
         p.noStroke();
         p.textFont('Montserrat');
 
+        updateColors();
         initSymbols();
+
+        window.addEventListener('themeChanged', updateColors);
     };
 
     function initSymbols() {
@@ -39,7 +54,6 @@ const sketch = (p) => {
     }
 
     p.draw = () => {
-        // Skip rendering if professional theme is active to save resources
         if (document.body.classList.contains('theme-professional')) {
             p.clear();
             return;
@@ -47,20 +61,8 @@ const sketch = (p) => {
 
         p.clear();
 
-        // Ease the mouse position
         easedMouseX = p.lerp(easedMouseX, p.mouseX, easing);
         easedMouseY = p.lerp(easedMouseY, p.mouseY, easing);
-
-        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-
-        // Use primary color if it's visible enough, else gray
-        const primaryRGB = getComputedStyle(document.body)
-            .getPropertyValue('--primary-color-rgb') || '190, 242, 100';
-        const primaryColor = primaryRGB.split(',').map(c => parseInt(c.trim()));
-
-        const textColorRGB = getComputedStyle(document.body)
-            .getPropertyValue('--text-color-rgb') || (isDark ? '255,255,255' : '0,0,0');
-        const textColor = textColorRGB.split(',').map(c => parseInt(c.trim()));
 
         symbols.forEach(s => {
             const dx = easedMouseX - s.x;
@@ -159,6 +161,7 @@ const PortfolioEngine = {
                 document.documentElement.setAttribute('data-theme', 'light');
             }
             updateThemeIcon();
+            window.dispatchEvent(new CustomEvent('themeChanged', { detail: mode }));
         };
 
         const savedMode = localStorage.getItem('theme');
