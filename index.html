@@ -733,16 +733,39 @@
 
         <!-- Final CTA / Contact Section -->
         <section id="contact" class="section animate-reveal">
-            <div class="container bg-primary p-12 border-4 border-background hard-shadow relative overflow-hidden text-center">
-                <div class="absolute inset-0 bg-white/10 opacity-50 mix-blend-overlay"></div>
-                <h2 class="text-on-primary italic tracking-tighter mb-8 relative z-10">READY TO LINK UP?</h2>
-                <div class="flex flex-col md:flex-row justify-center gap-6 relative z-10">
-                    <a href="mailto:NJ.Labuschagne@outlook.com" class="btn-action bg-background text-on-background hover:scale-105">HIRE ME!</a>
-                    <a href="https://linkedin.com/in/nicolaas-labuschagne-919739286" target="_blank" class="btn-action bg-transparent text-background border-background hover:bg-background hover:text-on-background transition-colors">LINKEDIN</a>
-                </div>
-                <div class="mt-8 font-hand text-2xl text-on-primary-fixed-variant rotate-1">Don't be a stranger, we don't bite (mostly).</div>
-            </div>
-        </section>
+  <div class="container bg-primary p-12 border-4 border-background hard-shadow relative overflow-hidden text-center">
+    <div class="absolute inset-0 bg-white/10 opacity-50 mix-blend-overlay"></div>
+
+    <h2 class="text-on-primary italic tracking-tighter mb-8 relative z-10">READY TO LINK UP?</h2>
+
+    <div class="flex flex-col md:flex-row justify-center gap-6 relative z-10">
+        <a href="mailto:NJ.Labuschagne@outlook.com" class="btn-action bg-background text-on-background hover:scale-105">HIRE ME!</a>
+    </div>
+
+    <!-- Social icon row -->
+    <div class="mt-6 flex justify-center items-center gap-4 relative z-10" aria-hidden="false">
+      <a href="https://linkedin.com/in/nicolaas-labuschagne-919739286" target="_blank" rel="noopener noreferrer"
+         class="inline-flex items-center justify-center w-10 h-10 rounded-full border border-background text-on-primary bg-transparent hover:bg-background hover:text-on-background transition-transform transform hover:scale-105"
+         aria-label="Open LinkedIn profile" title="LinkedIn">
+        <i class="fa fa-linkedin" aria-hidden="true"></i>
+      </a>
+
+      <a href="https://github.com/NicolaasLabuschagne" target="_blank" rel="noopener noreferrer"
+         class="inline-flex items-center justify-center w-10 h-10 rounded-full border border-background text-on-primary bg-transparent hover:bg-background hover:text-on-background transition-transform transform hover:scale-105"
+         aria-label="Open GitHub profile" title="GitHub">
+        <i class="fa fa-github" aria-hidden="true"></i>
+      </a>
+
+      <a href="mailto:NJ.Labuschagne@outlook.com"
+         class="inline-flex items-center justify-center w-10 h-10 rounded-full border border-background text-on-primary bg-transparent hover:bg-background hover:text-on-background transition-transform transform hover:scale-105"
+         aria-label="Send email" title="Email">
+        <i class="fa fa-envelope" aria-hidden="true"></i>
+      </a>
+    </div>
+
+    <div class="mt-8 font-hand text-2xl text-on-primary-fixed-variant rotate-1">Don't be a stranger, we don't bite (mostly).</div>
+  </div>
+</section>
     </main>
 
     <!-- Footer -->
@@ -758,6 +781,7 @@
             </div>
         </div>
     </footer>
+    
 
     <!-- Interactive Pet Element -->
     <div id="interactive-pet" class="hidden md:block pet-element" title="Click me to change the vibe!">🐾</div>
