@@ -1629,6 +1629,9 @@ p {
 }
 
 @media (max-width: 768px) {
+    #map {
+        height: 300px !important;
+    }
     .footer-content {
         flex-direction: column;
         text-align: center;
@@ -1637,10 +1640,18 @@ p {
         text-align: center;
     }
     .hero-name {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
     }
     .hero-greeting {
         font-size: 1.2rem;
+    }
+    .hero-description {
+        font-size: 0.95rem;
+    }
+    .profile-card-neo {
+        width: 280px;
+        height: 350px;
+        margin: 0 auto;
     }
     .section-title {
         font-size: 2rem;

@@ -518,6 +518,28 @@ const VibeEngine = {
 
         this.applyTheme();
         if (pet) pet.addEventListener('click', () => this.cycle());
+        this.initSwipe();
+    },
+
+    initSwipe() {
+        let touchstartX = 0;
+        let touchendX = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchstartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        document.addEventListener('touchend', e => {
+            touchendX = e.changedTouches[0].screenX;
+            this.handleSwipe(touchstartX, touchendX);
+        }, { passive: true });
+    },
+
+    handleSwipe(start, end) {
+        const threshold = 100;
+        if (Math.abs(start - end) > threshold) {
+            this.cycle();
+        }
     },
 
     applyTheme() {

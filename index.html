@@ -106,7 +106,7 @@
                 <a class="text-on-surface-variant hover:text-on-surface transition-colors hover:scale-105 hover:-rotate-1" href="#contact">Contact</a>
             </div>
             <div class="flex items-center gap-4">
-                <button class="material-symbols-outlined text-primary hover:scale-110 transition-transform" id="theme-toggle">terminal</button>
+                <button class="hidden md:inline-block material-symbols-outlined text-primary hover:scale-110 transition-transform" id="theme-toggle">terminal</button>
                 <button class="bg-primary text-on-primary font-headline font-bold uppercase px-6 py-2 rounded-full border-2 border-on-surface active:translate-y-1 transition-all">
                     Hire Me
                 </button>
@@ -128,18 +128,18 @@
                         </div>
                     </div>
                     <!-- Hand-drawn annotation -->
-                    <div class="absolute speech-bubble-hero -top-12 -right-16 sticker-rotate-cw text-on-primary">
+                    <div class="hidden md:block absolute speech-bubble-hero -top-12 -right-16 sticker-rotate-cw text-on-primary">
                         I'm Nicolaas! <span>→</span>
                     </div>
 
                     <!-- Floating Keyboard Command Stickers -->
-                    <div class="absolute top-1/4 -left-8 md:-left-12 opacity-0 group-hover:opacity-100 group-hover:-translate-y-6 transition-all duration-500 delay-75 pointer-events-none">
+                    <div class="hidden md:block absolute top-1/4 -left-8 md:-left-12 opacity-0 group-hover:opacity-100 group-hover:-translate-y-6 transition-all duration-500 delay-75 pointer-events-none">
                         <span class="bg-primary text-on-primary px-4 py-2 rounded-lg border-2 border-on-surface font-label font-black hard-shadow-pink -rotate-12 block">CTRL</span>
                     </div>
-                    <div class="absolute top-1/2 -left-12 md:-left-20 opacity-0 group-hover:opacity-100 group-hover:-translate-y-10 transition-all duration-500 delay-150 pointer-events-none">
+                    <div class="hidden md:block absolute top-1/2 -left-12 md:-left-20 opacity-0 group-hover:opacity-100 group-hover:-translate-y-10 transition-all duration-500 delay-150 pointer-events-none">
                         <span class="bg-tertiary-container text-on-tertiary-container px-4 py-2 rounded-lg border-2 border-on-surface font-label font-black hard-shadow rotate-6 block">ALT</span>
                     </div>
-                    <div class="absolute top-3/4 -left-8 md:-left-12 opacity-0 group-hover:opacity-100 group-hover:-translate-y-6 transition-all duration-500 delay-225 pointer-events-none">
+                    <div class="hidden md:block absolute top-3/4 -left-8 md:-left-12 opacity-0 group-hover:opacity-100 group-hover:-translate-y-6 transition-all duration-500 delay-225 pointer-events-none">
                         <span class="bg-secondary text-on-secondary px-4 py-2 rounded-lg border-2 border-on-surface font-label font-black hard-shadow-lime -rotate-6 block">DEL</span>
                     </div>
                 </div>
@@ -175,7 +175,7 @@
                             </div>
                         </a>
                         <!-- Hand-drawn Arrow -->
-                        <div class="absolute -top-12 -left-36 hidden lg:block">
+                        <div class="hidden md:block absolute -top-12 -left-36 hidden lg:block">
                             <div class="font-hand text-2xl text-secondary-container rotate-12 flex flex-col items-center">
                                 <span class="mb-1">Totally worth it!</span>
                                 <svg width="60" height="60" viewBox="0 0 100 100" class="fill-none stroke-secondary-container stroke-[4]">
@@ -648,7 +648,7 @@
                         </div>
                     </div>
                     <div class="flex flex-col lg:flex-row gap-8 mt-12">
-                        <div id="map" class="map-box flex-1 animate-reveal" style="height: 500px; border: 4px solid #131313; border-radius: 20px; box-shadow: 10px 10px 0px 0px #131313;"></div>
+                        <div id="map" class="map-box flex-1 animate-reveal" style="border: 4px solid #131313; border-radius: 20px; box-shadow: 10px 10px 0px 0px #131313;"></div>
 
                         <!-- Languages Sidebar (Hidden on Mobile) -->
                         <aside class="hidden lg:flex flex-col gap-6 w-72 animate-reveal">
