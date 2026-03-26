@@ -523,21 +523,31 @@ const VibeEngine = {
 
     initSwipe() {
         let touchstartX = 0;
+        let touchstartY = 0;
         let touchendX = 0;
+        let touchendY = 0;
 
         document.addEventListener('touchstart', e => {
+            if (e.target.closest('#map')) return;
             touchstartX = e.changedTouches[0].screenX;
+            touchstartY = e.changedTouches[0].screenY;
         }, { passive: true });
 
         document.addEventListener('touchend', e => {
+            if (e.target.closest('#map')) return;
             touchendX = e.changedTouches[0].screenX;
-            this.handleSwipe(touchstartX, touchendX);
+            touchendY = e.changedTouches[0].screenY;
+            this.handleSwipe(touchstartX, touchstartY, touchendX, touchendY);
         }, { passive: true });
     },
 
-    handleSwipe(start, end) {
-        const threshold = 100;
-        if (Math.abs(start - end) > threshold) {
+    handleSwipe(startX, startY, endX, endY) {
+        const deltaX = Math.abs(startX - endX);
+        const deltaY = Math.abs(startY - endY);
+        const thresholdX = 100;
+
+        // Ensure horizontal swipe is dominant and above threshold to avoid accidental triggers
+        if (deltaX > thresholdX && deltaX > 2 * deltaY) {
             this.cycle();
         }
     },
