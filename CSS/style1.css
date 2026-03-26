@@ -1452,6 +1452,17 @@ p {
 /* ===========================
    Animations
    =========================== */
+.stagger-parent .stagger {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.stagger-parent .stagger.active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
 .animate-reveal {
     opacity: 0;
     transform: translateY(30px);

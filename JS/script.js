@@ -140,7 +140,7 @@ const PortfolioEngine = {
             });
         }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
 
-        document.querySelectorAll('.animate-reveal, .highlight, .scribble-underline, .hand-drawn-circle')
+        document.querySelectorAll('.animate-reveal, .highlight, .scribble-underline, .hand-drawn-circle, .stagger')
                 .forEach(el => revealObserver.observe(el));
     },
 
