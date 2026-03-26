@@ -1862,12 +1862,7 @@ body.theme-professional .marquee {
     border-y: 1px solid var(--border-color);
 }
 
-body.theme-professional .glow-lime, body.theme-professional .glow-pink,
-body.theme-professional .scribble-svg, body.theme-professional .circle-svg,
-body.theme-professional .tape,
-body.theme-professional .sticker {
-    display: none !important;
-}
+
 
 body.theme-professional .text-on-surface-variant {
     color: var(--text-dim);
@@ -1948,7 +1943,9 @@ body.theme-creative .marquee {
     color: #000;
     transform: rotate(-2deg);
 }
-
+.d-none{
+    display: none !important;
+}
 body.theme-creative .btn-action {
     clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%);
 }
