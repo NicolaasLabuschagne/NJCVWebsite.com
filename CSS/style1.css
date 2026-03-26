@@ -1267,7 +1267,9 @@ main {
     font-size: 1.2rem;
     -webkit-text-stroke: 1px var(--border-color);
 }
-
+.right-14 {
+    right: -14rem !important;
+}
 /* ===========================
    Contact Section
    =========================== */
@@ -2057,8 +2059,8 @@ body.theme-fun .btn-hero-coffee:hover {
 
 /* Map Overhaul */
 .neon-map-outline {
-    filter: drop-shadow(0 0 2px #bef264) drop-shadow(0 0 5px #bef264);
-    stroke-opacity: 0.8;
+    filter: drop-shadow(0 0 1px var(--accent-color)) drop-shadow(0 0 1px var(--accent-color));
+    stroke-opacity: 0.1;
 }
 
 #map {

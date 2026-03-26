@@ -213,85 +213,189 @@ const PortfolioEngine = {
     },
 
     initMap() {
-        const mapElement = document.getElementById('map');
-        if (!mapElement) return;
+  const mapElement = document.getElementById('map');
+  if (!mapElement) return;
 
-        // Initialize map with a global view
-        const map = L.map('map', {
-            scrollWheelZoom: false,
-            zoomControl: true,
-            attributionControl: false
-        }).setView([15, 20], 2);
+  // Initialize map
+  const map = L.map('map', {
+    scrollWheelZoom: false,
+    zoomControl: true,
+    attributionControl: false
+  }).setView([15, 20], 2);
 
-        const workHistory = ['AGO', 'AUS', 'BWA', 'ZAF'];
-        let geojsonLayer;
+  const workHistory = ['AGO', 'AUS', 'BWA', 'ZAF'];
+  let geojsonLayer;
 
-        const getStyle = (feature) => {
-            const isDark = document.documentElement.classList.contains('dark') ||
-                           document.documentElement.getAttribute('data-theme') === 'dark';
-            const isWorkRegion = workHistory.includes(feature.id);
-            const bodyClass = document.body.className;
-            const isProfessional = bodyClass.includes('theme-professional');
-            const isFun = bodyClass.includes('theme-fun');
+  // Helper: read CSS variable with fallback
+  const cssVar = (name, fallback) => {
+    const v = getComputedStyle(document.documentElement).getPropertyValue(name);
+    return (v && v.trim()) ? v.trim() : fallback;
+  };
 
-            if (isDark) {
-                return {
-                    fillColor: isWorkRegion ? 'var(--primary-color)' : 'transparent',
-                    fillOpacity: isWorkRegion ? (isProfessional ? 0.2 : 0.4) : 0,
-                    color: 'var(--primary-color)',
-                    weight: isWorkRegion ? 3 : 1.2,
-                    className: isProfessional ? '' : 'neon-map-outline',
-                    dashArray: ''
-                };
-            } else {
-                return {
-                    fillColor: isWorkRegion ? '#bef264' : 'transparent',
-                    fillOpacity: isWorkRegion ? (isProfessional ? 0.2 : 0.4) : 0,
-                    color: isWorkRegion ? (isFun ? '#ff4a8d' : '#333333') : '#999999',
-                    weight: isWorkRegion ? 2.5 : 1.2,
-                    dashArray: isWorkRegion || isProfessional ? '' : '3, 6'
-                };
-            }
-        };
+  // Style function: dark = grey/white, light = black/grey
+  // replace your existing getStyle with this
+const getStyle = (feature) => {
+  const isDark = document.documentElement.classList.contains('dark') ||
+                 document.documentElement.getAttribute('data-theme') === 'dark';
+  const isWorkRegion = workHistory.includes(feature.id);
+  const bodyClass = document.body.className || '';
+  const isProfessional = bodyClass.includes('theme-professional');
+  const isFun = bodyClass.includes('theme-fun');
 
-        // Fetch and load world GeoJSON
-        fetch('https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json')
-            .then(response => response.json())
-            .then(data => {
-                geojsonLayer = L.geoJSON(data, {
-                    style: getStyle,
-                    onEachFeature: (feature, layer) => {
-                        if (workHistory.includes(feature.id)) {
-                            layer.bindPopup(`
-                                <div class="font-headline font-bold uppercase text-primary-container">
-                                    Project Territory: ${feature.properties.name}
-                                </div>
-                                <div class="font-mono text-xs mt-1 text-on-surface-variant">
-                                    Strategic Industrial Integration
-                                </div>
-                            `);
+  // resolve tokens to actual colors (never pass 'var(...)' strings to Leaflet)
+  const primaryColor = cssVar('--primary-color', '#bef264');
+  const accentColor  = cssVar('--accent-color', '#ff4a8d');
 
-                            layer.on('mouseover', function() {
-                                this.setStyle({
-                                    fillOpacity: 0.3,
-                                    weight: 4
-                                });
-                            });
+  // ONLY override for professional mode — neutral palette
+  if (isProfessional) {
+    if (isDark) {
+      return {
+        fillColor: isWorkRegion ? '#ffffff' : 'transparent',
+        fillOpacity: isWorkRegion ? 0.18 : 0,
+        color: isWorkRegion ? '#bdbdbd' : '#6b6b6b',
+        weight: isWorkRegion ? 2.5 : 1.0,
+        dashArray: isWorkRegion ? '' : '3,6',
+        className: '' // no neon outlines in professional mode
+      };
+    } else {
+      return {
+        fillColor: isWorkRegion ? '#000000' : 'transparent',
+        fillOpacity: isWorkRegion ? 0.18 : 0,
+        color: isWorkRegion ? '#4a4a4a' : '#9a9a9a',
+        weight: isWorkRegion ? 2.5 : 1.0,
+        dashArray: isWorkRegion ? '' : '3,6',
+        className: ''
+      };
+    }
+  }
 
-                            layer.on('mouseout', function() {
-                                geojsonLayer.resetStyle(this);
-                            });
-                        }
-                    }
-                }).addTo(map);
+  // Non-professional behavior: unchanged from your original logic
+  if (isDark) {
+    return {
+      fillColor: isWorkRegion ? primaryColor : 'transparent',
+      fillOpacity: isWorkRegion ? (isProfessional ? 0.8 : 1) : 0,
+      color: accentColor,
+      weight: isWorkRegion ? 3 : 1.2,
+      className: '', // keep class toggling out of initial style
+      dashArray: ''
+    };
+  } else {
+    return {
+      fillColor: isWorkRegion ? '#bef264' : 'transparent',
+      fillOpacity: isWorkRegion ? (isProfessional ? 0.2 : 0.4) : 0,
+      color: isWorkRegion ? (isFun ? '#ff4a8d' : '#333333') : '#999999',
+      weight: isWorkRegion ? 2.5 : 1.2,
+      dashArray: isWorkRegion || isProfessional ? '' : '3, 6',
+      className: ''
+    };
+  }
+};
 
-                // Update style when theme changes
-                window.addEventListener('themeChanged', () => {
-                    if (geojsonLayer) geojsonLayer.setStyle(getStyle);
-                });
-            })
-            .catch(err => console.error('Map loading failed:', err));
-    },
+// replace your existing updateLayerClasses with this
+const updateLayerClasses = () => {
+  if (!geojsonLayer) return;
+  const isDark = document.documentElement.classList.contains('dark') ||
+                 document.documentElement.getAttribute('data-theme') === 'dark';
+  const isProfessional = document.body.classList.contains('theme-professional');
+
+  geojsonLayer.eachLayer(layer => {
+    const path = layer._path || (layer.getElement && layer.getElement());
+    if (!path) return;
+
+    // always remove neon class first
+    path.classList.remove('neon-map-outline');
+
+    // Only add neon in non-professional dark mode (if you want neon there)
+    const isWorkRegion = workHistory.includes(layer.feature.id);
+    if (!isProfessional && isDark && isWorkRegion) {
+      // uncomment the next line if you want neon outlines in dark non-professional mode
+      // path.classList.add('neon-map-outline');
+    }
+
+    // clean up any inline vars/styles so setStyle can reapply correct values
+    path.style.removeProperty('--primary-color');
+    path.style.removeProperty('--accent-color');
+    path.style.removeProperty('stroke');
+    path.style.removeProperty('fill');
+    path.style.removeProperty('stroke-width');
+    path.style.removeProperty('stroke-dasharray');
+  });
+};
+
+  // Utility: remove any inline CSS variables set on the map element (if you set them elsewhere)
+  const clearMapInlineVars = () => {
+    if (!mapElement || !mapElement.style) return;
+    mapElement.style.removeProperty('--primary-color');
+    mapElement.style.removeProperty('--accent-color');
+  };
+
+  // Utility: clean up per-layer DOM path (remove classes and inline styles)
+  const cleanupLayerPath = (layer) => {
+    if (!layer) return;
+    const path = layer._path || (layer.getElement && layer.getElement());
+    if (path) {
+      path.classList.remove('neon-map-outline');
+      path.style.removeProperty('--primary-color');
+      path.style.removeProperty('--accent-color');
+      path.style.removeProperty('stroke');
+      path.style.removeProperty('fill');
+      path.style.removeProperty('stroke-width');
+      path.style.removeProperty('stroke-dasharray');
+    }
+  };
+
+  // Fetch and load world GeoJSON
+  fetch('https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json')
+    .then(response => response.json())
+    .then(data => {
+      geojsonLayer = L.geoJSON(data, {
+        style: getStyle,
+        onEachFeature: (feature, layer) => {
+          if (workHistory.includes(feature.id)) {
+            layer.bindPopup(`
+              <div class="font-headline font-bold uppercase text-primary-container">
+                Project Territory: ${feature.properties.name}
+              </div>
+              <div class="font-mono text-xs mt-1 text-on-surface-variant">
+                Strategic Industrial Integration
+              </div>
+            `);
+
+            layer.on('mouseover', function() {
+              this.setStyle({
+                fillOpacity: 0.4,
+                weight: 4
+              });
+            });
+
+            layer.on('mouseout', function() {
+              if (geojsonLayer) geojsonLayer.resetStyle(this);
+            });
+          }
+        }
+      }).addTo(map);
+
+      // Defensive re-style and class update to ensure initial render is correct
+      setTimeout(() => {
+        if (geojsonLayer) {
+          clearMapInlineVars();
+          geojsonLayer.eachLayer(layer => cleanupLayerPath(layer));
+          geojsonLayer.setStyle(getStyle);
+          updateLayerClasses();
+        }
+      }, 30);
+
+      // When theme changes, clear inline vars and reapply styles + classes
+      window.addEventListener('themeChanged', () => {
+        clearMapInlineVars();
+        if (!geojsonLayer) return;
+        geojsonLayer.eachLayer(layer => cleanupLayerPath(layer));
+        geojsonLayer.setStyle(getStyle);
+        updateLayerClasses();
+      });
+    })
+    .catch(err => console.error('Map loading failed:', err));
+},
 
     initSkillAnimations() {
         const skillTags = document.querySelectorAll('.tags span');
