@@ -165,7 +165,7 @@ const AnalyticsEngine = {
         if (typeof gtag === 'function') {
             gtag('event', name, params);
         }
-        //console.log(`[Analytics] Event: ${name}`, params);
+        console.log(`[Analytics] Event: ${name}`, params);
     }
 };
 
