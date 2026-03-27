@@ -113,6 +113,63 @@ const sketch = (p) => {
 new p5(sketch);
 
 /* ===========================
+   Analytics Engine: User Behavior Tracking
+   =========================== */
+const AnalyticsEngine = {
+    startTime: performance.now(),
+
+    init() {
+        this.trackClicks();
+        this.trackThemeChanges();
+        this.trackSessionDuration();
+    },
+
+    trackClicks() {
+        document.addEventListener('click', (e) => {
+            const target = e.target.closest('a, button');
+            if (!target) return;
+
+            const text = target.innerText.trim().toUpperCase();
+            const href = target.getAttribute('href');
+
+            if (text.includes('HIRE ME')) {
+                this.logEvent('click_hire_me', { location: href && href.includes('mailto') ? 'email' : 'nav' });
+            } else if (text === 'VIEW DOSSIER') {
+                this.logEvent('click_view_dossier');
+            } else if (text === 'THE STACK') {
+                this.logEvent('click_the_stack');
+            } else if (target.classList.contains('btn-hero-coffee') || target.closest('.btn-hero-coffee')) {
+                this.logEvent('click_paypal_coffee');
+            } else if (target.id === 'interactive-pet' || target.closest('#interactive-pet')) {
+                this.logEvent('click_interactive_pet');
+            }
+        });
+    },
+
+    trackThemeChanges() {
+        window.addEventListener('themeChanged', (e) => {
+            this.logEvent('theme_change', { theme: e.detail });
+        });
+    },
+
+    trackSessionDuration() {
+        window.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'hidden') {
+                const duration = Math.round((performance.now() - this.startTime) / 1000);
+                this.logEvent('session_duration', { duration_seconds: duration });
+            }
+        });
+    },
+
+    logEvent(name, params = {}) {
+        if (typeof gtag === 'function') {
+            gtag('event', name, params);
+        }
+        console.log(`[Analytics] Event: ${name}`, params);
+    }
+};
+
+/* ===========================
    Performance-Optimized Portfolio Engine
    =========================== */
 document.documentElement.classList.add('js-enabled');
@@ -125,6 +182,7 @@ const PortfolioEngine = {
         this.initMap();
         this.initSkillAnimations();
         VibeEngine.init();
+        AnalyticsEngine.init();
     },
 
     initObservers() {
