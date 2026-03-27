@@ -85,6 +85,20 @@
     --transition-bounce: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
     --shadow-offset: 8px;
+
+    /* Banana Theme Tokens */
+    --banana-primary: #F6E05E;
+    --banana-primary-rgb: 246, 224, 94;
+    --banana-primary-contrast: #1F2937;
+    --banana-background: #FFFBEA;
+    --banana-background-rgb: 255, 251, 234;
+    --banana-surface: #FFF3C4;
+    --banana-accent: #F6AD55;
+    --banana-muted: #9CA3AF;
+    --banana-on-background: #0F172A;
+    --banana-on-background-rgb: 15, 23, 42;
+    --banana-border: #FDE68A;
+    --banana-focus-ring: rgba(34, 197, 94, 0.35);
 }
 
 [data-theme="dark"] {
@@ -2100,4 +2114,73 @@ body.theme-professional .leaflet-popup-content-wrapper {
 .leaflet-popup-content {
     margin: 15px 20px !important;
     line-height: 1.4 !important;
+}
+
+/* theme-banana: Scoped Banana Theme */
+html.theme-banana body,
+html.theme-banana body.theme-fun,
+html.theme-banana body.theme-professional,
+html.theme-banana body.theme-creative {
+    --primary-color: var(--banana-primary);
+    --primary-color-rgb: var(--banana-primary-rgb);
+    --on-primary-color: var(--banana-primary-contrast);
+    --bg-color: var(--banana-background);
+    --bg-color-rgb: var(--banana-background-rgb);
+    --text-color: var(--banana-on-background);
+    --text-color-rgb: var(--banana-on-background-rgb);
+    --surface: var(--banana-surface);
+    --surface-low: var(--banana-surface);
+    --surface-high: var(--banana-border);
+    --surface-highest: var(--banana-border);
+    --surface-lowest: var(--banana-background);
+    --accent-color: var(--banana-accent);
+    --secondary-color: var(--banana-primary);
+    --border-color: var(--banana-border);
+    --text-dim: var(--banana-muted);
+}
+
+html.theme-banana *:focus {
+    outline: 3px solid var(--banana-focus-ring) !important;
+    outline-offset: 2px;
+}
+
+html.theme-banana .btn-action,
+html.theme-banana .btn-primary,
+html.theme-banana .btn-nav {
+    background-color: var(--banana-primary) !important;
+    color: var(--banana-primary-contrast) !important;
+    border-color: var(--banana-border) !important;
+}
+
+html.theme-banana .hard-shadow,
+html.theme-banana .card-bento,
+html.theme-banana .nav {
+    box-shadow: 6px 6px 0px 0px var(--banana-border) !important;
+}
+
+html.theme-banana .marquee {
+    background: var(--banana-accent);
+    color: var(--banana-on-background);
+}
+
+html.theme-banana h1,
+html.theme-banana h2,
+html.theme-banana h3,
+html.theme-banana h4,
+html.theme-banana nav a,
+html.theme-banana .text-primary,
+html.theme-banana .text-primary-container,
+html.theme-banana .text-secondary-container {
+    color: var(--banana-on-background) !important;
+}
+
+html.theme-banana .glow-lime,
+html.theme-banana .glow-pink {
+    text-shadow: none !important;
+}
+
+html.theme-banana .bg-primary,
+html.theme-banana .bg-primary-container,
+html.theme-banana .bg-secondary-container {
+    color: var(--banana-primary-contrast) !important;
 }

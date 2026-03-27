@@ -124,6 +124,7 @@ const PortfolioEngine = {
         this.initScrollInteractions();
         this.initMap();
         this.initSkillAnimations();
+        this.initBananaTheme();
         VibeEngine.init();
     },
 
@@ -142,6 +143,34 @@ const PortfolioEngine = {
 
         document.querySelectorAll('.animate-reveal, .highlight, .scribble-underline, .hand-drawn-circle')
                 .forEach(el => revealObserver.observe(el));
+    },
+
+    initBananaTheme() {
+        const bananaToggle = document.getElementById('banana-toggle');
+        if (!bananaToggle) return;
+
+        const applyBananaTheme = (isBanana) => {
+            if (isBanana) {
+                document.documentElement.classList.add('theme-banana');
+                bananaToggle.setAttribute('aria-pressed', 'true');
+            } else {
+                document.documentElement.classList.remove('theme-banana');
+                bananaToggle.setAttribute('aria-pressed', 'false');
+            }
+            window.dispatchEvent(new CustomEvent('themeChanged', { detail: isBanana ? 'banana' : 'default' }));
+        };
+
+        const savedTheme = localStorage.getItem('site-theme');
+        if (savedTheme === 'banana') {
+            applyBananaTheme(true);
+        }
+
+        bananaToggle.addEventListener('click', () => {
+            const isBanana = document.documentElement.classList.toggle('theme-banana');
+            bananaToggle.setAttribute('aria-pressed', isBanana);
+            localStorage.setItem('site-theme', isBanana ? 'banana' : 'default');
+            window.dispatchEvent(new CustomEvent('themeChanged', { detail: isBanana ? 'banana' : 'default' }));
+        });
     },
 
     initThemeSystem() {

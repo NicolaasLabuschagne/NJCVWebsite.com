@@ -71,7 +71,11 @@
               "secondary-container": "var(--accent-color)",
               "on-secondary-fixed-variant": "#8f0044",
               "background": "var(--bg-color)",
-              "tertiary-fixed": "#ffe16d"
+              "tertiary-fixed": "#ffe16d",
+              "banana-primary": "var(--banana-primary)",
+              "banana-background": "var(--banana-background)",
+              "banana-surface": "var(--banana-surface)",
+              "banana-accent": "var(--banana-accent)"
             },
             fontFamily: {
               "headline": ["var(--font-main)"],
@@ -106,6 +110,7 @@
                 <a class="text-on-surface-variant hover:text-on-surface transition-colors hover:scale-105 hover:-rotate-1" href="#contact">Contact</a>
             </div>
             <div class="flex items-center gap-4">
+                <button class="hidden md:inline-block text-2xl hover:scale-110 transition-transform" id="banana-toggle" aria-pressed="false" title="Toggle Banana Theme">🍌</button>
                 <button class="hidden md:inline-block material-symbols-outlined text-primary hover:scale-110 transition-transform" id="theme-toggle">terminal</button>
                 <button class="bg-primary text-on-primary font-headline font-bold uppercase px-6 py-2 rounded-full border-2 border-on-surface active:translate-y-1 transition-all">
                     Hire Me
