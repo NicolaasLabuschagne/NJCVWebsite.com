@@ -46,52 +46,52 @@
               "surface-container-low": "var(--surface-low)",
               "surface": "var(--surface)",
               "tertiary-container": "var(--secondary-color)",
-              "inverse-surface": "#e5e2e1",
+              "inverse-surface": "var(--surface-high)",
               "surface-dim": "var(--surface)",
               "on-primary-container": "var(--on-primary-color)",
               "on-secondary-container": "var(--on-secondary-color)",
               "on-accent-container": "var(--on-accent-color)",
-              "secondary": "#ffb1c4",
+              "secondary": "var(--accent-color)",
               "surface-tint": "var(--primary-color)",
-              "outline-variant": "#4a5d23",
-              "secondary-fixed": "#ffd9e1",
-              "inverse-primary": "#4d7c0f",
-              "on-tertiary": "#3a3000",
+              "outline-variant": "var(--border-color)",
+              "secondary-fixed": "var(--secondary-color)",
+              "inverse-primary": "var(--primary-color)",
+              "on-tertiary": "var(--on-secondary-color)",
               "on-primary": "var(--on-primary-color)",
               "on-secondary": "var(--on-secondary-color)",
               "on-accent": "var(--on-accent-color)",
               "on-primary-fixed-variant": "var(--on-primary-color)",
               "surface-container-high": "var(--surface-high)",
-              "on-tertiary-fixed": "#221b00",
-              "on-secondary-fixed": "#3f001a",
-              "tertiary": "#fff8eb",
-              "error": "#ffb4ab",
-              "tertiary-fixed-dim": "#e9c400",
+              "on-tertiary-fixed": "var(--on-secondary-color)",
+              "on-secondary-fixed": "var(--on-secondary-color)",
+              "tertiary": "var(--bg-color)",
+              "error": "var(--error-color)",
+              "tertiary-fixed-dim": "var(--secondary-color)",
               "on-surface": "var(--text-color)",
               "surface-container": "var(--surface-low)",
               "primary": "var(--primary-color)",
               "surface-container-highest": "var(--surface-highest)",
               "on-primary-fixed": "var(--on-primary-color)",
-              "error-container": "#93000a",
+              "error-container": "var(--error-color)",
               "surface-container-lowest": "var(--surface-lowest)",
-              "outline": "#849494",
-              "on-surface-variant": "#bacaca",
-              "on-secondary": "#65002e",
-              "on-tertiary-fixed-variant": "#544600",
-              "on-tertiary-container": "#725f00",
+              "outline": "var(--text-dim)",
+              "on-surface-variant": "var(--text-dim)",
+              "on-secondary": "var(--on-secondary-color)",
+              "on-tertiary-fixed-variant": "var(--on-secondary-color)",
+              "on-tertiary-container": "var(--on-secondary-color)",
               "primary-fixed": "var(--primary-color)",
               "primary-fixed-dim": "var(--primary-color)",
-              "on-error": "#690005",
+              "on-error": "var(--on-accent-color)",
               "primary-container": "var(--primary-color)",
               "surface-bright": "var(--surface-highest)",
-              "inverse-on-surface": "#313030",
-              "on-error-container": "#ffdad6",
-              "secondary-fixed-dim": "#ffb1c4",
+              "inverse-on-surface": "var(--bg-color)",
+              "on-error-container": "var(--on-accent-color)",
+              "secondary-fixed-dim": "var(--accent-color)",
               "on-background": "var(--text-color)",
               "secondary-container": "var(--accent-color)",
-              "on-secondary-fixed-variant": "#8f0044",
+              "on-secondary-fixed-variant": "var(--on-secondary-color)",
               "background": "var(--bg-color)",
-              "tertiary-fixed": "#ffe16d"
+              "tertiary-fixed": "var(--secondary-color)"
             },
             fontFamily: {
               "headline": ["var(--font-main)"],
@@ -169,8 +169,8 @@
                         <span class="bg-secondary text-on-secondary px-4 py-1 rounded-full font-mono text-xs font-bold tracking-widest uppercase">Intermediate Architect</span>
                         <span class="bg-primary-fixed-dim text-on-primary-fixed px-4 py-1 rounded-full font-mono text-xs font-bold tracking-widest uppercase">Google Junky</span>
                     </div>
-                    <h1 class="font-headline text-6xl md:text-8xl font-black text-primary-container leading-none tracking-tighter uppercase mb-6 drop-shadow-[4px_4px_0px_#131313] glow-lime">
-                        BUILDING THE <br/> <span class="text-white italic">CYBER FUTURE</span>
+                    <h1 class="font-headline text-6xl md:text-8xl font-black text-primary-container leading-none tracking-tighter uppercase mb-6 drop-shadow-[4px_4px_0px_var(--border-color)] glow-lime">
+                        BUILDING THE <br/> <span class="text-on-primary-container italic">CYBER FUTURE</span>
                     </h1>
                     <p class="font-body text-xl text-on-surface-variant max-w-xl mb-10 leading-relaxed">
                         Crafting high-performance distributed systems with a focus on scalability, resilience, and clean-sheet architectural design.
@@ -342,13 +342,13 @@
 
                     <!-- Future -->
                     <div class="relative group sticker-rotate-cw stagger-3 lg:mt-12">
-                        <div class="bg-surface-container-low text-surface border-4 border-on-surface p-8 rounded-2xl hard-shadow-lime group-hover:-translate-y-2 transition-transform h-full flex flex-col">
+                        <div class="bg-primary border-4 border-on-surface p-8 rounded-2xl hard-shadow-lime group-hover:-translate-y-2 transition-transform h-full flex flex-col">
                             <div class="flex justify-between items-start mb-6">
-                                <span class="bg-primary text-on-primary px-3 py-1 font-mono font-bold rounded">FUTURE</span>
+                                <span class="bg-on-primary text-primary px-3 py-1 font-mono font-bold rounded">FUTURE</span>
                                 <span class="material-symbols-outlined text-4xl text-primary-container" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
                             </div>
-                            <h3 class="font-headline text-3xl font-black text-white uppercase mb-4 leading-tight">Architecting<br/>The Singularity</h3>
-                            <p class="font-body text-white/80 mb-6 text-lg">Moving beyond features to systems. Designing software that breathes, adapts, and survives. The cyber future is autonomous, and I'm drawing the blueprints.</p>
+                            <h3 class="font-headline text-3xl font-black text-on-primary uppercase mb-4 leading-tight">Architecting<br/>The Singularity</h3>
+                            <p class="font-body text-on-primary opacity-80 mb-6 text-lg">Moving beyond features to systems. Designing software that breathes, adapts, and survives. The cyber future is autonomous, and I'm drawing the blueprints.</p>
                             <div class="mt-auto font-hand text-primary text-xl rotate-1 font-bold">"Evolution never stops."</div>
                         </div>
                     </div>
@@ -455,11 +455,11 @@
                      GUIDANCE: Showcase DevOps and Cloud Platform (Azure/Firebase) skills.
                      Focus on: Infrastructure as Code (Terraform) and CI/CD (GitHub Actions). -->
                 <div class="md:col-span-7 group -rotate-1">
-                    <div class="bg-[#1a1a1a] border-4 border-on-surface rounded-xl overflow-hidden hard-shadow sticker-hover transition-all duration-150 relative">
+                    <div class="bg-primary border-4 border-on-surface rounded-xl overflow-hidden hard-shadow sticker-hover transition-all duration-150 relative">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-primary-container/20 blur-3xl rounded-full"></div>
                         <div class="p-8 relative z-10">
                             <div class="flex justify-between items-start mb-8">
-                                <h3 class="text-3xl font-headline font-black uppercase text-on-surface">Cloud & DevOps</h3>
+                                <h3 class="text-3xl font-headline font-black uppercase text-on-primary">Cloud & DevOps</h3>
                                 <div class="flex gap-1">
                                     <div class="w-3 h-3 rounded-full bg-error border border-on-surface"></div>
                                     <div class="w-3 h-3 rounded-full bg-tertiary-container border border-on-surface"></div>
@@ -468,17 +468,17 @@
                             </div>
                             <div class="grid md:grid-cols-2 gap-8">
                                 <div>
-                                    <p class="font-body text-sm text-white mb-6 opacity-80">
+                                    <p class="font-body text-sm text-on-primary mb-6 opacity-80">
                                         Containerized orchestration with Docker & Kubernetes. Automated infrastructure provisioning with Terraform and CI/CD via GitHub Actions.
                                     </p>
                                     <div class="flex flex-wrap gap-2">
-                                        <span class="bg-primary/10 text-primary px-2 py-1 rounded font-mono text-[10px] border border-primary/30 uppercase">AZURE</span>
-                                        <span class="bg-primary/10 text-primary px-2 py-1 rounded font-mono text-[10px] border border-primary/30 uppercase">FIREBASE</span>
-                                        <span class="bg-primary/10 text-primary px-2 py-1 rounded font-mono text-[10px] border border-primary/30 uppercase">TERRAFORM</span>
-                                        <span class="bg-primary/10 text-primary px-2 py-1 rounded font-mono text-[10px] border border-primary/30 uppercase">GITHUB PAGES</span>
+                                        <span class="bg-on-primary/10 text-on-primary px-2 py-1 rounded font-mono text-[10px] border border-on-primary/30 uppercase">AZURE</span>
+                                        <span class="bg-on-primary/10 text-on-primary px-2 py-1 rounded font-mono text-[10px] border border-on-primary/30 uppercase">FIREBASE</span>
+                                        <span class="bg-on-primary/10 text-on-primary px-2 py-1 rounded font-mono text-[10px] border border-on-primary/30 uppercase">TERRAFORM</span>
+                                        <span class="bg-on-primary/10 text-on-primary px-2 py-1 rounded font-mono text-[10px] border border-on-primary/30 uppercase">GITHUB PAGES</span>
                                     </div>
                                 </div>
-                                <div class="bg-surface-container-lowest p-6 rounded-xl border-4 border-on-surface flex flex-col items-center justify-center text-center">
+                                <div class="bg-on-primary text-primary p-6 rounded-xl border-4 border-on-surface flex flex-col items-center justify-center text-center">
                                     <div class="text-primary-container mb-2 font-headline font-black text-5xl">99.9%</div>
                                     <div class="text-xs font-label uppercase text-on-surface-variant tracking-widest">Uptime_Metric</div>
                                 </div>
@@ -660,7 +660,7 @@
                         </div>
                     </div>
                     <div class="flex flex-col lg:flex-row gap-8 mt-12">
-                        <div id="map" class="map-box flex-1 animate-reveal" style="border: 4px solid #131313; border-radius: 20px; box-shadow: 10px 10px 0px 0px #131313;"></div>
+                        <div id="map" class="map-box flex-1 animate-reveal" style="border: var(--border-width-thick) solid var(--border-color); border-radius: 20px; box-shadow: 10px 10px 0px 0px var(--border-color);"></div>
 
                         <!-- Languages Sidebar (Hidden on Mobile) -->
                         <aside class="hidden lg:flex flex-col gap-6 w-72 animate-reveal">
@@ -789,14 +789,14 @@
     </main>
 
     <!-- Footer -->
-    <footer class="w-full py-12 px-8 border-t-4 border-[#131313] bg-[#131313] bg-gradient-to-t from-[#ff007f]/5 to-transparent">
+    <footer class="w-full py-12 px-8 border-t-4 border-on-surface bg-surface-lowest">
         <div class="flex flex-col md:flex-row justify-between items-center gap-6 w-full max-w-7xl mx-auto">
-            <div class="text-lg font-bold text-[#ff007f] font-headline">NICOLAAS DEV.</div>
+            <div class="text-lg font-bold text-primary font-headline uppercase">NICOLAAS DEV.</div>
             <div class="flex gap-8 font-label text-xs uppercase tracking-widest text-on-surface-variant">
-                <a class="hover:text-primary transition-all hover:skew-x-2" href="https://github.com/NicolaasLabuschagne" target="_blank">GitHub</a>
-                <a class="hover:text-primary transition-all hover:skew-x-2" href="https://linkedin.com/in/nicolaas-labuschagne-919739286" target="_blank">LinkedIn</a>
+                <a class="hover:text-primary transition-all hover:scale-110" href="https://github.com/NicolaasLabuschagne" target="_blank">GitHub</a>
+                <a class="hover:text-primary transition-all hover:scale-110" href="https://linkedin.com/in/nicolaas-labuschagne-919739286" target="_blank">LinkedIn</a>
             </div>
-            <div class="text-[#ff007f] font-label text-xs uppercase tracking-widest">
+            <div class="text-on-surface-variant font-label text-xs uppercase tracking-widest">
                 © 2026 NICOLAAS DEV. STICKERED IN CYBERSPACE.
             </div>
         </div>
