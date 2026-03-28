@@ -15,13 +15,12 @@ const sketch = (p) => {
     let textColor = [0, 0, 0];
 
     function updateColors() {
-        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
         const style = getComputedStyle(document.body);
 
         const pRGB = style.getPropertyValue('--primary-color-rgb') || '190, 242, 100';
         primaryColor = pRGB.split(',').map(c => parseInt(c.trim()));
 
-        const tRGB = style.getPropertyValue('--text-color-rgb') || (isDark ? '255,255,255' : '0,0,0');
+        const tRGB = style.getPropertyValue('--text-color-rgb') || '0, 0, 0';
         textColor = tRGB.split(',').map(c => parseInt(c.trim()));
     }
 
@@ -286,26 +285,25 @@ const PortfolioEngine = {
 
   // Helper: read CSS variable with fallback
   const cssVar = (name, fallback) => {
-    const v = getComputedStyle(document.documentElement).getPropertyValue(name);
+    const v = getComputedStyle(document.body).getPropertyValue(name);
     return (v && v.trim()) ? v.trim() : fallback;
   };
 
   // Style function: dark = grey/white, light = black/grey
-  // replace your existing getStyle with this
-const getStyle = (feature) => {
-  const isDark = document.documentElement.classList.contains('dark') ||
-                 document.documentElement.getAttribute('data-theme') === 'dark';
-  const isWorkRegion = workHistory.includes(feature.id);
-  const bodyClass = document.body.className || '';
-  const isProfessional = bodyClass.includes('theme-professional');
-  const isFun = bodyClass.includes('theme-fun');
+  const getStyle = (feature) => {
+    const isDark = document.documentElement.classList.contains('dark') ||
+                   document.documentElement.getAttribute('data-theme') === 'dark';
+    const isWorkRegion = workHistory.includes(feature.id);
+    const bodyClass = document.body.className || '';
+    const isProfessional = bodyClass.includes('theme-professional');
 
-  // resolve tokens to actual colors (never pass 'var(...)' strings to Leaflet)
-  const primaryColor = cssVar('--primary-color', '#bef264');
-  const accentColor  = cssVar('--accent-color', '#ff4a8d');
+    // resolve tokens to actual colors (never pass 'var(...)' strings to Leaflet)
+    const primaryColor = cssVar('--primary-color', '#bef264');
+    const accentColor = cssVar('--accent-color', '#ff4a8d');
+    const borderColor = cssVar('--border-color', '#999999');
 
-  // ONLY override for professional mode — neutral palette
-  if (isProfessional) {
+    // ONLY override for professional mode — neutral palette
+    if (isProfessional) {
     if (isDark) {
       return {
         fillColor: isWorkRegion ? '#ffffff' : 'transparent',
@@ -339,18 +337,17 @@ const getStyle = (feature) => {
     };
   } else {
     return {
-      fillColor: isWorkRegion ? '#bef264' : 'transparent',
-      fillOpacity: isWorkRegion ? (isProfessional ? 0.2 : 0.4) : 0,
-      color: isWorkRegion ? (isFun ? '#ff4a8d' : '#333333') : '#999999',
+      fillColor: isWorkRegion ? primaryColor : 'transparent',
+      fillOpacity: isWorkRegion ? 0.4 : 0,
+      color: isWorkRegion ? accentColor : '#999999',
       weight: isWorkRegion ? 2.5 : 1.2,
-      dashArray: isWorkRegion || isProfessional ? '' : '3, 6',
+      dashArray: isWorkRegion ? '' : '3, 6',
       className: ''
     };
   }
 };
 
-// replace your existing updateLayerClasses with this
-const updateLayerClasses = () => {
+    const updateLayerClasses = () => {
   if (!geojsonLayer) return;
   const isDark = document.documentElement.classList.contains('dark') ||
                  document.documentElement.getAttribute('data-theme') === 'dark';
@@ -479,6 +476,16 @@ const updateLayerClasses = () => {
 
         const debrisChars = ['{ }', '[]', '</>', '01', '!', '??', '#', '/* */', '=>', '&&', '||'];
         const debrisCount = 12;
+
+        window.addEventListener('themeChanged', () => {
+            const debrisItems = document.querySelectorAll('.digital-debris');
+            const primary = getComputedStyle(document.body).getPropertyValue('--primary-color');
+            const border = getComputedStyle(document.body).getPropertyValue('--border-color');
+            debrisItems.forEach(item => {
+                item.style.color = primary;
+                item.style.filter = `drop-shadow(2px 2px 0px ${border})`;
+            });
+        });
 
         for (let i = 0; i < debrisCount; i++) {
             const debris = document.createElement('div');
