@@ -1879,13 +1879,13 @@ body.theme-professional {
     --bg-color-rgb: 19, 19, 19;
     --text-color: #e5e5e5;
     --text-color-rgb: 229, 229, 229;
-    --text-dim: #a3a3a3;
+    --text-dim: #8f8f8f;
     --border-color: #262626;
     --border-color-rgb: 38, 38, 38;
-    --primary-color: #e5e5e5;
+    --primary-color: #b9b9b9;
     --primary-color-rgb: 229, 229, 229;
     --on-primary-color: #131313;
-    --on-secondary-color: #e5e5e5;
+    --on-secondary-color: #131313;
     --on-accent-color: #131313;
     --surface: #262626;
     --surface-low: #131313;
@@ -1954,7 +1954,7 @@ body.theme-creative {
     --bg-color-rgb: 10, 10, 10;
     --text-color: #bef264;
     --text-color-rgb: 190, 242, 100;
-    --text-dim: #bef264;
+    --text-dim: #5f910a;
     --border-color: #bef264;
     --border-color-rgb: 190, 242, 100;
     --on-primary-color: #0a0a0a;
