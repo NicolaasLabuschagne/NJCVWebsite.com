@@ -178,10 +178,31 @@ const PortfolioEngine = {
         this.initObservers();
         this.initThemeSystem();
         this.initScrollInteractions();
+        this.initScrollSpy();
         this.initMap();
         this.initSkillAnimations();
         VibeEngine.init();
         AnalyticsEngine.init();
+    },
+
+    initScrollSpy() {
+        const sections = document.querySelectorAll("section[id]");
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        const observer = new IntersectionObserver(
+            entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => link.classList.remove("active"));
+                        const activeLink = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+                        if (activeLink) activeLink.classList.add("active");
+                    }
+                });
+            },
+            { threshold: 0.2 } // section is active when 20% visible
+        );
+
+        sections.forEach(section => observer.observe(section));
     },
 
     initObservers() {

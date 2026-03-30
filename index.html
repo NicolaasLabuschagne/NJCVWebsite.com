@@ -108,6 +108,20 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+
+    <style type="text/tailwindcss">
+        @layer utilities {
+          /* Default look */
+          .nav-link {
+            @apply text-on-surface-variant hover:text-on-surface transition-colors hover:scale-105 hover:-rotate-1;
+          }
+
+          /* Active look */
+          .nav-link.active {
+            @apply text-primary border-b-4 border-primary pb-1 shadow-[0_2px_10px_rgba(190,242,100,0.5)] transition-all duration-150;
+          }
+        }
+    </style>
 </head>
 <body class="theme-creative">
     <div id="scroll-progress-container" class="scroll-progress-container">
@@ -121,10 +135,10 @@
                 GLOBAL_DEV
             </a>
             <div class="hidden md:flex gap-8 items-center font-headline font-bold tracking-tight uppercase">
-                <a class="text-primary border-b-4 border-primary pb-1 shadow-[0_2px_10px_rgba(190,242,100,0.5)] transition-all duration-150" href="#skills">Projects</a>
-                <a class="text-on-surface-variant hover:text-on-surface transition-colors hover:scale-105 hover:-rotate-1" href="#the-lab">The Lab</a>
-                <a class="text-on-surface-variant hover:text-on-surface transition-colors hover:scale-105 hover:-rotate-1" href="#experience-map">World Hub</a>
-                <a class="text-on-surface-variant hover:text-on-surface transition-colors hover:scale-105 hover:-rotate-1" href="#contact">Contact</a>
+                <a href="#skills" class="nav-link">Projects</a>
+                <a href="#the-lab" class="nav-link">The Lab</a>
+                <a href="#experience-map" class="nav-link">World Hub</a>
+                <a href="#contact" class="nav-link">Contact</a>
             </div>
             <div class="flex items-center gap-4">
                 <button class="hidden md:inline-block material-symbols-outlined text-primary hover:scale-110 transition-transform" id="theme-toggle">terminal</button>
